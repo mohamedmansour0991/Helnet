@@ -1,0 +1,27 @@
+.main {
+  max-width: 2000px;
+  margin-inline: auto;
+  margin-block-start: 3.75rem;
+
+  display: grid;
+  justify-items: center;
+  grid-template-columns: auto 1fr auto;
+
+  & > .placeholder {
+    grid-row: 1;
+    grid-column: 2;
+
+    height: 100rem;
+  }
+  @media screen and (max-width: 950px) {
+      grid-template-columns: auto 1fr;
+    }
+    
+    @media screen and (max-width: 600px) {
+        grid-template-columns: 1fr;
+        & > .placeholder {
+          grid-row: 1;
+          grid-column: 1;
+        }
+  }
+}

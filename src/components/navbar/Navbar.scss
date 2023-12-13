@@ -1,0 +1,139 @@
+.navbar {
+  display: flex;
+  // flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 3.5rem;
+  padding-block: 1rem;
+  // position: relative;
+  background-color: var(--bg-color);
+  position: sticky;
+  top: 0rem;
+  z-index: 99;
+
+  @media screen and (max-width: 600px) {
+    padding-inline: 1rem;
+
+    &__logo {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 230px) {
+    justify-content: flex-end;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+
+    &.navigation {
+      gap: 5rem;
+
+      @media screen and (max-width: 950px) {
+        display: none;
+      }
+    }
+
+    &.userOptions {
+      gap: 2rem;
+
+      @media screen and (max-width: 600px) {
+        gap: 1rem;
+
+        & > li:last-child {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 230px) {
+        display: none;
+      }
+
+      & > li {
+        background-color: #f6f6f6;
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.globe {
+          position: relative;
+
+          & > .notifications {
+            position: absolute;
+            right: 0;
+            top: 0;
+            transform: translate(0.5rem, -0.25rem);
+
+            background-color: #a74ed1;
+            width: 1.125rem;
+            height: 1.125rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+
+            color: #fff;
+            text-align: center;
+            font-family: Roboto;
+            font-size: 0.6875rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+        }
+      }
+    }
+
+    &.mobileButton {
+      display: none;
+      gap: 1rem;
+
+      @media screen and (max-width: 600px) {
+        display: flex;
+      }
+
+      @media screen and (max-width: 600px) {
+        display: flex;
+      }
+    }
+
+    &.mobileMenu {
+      display: none;
+
+      @media screen and (max-width: 950px) {
+        background-color: var(--bg-color);
+        width: 50vw;
+        height: 100dvh;
+        padding: 2rem;
+        position: absolute;
+        z-index: 100;
+        top: 0;
+        left: 0;
+
+        &.true {
+          display: grid;
+          position: fixed;
+        }
+
+        & > li {
+          display: grid;
+          grid-template-columns: auto 1fr;
+          align-items: center;
+          justify-content: center;
+          gap: 2rem;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        width: 70vw;
+      }
+
+      @media screen and (max-width: 350px) {
+        width: 100vw;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.mainMenu {
+  grid-row: 1;
+  grid-column: 1;
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+
+  &__List {
+    position: sticky;
+    top: 5rem;
+    display: grid;
+    gap: 2.69rem;
+    padding-block-end: 1.51rem;
+
+    background-color: var(--bg-color);
+    min-width: 15rem;
+    padding-inline-start: 1.73rem;
+    padding-block: 1.87rem;
+    border-radius: 1rem;
+
+    & > li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.3rem;
+      align-items: center;
+    }
+  }
+}
