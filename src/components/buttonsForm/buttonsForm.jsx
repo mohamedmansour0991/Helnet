@@ -18,7 +18,7 @@ const ButtonsForm = () => {
                     style={{
                         backgroundColor: '#D9D9D9',
                         borderRadius: '16px',
-                        width: '361px',
+                        width: '250px',
                         maxWidth: '100%',
                         fontSize: '24px',
                         fontWeight: '600',
@@ -36,7 +36,7 @@ const ButtonsForm = () => {
                     style={{
                         background: 'linear-gradient(#00ACFF75, #BD00FF58)',
                         borderRadius: '16px',
-                        width: '361px',
+                        width: '250px',
                         maxWidth: '100%',
                         fontSize: '24px',
                         fontWeight: '600',

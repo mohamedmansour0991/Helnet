@@ -30,7 +30,7 @@ export default function Navbar() {
   ];
 
   const userOptionsList = [
-    { name: "settings", icon: settings },
+    { name: "settings/user-info", icon: settings },
     { name: "globe", icon: globe },
     { name: "profile1", icon: profile1 },
   ];

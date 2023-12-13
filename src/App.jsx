@@ -17,12 +17,14 @@ import Nutrition from "./pages/nutrition/nutrition";
 import Language from "./pages/languag/languag";
 import { MainPage } from "./pages";
 import Profile from "./pages/profile/profile";
+import Settings from "./pages/settings/Settings";
+import Store from "./pages/store/Store";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="" element={<Button children={"Button"} />} /> */}
+        {/* <Route path="" element={<Button children={"Button"} />} />  */}
         {/* <Route path="" element={<Login />} /> */}
         {/* <Route path="" element={<Signup />} /> */}
         {/* <Route path="" element={<Forgetpass />} /> */}
@@ -37,7 +39,16 @@ function App() {
         {/* <Route path="" element={<Language />} /> */}
         {/* <Route path="" element={<Colors />} /> */}
 
-        <Route path="" element={<Profile />} />
+        {/* <Route path="" element={<Profile />} /> */}
+        <Route path="" element={<MainPage />} />
+        <Route path="/settings/:name" element={<Settings />} />
+        {/* <Route path="/settings/update-info" element={<Settings />} />
+        <Route path="/settings/change-pass" element={<Settings />} />
+        <Route path="/settings/privacy" element={<Settings />} />
+        <Route path="/settings/language" element={<Settings />} />
+        <Route path="/settings/art" element={<Settings />} />
+        <Route path="/settings/support" element={<Settings />} /> */}
+        <Route path="/store" element={<Store />} />
       </Routes>
     </BrowserRouter>
   );
