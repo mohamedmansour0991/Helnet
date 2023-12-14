@@ -15,10 +15,10 @@ import ChangePassword from "../changePassword/ChangePassword";
 import Privacy from "../privacy/Privacy";
 import UpdateInfo from "../updateInfo/UpdateInfo";
 import Language from "../languageSettings/Language";
-import Art from "../languageSettings/Language";
 import Support from "../support/Support";
 import { Route, Routes, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Art from "../art/Art";
 
 function Settings() {
   const name = useParams().name;
@@ -51,6 +51,10 @@ function Settings() {
             <UpdateInfo />
           ) : name === "privacy" ? (
             <Privacy />
+          ) : name === "art" ? (
+            <Art />
+          ) : name === "support" ? (
+            <Support />
           ) : name === "language" ? (
             <Language />
           ) : (
