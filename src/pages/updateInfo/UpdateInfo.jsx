@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import FormSelect from "../../components/formSelect/FormSelect";
 import { useTranslation } from "react-i18next";
 
 function UpdateInfo() {
   const [t] = useTranslation();
+  const [formValues, setFormValues] = useState({});
 
   const inputsSelect = [
     { name: t("First name"), type: "text", class: "half" },
@@ -14,7 +15,12 @@ function UpdateInfo() {
   const typeUser = [{ name: t("User Type"), type: "select" }];
   return (
     <div>
-      <FormSelect inputs={inputsSelect} name={t("Save modifications")} />
+      <FormSelect
+        inputs={inputsSelect}
+        name={t("Save modifications")}
+        setFormValues={setFormValues}
+        formValues={formValues}
+      />
       <FormSelect inputs={typeUser} name={t("Change")} />
     </div>
   );

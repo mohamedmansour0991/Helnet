@@ -1,10 +1,10 @@
 import React from "react";
 
-function Button({ name }) {
+function Button({ name, onClick }) {
   return (
     <div className="pb-2">
       <button
-        type="submit"
+        type="button" // Use type="button" to prevent form submission
         className="btn btn-dark font-weight-bold logbtn"
         style={{
           background: "linear-gradient(#00ACFF75, #BD00FF58)",
@@ -16,6 +16,7 @@ function Button({ name }) {
           letterSpacing: "1px",
           border: "none",
         }}
+        onClick={onClick}
       >
         {name}
       </button>

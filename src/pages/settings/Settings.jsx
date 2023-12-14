@@ -51,6 +51,8 @@ function Settings() {
             <UpdateInfo />
           ) : name === "privacy" ? (
             <Privacy />
+          ) : name === "language" ? (
+            <Language />
           ) : (
             <ChangePassword />
           )}
