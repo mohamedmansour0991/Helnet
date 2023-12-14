@@ -1,18 +1,21 @@
 import React from "react";
 import FormSelect from "../../components/formSelect/FormSelect";
+import { useTranslation } from "react-i18next";
 
 function UpdateInfo() {
+  const [t] = useTranslation();
+
   const inputsSelect = [
-    { name: "الاسم الاول", type: "text", class: "half" },
-    { name: "الاسم الاخير", type: "text", class: "half" },
-    { name: " البريد الالكتروني", type: "email", class: "" },
-    { name: "نبذة مختصرة عنك", type: "textarea", class: "" },
+    { name: t("First name"), type: "text", class: "half" },
+    { name: t("Last name"), type: "text", class: "half" },
+    { name: t("Email address"), type: "email", class: "" },
+    { name: t("About You"), type: "textarea", class: "" },
   ];
-  const typeUser = [{ name: "نوع المستخدم", type: "select" }];
+  const typeUser = [{ name: t("User Type"), type: "select" }];
   return (
     <div>
-      <FormSelect inputs={inputsSelect} name="حفظ التعديلات" />
-      <FormSelect inputs={typeUser} name="تغيير" />
+      <FormSelect inputs={inputsSelect} name={t("Save modifications")} />
+      <FormSelect inputs={typeUser} name={t("Change")} />
     </div>
   );
 }

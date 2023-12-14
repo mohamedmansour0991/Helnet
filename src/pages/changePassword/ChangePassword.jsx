@@ -1,11 +1,14 @@
 import React from "react";
 import FormSelect from "../../components/formSelect/FormSelect";
+import { useTranslation } from "react-i18next";
 
 function ChangePassword() {
+  const [t] = useTranslation();
+
   const inputsSelect = [
-    { name: "كلمة المرور القديمة", type: "password" },
-    { name: "كلمة المرور الجديدة", type: "password" },
-    { name: "تاكيد كلمة المرور الجديدة", type: "password" },
+    { name: t("Old Password"), type: "password" },
+    { name: t("New Password"), type: "password" },
+    { name: t("Confirm Password"), type: "password" },
   ];
   return (
     <div>
