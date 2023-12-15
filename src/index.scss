@@ -30,4 +30,9 @@ body {
 
 .devOnly {
   // display: none;
+  direction: rtl;
+}
+
+body.en {
+  direction: ltr;
 }

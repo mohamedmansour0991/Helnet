@@ -1,6 +1,7 @@
 import "./App.scss";
 /* eslint-disable react/no-children-prop */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./i18n";
 import Codecheck from "./pages/codecheck/codecheck";
 import { Button } from "./components/ui";
 import Login from "./pages/login/login";

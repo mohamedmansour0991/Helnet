@@ -15,37 +15,48 @@ import ChangePassword from "../changePassword/ChangePassword";
 import Privacy from "../privacy/Privacy";
 import UpdateInfo from "../updateInfo/UpdateInfo";
 import Language from "../languageSettings/Language";
-import Art from "../languageSettings/Language";
 import Support from "../support/Support";
 import { Route, Routes, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import Art from "../art/Art";
 
 function Settings() {
   const name = useParams().name;
-  console.log(name)
+  // console.log(name)
+  const [t] = useTranslation();
+
   const mainMenuLabels = [
-    { name: "تحديث المعلومات", icon: pen, link: "settings/update-info" },
-    { name: "بياناتي", icon: info, link: "settings/user-info" },
+    { name: t("Update Information"), icon: pen, link: "settings/update-info" },
+    { name: t("My Information"), icon: info, link: "settings/user-info" },
     {
-      name: "تغيير كلمة المرور",
+      name: t("Edit Password"),
       icon: eye,
       link: "settings/change-pass",
     },
-    { name: "الخصوصية", icon: mobilephone, link: "settings/privacy" },
-    { name: "اللغة", icon: language, link: "settings/language" },
-    { name: "اللون", icon: art, link: "settings/art" },
-    { name: "الدعم الفني", icon: support, link: "settings/support" },
-    { name: "تسجيل خروج", icon: logout, link: "logout" },
+    { name: t("Privacy"), icon: mobilephone, link: "settings/privacy" },
+    { name: t("Language"), icon: language, link: "settings/language" },
+    { name: t("Color"), icon: art, link: "settings/art" },
+    { name: t("Support"), icon: support, link: "settings/support" },
+    { name: t("Logout"), icon: logout, link: "logout" },
   ];
   return (
     <div>
       <Navbar />
       <main className="main">
-        <MainMenu mainMenuLabels={mainMenuLabels} header={"الاعدادات"} />
+        <MainMenu mainMenuLabels={mainMenuLabels} header={t("Settings")} />
         <div className="placeholder">
           {name === "user-info" ? (
+            <UserInfo />
+          ) : name === "update-info" ? (
             <UpdateInfo />
           ) : name === "privacy" ? (
             <Privacy />
+          ) : name === "art" ? (
+            <Art />
+          ) : name === "support" ? (
+            <Support />
+          ) : name === "language" ? (
+            <Language />
           ) : (
             <ChangePassword />
           )}

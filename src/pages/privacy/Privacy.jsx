@@ -1,17 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import FormSelect from "../../components/formSelect/FormSelect";
+import { useTranslation } from "react-i18next";
+import Button from "../../components/button/Button";
 
 function Privacy() {
+  const [t] = useTranslation();
+  const [formValues, setFormValues] = useState({});
+
   const inputsSelect = [
-    { name: "خصوصية الحساب", type: "select", select: ["Public", "Private"] },
-    { name: "من يستطيع رؤية منشوراتي", type: "select" },
-    { name: "من يستطيع رؤية معلوماتي  الشخصية", type: "select" },
+    {
+      name: t("Account Privacy"),
+      type: "select",
+      select: ["Public", "Private"],
+      state: "accountPrivacy",
+    },
+    {
+      name: t("Who can see Your Posts"),
+      type: "select",
+      state: "accountPosts",
+    },
+    {
+      name: t("Who can see my personal information?"),
+      type: "select",
+      state: "privacyInformation",
+    },
   ];
-  const typeUser = [{ name: "نوع المستخدم", type: "select" }];
+  const handleButtonClick = () => {
+    console.log(formValues);
+  };
   return (
-    <div>
-      <FormSelect inputs={inputsSelect} name="حفظ التعديلات" />
-      {/* <FormSelect inputs={typeUser} name="تغيير" /> */}
+    <div className="inputSelect">
+      <FormSelect inputs={inputsSelect} setFormValues={setFormValues} />
+      <Button name={t("Save modifications")} onClick={handleButtonClick} />
     </div>
   );
 }
