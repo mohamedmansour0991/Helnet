@@ -6,22 +6,24 @@
   display: grid;
   justify-items: center;
   grid-template-columns: auto 1fr auto;
+  gap: 1rem;
 
-  & > .placeholder {
+  & > .container {
     grid-row: 1;
-    grid-column: 2;
-
-    height: 100rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
+
   @media screen and (max-width: 950px) {
-      grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+    & > .placeholder {
+      grid-row: 1;
+      grid-column: 1;
     }
-    
-    @media screen and (max-width: 600px) {
-        grid-template-columns: 1fr;
-        & > .placeholder {
-          grid-row: 1;
-          grid-column: 1;
-        }
   }
 }

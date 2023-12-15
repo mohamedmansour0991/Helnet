@@ -2,12 +2,16 @@
   grid-row: 1;
   grid-column: 1;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 800px) {
     display: none;
   }
+
   &__All {
     background-color: var(--bg-color);
     border-radius: 1rem;
+    position: sticky;
+    top: 5rem;
+
     & .mainMenu__header {
       background: linear-gradient(#00acff75, #bd00ff58);
       padding: 10px 30px;
@@ -51,9 +55,8 @@
           text-align: right;
           color: #5d5fef;
           width: 100%;
-          svg{
-          color: #5d5fef;
-
+          svg {
+            color: #5d5fef;
           }
         }
       }

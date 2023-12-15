@@ -1,6 +1,6 @@
-import "./Input.scss";
 import { eyeClose, eyeOpen } from "../../../assets/images/icons";
 import { useEffect, useState } from "react";
+import "./Input.scss";
 
 export default function Input({
   inputID,

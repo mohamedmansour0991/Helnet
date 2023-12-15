@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import {
   lamp,
   lampColored,
@@ -16,17 +17,15 @@ import {
   profile1,
   favicon,
 } from "/src/assets/images/icons";
-
 import "./Navbar.scss";
-import { useState } from "react";
 
 export default function Navbar() {
   const mainNavbarList = [
-    { name: "lamp", icon: lamp, coloredIcon: lampColored },
-    { name: "store", icon: store, coloredIcon: storeColored },
-    { name: "reel", icon: reel, coloredIcon: reelColored },
-    { name: "video", icon: video, coloredIcon: videoColored },
     { name: "home", icon: home, coloredIcon: homeColored },
+    { name: "video", icon: video, coloredIcon: videoColored },
+    { name: "reel", icon: reel, coloredIcon: reelColored },
+    { name: "store", icon: store, coloredIcon: storeColored },
+    { name: "lamp", icon: lamp, coloredIcon: lampColored },
   ];
 
   const userOptionsList = [
@@ -50,10 +49,11 @@ export default function Navbar() {
   ];
 
   const [isOpened, setIsOpened] = useState(false);
+  const direction = localStorage.getItem("direction");
 
   return (
-    <nav className="navbar">
-      <Link className="navbar__logo">
+    <nav className={`navbar ${direction}`}>
+      <Link className="navbar__logo" to={"/"}>
         <img src={favicon} alt="Helnet logo" />
       </Link>
       <ul className="navbar__list navigation">
@@ -74,6 +74,15 @@ export default function Navbar() {
         ))}
       </ul>
       <ul className="navbar__list userOptions">
+        <li className="tapButton">
+          <img
+            src={menu}
+            alt=""
+            role="button"
+            className="utilityButton"
+            onClick={() => setIsOpened(!isOpened)}
+          />
+        </li>
         {userOptionsList.map((tap, index) => (
           <li
             key={index}
@@ -98,13 +107,6 @@ export default function Navbar() {
             )}
           </li>
         ))}
-        {/* <img
-          src={menu}
-          alt=""
-          role="button"
-          className="utilityButton"
-          onClick={() => setIsOpened(!isOpened)}
-        /> */}
       </ul>
       <div className="navbar__list mobileButton">
         <p>{currentPath}</p>

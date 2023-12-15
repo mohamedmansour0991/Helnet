@@ -29,5 +29,15 @@ export { default as Image1 } from "./Image1.svg";
 export { default as whatsapp } from "./whatsapp.svg";
 export { default as Overly } from "./Overly.svg";
 export { default as Star } from "./Star.svg";
+export { default as vertical3dots } from "./vertical3dots.svg";
+export { default as eyeClose } from "./eyeClose.svg";
+export { default as eyeOpen } from "./eyeOpen.svg";
+export { default as play } from "./play.svg";
+export { default as pause } from "./pause.svg";
+export { default as fullscreen } from "./fullscreen.svg";
+export { default as volumeDown } from "./volume_down.svg";
+export { default as volumeUp } from "./volume_up.svg";
+export { default as muted } from "./volume_off.svg";
+export { default as restart } from "./restart.svg";
 
 export { default as profile1 } from "./profile1.png";

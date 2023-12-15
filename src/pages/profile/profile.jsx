@@ -9,7 +9,8 @@ import freelance from "../../assets/images/freelance.png"
 import cake from "../../assets/images/cake.png"
 import link from "../../assets/images/link.png"
 import Rectangle from "../../assets/images/Rectangle.png"
-import MainMenu from "../../components/MainMenu/MainMenu"
+// import MainMenu from "../../components/MainMenu/MainMenu"
+import {  MainMenu } from "/src/components";
 
 
 const Profile = () => {
