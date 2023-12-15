@@ -8,6 +8,7 @@ export default function Input({
   value,
   label = "",
   className = "",
+  inputClassName = "",
   placeholder = "",
   checked = false,
   required = false,
@@ -44,6 +45,9 @@ export default function Input({
         name={type}
         placeholder={placeholder}
         value={value}
+        className={inputClassName 
+          ? inputClassName 
+          : "rounded-lg px-3"}
         required={required}
         aria-label={label}
         aria-describedby={`input${inputID}-desc`}

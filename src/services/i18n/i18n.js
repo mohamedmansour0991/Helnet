@@ -15,7 +15,10 @@ i18n
       caches: ["cookie", "localStorage"],
     },
     backend: { loadPath: "/locales/{{lng}}.json" },
-    // react: { useSuspanse: false },
+    react: { useSuspanse: false },
+    interpolation: {
+      escapeValue: false, 
+    },
   });
 
 export default i18n;

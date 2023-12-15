@@ -39,5 +39,16 @@ export { default as volumeDown } from "./volume_down.svg";
 export { default as volumeUp } from "./volume_up.svg";
 export { default as muted } from "./volume_off.svg";
 export { default as restart } from "./restart.svg";
+export { default as close } from "./close.svg";
+export { default as facebook } from "./facebook.svg";
+export { default as twitter } from "./twitter.svg";
+export { default as reddit } from "./reddit.svg";
+export { default as whatsApp2 } from "./whatsApp2.svg";
+export { default as copy } from "./copy.svg";
+export { default as like } from "./like.svg";
+export { default as comment } from "./comment.svg";
+export { default as share } from "./share.svg";
+export { default as image } from "./Image.svg";
+export { default as voice } from "./voice.svg";
 
 export { default as profile1 } from "./profile1.png";

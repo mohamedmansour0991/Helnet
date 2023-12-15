@@ -1,5 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Gallery, InteractionBar, VideoPlayer } from "../ui";
+import { vertical3dots } from "../../assets/images/icons";
+import { testVideo } from "../../assets/videos";
 import {
   PFP,
   testImage1,
@@ -9,10 +13,8 @@ import {
   testImage5,
   testImage6,
 } from "../../assets/images";
-import { vertical3dots } from "../../assets/images/icons";
-import { testVideo } from "../../assets/videos";
-import { Gallery, VideoPlayer } from "../ui";
 import "./singlePost.scss";
+import CommentSection from "../commentSection/CommentSection";
 
 export default function SinglePost(
   {
@@ -36,18 +38,21 @@ export default function SinglePost(
     post_id: "1",
     post_data: {
       post_time: "3am",
-      post_text:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus placerat erat blandit hendrerit aliquam. Maecenas.",
+      post_text: "",
+      // post_text:
+      //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus placerat erat blandit hendrerit aliquam. Maecenas.",
       post_images: [
-        testImage1,
-        testImage2,
-        testImage3,
-        testImage4,
-        testImage5,
-        testImage6,
+        // testImage1,
+        // testImage2,
+        // testImage3,
+        // testImage4,
+        // testImage5,
+        // testImage6,
       ],
-      post_video: testVideo,
-      post_link: "https://www.google.com/",
+      // post_video: testVideo,
+      // post_link: "https://www.google.com/",
+      post_video: "",
+      post_link: "",
     },
     post_user: {
       user_id: "1",
@@ -58,8 +63,6 @@ export default function SinglePost(
   const openProfile = () => {
     navigate("/");
   };
-
-  const openMenu = () => {};
 
   return (
     <div className="singlePost" key={post.post_id}>
@@ -83,7 +86,7 @@ export default function SinglePost(
         </div>
 
         <div className="singlePost__header--aside">
-          <img src={vertical3dots} alt="" role="button" onClick={openMenu} />
+          <img src={vertical3dots} alt="" role="button" />
         </div>
       </div>
 
@@ -102,9 +105,10 @@ export default function SinglePost(
           <VideoPlayer data={post.post_data.post_video} />
         )}
 
-        {post.post_data.post_link && (
-          <p className="singlePost__body--link">{post.post_data.post_link}</p>
-        )}
+        {post.post_data.post_link && <p>{post.post_data.post_link}</p>}
+
+        <InteractionBar />
+        <CommentSection />
       </div>
     </div>
   );
