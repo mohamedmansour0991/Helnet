@@ -7,6 +7,7 @@
 }
 body {
   // font-family: Times New Roman;
+    background-color: #F6F6F6;
   min-height: 100vh;
 }
 #root{
@@ -428,6 +429,8 @@ button {
  a:hover {
   color: white!important;
  }
+
+ 
 .input__select {
   display: flex;
   flex-direction: column;

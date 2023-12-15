@@ -182,11 +182,12 @@ const Reels = () => {
                                         borderRadius: "12px",
                                         fontSize: "13px",
                                         fontWeight: "600",
-                                        height: "25px",
+                                        height: "30px",
                                         border: "1PX solid #c7c2c2",
                                         color: "black",
                                         lineHeight: "normal",
                                         marginLeft: "10px",
+                                        padding: "0px 7px"
                                     }}
                                 >
                                     {address.name}

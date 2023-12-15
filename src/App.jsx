@@ -40,15 +40,15 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* <Route path="" element={<Button children={"Button"} />} />  */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Signup />} />
-        <Route path="/forget-pass" element={<Forgetpass />} />
-        <Route path="/check-code" element={<Codecheck />} />
-        <Route path="/reset-pass" element={<Resetpass />} />
-        <Route path="/doctor" element={<Doctor />} />
-        <Route path="/user-kind" element={<UserKind />} />
+        {/* <Route path="/login" element={<Login />} /> */}
+        {/* <Route path="/register" element={<Signup />} /> */}
+        {/* <Route path="/forget-pass" element={<Forgetpass />} /> */}
+        {/* <Route path="/check-code" element={<Codecheck />} /> */}
+        {/* <Route path="/reset-pass" element={<Resetpass />} /> */}
+        {/* <Route path="/doctor" element={<Doctor />} /> */}
+        {/* <Route path="/user-kind" element={<UserKind />} /> */}
         {/* <Route path="" element={<Provider />} /> */}
-        <Route path="/job" element={<Jobs />} />
+        {/* <Route path="/job" element={<Jobs />} /> */}
         {/* <Route path="" element={<Places />} /> */}
         {/* <Route path="" element={<Nutrition />} /> */}
         {/* <Route path="" element={<Language />} /> */}
@@ -58,23 +58,23 @@ function App() {
 
         {/* <Route path="" element={<Profile />} /> */}
         {/* <Route path="" element={<Notifcations />} /> */}
-        {/* <Route path="" element={<Reels />} /> */}
+        <Route path="" element={<Reels />} />
 
 
 
 
         {/* <Route path="" element={<Profile />} /> */}
-        <Route path="/" element={<MainPage />} />
-        <Route path="/home" element={<MainPage />} />
-        <Route path="/settings/:name" element={<Settings />} />
+        {/* <Route path="/" element={<MainPage />} /> */}
+        {/* <Route path="/home" element={<MainPage />} /> */}
+        {/* <Route path="/settings/:name" element={<Settings />} /> */}
         {/* <Route path="/settings/update-info" element={<Settings />} />
         <Route path="/settings/change-pass" element={<Settings />} />
         <Route path="/settings/privacy" element={<Settings />} />
         <Route path="/settings/language" element={<Settings />} />
         <Route path="/settings/art" element={<Settings />} />
         <Route path="/settings/support" element={<Settings />} /> */}
-        <Route path="/store" element={<Store />} />
-        <Route path="/store/:name" element={<Store />} />
+        {/* <Route path="/store" element={<Store />} /> */}
+        {/* <Route path="/store/:name" element={<Store />} /> */}
         {/* <Route path="/store/buy" element={<Store />} />
         <Route path="/store/used" element={<Store />} />
         <Route path="/store/display" element={<ProductDisplay />} /> */}
