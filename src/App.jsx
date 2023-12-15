@@ -26,15 +26,15 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* <Route path="" element={<Button children={"Button"} />} />  */}
-        {/* <Route path="" element={<Login />} /> */}
-        {/* <Route path="" element={<Signup />} /> */}
-        {/* <Route path="" element={<Forgetpass />} /> */}
-        {/* <Route path="" element={<Codecheck />} /> */}
-        {/* <Route path="" element={<Resetpass />} /> */}
-        {/* <Route path="" element={<Doctor />} /> */}
-        {/* <Route path="" element={<UserKind />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/forget-pass" element={<Forgetpass />} />
+        <Route path="/check-code" element={<Codecheck />} />
+        <Route path="/reset-pass" element={<Resetpass />} />
+        <Route path="/doctor" element={<Doctor />} />
+        <Route path="/user-kind" element={<UserKind />} />
         {/* <Route path="" element={<Provider />} /> */}
-        {/* <Route path="" element={<Jobs />} /> */}
+        <Route path="/job" element={<Jobs />} />
         {/* <Route path="" element={<Places />} /> */}
         {/* <Route path="" element={<Nutrition />} /> */}
         {/* <Route path="" element={<Language />} /> */}
@@ -42,6 +42,7 @@ function App() {
 
         {/* <Route path="" element={<Profile />} /> */}
         <Route path="/" element={<MainPage />} />
+        <Route path="/home" element={<MainPage />} />
         <Route path="/settings/:name" element={<Settings />} />
         {/* <Route path="/settings/update-info" element={<Settings />} />
         <Route path="/settings/change-pass" element={<Settings />} />

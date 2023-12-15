@@ -34,15 +34,32 @@ export default function VideoPlayer({ data }) {
     }
   };
 
+  // useEffect(() => {
+  //   const handleTimeUpdate = () => {
+  //     setTimeLine(videoRef.current.currentTime);
+  //   };
+
+  //   videoRef.current.addEventListener("timeupdate", handleTimeUpdate);
+
+  //   return () => {
+  //     videoRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+  //   };
+  // }, []);
   useEffect(() => {
     const handleTimeUpdate = () => {
       setTimeLine(videoRef.current.currentTime);
     };
 
-    videoRef.current.addEventListener("timeupdate", handleTimeUpdate);
+    const currentVideoRef = videoRef.current;
+
+    if (currentVideoRef) {
+      currentVideoRef.addEventListener("timeupdate", handleTimeUpdate);
+    }
 
     return () => {
-      videoRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+      if (currentVideoRef) {
+        currentVideoRef.removeEventListener("timeupdate", handleTimeUpdate);
+      }
     };
   }, []);
 

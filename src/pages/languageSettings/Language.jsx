@@ -21,10 +21,13 @@ function Language() {
       i18n.changeLanguage("en");
       document.body.classList.add("en");
       localStorage.setItem("lang", "en");
+      localStorage.setItem("direction",'ltr');
     } else {
       i18n.changeLanguage("ar");
       document.body.classList.remove("en");
       localStorage.setItem("lang", "ar");
+      localStorage.setItem("direction", "rtl");
+
     }
   };
   return (

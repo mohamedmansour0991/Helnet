@@ -103,7 +103,12 @@ button {
 }
 
 .logform {
-  padding-left: 186px !important;
+  padding-left: 80px !important;
+  @media screen and (max-width: 1120px) {
+    & {
+      padding-left: 3rem !important;
+    }
+  }
 }
 
 .codeform {
@@ -129,9 +134,10 @@ button {
 .card {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
   border-radius: 20px;
-  height: 128px;
-  width: 128px;
+  height: 160px;
+  width: 160px;
   margin: 48px 25px;
+  
 }
 
 .card:hover,
@@ -428,38 +434,36 @@ button {
   }
 }
 
-.row {
-  // width: 90%;
-  background-color: #fff;
-  border-radius: 1rem;
-  // height: 100%;
-  padding: 20px;
-  margin: 0px 10px;
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  justify-content: center;
-  gap: 1rem;
-}
+// .row {
+//   // width: 90%;
+//   background-color: #fff;
+//   border-radius: 1rem;
+//   // height: 100%;
+//   padding: 20px;
+//   margin: 0px 10px;
+//   display: grid;
+//   grid-template-columns: repeat(3, auto);
+//   justify-content: center;
+//   gap: 1rem;
+// }
 
+// @media (max-width: 1200px) {
+//   .row {
+//     grid-template-columns: repeat(2, auto) !important;
+//     text-align: center;
+//   }
+// }
 
-@media (max-width: 1200px) {
-  .row {
-    grid-template-columns: repeat(2, auto) !important;
-    text-align: center;
-  }
-}
-
-
-@media (max-width: 771px) {
-  .row {
-    // width: 90%;
-    background-color: #fff;
-    border-radius: 1rem;
-    // height: 100%;
-    padding: 20px;
-    margin: 0px 30px;
-    display: grid;
-    grid-template-columns: repeat(1, auto) !important;
-    text-align: center;
-  }
-}
+// @media (max-width: 771px) {
+//   .row {
+//     // width: 90%;
+//     background-color: #fff;
+//     border-radius: 1rem;
+//     // height: 100%;
+//     padding: 20px;
+//     margin: 0px 30px;
+//     display: grid;
+//     grid-template-columns: repeat(1, auto) !important;
+//     text-align: center;
+//   }
+// }

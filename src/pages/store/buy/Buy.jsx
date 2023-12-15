@@ -66,11 +66,7 @@ function Buy() {
       price: "70$",
     },
   ];
-  return (
-    <div className="row">
-      <CardStore products={products} />
-    </div>
-  );
+  return <CardStore products={products} />;
 }
 
 export default Buy;

@@ -13,9 +13,20 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    &.start {
+      justify-content: space-between !important;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    & > .container {
+      &.start {
+        justify-content: center !important;
+        
+      }
+    }
   }
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 800px) {
     grid-template-columns: 1fr;
   }
 

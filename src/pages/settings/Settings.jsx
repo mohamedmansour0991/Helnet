@@ -19,10 +19,11 @@ import Support from "../support/Support";
 import { Route, Routes, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Art from "../art/Art";
-
+import "./Settings.scss";
 function Settings() {
+  const direction = localStorage.getItem("direction");
   const name = useParams().name;
-  // console.log(name)
+
   const [t] = useTranslation();
 
   const mainMenuLabels = [
@@ -37,36 +38,31 @@ function Settings() {
     { name: t("Language"), icon: language, link: "settings/language" },
     { name: t("Color"), icon: art, link: "settings/art" },
     { name: t("Support"), icon: support, link: "settings/support" },
-    { name: t("Logout"), icon: logout, link: "logout" },
+    { name: t("Logout"), icon: logout, link: "login" },
   ];
   return (
     <div>
       <Navbar />
-      <main className="main">
+      <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} header={t("Settings")} />
-        <div className="placeholder">
-          {name === "user-info" ? (
-            <UserInfo />
-          ) : name === "update-info" ? (
-            <UpdateInfo />
-          ) : name === "privacy" ? (
-            <Privacy />
-          ) : name === "art" ? (
-            <Art />
-          ) : name === "support" ? (
-            <Support />
-          ) : name === "language" ? (
-            <Language />
-          ) : (
-            <ChangePassword />
-          )}
-
-          {/* <Privacy /> */}
-          {/* <ChangePassword /> */}
-          {/* <UserInfo/> */}
-          {/* <Language /> */}
-          {/* <Art /> */}
-          {/* <Support /> */}
+        <div className="container start">
+          <div className="settings">
+            {name === "user-info" ? (
+              <UserInfo />
+            ) : name === "update-info" ? (
+              <UpdateInfo />
+            ) : name === "privacy" ? (
+              <Privacy />
+            ) : name === "art" ? (
+              <Art />
+            ) : name === "support" ? (
+              <Support />
+            ) : name === "language" ? (
+              <Language />
+            ) : (
+              <ChangePassword />
+            )}
+          </div>
         </div>
       </main>
     </div>

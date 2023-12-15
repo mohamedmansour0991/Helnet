@@ -18,7 +18,7 @@ function UpdateInfo() {
     console.log(formValues);
   };
   return (
-    <>
+    <div className="updateInfo">
       <div className="inputSelect">
         <FormSelect
           inputs={inputsSelect}
@@ -31,7 +31,7 @@ function UpdateInfo() {
         <FormSelect inputs={typeUser} />
         <Button name={t("Change")} />
       </div>
-    </>
+    </div>
   );
 }
 
