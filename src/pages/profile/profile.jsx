@@ -464,7 +464,7 @@ const Profile = () => {
                 backgroundColor: "#FB3B3B", color: "#ffff", width: "58%", marginBottom: "20px",
                 height: "30px", textAlign: "center", margin: "auto", borderRadius: "5px"
             }}>
-                <a href="#" onClick={openModal2} style={{ fontSize: "20px", fontWeight: "500" }}>هذا الحساب غير موثق حتى الآن</a>
+                <a className="red" href="#" onClick={openModal2} style={{ fontSize: "20px", fontWeight: "500" }}>هذا الحساب غير موثق حتى الآن</a>
             </div>
 
             {/* موديل توثيق الحساب  */}
