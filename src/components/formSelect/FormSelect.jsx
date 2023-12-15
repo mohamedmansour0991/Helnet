@@ -12,7 +12,7 @@ function FormSelect({ inputs, header, name, formValues, setFormValues }) {
   return (
     // <div className="inputSelect">
     <div className="inputSelect__All">
-      {inputs.map((tap, index) => (
+      {inputs?.map((tap, index) => (
         <div key={index} className={`${tap.class} input__select`}>
           <label>{tap.name}</label>
           {tap.type == "select" ? (

@@ -20,8 +20,20 @@ import { MainPage } from "./pages";
 import Profile from "./pages/profile/profile";
 import Settings from "./pages/settings/Settings";
 import Store from "./pages/store/Store";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import ProductDisplay from "./pages/store/productDisplay/ProductDisplay";
 
 function App() {
+  const [t, i18n] = useTranslation();
+  useEffect(() => {
+    console.log(i18n.language);
+    if (i18n.language === "ar") {
+      localStorage.setItem("direction", "rtl");
+    } else {
+      localStorage.setItem("direction", "ltr");
+    }
+  }, []);
   return (
     <BrowserRouter>
       <Routes>
@@ -51,6 +63,10 @@ function App() {
         <Route path="/settings/art" element={<Settings />} />
         <Route path="/settings/support" element={<Settings />} /> */}
         <Route path="/store" element={<Store />} />
+        <Route path="/store/:name" element={<Store />} />
+        {/* <Route path="/store/buy" element={<Store />} />
+        <Route path="/store/used" element={<Store />} />
+        <Route path="/store/display" element={<ProductDisplay />} /> */}
       </Routes>
     </BrowserRouter>
   );

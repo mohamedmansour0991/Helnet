@@ -7,10 +7,17 @@
 }
 body {
   // font-family: Times New Roman;
+  min-height: 100vh;
+}
+#root{
+  height: 100%;
 }
 .bg-body {
   background-color: var(--main-bg) !important;
+  min-height: 100%;
+  
 }
+
 
 .title {
   text-align: center;
