@@ -3,6 +3,7 @@ import { useState } from "react";
 // import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Logimage from "../../components/logImage/logImage";
+import { Link } from "react-router-dom";
 const Login = () => {
   const validEmail = new RegExp(
     "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
@@ -129,11 +130,11 @@ const Login = () => {
 
   return (
     <div className="container">
-      <div className="row m-5 no-gutters">
-        <div className="col-md-6 d-none d-md-block">
+      <div className="row m-md-5 my-5  no-gutters flex-wrap">
+        <div className="col-xl-6 col-12 d-none d-xl-block">
           <Logimage style={{ minHeight: "100%" }} />
         </div>
-        <div className="col-md-6 bg-white p-5 logform">
+        <div className="col-xl-6 col-12 bg-white p-5 logform">
           <h1 className="title" style={{ marginBottom: "5px" }}>
             أهلا بعودتك
           </h1>
@@ -206,7 +207,7 @@ const Login = () => {
 
               <div className="d-flex align-items-center justify-content-between">
                 <div style={{ color: "#A74ED1" }}>
-                  <a href="#">نسيت كلمة السر؟</a>
+                  <Link to="/forget-pass">نسيت كلمة السر؟</Link>
                 </div>
                 <div className="d-flex align-items-center">
                   <span
@@ -220,7 +221,7 @@ const Login = () => {
                     name=""
                     type="checkbox"
                     value=""
-                    className="inpcheck"
+                    className="inpcheck mb-0"
                   />
                 </div>
               </div>
@@ -252,10 +253,13 @@ const Login = () => {
               }}
             >
               ليس لديك حساب بعد؟
-              <a style={{ color: "#873fa9", fontWeight: "600" }} href="#">
+              <Link
+                to={"/register"}
+                style={{ color: "#873fa9", fontWeight: "600" }}
+              >
                 {" "}
                 انشئ حساب الآن{" "}
-              </a>
+              </Link>
               وانضم الينا{" "}
             </h3>
           </div>

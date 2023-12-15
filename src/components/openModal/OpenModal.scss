@@ -1,0 +1,17 @@
+.modal-header {
+  background: #a74ed1;
+  & .modal-title {
+    color: #fff;
+  }
+}
+
+.modal-content {
+  direction: rtl !important;
+}
+.en .modal-content {
+  direction: ltr !important;
+}
+
+.modal-header .btn-close {
+  margin: 0px;
+}

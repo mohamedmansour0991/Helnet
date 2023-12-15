@@ -1,0 +1,42 @@
+.gallery {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  grid-template-columns: repeat(4, 1fr);
+
+  & > .imageNo1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+    & > .imageNo1 {
+      grid-row: auto;
+      grid-column: auto;
+    }
+  }
+
+  & img {
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+  }
+
+  & > :last-child.imageNo5 {
+    position: relative;
+    opacity: 0.3;
+  }
+
+  &__indicator {
+    position: absolute;
+    font-size: 3em;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+}

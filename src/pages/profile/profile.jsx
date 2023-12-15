@@ -18,11 +18,12 @@ import delet from "../../assets/images/delete.png"
 import padlock from "../../assets/images/padlock.png"
 import upload from "../../assets/images/upload.png"
 import close2 from "../../assets/images/close2.png"
+// import MainMenu from "../../components/MainMenu/MainMenu"
+// import { MainMenu } from "/src/components";
 
 import Card from "../../components/card/card";
 
 const Profile = () => {
-
     const mainMenuLabels = [
         { name: "من المنصورة", icon: home },
         { name: "درس في جامعة المنصورة ", icon: graduation },
@@ -30,6 +31,8 @@ const Profile = () => {
         { name: "ولد 12 سبتمبر 2002 ", icon: cake },
         { name: " انضم في مارس 2020 ", icon: link },
     ];
+
+
     let [isOpen, setIsOpen] = useState(false)
 
     function closeModal() {
@@ -672,5 +675,4 @@ const Profile = () => {
         </>
     );
 };
-
 export default Profile;

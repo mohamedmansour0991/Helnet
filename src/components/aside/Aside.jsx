@@ -3,8 +3,12 @@ import { adImage, Polygon } from "/src/assets/images";
 import { profile1, plus } from "/src/assets/images/icons";
 import "./Aside.scss";
 import { Link } from "react-router-dom";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Aside() {
+  const { t } = useTranslation();
+
   const users = [
     { name: "أحمد يس", job: "مدير تنفيذي", image: profile1 },
     { name: "ريان أحمد", job: "مبرمج", image: profile1 },
@@ -23,17 +27,43 @@ export default function Aside() {
     "independent",
   ];
 
+  /////////////////////////developing only////////////////////////////
+  const lang = localStorage.getItem("i18nextLng");
+  const direction = localStorage.getItem("direction");
+
+  const handelLang = () => {
+    if (lang === "en") {
+      return "ar";
+    } else return "en";
+  };
+  const handelDirection = () => {
+    if (direction === "ltr") {
+      return "rtl";
+    } else return "ltr";
+  };
+  /////////////////////////developing only////////////////////////////
+
   return (
     <aside className="aside">
+      <div className="devOnly">
+        <Button
+          className="w-fit"
+          children={<p>{t("changeLang(developingOnly)")}</p>}
+          onClick={() => {
+            i18next.changeLanguage(handelLang());
+            localStorage.setItem("direction", handelDirection());
+          }}
+        />
+      </div>
       <div className="aside__section ad">
-        <h4>{"This site is completely free for six months"}</h4>
-        <p>{"--Subscription fee is 0 pounds"}</p>
-        <Button children={"Try for free"} />
+        <h4>{t("This site is completely free for six months")}</h4>
+        <p>{t("--Subscription fee is 0 pounds")}</p>
+        <Button children={t("Try for free")} />
         <img src={adImage} alt="" />
         <img className="polygon" src={Polygon} alt="" />
       </div>
       <div className="aside__section recommend">
-        <h4>{"people you may know:"}</h4>
+        <h4>{t("people you may know:")}</h4>
         <ul>
           {users.map((user, index) => (
             <li key={index}>
@@ -50,12 +80,12 @@ export default function Aside() {
               />
             </li>
           ))}
-          <Link>{"all"}</Link>
+          <Link>{t("all")}</Link>
         </ul>
       </div>
       <div className="aside__section tags">
         <div className="tagsHeader">
-          <p>{"followed-up titles:"}</p>
+          <p>{t("followed-up titles:")}</p>
           <img src={plus} alt="" role="button" />
         </div>
 

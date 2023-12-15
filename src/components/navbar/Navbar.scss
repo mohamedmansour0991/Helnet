@@ -1,11 +1,10 @@
 .navbar {
   display: flex;
-  // flex-direction: row-reverse;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
   padding-inline: 3.5rem;
   padding-block: 1rem;
-  // position: relative;
   background-color: var(--bg-color);
   position: sticky;
   top: 0rem;
@@ -30,7 +29,7 @@
     &.navigation {
       gap: 5rem;
 
-      @media screen and (max-width: 950px) {
+      @media screen and (max-width: 1100px) {
         display: none;
       }
     }
@@ -49,6 +48,8 @@
         display: none;
       }
 
+
+
       & > li {
         background-color: #f6f6f6;
         border-radius: 50%;
@@ -57,6 +58,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        &.tapButton{
+          display: none;
+          @media screen and (max-width: 1100px) {
+            display: flex;
+          }
+        }
 
         &.globe {
           position: relative;
@@ -90,10 +98,6 @@
     &.mobileButton {
       display: none;
       gap: 1rem;
-
-      @media screen and (max-width: 600px) {
-        display: flex;
-      }
 
       @media screen and (max-width: 600px) {
         display: flex;

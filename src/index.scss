@@ -15,11 +15,25 @@
   // i well set the vars
   --color: #a74ed1;
   --bg-color: #fff;
-  --main-bg: #F6F6F6;
+  --main-bg: #f6f6f6;
+  
 }
 
 html,
 body {
   height: 100%;
-  background-color: var(--main-bg);
+  // background-color: var(--main-bg);
+
+  .rtl {
+    direction: rtl;
+  }
+}
+
+.devOnly {
+  // display: none;
+  direction: rtl;
+}
+
+body.en {
+  direction: ltr;
 }
