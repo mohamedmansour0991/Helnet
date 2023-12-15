@@ -14,7 +14,7 @@ export { default as globe } from "./globe.svg";
 export { default as events } from "./fireworks.svg";
 export { default as search } from "./search.svg";
 export { default as menu } from "./menu.svg";
-export { default as plus } from "./plus.svg";
+export { default as plus } from "./Plus.svg";
 export { default as art } from "./art.svg";
 export { default as language } from "./language.svg";
 export { default as support } from "./support.svg";
