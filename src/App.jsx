@@ -54,32 +54,25 @@ function App() {
         {/* <Route path="" element={<Language />} /> */}
         {/* <Route path="" element={<Colors />} /> */}
 
-
-
-        {/* <Route path="" element={<Profile />} /> */}
-        {/* <Route path="" element={<Notifcations />} /> */}
-        {/* <Route path="" element={<Reels />} /> */}
-
-
-
+        <Route path="/profile1" element={<Profile />} />
+        <Route path="/globe" element={<Notifcations />} />
+        {/* <Route path="/reel" element={<Reels />} /> */}
 
         {/* <Route path="" element={<Profile />} /> */}
-        <Route path="/" element={<MainPage />} />
-        <Route path="/home" element={<MainPage />} />
+        <Route path="/:allroute" element={<MainPage />} />
+        {/* <Route path="/" element={<MainPage />} /> */}
+        {/* <Route path="/home" element={<MainPage />} /> */}
+
         <Route path="/settings/:name" element={<Settings />} />
-        {/* <Route path="/settings/update-info" element={<Settings />} />
-        <Route path="/settings/change-pass" element={<Settings />} />
-        <Route path="/settings/privacy" element={<Settings />} />
-        <Route path="/settings/language" element={<Settings />} />
-        <Route path="/settings/art" element={<Settings />} />
-        <Route path="/settings/support" element={<Settings />} /> */}
+        <Route path="/settings/update-info" element={<Settings />} />
+
         <Route path="/store" element={<Store />} />
         <Route path="/store/:name" element={<Store />} />
         {/* <Route path="/store/buy" element={<Store />} />
         <Route path="/store/used" element={<Store />} />
         <Route path="/store/display" element={<ProductDisplay />} /> */}
-      </Routes >
-    </BrowserRouter >
+      </Routes>
+    </BrowserRouter>
   );
 }
 

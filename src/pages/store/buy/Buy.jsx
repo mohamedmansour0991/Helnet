@@ -6,7 +6,7 @@ function Buy() {
   const products = [
     {
       name: "بيع",
-      icon: Image,
+      icon: Image1,
       desc: "كيبورد حمراء اللون متغبرة الألوان للألعاب والاستخدام اليومي السريع",
       rate: 745,
       star: 5,
@@ -15,7 +15,7 @@ function Buy() {
     },
     {
       name: "بيع",
-      icon: Image,
+      icon: Image1,
       desc: "كيبورد حمراء اللون متغبرة الألوان للألعاب والاستخدام اليومي السريع",
       rate: 745,
       star: 5,
@@ -24,7 +24,7 @@ function Buy() {
     },
     {
       name: "بيع",
-      icon: Image,
+      icon: Image1,
       desc: "كيبورد حمراء اللون متغبرة الألوان للألعاب والاستخدام اليومي السريع",
       rate: 745,
       star: 5,
@@ -33,7 +33,7 @@ function Buy() {
     },
     {
       name: "بيع",
-      icon: Image,
+      icon: Image1,
       desc: "كيبورد حمراء اللون متغبرة الألوان للألعاب والاستخدام اليومي السريع",
       rate: 745,
       star: 5,
@@ -42,7 +42,7 @@ function Buy() {
     },
     {
       name: "بيع",
-      icon: Image,
+      icon: Image1,
       desc: "كيبورد حمراء اللون متغبرة الألوان للألعاب والاستخدام اليومي السريع",
       rate: 745,
       star: 3,
@@ -59,7 +59,7 @@ function Buy() {
     },
     {
       name: "عرض منتج",
-      icon: Overly,
+      icon: Image1,
       desc: "كيبورد حمراء اللون متغبرة الألوان للألعاب والاستخدام اليومي السريع",
       rate: 745,
       star: 5,
