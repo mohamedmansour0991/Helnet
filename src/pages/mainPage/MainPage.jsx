@@ -15,7 +15,7 @@ export default function MainPage() {
     { name: t("Reel"), icon: reel },
   ];
   return (
-    <div>
+    <div className="bg-body">
       <Navbar />
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />

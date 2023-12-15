@@ -221,7 +221,7 @@ const Login = () => {
                     name=""
                     type="checkbox"
                     value=""
-                    className="inpcheck"
+                    className="inpcheck mb-0"
                   />
                 </div>
               </div>

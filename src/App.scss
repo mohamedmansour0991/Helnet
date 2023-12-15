@@ -7,7 +7,9 @@
 }
 body {
   // font-family: Times New Roman;
-  background-color: #f6f6f6;
+}
+.bg-body {
+  background-color: var(--main-bg) !important;
 }
 
 .title {
@@ -137,7 +139,6 @@ button {
   height: 160px;
   width: 160px;
   margin: 48px 25px;
-  
 }
 
 .card:hover,

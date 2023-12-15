@@ -41,7 +41,7 @@ function Settings() {
     { name: t("Logout"), icon: logout, link: "login" },
   ];
   return (
-    <div>
+    <div className="bg-body">
       <Navbar />
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} header={t("Settings")} />

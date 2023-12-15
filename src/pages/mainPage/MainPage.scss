@@ -7,7 +7,12 @@
   justify-items: center;
   grid-template-columns: auto 1fr auto;
   gap: 1rem;
-
+  padding: 0px 30px;
+  @media screen and (max-width: 991px) {
+    & {
+      padding: 0px !important;
+    }
+  }
   & > .container {
     grid-row: 1;
     width: 100%;
@@ -21,7 +26,6 @@
     & > .container {
       &.start {
         justify-content: center !important;
-        
       }
     }
   }

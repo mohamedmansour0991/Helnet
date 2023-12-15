@@ -14,9 +14,8 @@ function Store() {
     { name: t("Product display"), icon: events },
   ];
   return (
-    <div>
+    <div className="bg-body">
       <Navbar />
-
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
         <div className="container">
