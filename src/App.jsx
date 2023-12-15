@@ -17,6 +17,8 @@ import Nutrition from "./pages/nutrition/nutrition";
 import Language from "./pages/languag/languag";
 import { MainPage } from "./pages";
 import Profile from "./pages/profile/profile";
+import Notifcations from "./pages/notifcations/notifcations";
+import Reels from "./pages/reels/reels";
 
 function App() {
   return (
@@ -36,8 +38,11 @@ function App() {
         {/* <Route path="" element={<Nutrition />} /> */}
         {/* <Route path="" element={<Language />} /> */}
         {/* <Route path="" element={<Colors />} /> */}
-
         <Route path="" element={<Profile />} />
+        {/* <Route path="" element={<Notifcations />} /> */}
+
+        {/* <Route path="" element={<Reels />} /> */}
+
       </Routes>
     </BrowserRouter>
   );

@@ -261,11 +261,11 @@ button {
 .profile-pic {
   border-radius: 50%;
   position: absolute;
-  top: -118px;
+  top: -109px;
   right: 50px;
   margin: auto;
   z-index: 1;
-  max-width: 167.82px;
+  max-width: 150px;
   transition: all 0.4s;
   background-color: orange;
 }
@@ -289,7 +289,7 @@ button {
   left: 14px;
   margin: auto;
   z-index: 1;
-  max-width: 50px;
+  max-width: 45px;
   transition: all 0.4s;
 }
 
@@ -413,4 +413,27 @@ button {
   display: inline-block;
   margin-left: 5px;
 }
+ .chosen{
+  margin-bottom: 20px;
+ }
 
+ .delete {
+  padding: 3px 6px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+ }
+
+ .notibutton:hover  {
+  text-decoration: underline;
+
+ }
+
+ .reelbutton:hover {
+    background-color: #873fa9!important;
+    color: white!important;
+ }
+
+ a:hover {
+  color: white!important;
+ }
