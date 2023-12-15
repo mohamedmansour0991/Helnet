@@ -7,18 +7,16 @@
 }
 body {
   font-family: Times New Roman;
-    background-color: #F6F6F6;
+  background-color: #f6f6f6;
   min-height: 100vh;
 }
-#root{
+#root {
   height: 100%;
 }
 .bg-body {
   background-color: var(--main-bg) !important;
   min-height: 100%;
-  
 }
-
 
 .title {
   text-align: center;
@@ -404,30 +402,26 @@ button {
   display: inline-block;
   margin-left: 5px;
 }
- .chosen{
+.chosen {
   margin-bottom: 20px;
- }
+}
 
- .delete {
+.delete {
   padding: 3px 6px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
- }
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+}
 
- .notibutton:hover  {
+.notibutton:hover {
   text-decoration: underline;
+}
 
- }
+.reelbutton:hover {
+  background-color: #873fa9 !important;
+  color: white !important;
+}
 
- .reelbutton:hover {
-    background-color: #873fa9!important;
-    color: white!important;
- }
-
- a:hover {
-  color: white!important;
- }
 .input__select {
   display: flex;
   flex-direction: column;
