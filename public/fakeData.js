@@ -234,10 +234,21 @@ export const data = [
 ];
 
 export const user = {
-    user_id: "1",
-    username: "noobmaster69",
-    first_name: "abdo",
-    last_name: "alaa",
-    user_img: "",
-    posts: {},
-  };
+  user_id: "1",
+  username: "noobmaster69",
+  first_name: "abdo",
+  last_name: "alaa",
+  user_img: "",
+  posts: {},
+};
+
+export const videosLabels = [
+  "games",
+  "barcelona",
+  "mix",
+  "music",
+  "user interface",
+  "Football Federation",
+  "samsung",
+  "now",
+];

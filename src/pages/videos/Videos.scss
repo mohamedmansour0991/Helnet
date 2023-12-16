@@ -1,11 +1,14 @@
-.videos__page {
+.videosPage__wrapper {
   background-color: #fff;
   width: 100%;
   border-radius: 1rem;
   padding: 20px;
   margin: 0px 10px;
+}
+
+.videos__page {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(3, 1fr);
   justify-content: space-around;
   gap: 1rem;
 }
