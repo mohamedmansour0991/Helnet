@@ -108,7 +108,8 @@
       &.true {
         left: 0px !important;
       }
-      @media (min-width: 1100px) {
+
+      @media (min-width: 1050px) {
         & {
           display: none !important;
         }

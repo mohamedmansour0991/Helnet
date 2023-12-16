@@ -30,7 +30,6 @@ import { t } from "i18next";
 
 export default function Navbar() {
   const name = window.location.pathname.split("/")[1];
-  console.log(name);
   const mainNavbarList = [
     { name: t("Home"), icon: home, coloredIcon: homeColored, link: "home" },
     { name: t("video"), icon: video, coloredIcon: videoColored, link: "video" },
@@ -158,8 +157,8 @@ export default function Navbar() {
       <div className="navbar__list mobileButton">
         <div>
           {[...userOptionsList, ...mainMenuLabels, ...mainNavbarList].map(
-            (f) => (
-              <div>{f.link == currentPath && f.name}</div>
+            (f, index) => (
+              <div key={index}>{f.link == currentPath && f.name}</div>
             )
           )}
         </div>

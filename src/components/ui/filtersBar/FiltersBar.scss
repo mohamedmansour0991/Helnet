@@ -1,0 +1,18 @@
+.filtersBar {
+  overflow: hidden;
+
+  & > ul {
+    overflow-x: scroll;
+    max-width: 60vw;
+
+    scrollbar-width: 0;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (max-width: 850px) {
+      max-width: 80vw;
+    }
+  }
+}

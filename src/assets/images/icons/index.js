@@ -66,5 +66,7 @@ export { default as Frame } from "./Frame.svg";
 export { default as Frame35 } from "./Frame35.svg";
 export { default as Frame36 } from "./Frame36.svg";
 export { default as publicIcon } from "./earth 1.svg";
+export { default as rightCircle } from "./Top.svg";
+export { default as leftCircle } from "./Bottom.svg";
 
 export { default as profile1 } from "./profile1.png";
