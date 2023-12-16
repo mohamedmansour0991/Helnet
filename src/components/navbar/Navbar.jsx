@@ -18,6 +18,7 @@ import {
   favicon,
 } from "/src/assets/images/icons";
 import "./Navbar.scss";
+import { t } from "i18next";
 
 export default function Navbar() {
   const mainNavbarList = [
@@ -35,13 +36,16 @@ export default function Navbar() {
   ];
 
   const navigate = useNavigate();
+
   const location = useLocation();
 
   const getCurrentLocationName = () => {
     const currentPath = location.pathname.substring(1);
     return currentPath === "" ? "home" : currentPath;
   };
+
   const currentPath = getCurrentLocationName();
+
   const notifications = [
     1, 2, 3, 4, 5,
     // 6, 7, 8, 9
@@ -49,6 +53,7 @@ export default function Navbar() {
   ];
 
   const [isOpened, setIsOpened] = useState(false);
+
   const direction = localStorage.getItem("direction");
 
   return (
@@ -117,7 +122,7 @@ export default function Navbar() {
           onClick={() => setIsOpened(!isOpened)}
         />
       </div>
-      <ul className={`navbar__list mobileMenu ${isOpened}`}>
+      <ul className={`navbar__list mobileMenu ${isOpened} ${direction}`}>
         <Link>
           <img src={favicon} alt="Helnet logo" />
         </Link>
@@ -131,7 +136,7 @@ export default function Navbar() {
             }}
           >
             <img src={tap.icon} alt="" />
-            <p>{tap.name}</p>
+            <p>{t(tap.name)}</p>
           </li>
         ))}
       </ul>

@@ -56,13 +56,13 @@ export default function Aside() {
       </div>
       <div className="aside__section ad">
         <h4>{t("This site is completely free for six months")}</h4>
-        <p>{t("--Subscription fee is 0 pounds")}</p>
+        <p>{"--" + t("Subscription fee is 0 pounds")}</p>
         <Button children={t("Try for free")} />
         <img src={adImage} alt="" />
         <img className="polygon" src={Polygon} alt="" />
       </div>
       <div className="aside__section recommend">
-        <h4>{t("people you may know:")}</h4>
+        <h4>{t("people you may know") + ":"}</h4>
         <ul>
           {users.map((user, index) => (
             <li key={index}>
@@ -72,7 +72,7 @@ export default function Aside() {
                 <p>{user.job}</p>
               </div>
               <Button
-                children={"add"}
+                children={t("add")}
                 backgroundColor={"#fff"}
                 color={"#A74ED1"}
                 border={"1px"}
@@ -84,7 +84,7 @@ export default function Aside() {
       </div>
       <div className="aside__section tags">
         <div className="tagsHeader">
-          <p>{t("followed-up titles:")}</p>
+          <p>{t("followed-up titles") + ":"}</p>
           <img src={plus} alt="" role="button" />
         </div>
 
@@ -92,7 +92,7 @@ export default function Aside() {
           {titles.map((title, index) => (
             <p key={index}>
               <span>#</span>
-              {title}
+              {t(title)}
             </p>
           ))}
         </div>
