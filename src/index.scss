@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Times New Roman";
+  src: local("Times New Roman"), url("./times-new-roman.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  font-family: "Times New Roman";
+
+  // i well set the vars
+  --color: #a74ed1;
+  --bg-color: #fff;
+  --main-bg: #f6f6f6;
+}
+
+html,
+body {
+  height: 100%;
+  // background-color: var(--main-bg);
+
+  .rtl {
+    direction: rtl;
+  }
+}
+
+body.en {
+  direction: ltr;
+}
