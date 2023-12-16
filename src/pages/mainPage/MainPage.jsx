@@ -24,13 +24,14 @@ export default function MainPage() {
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
         <div className="container">
-          {name === "home" ? (
-            <Posts />
+          <Posts />
+          {/* {name === "home" ? (
+            <SinglePost />
           ) : name === "reel" ? (
             <Reels />
           ) : (
             name === "settings" && <Settings />
-          )}
+          )} */}
         </div>
         <Aside />
       </main>

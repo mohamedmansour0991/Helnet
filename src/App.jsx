@@ -39,7 +39,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<Button children={"Button"} />} /> 
+        {/* <Route path="" element={<Button children={"Button"} />} />  */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/forget-pass" element={<Forgetpass />} />
@@ -63,6 +63,7 @@ function App() {
         {/* <Route path="" element={<Reels />} /> */}
 
         {/* <Route path="" element={<Profile />} /> */}
+        <Route path="/" element={<MainPage />} />
         <Route path="/:allroute" element={<MainPage />} />
         {/* <Route path="/" element={<MainPage />} /> */}
         {/* <Route path="/home" element={<MainPage />} /> */}
