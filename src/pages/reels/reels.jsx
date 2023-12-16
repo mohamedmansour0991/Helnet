@@ -11,8 +11,8 @@ import { Fragment } from "react";
 import xicon from "../../assets/images/xicon.png";
 import Left from "../../assets/images/Left.png";
 import right from "../../assets/images/right.png";
-
 import BoxReelComponents from "../../components/boxReelComponents/boxReelComponents";
+
 
 const Reels = () => {
   // function classNames(...classes) {
