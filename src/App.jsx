@@ -65,8 +65,8 @@ function App() {
         <Route path="/:allroute" element={<MainPage />} />
         <Route path="/" element={<MainPage />} />
         {/* <Route path="/" element={<MainPage />} /> */}
-        {/* <Route path="/home" element={<MainPage />} /> */}
         <Route path="/settings/:name" element={<Settings />} />
+        {/* <Route path="/home" element={<MainPage />} /> */}
         {/* <Route path="/settings/update-info" element={<Settings />} />
         <Route path="/settings/change-pass" element={<Settings />} />
         <Route path="/settings/privacy" element={<Settings />} />

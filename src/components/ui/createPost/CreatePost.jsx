@@ -144,7 +144,7 @@ export default function CreatePost() {
           dir={direction}
         >
           <p className="d-none d-sm-block">{t("add to your post")}</p>
-          <div className="sm:flex d-flex flex-column flex-sm-row flex-wrap   items-center gap-sm-6">
+          <div className="sm:flex d-flex flex-column flex-sm-row flex-wrap   gap-sm-6">
             {buttons &&
               buttons.map((button) => (
                 <button

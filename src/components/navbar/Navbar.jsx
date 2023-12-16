@@ -1,5 +1,5 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import {
   lamp,
   lampColored,
@@ -16,23 +16,47 @@ import {
   menu,
   profile1,
   favicon,
+  pen,
+  info,
+  logout,
+  support,
+  language,
+  art,
+  mobilephone,
+  eye,
 } from "/src/assets/images/icons";
 import "./Navbar.scss";
 import { t } from "i18next";
 
 export default function Navbar() {
+  const name = window.location.pathname.split("/")[1];
+  console.log(name);
   const mainNavbarList = [
-    { name: "home", icon: home, coloredIcon: homeColored },
-    { name: "video", icon: video, coloredIcon: videoColored },
-    { name: "reel", icon: reel, coloredIcon: reelColored },
-    { name: "store", icon: store, coloredIcon: storeColored },
-    { name: "lamp", icon: lamp, coloredIcon: lampColored },
+    { name: t("Home"), icon: home, coloredIcon: homeColored, link: "home" },
+    { name: t("video"), icon: video, coloredIcon: videoColored, link: "video" },
+    { name: t("Reel"), icon: reel, coloredIcon: reelColored, link: "reel" },
+    { name: t("Store"), icon: store, coloredIcon: storeColored, link: "store" },
+    { name: t("Lamp"), icon: lamp, coloredIcon: lampColored, link: "lamp" },
+  ];
+  const mainMenuLabels = [
+    { name: t("Update Information"), icon: pen, link: "settings/update-info" },
+    { name: t("My Information"), icon: info, link: "settings/user-info" },
+    {
+      name: t("Edit Password"),
+      icon: eye,
+      link: "settings/change-pass",
+    },
+    { name: t("Privacy"), icon: mobilephone, link: "settings/privacy" },
+    { name: t("Language"), icon: language, link: "settings/language" },
+    { name: t("Color"), icon: art, link: "settings/art" },
+    { name: t("Support"), icon: support, link: "settings/support" },
+    { name: t("Logout"), icon: logout, link: "login" },
   ];
 
   const userOptionsList = [
-    { name: "settings/user-info", icon: settings },
-    { name: "globe", icon: globe },
-    { name: "profile1", icon: profile1 },
+    { name: "settings/", icon: settings, link: "settings/update-user" },
+    { name: t("globe"), icon: globe, link: "globe" },
+    { name: t("profile1"), icon: profile1, link: "profile1" },
   ];
 
   const navigate = useNavigate();
@@ -56,6 +80,24 @@ export default function Navbar() {
 
   const direction = localStorage.getItem("direction");
 
+  const menuRef = useRef();
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (menuRef.current.contains(e.target)) {
+        // inside click
+        return;
+      } else {
+        setIsOpened(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClick);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [menuRef]);
+
   return (
     <nav className={`navbar ${direction}`}>
       <Link className="navbar__logo" to={"/"}>
@@ -67,7 +109,7 @@ export default function Navbar() {
             key={index}
             role="button"
             onClick={() => {
-              navigate(`/${tap.name}`);
+              navigate(`/${tap.link}`);
             }}
           >
             {currentPath === tap.name ? (
@@ -94,7 +136,7 @@ export default function Navbar() {
             role="button"
             className={tap.name}
             onClick={() => {
-              navigate(`/${tap.name}`);
+              navigate(`/${tap.link}`);
             }}
           >
             <img src={tap.icon} alt="" />
@@ -114,7 +156,13 @@ export default function Navbar() {
         ))}
       </ul>
       <div className="navbar__list mobileButton">
-        <p>{currentPath}</p>
+        <div>
+          {[...userOptionsList, ...mainMenuLabels, ...mainNavbarList].map(
+            (f) => (
+              <div>{f.link == currentPath && f.name}</div>
+            )
+          )}
+        </div>
         <img
           src={menu}
           alt=""
@@ -122,8 +170,17 @@ export default function Navbar() {
           onClick={() => setIsOpened(!isOpened)}
         />
       </div>
-      <ul className={`navbar__list mobileMenu ${isOpened} ${direction}`}>
-        <Link>
+      <ul
+        ref={menuRef}
+        className={`navbar__list mobileMenu p-0 py-4  d-grid  ${isOpened} ${direction} `}
+        style={{
+          overflowY: "scroll",
+          height: "100vh",
+          boxShadow: "0px 1px 7px 0px #3D5B5945",
+          transition: ".4s",
+        }}
+      >
+        <Link className="p-3">
           <img src={favicon} alt="Helnet logo" />
         </Link>
 
@@ -131,14 +188,31 @@ export default function Navbar() {
           <li
             key={index}
             role="button"
+            className="p-3"
             onClick={() => {
-              navigate(`/${tap.name}`);
+              setIsOpened(false);
+              navigate(`/${tap.link}`);
             }}
           >
             <img src={tap.icon} alt="" />
             <p>{t(tap.name)}</p>
           </li>
         ))}
+        {name === "settings" &&
+          mainMenuLabels.map((tap, index) => (
+            <li
+              className="p-3"
+              key={index}
+              role="button"
+              onClick={() => {
+                setIsOpened(false);
+                navigate(`/${tap.link}`);
+              }}
+            >
+              <img src={tap.icon} alt="" />
+              <p>{t(tap.name)}</p>
+            </li>
+          ))}
       </ul>
     </nav>
   );
