@@ -4,6 +4,7 @@ import { Gallery, InteractionBar, VideoPlayer } from "../ui";
 import { vertical3dots } from "../../assets/images/icons";
 import { PFP } from "../../assets/images";
 import "./singlePost.scss";
+import PostTime from "../postTime/PostTime";
 
 export default function SinglePost({ data }) {
   const { t } = useTranslation();
@@ -67,7 +68,7 @@ export default function SinglePost({ data }) {
         )}
 
         {data.post_data.post_link && <p>{data.post_data.post_link}</p>}
-
+        <PostTime/>
         <InteractionBar />
       </div>
     </div>

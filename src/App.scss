@@ -492,3 +492,10 @@ button {
 //     text-align: center;
 //   }
 // }
+
+
+
+#headlessui-portal-root{
+  position: relative;
+  z-index: 1000;
+}

@@ -5,6 +5,7 @@ import "./MainPage.scss";
 import { useParams } from "react-router-dom";
 import Reels from "../reels/reels";
 import Settings from "../settings/Settings";
+import Notifcations from "../notifcations/notifcations";
 
 export default function MainPage() {
   const { t } = useTranslation();
@@ -12,7 +13,7 @@ export default function MainPage() {
   const name = useParams().allroute;
   const mainMenuLabels = [
     { name: t("Search"), icon: search, link: "search" },
-    { name: t("Store"), icon: store, link: "store" },
+    { name: t("Store"), icon: store, link: "store/buy" },
     { name: t("Events"), icon: events, link: "event" },
     { name: t("video"), icon: video, link: "video" },
     { name: t("Reel"), icon: reel, link: "reel" },
@@ -24,14 +25,15 @@ export default function MainPage() {
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
         <div className="container">
-          <Posts />
-          {/* {name === "home" ? (
-            <SinglePost />
+          {name === "home" || name === undefined ? (
+            <Posts />
           ) : name === "reel" ? (
             <Reels />
+          ) : name === "globe" ? (
+            <Notifcations />
           ) : (
             name === "settings" && <Settings />
-          )} */}
+          )}
         </div>
         <Aside />
       </main>

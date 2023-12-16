@@ -9,14 +9,9 @@ import { useState } from "react";
 import sea from "../../assets/videos/sea.mp4";
 import { Fragment } from "react";
 import xicon from "../../assets/images/xicon.png";
-import Union from "../../assets/images/Union.png";
-import Subtract from "../../assets/images/Subtract.png";
 import Left from "../../assets/images/Left.png";
 import right from "../../assets/images/right.png";
-import Heart from "../../assets/images/Heart.png";
-import Ellipse from "../../assets/images/Ellipse.png";
-import Plus from "../../assets/images/Plus.png";
-import Shape from "../../assets/images/Shape.png";
+
 import BoxReelComponents from "../../components/boxReelComponents/boxReelComponents";
 
 const Reels = () => {

@@ -25,6 +25,7 @@ import Store from "./pages/store/Store";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import ProductDisplay from "./pages/store/productDisplay/ProductDisplay";
+import ReelsPage from "./pages/reels/reelsPage/ReelsPage";
 
 function App() {
   const [t, i18n] = useTranslation();
@@ -54,17 +55,14 @@ function App() {
         {/* <Route path="" element={<Language />} /> */}
         {/* <Route path="" element={<Colors />} /> */}
 
-        {/* <Route path="/profile1" element={<Profile />} /> */}
+        <Route path="/profile1" element={<Profile />} />
         {/* <Route path="/globe" element={<Notifcations />} /> */}
         {/* <Route path="/reel" element={<Reels />} /> */}
 
         {/* <Route path="" element={<Profile />} /> */}
-        {/* <Route path="" element={<Notifcations />} /> */}
-        {/* <Route path="" element={<Reels />} /> */}
-
-        {/* <Route path="" element={<Profile />} /> */}
-        <Route path="/" element={<MainPage />} />
+        <Route path="/reels-page" element={<ReelsPage />} />
         <Route path="/:allroute" element={<MainPage />} />
+        <Route path="/" element={<MainPage />} />
         {/* <Route path="/" element={<MainPage />} /> */}
         {/* <Route path="/home" element={<MainPage />} /> */}
         <Route path="/settings/:name" element={<Settings />} />
@@ -74,8 +72,8 @@ function App() {
         <Route path="/settings/language" element={<Settings />} />
         <Route path="/settings/art" element={<Settings />} />
         <Route path="/settings/support" element={<Settings />} /> */}
-        <Route path="/store" element={<Store />} />
         <Route path="/store/:name" element={<Store />} />
+        <Route path="/store" element={<Store />} />
         {/* <Route path="/store/buy" element={<Store />} />
         <Route path="/store/used" element={<Store />} />
         <Route path="/store/display" element={<ProductDisplay />} /> */}

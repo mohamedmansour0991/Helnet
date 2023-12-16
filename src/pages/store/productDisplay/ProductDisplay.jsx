@@ -2,6 +2,7 @@ import React from "react";
 import BoxStore from "../../../components/boxStore/BoxStore";
 import { search, store, events } from "/src/assets/images/icons";
 import { useTranslation } from "react-i18next";
+import Posts from "../../../components/posts/Posts";
 
 function ProductDisplay() {
   const [t] = useTranslation();
@@ -29,8 +30,9 @@ function ProductDisplay() {
     { name: t("Service Request"), icon: events },
   ];
   return (
-    <div className="">
+    <div className="d-flex flex-column gap-4">
       <BoxStore buttons={buttons} />
+      <Posts/>
     </div>
   );
 }
