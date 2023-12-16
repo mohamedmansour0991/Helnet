@@ -1,7 +1,7 @@
 import React from "react";
 import profilePic from "../../assets/images/profilePic.png";
 import delet from "../../assets/images/delete.png";
-import "./boxNotification.scss";
+import "./BoxNotification.scss";
 function BoxNotification() {
   return (
     <>

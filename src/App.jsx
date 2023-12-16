@@ -18,7 +18,7 @@ import Nutrition from "./pages/nutrition/nutrition";
 import Language from "./pages/languag/languag";
 import { MainPage } from "./pages";
 import Profile from "./pages/profile/profile";
-import Notifcations from "./pages/notifcations/notifcations";
+import Notifcations from "./pages/notifcations/Notifcations";
 import Reels from "./pages/reels/reels";
 import Settings from "./pages/settings/Settings";
 import Store from "./pages/store/Store";

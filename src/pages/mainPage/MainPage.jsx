@@ -5,7 +5,7 @@ import "./MainPage.scss";
 import { useParams } from "react-router-dom";
 import Reels from "../reels/reels";
 import Settings from "../settings/Settings";
-import Notifcations from "../notifcations/notifcations";
+import Notifcations from "../notifcations/Notifcations";
 
 export default function MainPage() {
   const { t } = useTranslation();

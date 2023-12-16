@@ -9,12 +9,11 @@ import delet from "../../assets/images/delete.png";
 import { Aside, MainMenu, Navbar, SinglePost } from "/src/components";
 import { useTranslation } from "react-i18next";
 import { search, store, events, video, reel } from "/src/assets/images/icons";
-import BoxNotification from "../../components/boxNotification/boxNotification";
+import BoxNotification from "../../components/boxNotification/BoxNotification";
 
 const Notifcations = () => {
   const [t] = useTranslation();
 
- 
   return (
     <>
       <div className="notification">
