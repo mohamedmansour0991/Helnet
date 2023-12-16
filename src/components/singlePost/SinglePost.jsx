@@ -1,7 +1,9 @@
 import { Gallery, InteractionBar, PostHeader, VideoPlayer } from "../ui";
 import PostTime from "../postTime/PostTime";
 import { useTranslation } from "react-i18next";
-import { user } from "/public/fakeData";
+import { user } from "../../../public/fakeData";
+import Category from "../category/Category";
+// import user from "../../../public/fakeData";
 
 export default function SinglePost({ data }) {
   const [t] = useTranslation();

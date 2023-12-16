@@ -307,7 +307,7 @@ const Profile = () => {
       {/* mycover */}
       <div className="bg-body">
         <Navbar />
-        <div className="profile-card text-start">
+        <div className="profile-card  text-start" style={{ marginTop: "6rem" }}>
           <img className="img-responsive " src={cover} alt="" />
           <div className="profile-info">
             <img className="profile-pic3" src={camera2} alt="" />

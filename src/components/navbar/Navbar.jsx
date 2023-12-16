@@ -53,9 +53,9 @@ export default function Navbar() {
   ];
 
   const userOptionsList = [
-    { name: "settings/", icon: settings, link: "settings/update-user" },
-    { name: t("globe"), icon: globe, link: "globe" },
     { name: t("profile1"), icon: profile1, link: "profile1" },
+    { name: t("globe"), icon: globe, link: "globe" },
+    { name: "settings/", icon: settings, link: "settings/update-user" },
   ];
 
   const navigate = useNavigate();
@@ -98,7 +98,10 @@ export default function Navbar() {
   }, [menuRef]);
 
   return (
-    <nav className={`navbar ${direction}`}>
+    <nav
+      className={`navbar ${direction} p-fixed w-100`}
+      style={{ position: "fixed" }}
+    >
       <Link className="navbar__logo" to={"/"}>
         <img src={favicon} alt="Helnet logo" />
       </Link>
