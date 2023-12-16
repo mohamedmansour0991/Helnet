@@ -241,8 +241,6 @@ export const user = {
   user_img: "",
   posts: {},
 };
-<<<<<<< HEAD
-=======
 
 export const videosLabels = [
   "games",
@@ -254,4 +252,3 @@ export const videosLabels = [
   "samsung",
   "now",
 ];
->>>>>>> b09d3ef363e41b387f3e1e374b2aef29c59efd06

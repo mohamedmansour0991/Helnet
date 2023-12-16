@@ -75,9 +75,7 @@ function App() {
         <Route path="/settings/support" element={<Settings />} /> */}
         <Route path="/store/:name" element={<Store />} />
         <Route path="/store" element={<Store />} />
-        {/* <Route path="/store/buy" element={<Store />} />
-        <Route path="/store/used" element={<Store />} />
-        <Route path="/store/display" element={<ProductDisplay />} /> */}
+      
       </Routes>
     </BrowserRouter>
   );
