@@ -32,6 +32,7 @@ const Jobs = () => {
                 height: "256px",
                 overflow: "auto",
                 marginBottom: "40px",
+                flexWrap: "wrap",
               }}
             >
               <Card imageSrc={hat} title="مهندس" />
