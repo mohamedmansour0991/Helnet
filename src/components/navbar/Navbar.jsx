@@ -53,9 +53,10 @@ export default function Navbar() {
   ];
 
   const userOptionsList = [
-    { name: t("profile1"), icon: profile1, link: "profile1" },
-    { name: t("globe"), icon: globe, link: "globe" },
-    { name: "settings/", icon: settings, link: "settings/update-user" },
+    { name: t("Ebrahim mohamed"), icon: profile1, link: "profile1" },
+    { name: t("Globe"), icon: globe, link: "notification" },
+    // { name: "settings/", icon: settings, link: "settings/update-user" },
+    { name: t("Settings"), icon: settings, link: "settings/update-user" },
   ];
 
   const navigate = useNavigate();
@@ -136,7 +137,7 @@ export default function Navbar() {
           <li
             key={index}
             role="button"
-            className={tap.name}
+            // className={tap.name}
             onClick={() => {
               navigate(`/${tap.link}`);
             }}
@@ -196,7 +197,7 @@ export default function Navbar() {
               navigate(`/${tap.link}`);
             }}
           >
-            <img src={tap.icon} alt="" />
+            <img src={tap.icon} alt="" style={{width:"30px"}}/>
             <p>{t(tap.name)}</p>
           </li>
         ))}
