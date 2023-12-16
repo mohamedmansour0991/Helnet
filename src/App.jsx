@@ -18,6 +18,8 @@ import Nutrition from "./pages/nutrition/nutrition";
 import Language from "./pages/languag/languag";
 import { MainPage } from "./pages";
 import Profile from "./pages/profile/profile";
+import Notifcations from "./pages/notifcations/notifcations";
+import Reels from "./pages/reels/reels";
 import Settings from "./pages/settings/Settings";
 import Store from "./pages/store/Store";
 import { useEffect } from "react";
@@ -37,7 +39,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="" element={<Button children={"Button"} />} />  */}
+        <Route path="" element={<Button children={"Button"} />} /> 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/forget-pass" element={<Forgetpass />} />
@@ -52,9 +54,18 @@ function App() {
         {/* <Route path="" element={<Language />} /> */}
         {/* <Route path="" element={<Colors />} /> */}
 
+        {/* <Route path="/profile1" element={<Profile />} /> */}
+        {/* <Route path="/globe" element={<Notifcations />} /> */}
+        {/* <Route path="/reel" element={<Reels />} /> */}
+
         {/* <Route path="" element={<Profile />} /> */}
-        <Route path="/" element={<MainPage />} />
-        <Route path="/home" element={<MainPage />} />
+        {/* <Route path="" element={<Notifcations />} /> */}
+        {/* <Route path="" element={<Reels />} /> */}
+
+        {/* <Route path="" element={<Profile />} /> */}
+        <Route path="/:allroute" element={<MainPage />} />
+        {/* <Route path="/" element={<MainPage />} /> */}
+        {/* <Route path="/home" element={<MainPage />} /> */}
         <Route path="/settings/:name" element={<Settings />} />
         {/* <Route path="/settings/update-info" element={<Settings />} />
         <Route path="/settings/change-pass" element={<Settings />} />
