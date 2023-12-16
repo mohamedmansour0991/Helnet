@@ -9,7 +9,7 @@ export default function SingleComment({ data }) {
 
   return (
     <div className={data.isReplay ? "ms-20" : ""}>
-      <div className="flex gap-2">
+      <div className="flex gap-2 mt-6">
         <Link to={"path" + data.user.id}>
           <img className="rounded-full" src={data.user.image} alt="PFP" />
         </Link>

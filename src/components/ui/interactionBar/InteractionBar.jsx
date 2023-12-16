@@ -2,6 +2,7 @@ import { useState } from "react";
 import { like, comment, share } from "../../../assets/images/icons";
 import ShareModel from "../../shareModel/ShareModel";
 import CreateComment from "../createComment/CreateComment";
+import CommentSection from "../../commentSection/CommentSection";
 
 export default function InteractionBar() {
   const [isShareModelOpen, setIsShareModelOpen] = useState(false);
@@ -19,7 +20,7 @@ export default function InteractionBar() {
 
   return (
     <>
-      <div className="flex gap-4 ps-6">
+      <div className="flex gap-4 mt-8 ps-6">
         <button
           className="relative"
           children={
@@ -51,7 +52,10 @@ export default function InteractionBar() {
           onClick={openShareModal}
         />
       </div>
-      <CreateComment />
+
+
+      <CommentSection />
+
       <ShareModel
         isShareOpen={isShareModelOpen}
         closeShareModal={closeShareModal}

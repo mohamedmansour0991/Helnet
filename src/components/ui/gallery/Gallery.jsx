@@ -8,7 +8,7 @@ export default function Gallery({ data }) {
   };
 
   return (
-    <div className="gallery">
+    <div className={`gallery with${data.length}`}>
       {data.slice(0, 5).map((image, index) => (
         <div key={index} className={`imageNo${index + 1}`}>
           <img src={image} alt="" />

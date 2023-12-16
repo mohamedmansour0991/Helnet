@@ -1,5 +1,6 @@
 import SingleComment from "../ui/singleComment/SingleComment";
 import { PFP, verified } from "../../assets/images";
+import { CreateComment } from "../ui";
 
 export default function CommentSection() {
   const comments = [
@@ -32,11 +33,13 @@ export default function CommentSection() {
   ];
 
   return (
-    <div>
+    <>
+      <CreateComment />
+
       {comments &&
         comments.map((comment) => (
           <SingleComment key={comment.id} data={comment} />
         ))}
-    </div>
+    </>
   );
 }

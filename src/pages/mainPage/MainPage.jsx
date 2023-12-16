@@ -1,4 +1,4 @@
-import { Aside, MainMenu, Navbar, SinglePost } from "/src/components";
+import { Navbar, Aside, MainMenu, Posts } from "/src/components";
 import { search, store, events, video, reel } from "/src/assets/images/icons";
 import { useTranslation } from "react-i18next";
 import "./MainPage.scss";
@@ -20,8 +20,7 @@ export default function MainPage() {
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
         <div className="container">
-          {/* replace the place holder with to container and remove the hight */}
-          <SinglePost />
+          <Posts />
         </div>
         <Aside />
       </main>
