@@ -1,6 +1,7 @@
 import React from "react";
 import CardStore from "../../../components/cardStore/CardStore";
 import { Image, Image1, Overly } from "/src/assets/images/icons";
+import ChooseType from "../../../components/chooseType/ChooseType";
 
 function Buy() {
   const products = [
@@ -66,7 +67,12 @@ function Buy() {
       price: "70$",
     },
   ];
-  return <CardStore products={products} />;
+  return (
+    <>
+      {/* <ChooseType /> */}
+      <CardStore products={products} />
+    </>
+  );
 }
 
 export default Buy;
