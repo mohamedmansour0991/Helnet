@@ -55,5 +55,15 @@ export { default as Union } from "./Union.svg";
 export { default as write } from "./write.svg";
 export { default as send } from "./Send.svg";
 export { default as Video3 } from "./Video3.svg";
+export { default as asking } from "./asking.svg";
+export { default as news } from "./new.svg";
+export { default as buy } from "./buy.svg";
+export { default as easy } from "./easy.svg";
+export { default as easytouse } from "./easytouse.svg";
+export { default as personal } from "./personal.svg";
+export { default as close1 } from "./close1.svg";
+export { default as Frame } from "./Frame.svg";
+export { default as Frame35 } from "./Frame35.svg";
+export { default as Frame36 } from "./Frame36.svg";
 
 export { default as profile1 } from "./profile1.png";

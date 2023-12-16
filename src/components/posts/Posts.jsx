@@ -252,7 +252,7 @@ export default function Posts() {
     <div className="grid gap-3">
       <CreatePost />
       {data
-        ? data.map((post) => <SinglePost key={post.post_id} data={post} />)
+        ? data.map((post, index) => <SinglePost key={index} data={post} />)
         : ""}
     </div>
   );

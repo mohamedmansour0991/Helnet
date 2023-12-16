@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import FormSelect from "../formSelect/FormSelect";
 import { useTranslation } from "react-i18next";
 import Button2 from "../../components/button/Button";
+import { close1 } from "../../assets/images/icons";
 
 function OpenModal(props) {
   const [t] = useTranslation();
@@ -20,9 +21,26 @@ function OpenModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {props?.show?.name}
+      <Modal.Header>
+        <Modal.Title id="contained-modal-title-vcenter" className="w-100">
+          <div className="d-flex align-items-center justify-content-between w-100">
+            {" "}
+            <div className="d-flex align-items-center gap-2">
+              <img src={props?.show?.icon} alt="" />
+              {props?.show?.name}
+            </div>
+            <div
+              onClick={() => props.setModalShow(false)}
+              className="cursor-pointer"
+              style={{
+                background: "#fff",
+                padding: "5px",
+                borderRadius: "50%",
+              }}
+            >
+              <img src={close1} style={{ width: "20px" }} />
+            </div>
+          </div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -33,9 +51,6 @@ function OpenModal(props) {
         />
         <Button2 name={t("Save modifications")} onClick={handleButtonClick} />
       </Modal.Body>
-      {/* <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer> */}
     </Modal>
   );
 }

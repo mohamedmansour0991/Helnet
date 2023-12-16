@@ -32,8 +32,10 @@ function App() {
   useEffect(() => {
     if (i18n.language === "ar") {
       localStorage.setItem("direction", "rtl");
+      document.body.classList.remove("en");
     } else {
       localStorage.setItem("direction", "ltr");
+      document.body.classList.add("en");
     }
   }, []);
   return (
