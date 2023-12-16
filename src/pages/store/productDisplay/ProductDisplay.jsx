@@ -1,8 +1,9 @@
 import React from "react";
 import BoxStore from "../../../components/boxStore/BoxStore";
-import { search, store, events } from "/src/assets/images/icons";
+import { news } from "/src/assets/images/icons";
 import { useTranslation } from "react-i18next";
 import Posts from "../../../components/posts/Posts";
+import { easytouse, personal } from "../../../assets/images/icons";
 
 function ProductDisplay() {
   const [t] = useTranslation();
@@ -10,7 +11,63 @@ function ProductDisplay() {
   const buttons = [
     {
       name: t("Show the new product"),
-      icon: search,
+      icon: news,
+      inputs: [
+        {
+          name: t("Product Name"),
+          type: "text",
+          state: "pName",
+        },
+        {
+          name: t("Product Type"),
+          type: "text",
+          state: "sType",
+        },
+        {
+          name: t("Price"),
+          type: "text",
+          state: "sName",
+        },
+        { name: t("Quantity"), type: "text", state: "Details" },
+        { name: t("Product condition"), type: "text", state: "sPrice" },
+        {
+          name: t("Communication method"),
+          type: "text",
+          state: "aaboutMe",
+        },
+      ],
+    },
+    {
+      name: t("View a used product"),
+      icon: easytouse,
+      inputs: [
+        {
+          name: t("Product Name"),
+          type: "text",
+          state: "pName",
+        },
+        {
+          name: t("Product Type"),
+          type: "text",
+          state: "sType",
+        },
+        {
+          name: t("Price"),
+          type: "text",
+          state: "sName",
+        },
+        { name: t("Quantity"), type: "text", state: "Details" },
+        { name: t("Product condition"), type: "text", state: "sPrice" },
+        {
+          name: t("Communication method"),
+          type: "text",
+          state: "aaboutMe",
+        },
+      ],
+    },
+    {
+      name: t("Service Request"),
+      icon: personal,
       inputs: [
         {
           name: t("Service name"),
@@ -26,13 +83,11 @@ function ProductDisplay() {
         },
       ],
     },
-    { name: t("View a used product"), icon: store },
-    { name: t("Service Request"), icon: events },
   ];
   return (
     <div className="d-flex flex-column gap-4">
       <BoxStore buttons={buttons} />
-      <Posts/>
+      <Posts />
     </div>
   );
 }

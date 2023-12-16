@@ -9,7 +9,8 @@ function BoxStore({ buttons }) {
     <>
       <div className="box__store  flex-wrap">
         {buttons.map((b, index) => (
-          <div key={index}
+          <div
+            key={index}
             className="box__store__card d-flex col-xxl-4 col-sm-6 col-12 gap-2 p-2"
             onClick={() => setModalShow(b)}
           >
@@ -18,7 +19,11 @@ function BoxStore({ buttons }) {
           </div>
         ))}
       </div>
-      <OpenModal show={modalShow} onHide={() => setModalShow(false)} />
+      <OpenModal
+        show={modalShow}
+        setModalShow={setModalShow}
+        onHide={() => setModalShow(false)}
+      />
     </>
   );
 }

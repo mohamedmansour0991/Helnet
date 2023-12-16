@@ -18,7 +18,7 @@ function Art() {
     console.log(formValues);
   };
   return (
-    <div>
+    <div className="inputSelect">
       <FormSelect inputs={inputsSelect} setFormValues={setFormValues} />
       <Button name={t("Save modifications")} onClick={handleButtonClick} />
     </div>
