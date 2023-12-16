@@ -7,3 +7,4 @@ export { default as Dropdown } from "./dropdown/Dropdown";
 export { default as InteractionBar } from "./interactionBar/InteractionBar";
 export { default as CreateComment } from "./createComment/CreateComment";
 export { default as CreatePost } from "./createPost/CreatePost";
+export { default as PostHeader } from "./postHeader/PostHeader";

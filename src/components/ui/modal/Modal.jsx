@@ -8,6 +8,7 @@ export default function Modal({
   title,
   children,
   closeIcon,
+  width = "max-w-md",
 }) {
   const [isXIcon, setIsXIcon] = useState(false);
   const [isArabic, setIsArabic] = useState(false);
@@ -43,7 +44,9 @@ export default function Modal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-start align-middle shadow-xl transition-all">
+              <Dialog.Panel
+                className={`w-full transform overflow-hidden rounded-2xl bg-white p-6 text-start align-middle shadow-xl transition-all ${width}`}
+              >
                 <div className={`${isArabic ? "text-right" : "text-left"}`}>
                   {isXIcon && (
                     <button

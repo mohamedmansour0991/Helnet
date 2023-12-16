@@ -11,7 +11,6 @@ import {
 import "./ShareModel.scss";
 
 export default function ShareModel({ isShareOpen, closeShareModal }) {
-
   const socialIcons = [
     { icon: twitter, name: "Twitter" },
     { icon: facebook, name: "Facebook" },

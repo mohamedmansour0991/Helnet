@@ -271,7 +271,7 @@ export default function MainPage() {
         <MainMenu mainMenuLabels={mainMenuLabels} />
         <div className="container">
           {name === "home" || name === undefined ? (
-            <Posts data={data} />
+            <Posts />
           ) : name === "reel" ? (
             <Reels />
           ) : name === "video" ? (

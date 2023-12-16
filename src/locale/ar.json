@@ -573,12 +573,16 @@
   "Like": "اعجبني",
   "Likes": "إعجاب",
   "Comment": "تعليق",
-  "write something...": "أكتب شيئا...",
+  "write something": "أكتب شيئا",
   "Post Text": "اكتب منشور",
   "Post Images": "انشر صور",
   "Images": "صور",
   "Post Video": "انشر فيديو",
   "Video": "فيديو",
   "Post Record": "انشر تسجيل صوتي",
-  "Record": "تسجيل صوتي"
+  "Record": "تسجيل صوتي",
+  "add to your post": "اضف الي منشورك",
+  ",": "يا",
+  "public": "عام",
+  "privet": "خاص"
 }
