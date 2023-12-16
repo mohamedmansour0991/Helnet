@@ -18,6 +18,8 @@ import {
   testImage6,
 } from "../../assets/images";
 import { testVideo } from "../../assets/videos";
+import { CreatePost } from "../../components/ui";
+
 export default function MainPage() {
   const { t } = useTranslation();
   const direction = localStorage.getItem("direction");
@@ -29,7 +31,6 @@ export default function MainPage() {
     { name: t("video"), icon: video, link: "video" },
     { name: t("Reel"), icon: reel, link: "reel" },
   ];
-  console.log(data);
 
   return (
     <div className="bg-body">
@@ -38,7 +39,11 @@ export default function MainPage() {
         <MainMenu mainMenuLabels={mainMenuLabels} />
         <div className="container">
           {name === "home" || name === undefined ? (
-            <Posts data={data} />
+            <div className="d-flex flex-column gap-3">
+              {" "}
+              <CreatePost />
+              <Posts data={data} />
+            </div>
           ) : name === "reel" ? (
             <Reels />
           ) : name === "video" ? (

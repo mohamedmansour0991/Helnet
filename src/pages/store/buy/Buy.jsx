@@ -1,7 +1,6 @@
 import React from "react";
 import CardStore from "../../../components/cardStore/CardStore";
 import { Image, Image1, Overly } from "/src/assets/images/icons";
-import ChooseType from "../../../components/chooseType/ChooseType";
 
 function Buy() {
   const products = [

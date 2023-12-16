@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import ProductDisplay from "./productDisplay/ProductDisplay";
 import { asking, easy } from "../../assets/images/icons";
 import ChooseType from "../../components/chooseType/ChooseType";
+import FiltersBar from "../../components/ui/filtersBar/FiltersBar";
 function Store() {
   const direction = localStorage.getItem("direction");
   const [t] = useTranslation();
@@ -24,20 +25,23 @@ function Store() {
         <MainMenu mainMenuLabels={mainMenuLabels} />
         <div className="container">
           <div className="store">
-            {name === "buy" ? (
-              <div className="card__center">
-                <div className="store-bg">
-                  <Buy />
-                </div>
-              </div>
+            {name === "display" ? (
+              <ProductDisplay />
             ) : name == "used" ? (
               <div className="card__center">
+                <FiltersBar />
+
                 <div className="store-bg">
                   <Buy />
                 </div>
               </div>
             ) : (
-              <ProductDisplay />
+              <div className="card__center">
+                <FiltersBar />
+                <div className="store-bg">
+                  <Buy />
+                </div>
+              </div>
             )}
           </div>
         </div>

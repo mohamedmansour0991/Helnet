@@ -84,10 +84,11 @@
         padding-inline: 0.5rem;
 
         & > li {
-          display: inherit;
-          grid-template-columns: auto auto auto;
+          display: flex;
           align-items: center;
-
+          button {
+            width: fit-content !important;
+          }
           & > div {
             display: inherit;
             gap: 0.31rem;

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 function Category({ category }) {
   console.log(category.title);
   const [t] = useTranslation();
+  console.log(category);
   return (
     <div className="d-flex category flex-column my-2">
       <p className="my-1">{category?.title}</p>

@@ -1,15 +1,18 @@
-.store {
-  .card__center {
-    background-color: #fff;
-    width: 100%;
-    border-radius: 1rem;
-    padding: 20px;
-    @media (max-width: 550px) {
-      padding: 5px !important;
-      padding-top: 20px !important;
-      padding-bottom: 20px !important;
-    }
+.card__center {
+  background-color: #fff;
+  width: 100%;
+  border-radius: 1rem;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (max-width: 550px) {
+    padding: 5px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
   }
+}
+.store {
   & .store-bg {
     margin: 0px 10px;
     display: grid;

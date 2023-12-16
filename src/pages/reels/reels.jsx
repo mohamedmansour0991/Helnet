@@ -12,7 +12,7 @@ import xicon from "../../assets/images/xicon.png";
 import Left from "../../assets/images/Left.png";
 import right from "../../assets/images/right.png";
 import BoxReelComponents from "../../components/boxReelComponents/boxReelComponents";
-
+import FiltersBar from "../../components/ui/filtersBar/FiltersBar";
 
 const Reels = () => {
   // function classNames(...classes) {
@@ -128,12 +128,14 @@ const Reels = () => {
   // مراجعة سطر 225
 
   return (
-    <div className="reelsComponents">
-      {/* sidebar */}
+    <div className="d-flex card__center ">
+      <FiltersBar />
+      <div className="reelsComponents">
+        {/* sidebar */}
         {videos.map((video, index) => (
           <BoxReelComponents video={video} index={index} />
         ))}
-      {/* <div
+        {/* <div
         className="profile-card2 myside"
         style={{ textAlign: "right", width: "100%" }}
       >
@@ -162,8 +164,8 @@ const Reels = () => {
         </ul>
       </div> */}
 
-      <style>
-        {`
+        <style>
+          {`
                  @media (max-width: 800px) {
                   
                   li {
@@ -180,7 +182,8 @@ const Reels = () => {
                   }
                   }
                  `}
-      </style>
+        </style>
+      </div>
     </div>
   );
 };

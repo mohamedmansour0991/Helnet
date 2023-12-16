@@ -62,20 +62,23 @@ export default function Aside() {
         <img className="polygon" src={Polygon} alt="" />
       </div>
       <div className="aside__section recommend">
-        <h4>{t("people you may know") + ":"}</h4>
+        <h4 className="mb-3">{t("people you may know") + ":"}</h4>
         <ul>
           {users.map((user, index) => (
             <li key={index}>
-              <img src={user.image} alt="" />
-              <div>
-                <p>{user.name}</p>
-                <p>{user.job}</p>
+              <div className="d-flex gap-3 w-100">
+                <img src={user.image} alt="" />
+                <div>
+                  <p>{user.name}</p>
+                  <p>{user.job}</p>
+                </div>
               </div>
               <Button
                 children={t("add")}
                 backgroundColor={"#fff"}
                 color={"#A74ED1"}
                 border={"1px"}
+                
               />
             </li>
           ))}

@@ -3,9 +3,14 @@
 
   & > ul {
     overflow-x: scroll;
-    max-width: 60vw;
+    max-width: 60vw !important;
 
     scrollbar-width: 0;
+    @media (min-width: 1200px) and (max-width: 1550px) {
+      & {
+        max-width: 40vw !important;
+      }
+    }
 
     &::-webkit-scrollbar {
       display: none;

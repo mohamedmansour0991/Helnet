@@ -12,9 +12,9 @@ export default function SinglePost({ data }) {
       <PostHeader user={user} />
 
       <div className="singlePost__body">
-        {data.post_data.post_text && (
+        {data?.post_data?.post_text && (
           <p className="singlePost__body--text">
-            {t(data.post_data.post_text)}
+            {t(data?.post_data?.post_text)}
           </p>
         )}
 
@@ -26,7 +26,7 @@ export default function SinglePost({ data }) {
           <VideoPlayer data={data.post_data.post_video} />
         )}
 
-        {data.post_data.post_link && <p>{data.post_data.post_link}</p>}
+        {data?.post_data?.post_link && <p>{data?.post_data?.post_link}</p>}
         {data?.category && <Category category={data?.category} />}
         <PostTime />
         <InteractionBar />
