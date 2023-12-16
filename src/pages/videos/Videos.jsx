@@ -2,6 +2,7 @@ import React from "react";
 import VideoCard from "../../components/videoCard/VideoCard";
 import "./Videos.scss";
 import { Frame, Frame35, Frame36 } from "../../assets/images/icons";
+import FiltersBar from "../../components/ui/filtersBar/FiltersBar";
 function Videos() {
   const videos = [
     {
@@ -83,8 +84,11 @@ function Videos() {
     },
   ];
   return (
-    <div className="videos__page">
-      <VideoCard videos={videos} />
+    <div className="videosPage__wrapper">
+      <FiltersBar />
+      <div className="videos__page">
+        <VideoCard videos={videos} />
+      </div>
     </div>
   );
 }
