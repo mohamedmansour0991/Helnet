@@ -6,6 +6,16 @@
   flex-direction: column;
   gap: 1rem;
 
+  &.rtl > .aside__section.ad > img {
+    right: auto;
+    left: 0;
+
+    &.polygon {
+      right: auto;
+      left: 2.5rem;
+    }
+  }
+
   @media screen and (max-width: 1100px) {
     display: none;
   }
@@ -18,7 +28,6 @@
     position: sticky;
 
     &.ad {
-      //   position: relative;
       top: 5rem;
       padding-inline-end: 3rem;
       font-weight: 400;

@@ -18,7 +18,7 @@ export default function MainPage() {
     { name: t("video"), icon: video, link: "video" },
     { name: t("Reel"), icon: reel, link: "reel" },
   ];
-  console.log(name);
+
   return (
     <div className="bg-body">
       <Navbar />

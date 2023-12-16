@@ -293,7 +293,6 @@
   "Livevideo": "فيديو مباشر",
   "photosVideo": "صور فيديو",
   "files": "الملفات",
-  "Record": "تسجيل",
   "USERINFORMATION": "معلومات المستخدم",
   "Shared Photoes": "مشاركه الصور",
   "Search": "البحث",
@@ -567,5 +566,13 @@
   "write a comment": "اكتب تعليق",
   "Like": "اعجبني",
   "Likes": "إعجاب",
-  "Comment": "تعليق"
+  "Comment": "تعليق",
+  "write something...": "أكتب شيئا...",
+  "Post Text": "اكتب منشور",
+  "Post Images": "انشر صور",
+  "Images": "صور",
+  "Post Video": "انشر فيديو",
+  "Video": "فيديو",
+  "Post Record": "انشر تسجيل صوتي",
+  "Record": "تسجيل صوتي"
 }

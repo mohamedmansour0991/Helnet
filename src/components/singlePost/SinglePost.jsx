@@ -10,7 +10,6 @@ export default function SinglePost({ data }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  console.log(data);
   const storageLink = "";
 
   const user = {
@@ -68,7 +67,7 @@ export default function SinglePost({ data }) {
         )}
 
         {data.post_data.post_link && <p>{data.post_data.post_link}</p>}
-        <PostTime/>
+        <PostTime />
         <InteractionBar />
       </div>
     </div>

@@ -1,14 +1,11 @@
 import { Button } from "/src/components/ui";
 import { adImage, Polygon } from "/src/assets/images";
 import { profile1, plus } from "/src/assets/images/icons";
-import "./Aside.scss";
 import { Link } from "react-router-dom";
-import i18next from "i18next";
-import { useTranslation } from "react-i18next";
+import i18next, { t } from "i18next";
+import "./Aside.scss";
 
 export default function Aside() {
-  const { t } = useTranslation();
-
   const users = [
     { name: "أحمد يس", job: "مدير تنفيذي", image: profile1 },
     { name: "ريان أحمد", job: "مبرمج", image: profile1 },
@@ -43,8 +40,10 @@ export default function Aside() {
   };
   /////////////////////////developing only////////////////////////////
 
+  const dir = localStorage.getItem("direction");
+
   return (
-    <aside className="aside">
+    <aside className={`aside ${dir}`}>
       <div className="devOnly">
         <Button
           className="w-fit"

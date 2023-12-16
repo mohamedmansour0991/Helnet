@@ -8,6 +8,7 @@ import {
 } from "../../assets/images";
 import { testVideo } from "../../assets/videos";
 import SinglePost from "../singlePost/SinglePost";
+import { CreatePost } from "../ui";
 
 export default function Posts() {
   const data = [
@@ -85,24 +86,10 @@ export default function Posts() {
     },
 
     {
-      post_id: "5",
-      post_data: {
-        post_time: "",
-        post_text: "",
-        post_images: [testImage1, testImage2],
-        post_video: "",
-      },
-      post_user: {
-        user_id: "1",
-      },
-      post_likes: [],
-    },
-    {
       post_id: "6",
       post_data: {
         post_time: "",
-        post_text:
-          "الأهرامات في مصر هي شهادة حية على الحضارة المصرية القديمة وتعتبر واحدة من أعجب المعالم السياحية في العالم. تاريخها يعود إلى الفترة من 2600 إلى 2500 قبل الميلاد وتم بناؤها كمقابر لملوك الفراعنة!  😍",
+        post_text: "",
         post_images: [testImage1, testImage2],
         post_video: "",
       },
@@ -115,8 +102,9 @@ export default function Posts() {
       post_id: "7",
       post_data: {
         post_time: "",
-        post_text: "",
-        post_images: [testImage1, testImage2, testImage3],
+        post_text:
+          "الأهرامات في مصر هي شهادة حية على الحضارة المصرية القديمة وتعتبر واحدة من أعجب المعالم السياحية في العالم. تاريخها يعود إلى الفترة من 2600 إلى 2500 قبل الميلاد وتم بناؤها كمقابر لملوك الفراعنة!  😍",
+        post_images: [testImage1, testImage2],
         post_video: "",
       },
       post_user: {
@@ -128,8 +116,7 @@ export default function Posts() {
       post_id: "8",
       post_data: {
         post_time: "",
-        post_text:
-          "الأهرامات في مصر هي شهادة حية على الحضارة المصرية القديمة وتعتبر واحدة من أعجب المعالم السياحية في العالم. تاريخها يعود إلى الفترة من 2600 إلى 2500 قبل الميلاد وتم بناؤها كمقابر لملوك الفراعنة!  😍",
+        post_text: "",
         post_images: [testImage1, testImage2, testImage3],
         post_video: "",
       },
@@ -142,8 +129,9 @@ export default function Posts() {
       post_id: "9",
       post_data: {
         post_time: "",
-        post_text: "",
-        post_images: [testImage1, testImage2, testImage3, testImage4],
+        post_text:
+          "الأهرامات في مصر هي شهادة حية على الحضارة المصرية القديمة وتعتبر واحدة من أعجب المعالم السياحية في العالم. تاريخها يعود إلى الفترة من 2600 إلى 2500 قبل الميلاد وتم بناؤها كمقابر لملوك الفراعنة!  😍",
+        post_images: [testImage1, testImage2, testImage3],
         post_video: "",
       },
       post_user: {
@@ -155,8 +143,7 @@ export default function Posts() {
       post_id: "10",
       post_data: {
         post_time: "",
-        post_text:
-          "الأهرامات في مصر هي شهادة حية على الحضارة المصرية القديمة وتعتبر واحدة من أعجب المعالم السياحية في العالم. تاريخها يعود إلى الفترة من 2600 إلى 2500 قبل الميلاد وتم بناؤها كمقابر لملوك الفراعنة!  😍",
+        post_text: "",
         post_images: [testImage1, testImage2, testImage3, testImage4],
         post_video: "",
       },
@@ -169,14 +156,9 @@ export default function Posts() {
       post_id: "11",
       post_data: {
         post_time: "",
-        post_text: "",
-        post_images: [
-          testImage1,
-          testImage2,
-          testImage3,
-          testImage4,
-          testImage5,
-        ],
+        post_text:
+          "الأهرامات في مصر هي شهادة حية على الحضارة المصرية القديمة وتعتبر واحدة من أعجب المعالم السياحية في العالم. تاريخها يعود إلى الفترة من 2600 إلى 2500 قبل الميلاد وتم بناؤها كمقابر لملوك الفراعنة!  😍",
+        post_images: [testImage1, testImage2, testImage3, testImage4],
         post_video: "",
       },
       post_user: {
@@ -188,8 +170,7 @@ export default function Posts() {
       post_id: "12",
       post_data: {
         post_time: "",
-        post_text:
-          "الأهرامات في مصر هي شهادة حية على الحضارة المصرية القديمة وتعتبر واحدة من أعجب المعالم السياحية في العالم. تاريخها يعود إلى الفترة من 2600 إلى 2500 قبل الميلاد وتم بناؤها كمقابر لملوك الفراعنة!  😍",
+        post_text: "",
         post_images: [
           testImage1,
           testImage2,
@@ -206,6 +187,26 @@ export default function Posts() {
     },
     {
       post_id: "13",
+      post_data: {
+        post_time: "",
+        post_text:
+          "الأهرامات في مصر هي شهادة حية على الحضارة المصرية القديمة وتعتبر واحدة من أعجب المعالم السياحية في العالم. تاريخها يعود إلى الفترة من 2600 إلى 2500 قبل الميلاد وتم بناؤها كمقابر لملوك الفراعنة!  😍",
+        post_images: [
+          testImage1,
+          testImage2,
+          testImage3,
+          testImage4,
+          testImage5,
+        ],
+        post_video: "",
+      },
+      post_user: {
+        user_id: "1",
+      },
+      post_likes: [],
+    },
+    {
+      post_id: "14",
       post_data: {
         post_time: "",
         post_text: "",
@@ -225,7 +226,7 @@ export default function Posts() {
       post_likes: [],
     },
     {
-      post_id: "14",
+      post_id: "15",
       post_data: {
         post_time: "",
         post_text:
@@ -249,6 +250,7 @@ export default function Posts() {
 
   return (
     <div className="grid gap-3">
+      <CreatePost />
       {data
         ? data.map((post) => <SinglePost key={post.post_id} data={post} />)
         : ""}

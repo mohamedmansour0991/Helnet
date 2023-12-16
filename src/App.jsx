@@ -30,7 +30,6 @@ import ReelsPage from "./pages/reels/reelsPage/ReelsPage";
 function App() {
   const [t, i18n] = useTranslation();
   useEffect(() => {
-    console.log(i18n.language);
     if (i18n.language === "ar") {
       localStorage.setItem("direction", "rtl");
     } else {
