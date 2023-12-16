@@ -7,6 +7,7 @@ import Reels from "../reels/reels";
 import Settings from "../settings/Settings";
 import Notifcations from "../notifcations/Notifcations";
 import Videos from "../videos/Videos";
+import PreviewSinglePost from "../../components/previewSinglePost/PreviewSinglePost";
 
 export default function MainPage() {
   const { t } = useTranslation();
@@ -28,6 +29,8 @@ export default function MainPage() {
         <div className="container">
           {name === "home" || name === undefined ? (
             <Posts />
+          ) : name === "/#:id" ? (
+            <PreviewSinglePost />
           ) : name === "reel" ? (
             <Reels />
           ) : name === "video" ? (

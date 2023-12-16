@@ -103,6 +103,8 @@ export default function CreatePost() {
           <div className="flex gap-2">
             <div>
               <p>{userFullName}</p>
+
+              {/* this well be a reusable component */}
               {/* <Dropdown /> */}
               <select
                 className="px-2 py-1 bg-slate-200 rounded-full"
@@ -115,24 +117,27 @@ export default function CreatePost() {
                 </option>
                 <option value="privet">{t("privet")}</option>
               </select>
+              {/* this well be a reusable component */}
             </div>
             <img className="w-10 h-10" src={profile1} alt="" />
           </div>
-          <button className="rounded-full bg-slate-200 h-fit p-1">
+          <button className="rounded-full bg-slate-200 h-fit p-1D">
             <img src={close1} alt="" />
           </button>
         </div>
 
+        {/* this well be a reusable component */}
         <textarea
           className={`w-full outline-none resize-none px-2 h-28 text-xl ${
             isArabic ? "text-right" : "text-left"
           }`}
           placeholder={`${t("write something")} ${t(",")} ${username}`}
         />
+        {/* this well be a reusable component */}
 
-        <div className="flex flex-row-reverse items-center justify-between px-4 mb-3 border rounded-2xl">
+        <div className="sm:flex flex-row-reverse items-center justify-between px-4 mb-3 border rounded-2xl">
           <p>{t("add to your post")}</p>
-          <div className="flex flex-row-reverse items-center gap-6">
+          <div className="sm:flex flex-row-reverse items-center gap-6">
             {buttons &&
               buttons.map((button) => (
                 <button
