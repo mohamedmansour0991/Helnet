@@ -128,9 +128,10 @@ const Reels = () => {
   // مراجعة سطر 225
 
   return (
-    <div className="d-flex card__center ">
+    <>
+    <div className="flex card__center ">
       <FiltersBar />
-      <div className="reelsComponents">
+      <div className="reelsComponents ">
         {/* sidebar */}
         {videos.map((video, index) => (
           <BoxReelComponents video={video} index={index} />
@@ -164,7 +165,7 @@ const Reels = () => {
         </ul>
       </div> */}
 
-        <style>
+        {/* <style>
           {`
                  @media (max-width: 800px) {
                   
@@ -182,9 +183,10 @@ const Reels = () => {
                   }
                   }
                  `}
-        </style>
+        </style> */}
       </div>
     </div>
+    </>
   );
 };
 

@@ -27,6 +27,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    // max-height: 88vh;
+    // overflow-y: scroll;
 
     &.start {
       justify-content: space-between !important;

@@ -6,7 +6,7 @@ export default function CardStore({ products }) {
   return (
     <>
       {products.map((p) => (
-        <div className="card__store">
+        <div className="card__store flex flex-col">
           <img src={p.icon} />
           {p.plus && <span className="card__store__plus">{p.plus}</span>}
           <div className="card__store__content">

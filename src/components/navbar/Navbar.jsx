@@ -113,10 +113,7 @@ export default function Navbar() {
   }, [menuRef]);
 
   return (
-    <nav
-      className={`navbar ${direction} p-fixed w-100`}
-      style={{ position: "fixed" }}
-    >
+    <nav className={`navbar ${direction} fixed w-100`}>
       <Link className="navbar__logo" to={"/"}>
         <img src={favicon} alt="Helnet logo" />
       </Link>

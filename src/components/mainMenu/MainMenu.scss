@@ -1,6 +1,7 @@
 .mainMenu {
   grid-row: 1;
   grid-column: 1;
+  min-width: 14rem;
 
   @media screen and (max-width: 850px) {
     display: none;
@@ -10,7 +11,8 @@
     background-color: var(--bg-color);
     border-radius: 1rem;
     position: sticky;
-    top: 5rem;
+    position: fixed;
+    top: 7rem;
 
     & .mainMenu__header {
       background: linear-gradient(#00acff75, #bd00ff58);
@@ -24,6 +26,7 @@
 
   &__List {
     position: sticky;
+    // position: fixed;
     top: 5rem;
     display: grid;
     gap: 1.5rem;

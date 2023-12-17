@@ -64,7 +64,7 @@ const Video = ({
         song={song}
       />
   */}
-      <ReelsHeader />
+      {/* <ReelsHeader /> */}
       <VideoSidebar
         likes={likes}
         messages={messages}

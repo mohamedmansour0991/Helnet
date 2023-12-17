@@ -8,16 +8,6 @@ import Settings from "../settings/Settings";
 import Notifcations from "../notifcations/Notifcations";
 import Videos from "../videos/Videos";
 import { data } from "/public/fakeData";
-
-import {
-  testImage1,
-  testImage2,
-  testImage3,
-  testImage4,
-  testImage5,
-  testImage6,
-} from "../../assets/images";
-import { testVideo } from "../../assets/videos";
 import { CreatePost } from "../../components/ui";
 
 export default function MainPage() {
@@ -37,7 +27,7 @@ export default function MainPage() {
       <Navbar />
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
-        <div className="container">
+        <div className="container ">
           {name === "home" || name === undefined ? (
             <div className="d-flex flex-column gap-3">
               {" "}
@@ -54,8 +44,6 @@ export default function MainPage() {
             name === "settings" && <Settings />
           )}
         </div>
-
-        <div className=""></div>
         <Aside />
       </main>
     </div>
