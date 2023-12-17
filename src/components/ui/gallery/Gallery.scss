@@ -64,11 +64,14 @@
     }
   }
 
-  @media screen and (max-width: 500px) {
-    grid-template-columns: 1fr;
+  @media screen and (max-width: 320px) {
+    // grid-template-columns: 1fr;
+
     & > .imageNo1 {
-      grid-row: auto;
-      grid-column: auto;
+      grid-column-start: 1;
+      grid-column-end: 5;
+      grid-row-start: 1;
+      grid-row-end: 2;
     }
   }
 
