@@ -6,19 +6,16 @@ import Card from "../../components/card/card";
 const UserKind = () => {
   return (
     <div className="container">
-      <div className="row m-5 no-gutters">
-        <div className="bg-white p-5">
-          <h1 className="title" style={{ marginBottom: "66px" }}>
-            {" "}
-            من هو المستخدم؟
-          </h1>
+      <div className="">
+        <div className="bg-white p-5 d-flex align-items-center justify-content-center flex-column h-100vh">
+          <h1 className="title"> من هو المستخدم؟</h1>
 
           <div className="form-style" style={{ textAlign: "center" }}>
             <div
               style={{
                 display: "flex",
                 justifyContent: "center",
-                marginBottom: "100px",
+                // marginBottom: "100px",
                 flexFlow: "wrap",
               }}
             >

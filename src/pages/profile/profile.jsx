@@ -353,12 +353,35 @@ const Profile = () => {
             </button>
           </div>
         </div>
-        <main className={`main ${direction}`}>
+        <main className={`main mt-4 ${direction}`}>
           <MainMenu mainMenuLabels={mainMenuLabels} />
           <div className="container">
             <div className="d-flex flex-column">
               {" "}
               <NotActive openModal2={openModal2} />
+              <div className="card__center w-100 mb-3" style={{ backgroundColor: "#fff" }}>
+                <div className="w-100 p-4">
+                  <div
+                    className="gap-2 mb-3"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      className=""
+                      src={padlock}
+                      alt=""
+                      style={{ width: "30px" }}
+                    />
+                    <h1>حساب خاص</h1>
+                  </div>
+                  <p className="card-text">
+                    هذا حساب خاص لا يمكنك مشاهدة منشورات كريم، يرجى ضغط زر
+                    “إضافة صديق” لإرسال طلب صداقة.
+                  </p>
+                </div>
+              </div>
               <Posts data={data} />
             </div>
           </div>
@@ -641,57 +664,6 @@ const Profile = () => {
       {/* sidebar */}
 
       {/* حساب خاص */}
-      <div
-        className="card profile-card2"
-        style={{
-          textAlign: "right",
-          width: "49.5rem",
-          height: "181px",
-          boxShadow: "none",
-          border: "none",
-        }}
-      >
-        <div className="card-body">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "right",
-              marginBottom: "25px",
-            }}
-          >
-            <h1
-              className=""
-              style={{
-                fontSize: "25px",
-                fontWeight: "700",
-                color: "#2F2F31",
-                paddingTop: "11px",
-              }}
-            >
-              حساب خاص
-            </h1>
-
-            <img
-              className=""
-              style={{ marginLeft: "20px" }}
-              src={padlock}
-              alt=""
-            />
-          </div>
-          <p
-            className="card-text"
-            style={{
-              fontSize: "20px",
-              color: "#666666",
-              width: "613px",
-              float: "right",
-            }}
-          >
-            هذا حساب خاص لا يمكنك مشاهدة منشورات كريم، يرجى ضغط زر “إضافة صديق”
-            لإرسال طلب صداقة.
-          </p>
-        </div>
-      </div>
 
       <style>
         {`

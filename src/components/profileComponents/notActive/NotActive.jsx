@@ -2,7 +2,7 @@ import React from "react";
 
 function NotActive({ openModal2 }) {
   return (
-    <div className="not__active mb-3">
+    <div className="not__active mb-3  mx-3">
       <div
         style={{
           backgroundColor: "#FB3B3B",

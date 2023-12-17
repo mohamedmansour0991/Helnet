@@ -7,18 +7,27 @@
   justify-items: center;
   grid-template-columns: auto 1fr auto;
   gap: 1rem;
-  padding: 0px 30px;
+  padding-inline: 2rem;
   // overflow-y: scroll;
+
+  @media screen and (max-width: 550px) {
+    & {
+      margin-block-start: 5.5rem;
+    }
+  }
+
   @media screen and (max-width: 991px) {
     & {
       padding: 0px !important;
     }
   }
+
   & > .container {
     grid-row: 1;
     width: 100%;
     display: flex;
     justify-content: center;
+
     &.start {
       justify-content: space-between !important;
     }
@@ -31,6 +40,7 @@
     }
   }
 
+  // @media screen and (max-width: 900px) {
   @media screen and (max-width: 850px) {
     grid-template-columns: 1fr;
   }

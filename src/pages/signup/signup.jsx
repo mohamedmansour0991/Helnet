@@ -172,7 +172,7 @@ const Signup = () => {
           <Logimage />
         </div>
         <div className="col-xl-6 col-12 bg-white p-5 logform">
-          <div className="p-5">
+          <div className="p-md-5 p-2">
             <h1 className="title" style={{ marginBottom: "5px" }}>
               أهلا بعودتك
             </h1>

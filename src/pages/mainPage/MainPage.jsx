@@ -54,6 +54,8 @@ export default function MainPage() {
             name === "settings" && <Settings />
           )}
         </div>
+
+        <div className=""></div>
         <Aside />
       </main>
     </div>

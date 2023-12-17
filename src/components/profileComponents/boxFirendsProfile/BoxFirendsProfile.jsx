@@ -1,5 +1,11 @@
+import React from "react";
 import profilePic from "../../../assets/images/profilePic.png";
+import closeing from "../../../assets/images/close.png";
 import friends from "../../../assets/images/friends.png";
+import delet from "../../../assets/images/delete.png";
+import padlock from "../../../assets/images/padlock.png";
+import upload from "../../../assets/images/upload.png";
+import close2 from "../../../assets/images/close2.png";
 import "./BoxFirendsProfile.scss";
 function BoxFirendsProfile() {
   return (

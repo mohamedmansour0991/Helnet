@@ -9,6 +9,9 @@ import {
   reelColored,
   video,
   videoColored,
+  buy,
+  asking,
+  easy,
   home,
   homeColored,
   settings,
@@ -35,7 +38,7 @@ export default function Navbar() {
     { name: t("video"), icon: video, coloredIcon: videoColored, link: "video" },
     { name: t("Reel"), icon: reel, coloredIcon: reelColored, link: "reel" },
     { name: t("Store"), icon: store, coloredIcon: storeColored, link: "store" },
-    { name: t("Lamp"), icon: lamp, coloredIcon: lampColored, link: "lamp" },
+    { name: t("Lamp"), icon: lamp, coloredIcon: lampColored, link: "globe" },
   ];
   const mainMenuLabels = [
     { name: t("Update Information"), icon: pen, link: "settings/update-info" },
@@ -51,10 +54,21 @@ export default function Navbar() {
     { name: t("Support"), icon: support, link: "settings/support" },
     { name: t("Logout"), icon: logout, link: "login" },
   ];
+  const mainMenuLabelsStore = [
+    { name: t("Buy"), icon: buy, link: "store/buy" },
+    { name: t("Used"), icon: easy, link: "store/used" },
+    { name: t("Product display"), icon: asking, link: "store/display" },
+  ];
 
   const userOptionsList = [
+    // { name: t("Ebrahim mohamed"), icon: profile1, link: "profile1" },
+    // { name: t("Globe"), icon: globe, link: "globe" },
+    // { name: "settings/", icon: settings, link: "settings/update-user" },
+    { name: t("Settings"), icon: settings, link: "settings/update-user" },
+  ];
+  const userOptionsListComputer = [
     { name: t("Ebrahim mohamed"), icon: profile1, link: "profile1" },
-    { name: t("Globe"), icon: globe, link: "notification" },
+    { name: t("Globe"), icon: globe, link: "globe" },
     // { name: "settings/", icon: settings, link: "settings/update-user" },
     { name: t("Settings"), icon: settings, link: "settings/update-user" },
   ];
@@ -133,7 +147,7 @@ export default function Navbar() {
             onClick={() => setIsOpened(!isOpened)}
           />
         </li>
-        {userOptionsList.map((tap, index) => (
+        {userOptionsListComputer.map((tap, index) => (
           <li
             key={index}
             role="button"
@@ -183,7 +197,7 @@ export default function Navbar() {
           transition: ".4s",
         }}
       >
-        <Link className="p-3">
+        <Link className="p-3 justify-content-end">
           <img src={favicon} alt="Helnet logo" />
         </Link>
 
@@ -197,12 +211,27 @@ export default function Navbar() {
               navigate(`/${tap.link}`);
             }}
           >
-            <img src={tap.icon} alt="" style={{width:"30px"}}/>
+            <img src={tap.icon} alt="" style={{ width: "30px" }} />
             <p>{t(tap.name)}</p>
           </li>
         ))}
         {name === "settings" &&
           mainMenuLabels.map((tap, index) => (
+            <li
+              className="p-3"
+              key={index}
+              role="button"
+              onClick={() => {
+                setIsOpened(false);
+                navigate(`/${tap.link}`);
+              }}
+            >
+              <img src={tap.icon} alt="" />
+              <p>{t(tap.name)}</p>
+            </li>
+          ))}
+        {name === "store" &&
+          mainMenuLabelsStore.map((tap, index) => (
             <li
               className="p-3"
               key={index}

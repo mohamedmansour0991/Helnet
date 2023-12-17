@@ -89,6 +89,11 @@ button {
   background-color: white;
   background-repeat: no-repeat;
   background-position: 57px 20px;
+  @media screen and (max-width: 550px) {
+    & {
+      background-position: 8px 20px;
+    }
+  }
 
   &:hover {
     box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
@@ -118,6 +123,11 @@ button {
       padding-left: 3rem !important;
     }
   }
+  @media screen and (max-width: 550px) {
+    & {
+      padding: 1rem !important;
+    }
+  }
 }
 
 .codeform {
@@ -143,9 +153,19 @@ button {
 .card {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
   border-radius: 20px;
-  height: 160px;
-  width: 160px;
+  height: 120px;
+  width: 120px;
   margin: 48px 25px;
+  display: flex;
+  align-items: center;
+  img {
+    width: 100px;
+  }
+  @media screen and (max-width: 991px) {
+    & {
+      margin: 5px !important;
+    }
+  }
 }
 
 .card:hover,
@@ -372,10 +392,17 @@ button {
   margin: 20px;
   background-color: white;
   border-radius: 16px;
+  @media (max-width: 550px) {
+    & {
+      margin: 0px !important;
+      margin-top: 6rem !important;
+    }
+  }
 }
 
 .img-responsive {
   width: 100%;
+  min-height: 150px !important;
 }
 
 .profile-title {
@@ -504,3 +531,40 @@ button {
     gap: 1.5rem;
   }
 }
+
+@media (max-width: 550px) {
+  .container {
+    padding: 0px !important;
+  }
+}
+
+.min-h-full {
+  padding: 0px !important;
+  .w-full.transform {
+    .text-right {
+      height: 100%;
+      .mt-4 {
+        height: 90%;
+
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+    }
+    @media (max-width: 550px) {
+      & {
+        height: 100vh;
+        border-radius: 0px !important;
+      }
+    }
+  }
+}
+
+.row.no-gutters {
+  --bs-gutter-x: 0px !important;
+}
+
+.h-100vh {
+  height: 100vh;
+}
+
