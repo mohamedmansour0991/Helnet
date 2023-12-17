@@ -1,7 +1,7 @@
 import "./SingleVideo.scss";
 import Navbar from "../navbar/Navbar";
 import SinglePost from "../singlePost/SinglePost";
-import { data, youtubeCardData } from "/public/fakeData";
+import { youtubeCardData } from "/public/fakeData";
 import { verified1 } from "../../assets/images/icons";
 import { t } from "i18next";
 import { useState } from "react";
@@ -19,7 +19,7 @@ export default function SingleVideo() {
           {cardData &&
             cardData.map((card) => (
               <li
-                className="flex md:flex-row flex-col py-3 justify-center items-center gap-4 "
+                className="flex flex-row py-3 justify-center items-center gap-4 xs"
                 key={card.post_id}
               >
                 <div className="flex flex-col gap-2">
