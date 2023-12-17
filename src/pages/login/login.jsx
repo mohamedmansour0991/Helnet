@@ -134,7 +134,7 @@ const Login = () => {
         <div className="col-xl-6 col-12 d-none d-xl-block">
           <Logimage style={{ minHeight: "100%" }} />
         </div>
-        <div className="col-xl-6 col-12 bg-white p-5 logform">
+        <div className="col-xl-6 col-12 bg-white p-md-5 p-2 logform">
           <h1 className="title" style={{ marginBottom: "5px" }}>
             أهلا بعودتك
           </h1>

@@ -3,9 +3,9 @@ import "./VideoCard.scss";
 function VideoCard({ videos }) {
   return (
     <>
-      {videos.map((p,index) => (
+      {videos.map((p, index) => (
         <div className="videos__page__card" key={index}>
-          <img src={p.src} className="mb-2 w-100" />
+          <img src={p.src} preload="true" className="mb-2 w-100" />
           {/* {p.plus && <span className="card__store__plus">{p.plus}</span>} */}
           <div className="card__store__content">
             <div className="videos__page__card__rate">
@@ -18,7 +18,7 @@ function VideoCard({ videos }) {
                 </li>
               ))}
           </ul> */}
-              <img src={p.img} className="mb-2" />
+              <img src={p.img} preload="true" className="mb-2" />
 
               <span>({p.title})</span>
             </div>

@@ -102,7 +102,7 @@ export default function CreatePost() {
       <Modal isOpen={isOpen} closeModal={closeModal} width="max-w-2xl">
         <div className="flex flex-row-reverse justify-between pb-4">
           <div className="flex gap-2">
-            <div>
+            <div className="w-100">
               <p>{userFullName}</p>
 
               {/* this well be a reusable component */}
@@ -132,7 +132,7 @@ export default function CreatePost() {
 
         {/* this well be a reusable component */}
         <textarea
-          className={`w-full outline-none resize-none px-2 h-28 text-xl ${
+          className={`w-full outline-none resize-none px-2 h-28 text-xl w-100 ${
             isArabic ? "text-right" : "text-left"
           }`}
           placeholder={`${t("write something")} ${t(",")} ${username}`}

@@ -28,6 +28,7 @@ function BoxReelComponents({ video, index }) {
             <a href="#">
               {/* الشكل بيتكرر ف نفس المكان !!! */}
               <img
+                preload="true"
                 className="profile-pic3"
                 style={{ top: "11px", right: "-60%" }}
                 src={Shape}

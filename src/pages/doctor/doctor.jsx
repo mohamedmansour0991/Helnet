@@ -9,8 +9,8 @@ import ButtonsForm from "../../components/buttonsForm/buttonsForm";
 const Doctor = () => {
   return (
     <div className="container">
-      <div className="row m-5 no-gutters">
-        <div className="bg-white p-5">
+      <div className="">
+        <div className="bg-white p-5 d-flex align-items-center justify-content-center flex-column h-100vh">
           <h1 className="title" style={{ marginBottom: "66px" }}>
             {" "}
             طبيب{" "}

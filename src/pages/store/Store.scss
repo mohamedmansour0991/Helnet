@@ -5,7 +5,7 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   @media (max-width: 550px) {
     padding: 5px !important;
     padding-top: 20px !important;
@@ -13,12 +13,18 @@
   }
 }
 .store {
+  width: 100%;
   & .store-bg {
     margin: 0px 10px;
     display: grid;
     grid-template-columns: repeat(3, auto);
     justify-content: space-around;
     gap: 1rem;
+    @media screen and (max-width: 550px) {
+      & {
+        padding: 0px !important;
+      }
+    }
   }
 }
 

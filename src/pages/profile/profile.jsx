@@ -353,7 +353,7 @@ const Profile = () => {
             </button>
           </div>
         </div>
-        <main className={`main ${direction}`}>
+        <main className={`main mt-4 ${direction}`}>
           <MainMenu mainMenuLabels={mainMenuLabels} />
           <div className="container">
             <div className="d-flex flex-column">

@@ -44,7 +44,7 @@ export default function Aside() {
 
   return (
     <aside className={`aside ${dir}`}>
-      <div className="devOnly">
+      {/* <div className="devOnly">
         <Button
           className="w-fit"
           children={<p>{t("changeLang(developingOnly)")}</p>}
@@ -53,7 +53,7 @@ export default function Aside() {
             localStorage.setItem("direction", handelDirection());
           }}
         />
-      </div>
+      </div> */}
       <div className="aside__section ad">
         <h4>{t("This site is completely free for six months")}</h4>
         <p>{"--" + t("Subscription fee is 0 pounds")}</p>
@@ -66,11 +66,16 @@ export default function Aside() {
         <ul>
           {users.map((user, index) => (
             <li key={index}>
-              <div className="d-flex gap-3 w-100">
+              <div className="d-flex gap-2 w-100">
                 <img src={user.image} alt="" />
                 <div>
                   <p>{user.name}</p>
-                  <p>{user.job}</p>
+                  <p
+                    className="fs-14 text-gray"
+                    style={{ fontSize: "14px", color: "gray" }}
+                  >
+                    {user.job}
+                  </p>
                 </div>
               </div>
               <Button
@@ -78,7 +83,6 @@ export default function Aside() {
                 backgroundColor={"#fff"}
                 color={"#A74ED1"}
                 border={"1px"}
-                
               />
             </li>
           ))}
