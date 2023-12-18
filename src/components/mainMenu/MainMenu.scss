@@ -31,7 +31,7 @@
     display: grid;
     gap: 1.5rem;
     padding-block-end: 1.51rem;
-    height: 64vh;
+    max-height: 64vh;
     overflow-y: scroll;
     &::-webkit-scrollbar {
       display: none !important;

@@ -27,7 +27,7 @@ export default function Dropdown({ buttonData = "open", labels = [] }) {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items
-            className={`absolute mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none ${
+            className={`absolute z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none ${
               // isArabic ? "right-0" : "left-0"
               isArabic ? "left-0" : "right-0"
             }`}

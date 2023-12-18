@@ -43,7 +43,7 @@ export default function Aside() {
   const dir = localStorage.getItem("direction");
 
   return (
-    <aside className={`aside ${dir} no-scrollbar`}>
+    <aside className={`aside ${dir} no-scrollbar overflow-y-scroll`}>
       {/* <div className="devOnly">
         <Button
           className="w-fit"
