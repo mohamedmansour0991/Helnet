@@ -1,8 +1,7 @@
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import {
-  lamp,
-  lampColored,
+  friends,
   store,
   storeColored,
   reel,
@@ -38,7 +37,7 @@ export default function Navbar() {
     { name: t("video"), icon: video, coloredIcon: videoColored, link: "video" },
     { name: t("Reel"), icon: reel, coloredIcon: reelColored, link: "reel" },
     { name: t("Store"), icon: store, coloredIcon: storeColored, link: "store" },
-    { name: t("Lamp"), icon: lamp, coloredIcon: lampColored, link: "globe" },
+    { name: t("Friends"), icon: friends, coloredIcon: friends, link: "friends" },
   ];
   const mainMenuLabels = [
     { name: t("Update Information"), icon: pen, link: "settings/update-info" },

@@ -7,8 +7,24 @@ import {
   testImage6,
 } from "../src/assets/images";
 import { testVideo } from "../src/assets/videos";
+import { testAudio } from "../src/assets/audio";
 
 export const data = [
+  {
+    post_id: "0",
+    post_data: {
+      post_time: "",
+      post_text: "",
+      post_images: [],
+      post_video: "",
+      post_audio: testAudio,
+    },
+    post_user: {
+      user_id: "1",
+    },
+    post_likes: [],
+  },
+
   {
     post_id: "1",
     post_data: {
@@ -17,7 +33,7 @@ export const data = [
         "الأهرامات في مصر هي شهادة حية على الحضارة المصرية القديمة وتعتبر واحدة من أعجب المعالم السياحية في العالم. تاريخها يعود إلى الفترة من 2600 إلى 2500 قبل الميلاد وتم بناؤها كمقابر لملوك الفراعنة!  😍",
       post_images: [],
       post_video: "",
-      post_audio: "",
+      post_audio: testAudio,
     },
     post_user: {
       user_id: "1",
