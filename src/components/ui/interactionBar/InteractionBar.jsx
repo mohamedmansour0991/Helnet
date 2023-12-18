@@ -53,7 +53,6 @@ export default function InteractionBar() {
         />
       </div>
 
-
       <CommentSection />
 
       <ShareModel
