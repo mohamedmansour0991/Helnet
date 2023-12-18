@@ -11,8 +11,7 @@
     background-color: var(--bg-color);
     border-radius: 1rem;
     position: sticky;
-    // position: fixed;
-    top: 7rem;
+    top: 0rem;
 
     & .mainMenu__header {
       background: linear-gradient(#00acff75, #bd00ff58);
@@ -33,9 +32,11 @@
     padding-block-end: 1.51rem;
     max-height: 64vh;
     overflow-y: scroll;
+
     &::-webkit-scrollbar {
       display: none !important;
     }
+
     min-width: 15rem;
     // padding-inline-start: 1.73rem;
     padding-block: 1.87rem;
