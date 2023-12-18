@@ -14,6 +14,7 @@ import Modal from "../modal/Modal";
 import { useEffect, useState } from "react";
 import Input from "../input/Input";
 import Dropdown from "../dropdown/Dropdown";
+import Select from "../select/Select";
 
 export default function CreatePost() {
   const buttons = [
@@ -21,6 +22,11 @@ export default function CreatePost() {
     { value: "Images", title: "Post Images", image: image },
     { value: "Video", title: "Post Video", image: Video3 },
     { value: "Record", title: "Post Record", image: voice },
+  ];
+
+  const selectLabels = [
+    { name: "public", img: publicIcon },
+    { name: "privet", img: "" },
   ];
   const direction = localStorage.getItem("direction");
 
@@ -101,29 +107,16 @@ export default function CreatePost() {
       </div>
       <Modal isOpen={isOpen} closeModal={closeModal} width="max-w-2xl">
         <div className="flex flex-row-reverse justify-between pb-4">
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             <div className="w-100">
-              <p>{userFullName}</p>
+              <p className="px-2">{userFullName}</p>
 
-              {/* this well be a reusable component */}
-              {/* <Dropdown /> */}
-              <select
-                className="px-2 py-1 bg-slate-200 rounded-full"
-                name=""
-                id=""
-              >
-                <option value="public">
-                  {t("public")}
-                  {/* <img src={publicIcon} alt="" /> */}
-                </option>
-                <option value="privet">{t("privet")}</option>
-              </select>
-              {/* this well be a reusable component */}
+              <Select selectLabels={selectLabels} />
             </div>
             <img className="w-10 h-10" src={profile1} alt="" />
           </div>
           <button
-            className="rounded-full bg-slate-200 h-fit p-1D"
+            className="rounded-full bg-blue-50 h-fit p-1D"
             onClick={() => setIsOpen(false)}
           >
             <img src={close1} alt="" />
@@ -140,7 +133,7 @@ export default function CreatePost() {
         {/* this well be a reusable component */}
 
         <div
-          className="sm:flex  items-center justify-between px-4 mb-3 border rounded-2xl"
+          className="sm:flex items-center justify-between px-4 mb-3 border rounded-2xl"
           dir={direction}
         >
           <p className="d-none d-sm-block">{t("add to your post")}</p>

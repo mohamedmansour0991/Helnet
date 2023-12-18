@@ -15,8 +15,6 @@ body {
 }
 .bg-body {
   background-color: var(--main-bg) !important;
-  min-height: 100%;
-  overflow: hidden;
 }
 
 .title {
@@ -567,4 +565,3 @@ button {
 .h-100vh {
   height: 100vh;
 }
-

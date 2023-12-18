@@ -8,7 +8,6 @@ import {
   friend,
 } from "/src/assets/images/icons";
 import { useTranslation } from "react-i18next";
-import "./MainPage.scss";
 import { useParams } from "react-router-dom";
 import Reels from "../reels/reels";
 import Settings from "../settings/Settings";
@@ -17,6 +16,7 @@ import Videos from "../videos/Videos";
 import { data } from "/public/fakeData";
 import { CreatePost } from "../../components/ui";
 import Friends from "../Friends/Friends";
+import "./MainPage.scss";
 
 export default function MainPage() {
   const { t } = useTranslation();
