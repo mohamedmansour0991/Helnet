@@ -1,5 +1,12 @@
 import { Navbar, Aside, MainMenu, Posts } from "/src/components";
-import { search, store, events, video, reel } from "/src/assets/images/icons";
+import {
+  search,
+  store,
+  events,
+  video,
+  reel,
+  friend,
+} from "/src/assets/images/icons";
 import { useTranslation } from "react-i18next";
 import "./MainPage.scss";
 import { useParams } from "react-router-dom";
@@ -9,6 +16,7 @@ import Notifcations from "../notifcations/Notifcations";
 import Videos from "../videos/Videos";
 import { data } from "/public/fakeData";
 import { CreatePost } from "../../components/ui";
+import Friends from "../Friends/Friends";
 
 export default function MainPage() {
   const { t } = useTranslation();
@@ -20,6 +28,7 @@ export default function MainPage() {
     { name: t("Events"), icon: events, link: "event" },
     { name: t("video"), icon: video, link: "video" },
     { name: t("Reel"), icon: reel, link: "reel" },
+    { name: t("Friends"), icon: friend, link: "friends" },
   ];
 
   return (
@@ -38,6 +47,8 @@ export default function MainPage() {
             <Reels />
           ) : name === "video" ? (
             <Videos />
+          ) : name === "friends" ? (
+            <Friends />
           ) : name === "globe" ? (
             <Notifcations />
           ) : (
