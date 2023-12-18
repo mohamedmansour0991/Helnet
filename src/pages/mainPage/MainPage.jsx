@@ -27,7 +27,7 @@ export default function MainPage() {
       <Navbar />
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
-        <div className="container ">
+        <div className="container no-scrollbar">
           {name === "home" || name === undefined ? (
             <div className="d-flex flex-column gap-3">
               {" "}
