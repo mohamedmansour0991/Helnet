@@ -1,6 +1,4 @@
 import SinglePost from "../singlePost/SinglePost";
-import { CreatePost } from "../ui";
-// import { data } from "/public/fakeData";
 
 export default function Posts({ data }) {
   return (

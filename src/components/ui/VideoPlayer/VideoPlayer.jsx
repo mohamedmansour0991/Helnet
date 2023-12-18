@@ -45,6 +45,7 @@ export default function VideoPlayer({ data }) {
   //     videoRef.current.removeEventListener("timeupdate", handleTimeUpdate);
   //   };
   // }, []);
+
   useEffect(() => {
     const handleTimeUpdate = () => {
       setTimeLine(videoRef.current.currentTime);
@@ -110,8 +111,14 @@ export default function VideoPlayer({ data }) {
     : videoRef.current.duration;
 
   return (
-    <div className="videoPlayer">
-      <video className="video" src={data} ref={videoRef} onClick={togglePlay} />
+    <div className={`videoPlayer ${isPlaying}`}>
+      <video
+        className="video"
+        style={{ maxHeight: "400px" }}
+        src={data}
+        ref={videoRef}
+        onClick={togglePlay}
+      />
       <div className="controlsContainer">
         <div className="controlsTimeLine">
           <input

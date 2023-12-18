@@ -12,7 +12,7 @@ function BoxReelComponents({ video, index }) {
     <>
       <div className="box__reel__components">
         <div
-          style={{ marginLeft: "7px", marginBottom: "5px" }}
+          style={{ marginBottom: "5px" }}
           key={index}
           role="button"
           onClick={() => {

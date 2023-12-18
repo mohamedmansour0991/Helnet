@@ -19,7 +19,11 @@ export default function Button({
     <button
       type={type}
       onClick={handleClick}
-      style={{ backgroundColor: backgroundColor, color: color, borderWidth: border }}
+      style={{
+        backgroundColor: backgroundColor,
+        color: color,
+        borderWidth: border,
+      }}
       className={`normalButton ${className} ${
         backgroundColor === null && "gradient"
       }`}

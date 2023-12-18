@@ -1,8 +1,7 @@
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import {
-  lamp,
-  lampColored,
+  friends,
   store,
   storeColored,
   reel,
@@ -30,6 +29,7 @@ import {
 } from "/src/assets/images/icons";
 import "./Navbar.scss";
 import { t } from "i18next";
+import { lamp, lampColored } from "../../assets/images/icons";
 
 export default function Navbar() {
   const name = window.location.pathname.split("/")[1];
@@ -38,7 +38,7 @@ export default function Navbar() {
     { name: t("video"), icon: video, coloredIcon: videoColored, link: "video" },
     { name: t("Reel"), icon: reel, coloredIcon: reelColored, link: "reel" },
     { name: t("Store"), icon: store, coloredIcon: storeColored, link: "store" },
-    { name: t("Lamp"), icon: lamp, coloredIcon: lampColored, link: "globe" },
+    { name: t("Lamp"), icon: lamp, coloredIcon: lampColored, link: "lamp" },
   ];
   const mainMenuLabels = [
     { name: t("Update Information"), icon: pen, link: "settings/update-info" },
@@ -113,10 +113,7 @@ export default function Navbar() {
   }, [menuRef]);
 
   return (
-    <nav
-      className={`navbar ${direction} p-fixed w-100`}
-      style={{ position: "fixed" }}
-    >
+    <nav className={`navbar ${direction} fixed w-100`}>
       <Link className="navbar__logo" to={"/"}>
         <img src={favicon} alt="Helnet logo" />
       </Link>
