@@ -29,6 +29,7 @@ import {
 } from "/src/assets/images/icons";
 import "./Navbar.scss";
 import { t } from "i18next";
+import { lamp, lampColored } from "../../assets/images/icons";
 
 export default function Navbar() {
   const name = window.location.pathname.split("/")[1];
@@ -37,7 +38,7 @@ export default function Navbar() {
     { name: t("video"), icon: video, coloredIcon: videoColored, link: "video" },
     { name: t("Reel"), icon: reel, coloredIcon: reelColored, link: "reel" },
     { name: t("Store"), icon: store, coloredIcon: storeColored, link: "store" },
-    { name: t("Friends"), icon: friends, coloredIcon: friends, link: "friends" },
+    { name: t("Lamp"), icon: lamp, coloredIcon: lampColored, link: "lamp" },
   ];
   const mainMenuLabels = [
     { name: t("Update Information"), icon: pen, link: "settings/update-info" },

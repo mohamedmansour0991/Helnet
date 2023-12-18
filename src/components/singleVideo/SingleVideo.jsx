@@ -10,9 +10,10 @@ export default function SingleVideo() {
   const cardData = youtubeCardData;
 
   const [postIndex, setPostIndex] = useState(0);
+  const direction = localStorage.getItem("direction");
 
   return (
-    <>
+    <div dir={direction}>
       <Navbar />
       <div className="container flex flex-col-reverse lg:grid gap-6 grid-cols-12 pt-28 ">
         <ul className="bg-white rounded-xl p-3 col-span-12 lg:col-span-5 xl:col-span-4">
@@ -22,6 +23,14 @@ export default function SingleVideo() {
                 className="flex flex-row py-3 justify-center items-center gap-4 xs"
                 key={card.post_id}
               >
+                <img
+                  className="w-1/2 cursor-pointer"
+                  src={card.post_data.post_thumbnail}
+                  onClick={() => {
+                    setPostIndex(card.post_id - 1);
+                  }}
+                  alt=""
+                />
                 <div className="flex flex-col gap-2">
                   <h3
                     className="cursor-pointer"
@@ -51,22 +60,17 @@ export default function SingleVideo() {
                       t("view")}
                   </p>
                 </div>
-                <img
-                  className="w-1/2 cursor-pointer"
-                  src={card.post_data.post_thumbnail}
-                  onClick={() => {
-                    setPostIndex(card.post_id - 1);
-                  }}
-                  alt=""
-                />
               </li>
             ))}
         </ul>
 
-        <div className="col-span-12 lg:col-span-7 xl:col-span-8">
+        <div
+          className="col-span-12 lg:col-span-7 xl:col-span-8"
+         
+        >
           <SinglePost data={youtubeCardData[postIndex]} />
         </div>
       </div>
-    </>
+    </div>
   );
 }

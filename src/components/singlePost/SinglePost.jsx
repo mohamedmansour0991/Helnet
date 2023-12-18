@@ -28,8 +28,8 @@ export default function SinglePost({ data }) {
           <Gallery data={data.post_data?.post_images} target={data.post_id} />
         )}
 
-        {data.post_data?.post_audio.length > 0 && (
-          <AudioPlayer data={data.post_data?.post_audio} />
+        {data?.post_data?.post_audio?.length > 0 && (
+          <AudioPlayer data={data?.post_data?.post_audio} />
         )}
 
         {data.post_data?.post_video && (

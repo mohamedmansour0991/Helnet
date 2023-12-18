@@ -9,13 +9,6 @@
   gap: 1rem;
   padding-inline: 2rem;
   // overflow-y: scroll;
-
-  @media screen and (max-width: 550px) {
-    & {
-      margin-block-start: 5.5rem;
-    }
-  }
-
   @media screen and (max-width: 991px) {
     & {
       padding: 0px !important;

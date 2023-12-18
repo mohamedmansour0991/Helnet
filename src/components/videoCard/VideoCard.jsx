@@ -1,10 +1,16 @@
 import React from "react";
 import "./VideoCard.scss";
+import { useNavigate } from "react-router-dom";
 function VideoCard({ videos }) {
+  const navigate = useNavigate();
   return (
     <>
       {videos.map((p, index) => (
-        <div className="videos__page__card" key={index}>
+        <div
+          className="videos__page__card cursor-pointer"
+          key={index}
+          onClick={() => navigate("/singleVideo")}
+        >
           <img src={p.src} preload="true" className="mb-2 w-100" />
           {/* {p.plus && <span className="card__store__plus">{p.plus}</span>} */}
           <div className="card__store__content">

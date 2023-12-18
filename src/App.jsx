@@ -21,12 +21,13 @@ import { Navbar } from "./components";
 import "./App.scss"; /* eslint-disable react/no-children-prop */
 
 function App() {
-  const [i18n] = useTranslation();
+  const [t,i18n] = useTranslation();
   // const [isVisibleNavbar, setIsVisibleNavbar] = useState(true);
   // const location = useLocation();
   // const pagesWithoutNavbar = ["/login", "register", "forget-pass"];
 
   useEffect(() => {
+    console.log(i18n.language);
     if (i18n.language === "ar") {
       localStorage.setItem("direction", "rtl");
       document.body.classList.remove("en");

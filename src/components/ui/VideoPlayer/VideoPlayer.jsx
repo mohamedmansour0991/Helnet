@@ -112,7 +112,13 @@ export default function VideoPlayer({ data }) {
 
   return (
     <div className={`videoPlayer ${isPlaying}`}>
-      <video className="video" src={data} ref={videoRef} onClick={togglePlay} />
+      <video
+        className="video"
+        style={{ maxHeight: "400px" }}
+        src={data}
+        ref={videoRef}
+        onClick={togglePlay}
+      />
       <div className="controlsContainer">
         <div className="controlsTimeLine">
           <input
