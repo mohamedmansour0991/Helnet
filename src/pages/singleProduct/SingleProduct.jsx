@@ -67,13 +67,16 @@ export default function SingleProduct({ product }) {
                   {product.rate / 20}
                   {")"}
                 </p>
-                <div className="flex p-2">
-                  <img src={product.rate > 20 ? Star : grayStar} alt="" />
-                  <img src={product.rate > 40 ? Star : grayStar} alt="" />
-                  <img src={product.rate > 60 ? Star : grayStar} alt="" />
-                  <img src={product.rate > 80 ? Star : grayStar} alt="" />
-                  <img src={product.rate > 95 ? Star : grayStar} alt="" />
-                </div>
+                <ul className="flex p-2">
+                  {[20, 40, 60, 80, 95].map((threshold, index) => (
+                    <li key={index}>
+                      <img
+                        src={product.rate > threshold ? Star : grayStar}
+                        alt=""
+                      />
+                    </li>
+                  ))}
+                </ul>
               </div>
               <p>{product.name}</p>
 
