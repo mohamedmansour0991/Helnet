@@ -10,3 +10,4 @@ export { default as CreateComment } from "./createComment/CreateComment";
 export { default as CreatePost } from "./createPost/CreatePost";
 export { default as PostHeader } from "./postHeader/PostHeader";
 export { default as AudioPlayer } from "./audioPlayer/AudioPlayer";
+export { default as FiltersBar } from "./filtersBar/FiltersBar";

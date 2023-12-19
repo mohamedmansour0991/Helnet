@@ -451,3 +451,71 @@ export const youtubeCardData = [
     post_coments: [],
   },
 ];
+
+export const storeData = [
+  {
+    post_id: "1",
+    category: "service",
+    post_data: {
+      post_time: "",
+      post_text: "محتاج عربية نيسان للإيجار اليومي بسائق مخصوص",
+      post_images: [],
+
+      details:
+        "محتاج عربية نيسان للإيجار اليومي بسائق مخصوص محتاج عربية نيسان للإيجار اليومي بسائق مخصوص ",
+      price: "1000 جنيه يوميا",
+      brand: "",
+      quantity: 0,
+      isNew: false,
+      contactInfo: "0114789563",
+    },
+    post_user: {
+      user_id: "1",
+    },
+    post_likes: [],
+  },
+  {
+    post_id: "2",
+    category: "service",
+    post_data: {
+      post_time: "",
+      post_images: [],
+      post_text: "",
+
+      description: "محتاج عربية نيسان للإيجار اليومي بسائق مخصوص",
+      details:
+        "محتاج عربية نيسان للإيجار اليومي بسائق مخصوص محتاج عربية نيسان للإيجار اليومي بسائق مخصوص ",
+      price: "1000 جنيه يوميا",
+      brand: "",
+      quantity: 0,
+      isNew: false,
+      contactInfo: "0114789563",
+    },
+    post_user: {
+      user_id: "1",
+    },
+    post_likes: [],
+  },
+  {
+    post_id: "3",
+    category: "used",
+    post_data: {
+      post_time: "",
+      post_images: [testImage1,testImage2,testImage3,testImage4,testImage5],
+      post_text: "",
+
+      description:
+        "لاب توب DELL الهاوسنج من المعدن للأعمال الهندسية وأعمال الجرافيك",
+      details: "",
+      price: "15.000 جنيه",
+      brand: "",
+      quantity: 1,
+      isNew: false,
+      contactInfo: "0114789563",
+    },
+    post_user: {
+      user_id: "1",
+    },
+    post_likes: [],
+  },
+];

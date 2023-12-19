@@ -16,14 +16,14 @@ import Input from "../input/Input";
 import Dropdown from "../dropdown/Dropdown";
 import Select from "../select/Select";
 
-export default function CreatePost() {
-  const buttons = [
-    // { value: "Text", title: "Post Text" },
+export default function CreatePost({
+  placeholder,
+  buttons = [
     { value: "Images", title: "Post Images", image: image },
     { value: "Video", title: "Post Video", image: Video3 },
     { value: "Record", title: "Post Record", image: voice },
-  ];
-
+  ],
+}) {
   const selectLabels = [
     { name: "public", img: publicIcon },
     { name: "privet", img: "" },
@@ -68,10 +68,16 @@ export default function CreatePost() {
         >
           <img src={profile1} alt="" />
           <p className="flex gap-2 items-center">
-            {t("write something") + "..."}
-            <span>
-              <img src={write} alt="" />
-            </span>
+            {placeholder ? (
+              t(placeholder)
+            ) : (
+              <>
+                {t("write something")} {"..."}
+                <span>
+                  <img src={write} alt="" />
+                </span>
+              </>
+            )}
           </p>
         </div>
         <div className="flex justify-between bg-zinc-200 rounded-b-xl">
@@ -87,7 +93,7 @@ export default function CreatePost() {
                   }}
                   children={
                     <>
-                      <img src={button.image} alt="" />
+                      <img className="w-4" src={button.image} alt="" />
                       <p>{t(button.value)}</p>
                     </>
                   }
@@ -128,16 +134,24 @@ export default function CreatePost() {
           className={`w-full outline-none resize-none px-2 h-28 text-xl w-100 ${
             isArabic ? "text-right" : "text-left"
           }`}
-          placeholder={`${t("write something")} ${t(",")} ${username}`}
+          placeholder={
+            placeholder
+              ? t(placeholder)
+              : `${t("write something")} ${t(",")} ${username}`
+          }
         />
         {/* this well be a reusable component */}
 
         <div
-          className="sm:flex items-center justify-between px-4 mb-3 border rounded-2xl"
+          className="sm:flex items-center justify-between gap-3 px-4 mb-3 border rounded-2xl"
           dir={direction}
         >
-          <p className="d-none d-sm-block">{t("add to your post")}</p>
-          <div className="sm:flex d-flex flex-column flex-sm-row flex-wrap   gap-sm-6">
+          {!placeholder && (
+            <p className="d-none d-sm-block whitespace-nowrap">
+              {t("add to your post")}
+            </p>
+          )}
+          <div className="sm:flex flex flex-column justify-between flex-sm-row w-full flex-wrap gap-sm-6">
             {buttons &&
               buttons.map((button) => (
                 <button
@@ -146,8 +160,8 @@ export default function CreatePost() {
                   onClick={() => {}}
                   children={
                     <>
+                      <img className="w-4" src={button.image} alt="" />
                       <p>{t(button.value)}</p>
-                      <img src={button.image} alt="" />
                     </>
                   }
                 />

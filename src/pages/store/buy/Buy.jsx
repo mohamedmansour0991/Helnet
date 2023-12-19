@@ -1,6 +1,6 @@
 import React from "react";
 import CardStore from "../../../components/cardStore/CardStore";
-import { Image, Image1, Overly } from "/src/assets/images/icons";
+import { Image1 } from "/src/assets/images/icons";
 
 function Buy() {
   const products = [
@@ -67,10 +67,9 @@ function Buy() {
     },
   ];
   return (
-    <>
-      {/* <ChooseType /> */}
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-2">
       <CardStore products={products} />
-    </>
+    </div>
   );
 }
 

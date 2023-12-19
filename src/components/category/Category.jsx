@@ -1,25 +1,25 @@
-import React from "react";
+import { t } from "i18next";
 import "./Category.scss";
-import { useTranslation } from "react-i18next";
-function Category({ category }) {
-  console.log(category.title);
-  const [t] = useTranslation();
-  console.log(category);
+
+function Category({ data }) {
   return (
-    <div className="d-flex category flex-column my-2">
-      <p className="my-1">{category?.title}</p>
-      <p className="my-1">
-        {" "}
-        {t("Description")} : {category?.desc}
-      </p>
-      <p className="my-1">
-        {" "}
-        {t("Price")} : {category?.price}
-      </p>
-      <p className="my-1">
-        {" "}
-        {t("Communication Methods")} : {category?.contact}
-      </p>
+    <div className="text-lg grid gap-3">
+      <p>{data.post_data.description}</p>
+      {data?.post_data?.details && (
+        <p>
+          {t("Details")} : {data.post_data.details}
+        </p>
+      )}
+      {data?.post_data?.price && (
+        <p>
+          {t("Suggested price")} : {data.post_data.price}
+        </p>
+      )}
+      {data?.post_data?.contactInfo && (
+        <p>
+          {t("Contact method")} : {data.post_data.contactInfo}
+        </p>
+      )}
     </div>
   );
 }

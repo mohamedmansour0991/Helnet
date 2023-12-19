@@ -413,7 +413,7 @@ function ProductDisplay() {
   // console.log(data);
   return (
     <div className="d-flex flex-column gap-4">
-      <BoxStore buttons={buttons} />
+      {/* <BoxStore buttons={buttons} /> */}
       <Posts data={data} />
     </div>
   );

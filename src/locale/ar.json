@@ -548,10 +548,7 @@
   "What color do you prefer ?": "ما هو اللون الذى تفضله؟",
   "Back": "السابق",
   "Service name": "اسم الخدمة",
-  "Used": "مستعمل",
-  "Used": "مستعمل",
-  "Used": "مستعمل",
-  "Used": "مستعمل",
+  "used": "مستعمل",
   "Service Request": "طلب خدمة",
   "View a used product": "عرض منتج مستعمل",
   "Language": "اللغة",
@@ -613,5 +610,9 @@
   "now": "الآن",
   "Hours ago": "منذ ساعات",
   "view": "مشاهدة",
-  "audio clip": "مقطع صوتي"
+  "audio clip": "مقطع صوتي",
+  "new": "جديد",
+  "services": "خدمات",
+  "Contact method": "طريقة التواصل",
+  "Request a service or offer your product now": "اطلب خدمة أو اعرض منتجك الآن"
 }

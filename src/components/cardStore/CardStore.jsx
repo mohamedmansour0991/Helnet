@@ -5,8 +5,8 @@ import { Star } from "/src/assets/images/icons";
 export default function CardStore({ products }) {
   return (
     <>
-      {products.map((p) => (
-        <div className="card__store flex flex-col">
+      {products.map((p, i) => (
+        <div key={i} className="card__store flex flex-col">
           <img src={p.icon} />
           {p.plus && <span className="card__store__plus">{p.plus}</span>}
           <div className="card__store__content">
@@ -14,8 +14,8 @@ export default function CardStore({ products }) {
               <ul>
                 {Array(p.star)
                   .fill(null)
-                  .map((s) => (
-                    <li>
+                  .map((s, i) => (
+                    <li key={i}>
                       <img src={Star} />
                     </li>
                   ))}

@@ -38,8 +38,7 @@ export default function MainPage() {
         <MainMenu mainMenuLabels={mainMenuLabels} />
         <div className="container no-scrollbar">
           {name === "home" || name === undefined ? (
-            <div className="d-flex flex-column gap-3">
-              {" "}
+            <div className="grid gap-3">
               <CreatePost />
               <Posts data={data} />
             </div>
