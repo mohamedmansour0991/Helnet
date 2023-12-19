@@ -2,7 +2,14 @@ import { t } from "i18next";
 import { useParams } from "react-router-dom";
 import { Aside, MainMenu, Navbar, Posts } from "/src/components";
 import { CreatePost, FiltersBar } from "../../components/ui";
-import { asking, easy, buy, news, personal, easytouse } from "../../assets/images/icons";
+import {
+  asking,
+  easy,
+  buy,
+  news,
+  personal,
+  easytouse,
+} from "../../assets/images/icons";
 import { storeData } from "../../../public/fakeData";
 import Buy from "./buy/Buy";
 import "./Store.scss";
@@ -48,9 +55,21 @@ function Store() {
             <CreatePost
               placeholder={"Request a service or offer your product now"}
               buttons={[
-                { value: "Images", title: "Post Images",image: news },
-                { value: "Video", title: "Post Video" ,image: easytouse },
-                { value: "Record", title: "Post Record",image: personal  },
+                {
+                  value: t("Show the new product"),
+                  title: t("new"),
+                  image: news,
+                },
+                {
+                  value: t("View a used product"),
+                  title: "Post Video",
+                  image: easytouse,
+                },
+                {
+                  value: t("Service Request"),
+                  title: "Post Record",
+                  image: personal,
+                },
               ]}
             />
             <FiltersBar />
