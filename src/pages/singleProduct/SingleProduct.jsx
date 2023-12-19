@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { t } from "i18next";
+import { Navbar } from "../../components";
+import { ImageSlider, Select } from "../../components/ui";
 import {
   testImage1,
   testImage2,
@@ -7,16 +10,12 @@ import {
   testImage5,
   testImage6,
 } from "../../assets/images";
-import { Navbar } from "../../components";
-import { ImageSlider, Select } from "../../components/ui";
 import {
   Star,
   arrowDown,
   grayStar,
-  whatsApp2,
   whatsapp,
 } from "../../assets/images/icons";
-import { useState } from "react";
 
 export default function SingleProduct({ product }) {
   product = {
@@ -47,11 +46,7 @@ export default function SingleProduct({ product }) {
   const [currentColor, setCurrentColor] = useState(0);
 
   return (
-    <div
-      //  dir={direction}
-      dir={direction}
-      className="pt-24"
-    >
+    <div dir={direction} className="pt-24">
       <Navbar />
       <div className="container rounded-xl bg-white  py-4 text-lg">
         <button className="h-fit">

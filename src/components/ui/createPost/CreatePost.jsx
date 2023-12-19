@@ -6,15 +6,13 @@ import {
   send,
   voice,
   write,
-  publicIcon,
   close1,
 } from "../../../assets/images/icons";
 import Button from "../button/Button";
 import Modal from "../modal/Modal";
 import { useEffect, useState } from "react";
-import Input from "../input/Input";
-import Dropdown from "../dropdown/Dropdown";
 import Select from "../select/Select";
+import Form from "../../form/Form";
 
 export default function CreatePost({
   placeholder,
@@ -30,6 +28,7 @@ export default function CreatePost({
   const username = "كريم";
   const userFullName = "كريم سيف";
 
+  /////////////// main module ///////////////////
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("Text Post");
 
@@ -41,9 +40,21 @@ export default function CreatePost({
     setIsOpen(true);
   }
 
-  function openModal() {
-    setIsOpen(true);
+  /////////////// main module ///////////////////
+
+  /////////////// store module ///////////////////
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [formTitle, setFormTitle] = useState("Text Post");
+
+  function closeForm() {
+    setIsFormOpen(false);
   }
+
+  function openForm() {
+    setIsFormOpen(true);
+  }
+
+  /////////////// main module ///////////////////
 
   //   ${isArabic ? "text-right" : "text-left"}
   const [isArabic, setIsArabic] = useState(false);
@@ -56,7 +67,7 @@ export default function CreatePost({
     <>
       <div className="createPost rounded-xl bg-white">
         <div
-          className="flex gap-3 items-center  pt-4 ps-3 pb-10"
+          className="flex gap-3 items-center pt-4 ps-3 pb-10"
           onClick={() => {
             openModal();
             setTitle("Post Text");
@@ -125,7 +136,7 @@ export default function CreatePost({
           </div>
           <button
             className="rounded-full bg-blue-50 h-fit p-1D"
-            onClick={() => setIsOpen(false)}
+            onClick={closeModal}
           >
             <img src={close1} alt="" />
           </button>
@@ -153,13 +164,17 @@ export default function CreatePost({
               {t("add to your post")}
             </p>
           )}
-          <div className="sm:flex flex flex-column justify-between flex-sm-row w-full flex-wrap gap-sm-6">
+          <div className="sm:flex flex flex-column justify-between flex-sm-row w-full flex-wrap">
             {buttons &&
               buttons.map((button) => (
                 <button
                   key={button.value}
                   className="flex gap-1 items-center"
-                  onClick={() => {}}
+                  onClick={() => {
+                    openForm();
+                    setFormTitle(button.title);
+                    // console.log(formTitle);
+                  }}
                   children={
                     <>
                       <img className="w-4" src={button.image} alt="" />
@@ -170,6 +185,8 @@ export default function CreatePost({
               ))}
           </div>
         </div>
+
+        <Form isOpen={isFormOpen} closeModal={closeForm} title={formTitle} />
 
         <Button children={t("Post")} />
       </Modal>

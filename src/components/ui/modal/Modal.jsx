@@ -45,7 +45,7 @@ export default function Modal({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                className={`w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-start align-middle shadow-xl transition-all ${
+                className={`w-full  transform overflow-hidden rounded-2xl bg-white p-6 text-start align-middle shadow-xl transition-all ${
                   isFullScreen ? "max-w-md" : "max-w-xs"
                 }`}
               >
