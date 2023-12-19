@@ -129,14 +129,14 @@ const Reels = () => {
 
   return (
     <>
-    <div className="flex card__center ">
-      <FiltersBar />
-      <div className="reelsComponents ">
-        {/* sidebar */}
-        {videos.map((video, index) => (
-          <BoxReelComponents video={video} index={index} />
-        ))}
-        {/* <div
+      <div className="bg-white">
+        <FiltersBar />
+        <div className="reelsComponents ">
+          {/* sidebar */}
+          {videos.map((video, index) => (
+            <BoxReelComponents video={video} index={index} />
+          ))}
+          {/* <div
         className="profile-card2 myside"
         style={{ textAlign: "right", width: "100%" }}
       >
@@ -165,7 +165,7 @@ const Reels = () => {
         </ul>
       </div> */}
 
-        {/* <style>
+          {/* <style>
           {`
                  @media (max-width: 800px) {
                   
@@ -184,8 +184,8 @@ const Reels = () => {
                   }
                  `}
         </style> */}
+        </div>
       </div>
-    </div>
     </>
   );
 };
