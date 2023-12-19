@@ -6,7 +6,6 @@ export default function Form({ isOpen, closeModal, title }) {
   const [formType, setFormType] = useState("");
 
   useEffect(() => {
-    console.log(title);
     switch (title) {
       case "View a used product":
         setFormType("usedProduct");
@@ -36,7 +35,6 @@ export default function Form({ isOpen, closeModal, title }) {
         setFormType("text");
         break;
     }
-    console.log(title);
   }, [title]);
 
   return (
@@ -46,7 +44,12 @@ export default function Form({ isOpen, closeModal, title }) {
       title={t(title)}
       closeIcon={true}
       children={
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            closeModal();
+          }}
+        >
           {formType === "usedProduct" || formType === "newProduct" ? (
             <>
               <Input type="text" label={t("Product Name")} />
