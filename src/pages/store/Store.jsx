@@ -14,6 +14,7 @@ import { storeData } from "../../../public/fakeData";
 import Buy from "./buy/Buy";
 import "./Store.scss";
 import { useEffect, useState } from "react";
+import StoreForm from "../../components/form/Form";
 
 function Store() {
   const direction = localStorage.getItem("direction");
@@ -50,26 +51,14 @@ function Store() {
       <Navbar />
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
-        <div className="container no-scrollbar">
-          <div className="2xl:w-2/3 w-full">
+        <div className="container  no-scrollbar">
+          <div className="2xl:w-2/3 bg-white rounded-xl w-full">
             <CreatePost
               placeholder={"Request a service or offer your product now"}
               buttons={[
-                {
-                  value: t("Show the new product"),
-                  title: t("new"),
-                  image: news,
-                },
-                {
-                  value: t("View a used product"),
-                  title: "Post Video",
-                  image: easytouse,
-                },
-                {
-                  value: t("Service Request"),
-                  title: "Post Record",
-                  image: personal,
-                },
+                { value: "Images", title: "Post Images",image: news },
+                { value: "Video", title: "Post Video" ,image: easytouse },
+                { value: "Record", title: "Post Record",image: personal  },
               ]}
             />
             <FiltersBar />

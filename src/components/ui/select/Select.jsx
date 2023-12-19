@@ -2,18 +2,26 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { arrowDown } from "../../../assets/images/icons";
 import { t } from "i18next";
+import { publicIcon } from "../../../assets/images/icons";
 
-export default function Select({ selectLabels }) {
+export default function Select({
+  className = "",
+  selectLabels,
+  hasIndictor,
+  withImage = false,
+  selectName = "",
+}) {
   const [selected, setSelected] = useState(selectLabels[0]);
 
   return (
-    <>
+    <div className="grid gap-1">
+      <p>{selectName}</p>
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative">
-          <Listbox.Button className="flex gap-3 justify-between items-center px-2 py-0 bg-blue-50 rounded-xl max-w-28 w-fit max-h-8">
-            <img src={arrowDown} alt="" />
-            <span className="block truncate">{t(selected.name)}</span>
-            <img src={selected.img} alt="" />
+          <Listbox.Button className={className}>
+            {hasIndictor && <img src={arrowDown} alt="" />}
+            <span className="block truncate">{t(selected)}</span>
+            {withImage && <img src={publicIcon} alt="" />}
           </Listbox.Button>
           <Transition
             as={Fragment}
@@ -21,7 +29,7 @@ export default function Select({ selectLabels }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-hidden rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute z-30 mt-1 w-full max-h-60 overflow-hidden rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
               {selectLabels.map((label, index) => (
                 <Listbox.Option
                   key={index}
@@ -33,15 +41,15 @@ export default function Select({ selectLabels }) {
                   value={label}
                 >
                   {({ selected }) => (
-                    <p className="flex justify-between">
+                    <p className="flex gap-4 justify-between">
                       <span
                         className={`block truncate ${
                           selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {t(label.name)}
+                        {t(label)}
                       </span>
-                      <img src={label.img} alt="" />
+                      {withImage && <img src={publicIcon} alt="" />}
                     </p>
                   )}
                 </Listbox.Option>
@@ -50,6 +58,6 @@ export default function Select({ selectLabels }) {
           </Transition>
         </div>
       </Listbox>
-    </>
+    </div>
   );
 }

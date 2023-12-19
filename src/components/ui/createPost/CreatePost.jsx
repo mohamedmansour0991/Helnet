@@ -6,15 +6,13 @@ import {
   send,
   voice,
   write,
-  publicIcon,
   close1,
 } from "../../../assets/images/icons";
 import Button from "../button/Button";
 import Modal from "../modal/Modal";
 import { useEffect, useState } from "react";
-import Input from "../input/Input";
-import Dropdown from "../dropdown/Dropdown";
 import Select from "../select/Select";
+import Form from "../../form/Form";
 
 export default function CreatePost({
   placeholder,
@@ -24,15 +22,13 @@ export default function CreatePost({
     { value: "Record", title: "Post Record", image: voice },
   ],
 }) {
-  const selectLabels = [
-    { name: "public", img: publicIcon },
-    { name: "privet", img: "" },
-  ];
+  const selectLabels = ["public", "privet"];
   const direction = localStorage.getItem("direction");
 
   const username = "كريم";
   const userFullName = "كريم سيف";
 
+  /////////////// main module ///////////////////
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("Text Post");
 
@@ -44,9 +40,21 @@ export default function CreatePost({
     setIsOpen(true);
   }
 
-  function openModal() {
-    setIsOpen(true);
+  /////////////// main module ///////////////////
+
+  /////////////// store module ///////////////////
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [formTitle, setFormTitle] = useState("Text Post");
+
+  function closeForm() {
+    setIsFormOpen(false);
   }
+
+  function openForm() {
+    setIsFormOpen(true);
+  }
+
+  /////////////// main module ///////////////////
 
   //   ${isArabic ? "text-right" : "text-left"}
   const [isArabic, setIsArabic] = useState(false);
@@ -59,7 +67,7 @@ export default function CreatePost({
     <>
       <div className="createPost rounded-xl bg-white">
         <div
-          className="flex gap-3 items-center  pt-4 ps-3 pb-10"
+          className="flex gap-3 items-center pt-4 ps-3 pb-10"
           onClick={() => {
             openModal();
             setTitle("Post Text");
@@ -117,13 +125,18 @@ export default function CreatePost({
             <div className="w-100">
               <p className="px-2">{userFullName}</p>
 
-              <Select selectLabels={selectLabels} />
+              <Select
+                className="flex gap-3 justify-between items-center px-2 py-0 bg-blue-50 rounded-xl max-w-28 w-fit max-h-8"
+                selectLabels={selectLabels}
+                withImage={true}
+                hasIndictor={true}
+              />
             </div>
             <img className="w-10 h-10" src={profile1} alt="" />
           </div>
           <button
             className="rounded-full bg-blue-50 h-fit p-1D"
-            onClick={() => setIsOpen(false)}
+            onClick={closeModal}
           >
             <img src={close1} alt="" />
           </button>
@@ -151,13 +164,17 @@ export default function CreatePost({
               {t("add to your post")}
             </p>
           )}
-          <div className="sm:flex flex flex-column justify-between flex-sm-row w-full flex-wrap gap-sm-6">
+          <div className="sm:flex flex flex-column justify-between flex-sm-row w-full flex-wrap">
             {buttons &&
               buttons.map((button) => (
                 <button
                   key={button.value}
                   className="flex gap-1 items-center"
-                  onClick={() => {}}
+                  onClick={() => {
+                    openForm();
+                    setFormTitle(button.title);
+                    // console.log(formTitle);
+                  }}
                   children={
                     <>
                       <img className="w-4" src={button.image} alt="" />
@@ -168,6 +185,8 @@ export default function CreatePost({
               ))}
           </div>
         </div>
+
+        <Form isOpen={isFormOpen} closeModal={closeForm} title={formTitle} />
 
         <Button children={t("Post")} />
       </Modal>

@@ -19,6 +19,7 @@ import SingleVideo from "./components/singleVideo/SingleVideo";
 import { Navbar } from "./components";
 
 import "./App.scss"; /* eslint-disable react/no-children-prop */
+import SingleProduct from "./pages/singleProduct/SingleProduct";
 
 function App() {
   const [t,i18n] = useTranslation();
@@ -65,6 +66,7 @@ function App() {
         <Route path="/store" element={<Store />} />
 
         <Route path="/singleVideo" element={<SingleVideo />} />
+        <Route path="/singleProduct" element={<SingleProduct />} />
       </Routes>
     </BrowserRouter>
   );
