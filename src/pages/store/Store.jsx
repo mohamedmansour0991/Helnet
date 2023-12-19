@@ -2,7 +2,14 @@ import { t } from "i18next";
 import { useParams } from "react-router-dom";
 import { Aside, MainMenu, Navbar, Posts } from "/src/components";
 import { CreatePost, FiltersBar } from "../../components/ui";
-import { asking, easy, buy, news, personal, easytouse } from "../../assets/images/icons";
+import {
+  asking,
+  easy,
+  buy,
+  news,
+  personal,
+  easytouse,
+} from "../../assets/images/icons";
 import { storeData } from "../../../public/fakeData";
 import Buy from "./buy/Buy";
 import "./Store.scss";
@@ -43,14 +50,14 @@ function Store() {
       <Navbar />
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
-        <div className="container no-scrollbar">
-          <div className="2xl:w-2/3 w-full">
+        <div className="container  no-scrollbar">
+          <div className="2xl:w-2/3 bg-white rounded-xl w-full">
             <CreatePost
               placeholder={"Request a service or offer your product now"}
               buttons={[
-                { value: "Images", title: "Post Images",image: news },
-                { value: "Video", title: "Post Video" ,image: easytouse },
-                { value: "Record", title: "Post Record",image: personal  },
+                { value: "Images", title: "Post Images", image: news },
+                { value: "Video", title: "Post Video", image: easytouse },
+                { value: "Record", title: "Post Record", image: personal },
               ]}
             />
             <FiltersBar />

@@ -24,10 +24,7 @@ export default function CreatePost({
     { value: "Record", title: "Post Record", image: voice },
   ],
 }) {
-  const selectLabels = [
-    { name: "public", img: publicIcon },
-    { name: "privet", img: "" },
-  ];
+  const selectLabels = ["public", "privet"];
   const direction = localStorage.getItem("direction");
 
   const username = "كريم";
@@ -117,7 +114,12 @@ export default function CreatePost({
             <div className="w-100">
               <p className="px-2">{userFullName}</p>
 
-              <Select selectLabels={selectLabels} />
+              <Select
+                className="flex gap-3 justify-between items-center px-2 py-0 bg-blue-50 rounded-xl max-w-28 w-fit max-h-8"
+                selectLabels={selectLabels}
+                withImage={true}
+                hasIndictor={true}
+              />
             </div>
             <img className="w-10 h-10" src={profile1} alt="" />
           </div>

@@ -129,7 +129,7 @@ const Reels = () => {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-white rounded-xl">
         <FiltersBar />
         <div className="reelsComponents ">
           {/* sidebar */}
