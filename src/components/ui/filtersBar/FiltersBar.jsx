@@ -6,7 +6,7 @@ export default function FiltersBar() {
   const [select, setSelect] = useState("all");
 
   return (
-    <div className=" flex justify-center md:justify-start w-full h-10 px-1 py-10 relative">
+    <div className=" flex justify-center md:justify-start w-full h-10 px-1 py-10 relative px-0 ">
       <ul className="flex gap-2 absolute top-1/4 overflow-x-scroll w-full no-scrollbar">
         {videosLabels &&
           ["all", ...videosLabels].map((label, index) => (
