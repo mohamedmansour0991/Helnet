@@ -1,7 +1,7 @@
 .mainMenu {
   grid-row: 1;
   grid-column: 1;
-  min-width: 14rem;
+  min-width: 15rem;
 
   @media screen and (max-width: 850px) {
     display: none;
