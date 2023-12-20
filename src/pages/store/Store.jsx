@@ -51,25 +51,47 @@ function Store() {
       <Navbar />
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
-        <div className="container  no-scrollbar">
-          <div className="2xl:w-2/3 bg-white rounded-xl w-full">
+        <div className="  container no-scrollbar">
+          <div className="2xl:w-4/5  rounded-xl w-full">
             <CreatePost
               placeholder={"Request a service or offer your product now"}
               buttons={[
-                { value: "Images", title: "Post Images",image: news },
-                { value: "Video", title: "Post Video" ,image: easytouse },
-                { value: "Record", title: "Post Record",image: personal  },
+                {
+                  value: "Show the new product",
+                  title: "Show the new product",
+                  image: news,
+                },
+                {
+                  value: "View a used product",
+                  title: "View a used product",
+                  image: easytouse,
+                },
+                {
+                  value: "Service Request",
+                  title: "Service Request",
+                  image: personal,
+                },
               ]}
             />
-            <FiltersBar />
+
             {name === "services" ? (
               <>
+                <FiltersBar />
                 <Posts data={servicesList} />
               </>
             ) : name == "used" ? (
-              <Posts data={usedList} />
+              <>
+                <FiltersBar />
+                <Posts data={usedList} />
+              </>
             ) : (
-              <Buy />
+              <div
+                className="bg-white p-2 mt-4"
+                style={{ borderRadius: "1rem" }}
+              >
+                <FiltersBar />
+                <Buy />
+              </div>
             )}
           </div>
         </div>

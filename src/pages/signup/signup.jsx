@@ -162,11 +162,10 @@ const Signup = () => {
   //         }
   //     }
   // };
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   return (
-    <div className="container">
+    <div className="container ">
       <div className="row m-md-5 my-5 no-gutters">
         <div className="col-xl-6 col-12 d-none d-xl-block">
           <Logimage />

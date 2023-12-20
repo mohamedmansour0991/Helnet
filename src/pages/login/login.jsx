@@ -129,7 +129,7 @@ const Login = () => {
   // };
 
   return (
-    <div className="container">
+    <div className="container ">
       <div className="row m-md-5 my-5  no-gutters flex-wrap">
         <div className="col-xl-6 col-12 d-none d-xl-block">
           <Logimage style={{ minHeight: "100%" }} />

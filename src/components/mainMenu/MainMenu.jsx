@@ -17,7 +17,7 @@ export default function MainMenu({ mainMenuLabels, header }) {
         <ul className="mainMenu__List">
           {mainMenuLabels.map((tap, index) => (
             <li key={index} role="button">
-              <NavLink to={`/${tap.link}`}>
+              <NavLink className={""} to={`/${tap.link}`}>
                 <img src={tap.icon} alt="" />
                 <p>{tap.name}</p>
               </NavLink>

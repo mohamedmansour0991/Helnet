@@ -20,9 +20,11 @@ import { Navbar } from "./components";
 
 import "./App.scss"; /* eslint-disable react/no-children-prop */
 import SingleProduct from "./pages/singleProduct/SingleProduct";
+import { Provider } from "react-redux";
+import { store } from "./rtk/store";
 
 function App() {
-  const [t,i18n] = useTranslation();
+  const [t, i18n] = useTranslation();
   // const [isVisibleNavbar, setIsVisibleNavbar] = useState(true);
   // const location = useLocation();
   // const pagesWithoutNavbar = ["/login", "register", "forget-pass"];
@@ -45,30 +47,32 @@ function App() {
   // }, [location.pathname, setIsVisibleNavbar]);
 
   return (
-    <BrowserRouter>
-      {/* {isVisibleNavbar && <Navbar />} */}
+    <Provider store={store}>
+      <BrowserRouter>
+        {/* {isVisibleNavbar && <Navbar />} */}
 
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Signup />} />
-        <Route path="/forget-pass" element={<Forgetpass />} />
-        <Route path="/check-code" element={<Codecheck />} />
-        <Route path="/reset-pass" element={<Resetpass />} />
-        <Route path="/doctor" element={<Doctor />} />
-        <Route path="/user-kind" element={<UserKind />} />
-        <Route path="/job" element={<Jobs />} />
-        <Route path="/profile1" element={<Profile />} />
-        <Route path="/reels-page" element={<ReelsPage />} />
-        <Route path="/:allroute" element={<MainPage />} />
-        <Route path="/" element={<MainPage />} />
-        <Route path="/settings/:name" element={<Settings />} />
-        <Route path="/store/:name" element={<Store />} />
-        <Route path="/store" element={<Store />} />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Signup />} />
+          <Route path="/forget-pass" element={<Forgetpass />} />
+          <Route path="/check-code" element={<Codecheck />} />
+          <Route path="/reset-pass" element={<Resetpass />} />
+          <Route path="/doctor" element={<Doctor />} />
+          <Route path="/user-kind" element={<UserKind />} />
+          <Route path="/job" element={<Jobs />} />
+          <Route path="/profile1" element={<Profile />} />
+          <Route path="/reels-page" element={<ReelsPage />} />
+          <Route path="/:allroute" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/settings/:name" element={<Settings />} />
+          <Route path="/store/:name" element={<Store />} />
+          <Route path="/store" element={<Store />} />
 
-        <Route path="/singleVideo" element={<SingleVideo />} />
-        <Route path="/singleProduct" element={<SingleProduct />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/singleVideo" element={<SingleVideo />} />
+          <Route path="/singleProduct" element={<SingleProduct />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
