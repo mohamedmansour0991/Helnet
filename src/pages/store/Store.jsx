@@ -56,9 +56,21 @@ function Store() {
             <CreatePost
               placeholder={"Request a service or offer your product now"}
               buttons={[
-                { value: "Images", title: "Post Images",image: news },
-                { value: "Video", title: "Post Video" ,image: easytouse },
-                { value: "Record", title: "Post Record",image: personal  },
+                {
+                  value: "Show the new product",
+                  title: "Show the new product",
+                  image: news,
+                },
+                {
+                  value: "View a used product",
+                  title: "View a used product",
+                  image: easytouse,
+                },
+                {
+                  value: "Service Request",
+                  title: "Service Request",
+                  image: personal,
+                },
               ]}
             />
 
