@@ -52,7 +52,7 @@ function Store() {
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
         <div className="  container no-scrollbar">
-          <div className="2xl:w-2/3  rounded-xl w-full">
+          <div className="2xl:w-4/5  rounded-xl w-full">
             <CreatePost
               placeholder={"Request a service or offer your product now"}
               buttons={[
