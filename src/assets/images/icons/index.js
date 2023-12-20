@@ -77,5 +77,6 @@ export { default as friends } from "./friend 1.svg";
 export { default as arrowDown } from "./down-arrow 1.svg";
 export { default as Arrow } from "./Arrow.svg";
 export { default as grayStar } from "./grayStar.svg";
+export { default as verify } from "./verify-round.svg";
 
 export { default as profile1 } from "./profile1.png";

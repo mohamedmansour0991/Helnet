@@ -9,6 +9,9 @@ export default function Select({
   selectLabels,
   hasIndictor,
   withImage = false,
+  images,
+  isJustifyBetween = true,
+  showSelectedImage = true,
   selectName = "",
 }) {
   const [selected, setSelected] = useState(selectLabels[0]);
@@ -20,8 +23,12 @@ export default function Select({
         <div className="relative">
           <Listbox.Button className={className}>
             {hasIndictor && <img src={arrowDown} alt="" />}
-            <span className="block truncate">{t(selected)}</span>
-            {withImage && <img src={publicIcon} alt="" />}
+            <div className="flex items-center gap-2">
+              {showSelectedImage && (
+                <>{withImage && <img src={publicIcon} alt="" />}</>
+              )}
+              <span className="block truncate">{t(selected)}</span>
+            </div>
           </Listbox.Button>
           <Transition
             as={Fragment}
@@ -41,16 +48,41 @@ export default function Select({
                   value={label}
                 >
                   {({ selected }) => (
-                    <p className="flex gap-4 justify-between">
-                      <span
-                        className={`block truncate ${
-                          selected ? "font-medium" : "font-normal"
-                        }`}
-                      >
-                        {t(label)}
-                      </span>
-                      {withImage && <img src={publicIcon} alt="" />}
-                    </p>
+                    <>
+                      {isJustifyBetween ? (
+                        <p className="flex gap-4 justify-between">
+                          <span
+                            className={`block truncate ${
+                              selected ? "font-medium" : "font-normal"
+                            }`}
+                          >
+                            {t(label)}
+                          </span>
+                          {withImage && (
+                            <img
+                              src={images ? images[index] : publicIcon}
+                              alt=""
+                            />
+                          )}
+                        </p>
+                      ) : (
+                        <p className="flex gap-4">
+                          {withImage && (
+                            <img
+                              src={images ? images[index] : publicIcon}
+                              alt=""
+                            />
+                          )}
+                          <span
+                            className={`block truncate ${
+                              selected ? "font-medium" : "font-normal"
+                            }`}
+                          >
+                            {t(label)}
+                          </span>
+                        </p>
+                      )}
+                    </>
                   )}
                 </Listbox.Option>
               ))}
