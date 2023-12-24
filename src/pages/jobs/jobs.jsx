@@ -17,9 +17,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Jobs = ({ email, setStep, setprev, settypeProvider }) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  const [t] = useTranslation();
 
   const [type, setType] = useState("");
   const [loading, setLoading] = useState(false);
@@ -56,7 +58,7 @@ const Jobs = ({ email, setStep, setprev, settypeProvider }) => {
         <div className="bg-white p-5 w-100">
           <h1 className="title" style={{ marginBottom: "20px" }}>
             {" "}
-            وظائف{" "}
+            {t("Jobs")}{" "}
           </h1>
           <div className="form-style w-100" style={{ textAlign: "center" }}>
             <div
@@ -64,9 +66,9 @@ const Jobs = ({ email, setStep, setprev, settypeProvider }) => {
                 display: "flex",
                 justifyContent: "center",
                 flexFlow: "wrap",
-             
-          
-               
+
+
+
                 flexWrap: "wrap",
               }}
             >
@@ -75,91 +77,91 @@ const Jobs = ({ email, setStep, setprev, settypeProvider }) => {
                 type={type}
                 setType={setType}
                 imageSrc={hat}
-                title="مهندس"
+                title={t("engineer")}
               />
               <Card
                 name={"teacher"}
                 type={type}
                 setType={setType}
                 imageSrc={female}
-                title="مدرس"
+                title={t("teacher")}
               />
               <Card
                 name={"lawyer"}
                 type={type}
                 setType={setType}
                 imageSrc={law}
-                title="محامي"
+                title={t("lawyer")}
               />
               <Card
                 name={"programmer"}
                 type={type}
                 setType={setType}
                 imageSrc={developer}
-                title="مبرمج "
+                title={t("programmer")}
               />
               <Card
                 name={"photographer"}
                 type={type}
                 setType={setType}
                 imageSrc={camera}
-                title="مصور "
+                title={t("photographer")}
               />
               <Card
                 name={"artist"}
                 type={type}
                 setType={setType}
                 imageSrc={paint}
-                title="فنان "
+                title={t("artist")}
               />
               <Card
                 name={"Voice over"}
                 type={type}
                 setType={setType}
                 imageSrc={dubbing}
-                title="معلق صوتي "
+                title={t("Voice over")}
               />
               <Card
                 name={"entertaining content"}
                 type={type}
                 setType={setType}
                 imageSrc={music}
-                title="محتوى ترفيهي"
+                title={t("entertaining content")}
               />
               <Card
                 name={"General content provider"}
                 type={type}
                 setType={setType}
                 imageSrc={influencer}
-                title="مقدم محتوى عام  "
+                title={t("General content provider")}
               />
               <Card
                 name={"Politician"}
                 type={type}
                 setType={setType}
                 imageSrc={mayor}
-                title="سياسي "
+                title={t("Politician")}
               />
               <Card
                 name={"accountant"}
                 type={type}
                 setType={setType}
                 imageSrc={accounting}
-                title="محاسب"
+                title={t("accountant")}
               />
               <Card
                 name={"Commercial marketer"}
                 type={type}
                 setType={setType}
                 imageSrc={social}
-                title="مسوق تجاري  "
+                title={t("Commercial marketer")}
               />
               <Card
                 name={"business pioneers"}
                 type={type}
                 setType={setType}
                 imageSrc={cooperation}
-                title="رواد أعمال "
+                title={t("business pioneers")}
               />
 
               {/* Add more CardComponent instances with different text */}
@@ -194,7 +196,7 @@ const Jobs = ({ email, setStep, setprev, settypeProvider }) => {
                     setprev("");
                   }}
                 >
-                  السابق
+                  {t("Back")}
                 </button>
               </div>
               <div className="pb-2">
@@ -213,9 +215,9 @@ const Jobs = ({ email, setStep, setprev, settypeProvider }) => {
                   }}
                   disabled={loading}
                   onClick={() => handleSubmit()}
-                  // onClick={() => navigate(next)}
+                // onClick={() => navigate(next)}
                 >
-                  التالي
+                  {t("Next")}
                 </button>
               </div>
               <style>

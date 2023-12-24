@@ -3,6 +3,8 @@ import { useState } from "react";
 // import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Logimage from "../../components/logImage/logImage";
+import { useTranslation } from "react-i18next";
+
 const Resetpass = () => {
   const [errors, seterrors] = useState({
     password: null,
@@ -13,6 +15,7 @@ const Resetpass = () => {
     password: "",
     confirmpass: "",
   });
+  const [t] = useTranslation();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -136,7 +139,7 @@ const Resetpass = () => {
           <div className="p-4">
             <h1 className="title" style={{ marginBottom: "5px" }}>
               {" "}
-              إعادة تعيين كلمة السر{" "}
+              {t("Reset the password")}{" "}
             </h1>
             <h3
               className="pb-3 "
@@ -148,7 +151,7 @@ const Resetpass = () => {
               }}
             >
               {" "}
-              استخدم على الاقل 8 رموز تحتوي على ارقام وحروف
+              {t("Use at least 8 symbols that contain numbers and letters")}
             </h3>
 
             <div className="form-style" style={{ textAlign: "end" }}>
@@ -161,14 +164,14 @@ const Resetpass = () => {
                   style={{ marginBottom: "5px", fontWeight: "500" }}
                 >
                   {" "}
-                  كلمة سر جديدة
+                  {t("New password")}
                 </label>
 
                 <div className="form-group pb-3">
                   <input
                     type="password"
                     name="password"
-                    placeholder=" ادخل كلمة السر"
+                    placeholder={t("enter your password")}
                     className="form-control"
                     id="exampleInputPassword1"
                     required
@@ -182,14 +185,14 @@ const Resetpass = () => {
                   className="input-label"
                   style={{ marginBottom: "5px", fontWeight: "500" }}
                 >
-                  أعد كتابة كلمة السر
+                  {t("Rewrite password")}
                 </label>
 
                 <div className="form-group pb-3">
                   <input
                     type="password"
                     name="confirmpass"
-                    placeholder=" تأكيد كلمة السر"
+                    placeholder={t("Confirm Password")}
                     className="form-control"
                     id="exampleInputPassword1"
                     required
@@ -212,7 +215,7 @@ const Resetpass = () => {
                       border: "none",
                     }}
                   >
-                    تسجيل الدخول
+                    {t("Log in")}
                   </button>
                 </div>
               </form>

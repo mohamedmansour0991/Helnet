@@ -36,9 +36,9 @@ const Login = () => {
     };
 
     dispatch(loginUser({ user, setLoading }));
-    // Cookies.set("remember", JSON.stringify({ email, password }), {
+    // Cookies.set("remember", JSON.stringify({ email, password )}, {
     //   expires: 7,
-    // });
+    // )};
   };
 
   const [t] = useTranslation();
@@ -51,23 +51,23 @@ const Login = () => {
         </div>
         <div className="col-xl-6 col-12 bg-white p-md-5 p-2 logform">
           <h1 className="title" style={{ marginBottom: "5px" }}>
-            أهلا بعودتك
+            {t("welcome back")}
           </h1>
           <h3
             className="pb-3 "
             style={{ textAlign: "center", fontSize: "18px", color: "#96A0AD" }}
           >
-            لقد افتقدناك برجاء تسجيل الدخول لمعرفة آخر الأخبار
+            {t("We missed you please, log in for the latest news")}
           </h3>
           <button type="button" className="login-with-google-btn">
-            تسجيل الدخول بواسطة جوجل
+            {t("Sign in with Google")}
           </button>
           <h3
             className=""
             style={{ textAlign: "center", fontSize: "18px", color: "#96A0AD" }}
           >
             {" "}
-            أو{" "}
+            {t("or")} {" "}
           </h3>
 
           <div className="form-style">
@@ -77,7 +77,7 @@ const Login = () => {
                 className="input-label"
                 style={{ marginBottom: "5px", fontWeight: "500" }}
               >
-                البريد الإلكتروني
+                {t("Email")}
               </label>
 
               <div className="input-block">
@@ -87,7 +87,7 @@ const Login = () => {
                   className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
-                  placeholder="ادخل بريدك الالكتروني"
+                  placeholder="enter your email"
                   required
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -100,13 +100,13 @@ const Login = () => {
                 style={{ marginBottom: "5px", fontWeight: "500" }}
               >
                 {" "}
-                كلمة السر
+                {t("Password")}
               </label>
 
               <div className="form-group pb-3" style={{ position: "relative" }}>
                 <input
                   type={passwordShow ? "text" : "password"}
-                  placeholder=" ادخل كلمة السر"
+                  placeholder="enter your password"
                   className="form-control"
                   id="exampleInputPassword1"
                   required
@@ -137,7 +137,7 @@ const Login = () => {
 
               <div className="d-flex align-items-center justify-content-between">
                 <div style={{ color: "#A74ED1" }}>
-                  <Link to="/forget-pass">نسيت كلمة السر؟</Link>
+                  <Link to="/forget-pass">{t("Forgot your password?")}</Link>
                 </div>
                 <div className="d-flex align-items-center">
                   <span
@@ -145,7 +145,7 @@ const Login = () => {
                     style={{ fontWeight: "500" }}
                   >
                     {" "}
-                    تذكرني
+                    {t("remember me")}
                   </span>
                   <input
                     name=""
@@ -170,7 +170,7 @@ const Login = () => {
                   }}
                   disabled={loading}
                 >
-                  تسجيل دخول
+                  {t("Sign in")}
                 </button>
               </div>
             </form>
@@ -183,15 +183,15 @@ const Login = () => {
                 marginTop: "10px",
               }}
             >
-              ليس لديك حساب بعد؟
+              {t("Don't have an account yet?")}
               <Link
                 to={"/register"}
                 style={{ color: "#873fa9", fontWeight: "600" }}
               >
                 {" "}
-                انشئ حساب الآن{" "}
+                {t("Create an account now")}{" "}
               </Link>
-              وانضم الينا{" "}
+              {t("Join us")}{" "}
             </h3>
           </div>
         </div>

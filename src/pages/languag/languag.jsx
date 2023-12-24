@@ -17,7 +17,7 @@ const Language = () => {
         <div className="bg-white p-5">
           <h1 className="title" style={{ marginBottom: "60px" }}>
             {" "}
-            ما هي اللغة التي تود ان ترى بها الموقع؟
+            {t("What language would you like to view the site in?")}
           </h1>
 
           <div className="form-style" style={{ textAlign: "center" }}>
@@ -119,7 +119,7 @@ const Language = () => {
                   }}
                   //   onClick={() => navigate(prev)}
                 >
-                  السابق
+                   {t("Back")}
                 </button>
               </div> */}
               <div className="pb-2">
@@ -138,7 +138,7 @@ const Language = () => {
                   }}
                   onClick={() => navigate("/")}
                 >
-                  التالي
+                  {t("Next")}
                 </button>
               </div>
               <style>

@@ -11,8 +11,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+
 const Places = ({ email, setStep, setprev, settypeProvider }) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  const [t] = useTranslation();
 
   const [type, setType] = useState("");
   const [loading, setLoading] = useState(false);
@@ -58,7 +61,7 @@ const Places = ({ email, setStep, setprev, settypeProvider }) => {
         >
           <h1 className="title" style={{ marginBottom: "20px" }}>
             {" "}
-            أماكن{" "}
+            {t("Places")}{" "}
           </h1>
           <div className="form-style w-100" style={{ textAlign: "center" }}>
             <div
@@ -73,49 +76,49 @@ const Places = ({ email, setStep, setprev, settypeProvider }) => {
                 type={type}
                 setType={setType}
                 imageSrc={gym}
-                title="صالة ألعاب"
+                title={t("Games Hall")}
               />
               <Card
                 name={"company"}
                 type={type}
                 setType={setType}
                 imageSrc={office}
-                title="شركة"
+                title={t("company")}
               />
               <Card
                 name={"pharmacy"}
                 type={type}
                 setType={setType}
                 imageSrc={pharmacy}
-                title="صيدلية"
+                title={t("pharmacy")}
               />
               <Card
                 name={"clinic"}
                 type={type}
                 setType={setType}
                 imageSrc={clinic}
-                title="عيادة "
+                title={t("clinic")}
               />
               <Card
                 name={"hospital"}
                 type={type}
                 setType={setType}
                 imageSrc={hospital}
-                title="مستشفى "
+                title={t("hospital")}
               />
               <Card
                 name={"Training academy"}
                 type={type}
                 setType={setType}
                 imageSrc={analysis}
-                title="أكاديمية تدريب "
+                title={t("Training academy")}
               />
               <Card
                 name={"restaurant"}
                 type={type}
                 setType={setType}
                 imageSrc={restaurant}
-                title=" مطعم "
+                title={t("restaurant")}
               />
 
               {/* Add more CardComponent instances with different text */}
@@ -150,7 +153,7 @@ const Places = ({ email, setStep, setprev, settypeProvider }) => {
                     setprev("");
                   }}
                 >
-                  السابق
+                  {t("Back")}
                 </button>
               </div>
               <div className="pb-2">
@@ -169,9 +172,9 @@ const Places = ({ email, setStep, setprev, settypeProvider }) => {
                   }}
                   disabled={loading}
                   onClick={() => handleSubmit()}
-                  // onClick={() => navigate(next)}
+                // onClick={() => navigate(next)}
                 >
-                  التالي
+                  {t("Next")}
                 </button>
               </div>
               <style>

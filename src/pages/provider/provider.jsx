@@ -14,11 +14,13 @@ import Doctor from "../doctor/doctor";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const Provider = ({ email, setStep }) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const [type, setType] = useState("");
   const [loading, setLoading] = useState(false);
+  const [t] = useTranslation();
 
   const [typeProvider, settypeProvider] = useState(1);
   const navigate = useNavigate();
@@ -56,7 +58,7 @@ const Provider = ({ email, setStep }) => {
             <div className="bg-white p-5">
               <h1 className="title" style={{ marginBottom: "66px" }}>
                 {" "}
-                من هو مقدم الخدمة؟
+                {t("Who is the service provider?")}
               </h1>
 
               <div className="form-style" style={{ textAlign: "center" }}>
@@ -73,35 +75,35 @@ const Provider = ({ email, setStep }) => {
                     type={type}
                     setType={setType}
                     imageSrc={Vector}
-                    title=" آخر"
+                    title={t("other")}
                   />
                   <Card
                     name={"2"}
                     type={type}
                     setType={setType}
                     imageSrc={suitcase}
-                    title=" وظائف"
+                    title={t("Jobs")}
                   />
                   <Card
                     name={"3"}
                     type={type}
                     setType={setType}
                     imageSrc={hospital}
-                    title=" أماكن"
+                    title={t("Places")}
                   />
                   <Card
                     name={"4"}
                     type={type}
                     setType={setType}
                     imageSrc={nutrition}
-                    title=" تغذية"
+                    title={t("nourishment")}
                   />
                   <Card
                     name={"5"}
                     type={type}
                     setType={setType}
                     imageSrc={stethoscope}
-                    title=" طبيب"
+                    title={t("Doctor")}
                   />
                 </div>
 
@@ -132,7 +134,7 @@ const Provider = ({ email, setStep }) => {
                       }}
                       onClick={() => navigate(prev)}
                     >
-                      السابق
+                      {t("Back")}
                     </button>
                   </div>
                   <div className="pb-2">
@@ -158,9 +160,9 @@ const Provider = ({ email, setStep }) => {
                           settypeProvider("2");
                         }
                       }}
-                      // onClick={() => navigate(next)}
+                    // onClick={() => navigate(next)}
                     >
-                      التالي
+                      {t("Next")}
                     </button>
                   </div>
                   <style>

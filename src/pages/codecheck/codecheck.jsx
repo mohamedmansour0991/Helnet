@@ -3,6 +3,7 @@ import Logimage from "../../components/logImage/logImage";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 const Codecheck = ({ setStep, email, setEmail }) => {
   const formRef = useRef(null);
   const inputsRef = useRef([]);
@@ -111,6 +112,7 @@ const Codecheck = ({ setStep, email, setEmail }) => {
       });
     };
   }, []);
+  const [t] = useTranslation();
   const navigate = useNavigate();
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const [loading, setLoading] = useState(false);
@@ -205,7 +207,7 @@ const Codecheck = ({ setStep, email, setEmail }) => {
         <div className="col-xl-6 bg-white p-5 logform">
           <h1 className="title" style={{ marginBottom: "5px" }}>
             {" "}
-            افحص بريدك الالكتروني
+            {t("Check your email")}
           </h1>
           <h3
             className="pb-3 "
@@ -217,7 +219,7 @@ const Codecheck = ({ setStep, email, setEmail }) => {
             }}
           >
             {" "}
-            لقد ارسلنا الرمز إلى بريدك الالكتروني{" "}
+            {t("We have sent the code to your email")}{" "}
           </h3>
 
           <div className="form-style" style={{ textAlign: "end" }}>
@@ -277,9 +279,9 @@ const Codecheck = ({ setStep, email, setEmail }) => {
                     border: "none",
                   }}
                   disabled={loading}
-                  // onClick={() => navigate("/user-kind")}
+                // onClick={() => navigate("/user-kind")}
                 >
-                  أرسل الكود
+                  {t("Send the code")}
                 </button>
               </div>
             </form>
@@ -293,7 +295,7 @@ const Codecheck = ({ setStep, email, setEmail }) => {
                   marginTop: "10px",
                 }}
               >
-                لم يصلك الرمز؟
+                {t("Didn't receive the code?")}
                 <a
                   style={{
                     color: "#873fa9",
@@ -303,7 +305,7 @@ const Codecheck = ({ setStep, email, setEmail }) => {
                   onClick={() => resetCode()}
                 >
                   {" "}
-                  إعادة إرسال الرمز{" "}
+                  {t("Resend the code")}{" "}
                 </a>{" "}
               </h3>
             ) : (

@@ -1,13 +1,16 @@
 import ButtonsForm from "../../components/buttonsForm/buttonsForm";
+import { useTranslation } from "react-i18next";
 
 const Colors = () => {
+  const [t] = useTranslation();
+
   return (
     <div className="container">
       <div className="row m-5 no-gutters">
         <div className="bg-white p-5">
           <h1 className="title" style={{ marginBottom: "66px" }}>
             {" "}
-            ما هو اللون الذي تود ان ترى به الموقع؟
+            {t("What color would you like to see the site in?")}
           </h1>
 
           <div className="form-style" style={{ textAlign: "center" }}>

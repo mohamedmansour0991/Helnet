@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Signup = ({ setStep, setEmail }) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
@@ -18,7 +19,7 @@ const Signup = ({ setStep, setEmail }) => {
   const [loading, setLoading] = useState(false);
   const { user, error, signIn } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-
+  const [t] = useTranslation();
   useEffect(() => {
     if (error) navigate("/register");
 
@@ -119,7 +120,7 @@ const Signup = ({ setStep, setEmail }) => {
         <div className="col-xl-6 col-12 bg-white px-md-5 logform">
           <div className=" p-2">
             <h1 className="title" style={{ marginBottom: "5px" }}>
-              أهلا بعودتك
+              {t("welcome back")}
             </h1>
             <h3
               className="pb-3 "
@@ -129,10 +130,10 @@ const Signup = ({ setStep, setEmail }) => {
                 color: "#96A0AD",
               }}
             >
-              لقد افتقدناك برجاء تسجيل الدخول لمعرفة آخر الأخبار
+              {t("We missed you please, log in for the latest news")}
             </h3>
             <button type="button" className="login-with-google-btn">
-              تسجيل الدخول بواسطة جوجل
+              {t("Sign in with Google")}
             </button>
             <h3
               className=""
@@ -143,7 +144,7 @@ const Signup = ({ setStep, setEmail }) => {
               }}
             >
               {" "}
-              أو{" "}
+              {t("or")}{" "}
             </h3>
 
             <div className="form-style">
@@ -153,7 +154,7 @@ const Signup = ({ setStep, setEmail }) => {
                   className="input-label"
                   style={{ marginBottom: "5px", fontWeight: "500" }}
                 >
-                  الاسم الاول{" "}
+                  {t("The First Name")}  {" "}
                 </label>
 
                 <div className="input-block mb-3">
@@ -170,7 +171,7 @@ const Signup = ({ setStep, setEmail }) => {
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="name"
-                    placeholder="ادخل اسمك "
+                    placeholder="enter your name"
                     required
                   />
                   {formik.touched.first_name && formik.errors.first_name ? (
@@ -182,7 +183,7 @@ const Signup = ({ setStep, setEmail }) => {
                   className="input-label"
                   style={{ marginBottom: "5px", fontWeight: "500" }}
                 >
-                  الاسم الاخير{" "}
+                  {t("The Last Name")} {" "}
                 </label>
 
                 <div className="input-block mb-3">
@@ -199,7 +200,7 @@ const Signup = ({ setStep, setEmail }) => {
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="last_name"
-                    placeholder="ادخل اسمك "
+                    placeholder="enter your name"
                     required
                   />
                   {formik.touched.last_name && formik.errors.last_name ? (
@@ -211,7 +212,7 @@ const Signup = ({ setStep, setEmail }) => {
                   className="input-label"
                   style={{ marginBottom: "5px", fontWeight: "500" }}
                 >
-                  البريد الإلكتروني
+                  {t("Email")}
                 </label>
 
                 <div className="input-block mb-3">
@@ -228,7 +229,7 @@ const Signup = ({ setStep, setEmail }) => {
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
-                    placeholder="ادخل بريدك الالكتروني"
+                    placeholder="enter your email"
                     required
                   />
                   {formik.touched.email && formik.errors.email ? (
@@ -240,7 +241,7 @@ const Signup = ({ setStep, setEmail }) => {
                   className="input-label"
                   style={{ marginBottom: "5px", fontWeight: "500" }}
                 >
-                  اسم المستخدم{" "}
+                  {t("User Name")} {" "}
                 </label>
 
                 <div className="input-block mb-3">
@@ -257,7 +258,7 @@ const Signup = ({ setStep, setEmail }) => {
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="name"
-                    placeholder="ادخل اسم المستخدم "
+                    placeholder="enter User Name"
                     required
                   />
                   {formik.touched.user_name && formik.errors.user_name ? (
@@ -269,7 +270,7 @@ const Signup = ({ setStep, setEmail }) => {
                   className="input-label"
                   style={{ marginBottom: "5px", fontWeight: "500" }}
                 >
-                  رقم التليفون
+                  {t("Phone Number")}
                 </label>
 
                 <div className="input-block mb-3">
@@ -286,7 +287,7 @@ const Signup = ({ setStep, setEmail }) => {
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="name"
-                    placeholder=" رقم التليفون "
+                    placeholder="Phone Number"
                     required
                   />
 
@@ -301,7 +302,7 @@ const Signup = ({ setStep, setEmail }) => {
                   style={{ marginBottom: "5px", fontWeight: "500" }}
                 >
                   {" "}
-                  كلمة السر
+                  {t("Password")}
                 </label>
 
                 <div
@@ -318,7 +319,7 @@ const Signup = ({ setStep, setEmail }) => {
                     }
                     type={passwordShow ? "text" : "password"}
                     name="password"
-                    placeholder=" ادخل كلمة السر"
+                    placeholder="enter your password"
                     className="form-control"
                     id="exampleInputPassword1"
                     required
@@ -350,7 +351,7 @@ const Signup = ({ setStep, setEmail }) => {
                   className="input-label"
                   style={{ marginBottom: "5px", fontWeight: "500" }}
                 >
-                  تأكيد كلمة السر
+                  {t("Confirm Password")}
                 </label>
 
                 <div
@@ -369,7 +370,7 @@ const Signup = ({ setStep, setEmail }) => {
                     }
                     type={passwordShowConfirm ? "text" : "password"}
                     name="password_confirmation"
-                    placeholder=" تأكيد كلمة السر"
+                    placeholder="Confirm Password"
                     className="form-control"
                     id="exampleInputPassword1"
                     required
@@ -392,7 +393,7 @@ const Signup = ({ setStep, setEmail }) => {
                     )}
                   </button>
                   {formik.touched.password_confirmation &&
-                  formik.errors.password_confirmation ? (
+                    formik.errors.password_confirmation ? (
                     <div className="text-red">
                       {formik.errors.password_confirmation}
                     </div>
@@ -413,9 +414,9 @@ const Signup = ({ setStep, setEmail }) => {
                       border: "none",
                     }}
                     disabled={loading}
-                    // onClick={() => navigate("/check-code")}
+                  // onClick={() => navigate("/check-code")}
                   >
-                    التالى
+                    {t("Next")}
                   </button>
                 </div>
               </form>
@@ -429,15 +430,15 @@ const Signup = ({ setStep, setEmail }) => {
                 }}
               >
                 {" "}
-                لديك حساب بالفعل؟{" "}
+                {t("Already have an account?")} {" "}
                 <Link
                   style={{ color: "#873fa9", fontWeight: "600" }}
                   to="/login"
                 >
                   {" "}
-                  سجل دخول{" "}
+                  {t("Sign in")}{" "}
                 </Link>{" "}
-                الآن وانضم الينا{" "}
+                {t("now and Join us")}{" "}
               </h3>
             </div>
           </div>
