@@ -1,11 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logimage from "../../components/logImage/logImage";
 import { useNavigate } from "react-router-dom";
-
-const Codecheck = () => {
+import axios from "axios";
+import { toast } from "react-toastify";
+const Codecheck = ({ setStep, email, setEmail }) => {
   const formRef = useRef(null);
   const inputsRef = useRef([]);
-
+  const [value, setValue] = useState("");
   useEffect(() => {
     const form = formRef.current;
     const inputs = form.querySelectorAll("input");
@@ -111,8 +112,92 @@ const Codecheck = () => {
     };
   }, []);
   const navigate = useNavigate();
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async (e) => {
+    const codeValues = inputsRef.current.map((input) => input.value);
+    const numericCode = codeValues.join(""); // Combine individual values into a single string
+    console.log(numericCode);
+    setLoading(true);
+    e.preventDefault();
+    let data = {
+      email,
+      otp: numericCode,
+    };
+    console.log(data);
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const res = await axios.post(`${URL}/api/code_verified`, data, config);
+      console.log(res);
+      //  navigate("/login");
+      setStep(3);
+      setLoading(false);
+      // return res.data;
+    } catch (error) {
+      // return custom error message from backend if present
+      setLoading(false);
+      console.log(error, "error");
+      toast.error(error?.response?.data?.msg);
+    }
+
+    // dispatch(signUpUser({ user, setLoading }));
+  };
+  const [count, setCount] = useState(180);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (count > 0) {
+        setCount(count - 1);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [count]);
+
+  const resetCode = async () => {
+    // setLoading(true);
+    setCount(180);
+    let data = {
+      email,
+    };
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          withCredentials: false,
+        },
+      };
+      const res = await axios.post(`${URL}/api/resend_code`, data, config);
+      if (res.data.status == 201) {
+        console.log("res", res);
+        // setLoading(false);
+        toast.success(res?.data?.msg);
+        setLoading(false);
+      } else {
+        console.log(res);
+        setLoading(false);
+        toast.error(res?.response?.data?.msg);
+      }
+    } catch (error) {
+      // setLoading(false);
+      toast.error(error?.response?.data?.msg);
+      console.log(error);
+      setLoading(false);
+      // setError(true);
+    }
+  };
+  const direction = localStorage.getItem("direction");
+
   return (
-    <div className="container">
+    <div className={`container ${direction}`}>
       <div className="row m-md-5 no-gutters">
         <div className="col-xl-6 d-none d-xl-block">
           <Logimage style={{ minHeight: "100%" }} />
@@ -136,10 +221,8 @@ const Codecheck = () => {
           </h3>
 
           <div className="form-style" style={{ textAlign: "end" }}>
-            <form
-            // onSubmit={(e) => submitForm(e)}
-            >
-              <div action="#" className="codeform" ref={formRef}>
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <div action="#" className="codeform" dir="ltr" ref={formRef}>
                 <div
                   className="d-flex mb-3"
                   style={{ justifyContent: "center" }}
@@ -193,27 +276,41 @@ const Codecheck = () => {
                     marginTop: "2.5rem",
                     border: "none",
                   }}
-                  onClick={() => navigate("/user-kind")}
+                  disabled={loading}
+                  // onClick={() => navigate("/user-kind")}
                 >
                   أرسل الكود
                 </button>
               </div>
             </form>
 
-            <h3
-              className="pb-3 "
-              style={{
-                textAlign: "center",
-                fontSize: "18px",
-                marginTop: "10px",
-              }}
-            >
-              لم يصلك الرمز؟
-              <a style={{ color: "#873fa9", fontWeight: "600" }} href="#">
-                {" "}
-                إعادة إرسال الرمز{" "}
-              </a>{" "}
-            </h3>
+            {count === 0 ? (
+              <h3
+                className="pb-3 "
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  marginTop: "10px",
+                }}
+              >
+                لم يصلك الرمز؟
+                <a
+                  style={{
+                    color: "#873fa9",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => resetCode()}
+                >
+                  {" "}
+                  إعادة إرسال الرمز{" "}
+                </a>{" "}
+              </h3>
+            ) : (
+              <p className="mt-2 text-center">
+                Time Remaining: {count} seconds
+              </p>
+            )}
           </div>
         </div>
 

@@ -19,6 +19,7 @@ export { default as art } from "./art.svg";
 export { default as language } from "./language.svg";
 export { default as support } from "./support.svg";
 export { default as logout } from "./logout.svg";
+export { default as logout2 } from "./logout.svg";
 export { default as pen } from "./pen.svg";
 export { default as info } from "./info.svg";
 export { default as mobilephone } from "./mobilephone.svg";

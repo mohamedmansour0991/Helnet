@@ -18,7 +18,7 @@ import {
   favicon,
   pen,
   info,
-  logout,
+  logout2,
   support,
   language,
   art,
@@ -29,6 +29,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { t } from "i18next";
 import "./Navbar.scss";
+import { logout } from "../../rtk/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 export default function Navbar() {
   const name = window.location.pathname.split("/")[1];
@@ -56,7 +58,7 @@ export default function Navbar() {
     { name: t("Language"), icon: language, link: "settings/language" },
     { name: t("Color"), icon: art, link: "settings/art" },
     { name: t("Support"), icon: support, link: "settings/support" },
-    { name: t("Logout"), icon: logout, link: "login" },
+    { name: t("Logout"), icon: logout2, link: "login", event: "logout" },
   ];
   const mainMenuLabelsStore = [
     { name: t("Buy"), icon: buy, link: "store/buy" },
@@ -115,7 +117,7 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClick);
     };
   }, [menuRef]);
-
+  const dispatch = useDispatch();
   return (
     <nav className={`navbar ${direction} fixed w-100`}>
       <Link className="navbar__logo" to={"/"}>
@@ -223,6 +225,9 @@ export default function Navbar() {
               key={index}
               role="button"
               onClick={() => {
+                if (tap.event == "logout") {
+                  dispatch(logout());
+                }
                 setIsOpened(false);
                 navigate(`/${tap.link}`);
               }}

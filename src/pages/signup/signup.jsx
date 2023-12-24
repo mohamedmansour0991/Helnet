@@ -1,177 +1,109 @@
 // import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Logimage from "../../components/logImage/logImage";
 import { Link, useNavigate } from "react-router-dom";
-const Signup = () => {
-  const validEmail = new RegExp(
-    "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
-  );
+import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
 
-  const [errors, seterrors] = useState({
-    name: null,
-    email: null,
-    password: null,
-    confirmpass: null,
-  });
-
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmpass: "",
-  });
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setData({
-      ...data,
-      [e.target.name]: value,
-    });
-
-    if (e.target.name === "name") {
-      setData({
-        ...data,
-        name: e.target.value,
-      });
-      seterrors({
-        ...errors,
-        name:
-          e.target.value.length < 3
-            ? " name should has more than 3 charctricts"
-            : null,
-      });
-    } else if (e.target.name === "password") {
-      setData({
-        ...data,
-        password: e.target.value,
-      });
-      seterrors({
-        ...errors,
-        password:
-          e.target.value.length < 3
-            ? "password should have more than 3 charctricts"
-            : null,
-      });
-    } else if (e.target.name === "email") {
-      setData({
-        ...data,
-        email: e.target.value,
-      });
-      seterrors({
-        ...errors,
-        email:
-          validEmail.test(e.target.value) === false
-            ? "please write a vaild email !"
-            : null,
-      });
-    } else if (e.target.name === "confirmpass") {
-      setData({
-        ...data,
-        confirmpass: e.target.value,
-      });
-      seterrors({
-        ...errors,
-        confirmpass:
-          e.target.value.length == data.password
-            ? " Not the same password, check again ."
-            : null,
-      });
-    }
-  };
-
-  // const userData = {
-  //     name: data.name,
-  //     email: data.email,
-  //     password: data.password,
-  //     mobile: data.mobile,
-  //     college_id: data.college_id,
-  // };
-  // // console.log(JSON.stringify(userData))
-
-  // const customConfig = {
-  //     headers: {
-  //         'Content-Type': 'application/json',
-  //     }
-  // };
-
-  // const submitForm = (e) => {
-  //     e.preventDefault();
-
-  //     axios
-  //         .post(url + "register", userData, customConfig)
-  //         .then((response) => {
-  //             console.log(userData)      //test
-  //             console.log(response);
-
-  //             toast.success('Welcome! You have successfully registed .', {
-  //                 position: toast.POSITION.BOTTOM_RIGHT,
-  //                 autoClose: 5000
-  //             });
-
-  //             // Wait for the toast message to disappear before navigating to the next page
-  //             setTimeout(() => {
-
-  //                 // window.location.href = '/academy/otp';
-  //                 window.location.href = '/home';
-
-  //                 // to send data (mobile)
-  //                 // history.push({
-  //                 //     pathname: '/academy/otp',
-  //                 //     state: { data: userData }
-  //                 // });
-
-  //             }, 5000); // Wait for 2 seconds
-
-  //         })
-  //         .catch((error) => {
-  //             if (error.response) {
-  //                 console.log(error.response.data.message);
-  //                 console.log("server error");
-
-  //                 toast.error(error.response.data.message, {
-  //                     position: toast.POSITION.BOTTOM_RIGHT,
-  //                     autoClose: 2000
-  //                 });
-
-  //             } else if (error.request) {
-  //                 console.log("network error");
-
-  //                 toast.error('network error! ,please check your network ', {
-  //                     position: toast.POSITION.BOTTOM_RIGHT,
-  //                     autoClose: 2000
-  //                 });
-  //             } else {
-  //                 console.log(error);
-  //             }
-  //         });
-
-  //     for (var item in data) {
-  //         // console.log(item);
-
-  //         if (data[item] === "") {
-  //             seterrors({
-  //                 ...errors,
-  //                 name: data.name === "" ? "this field is required" : null,
-  //                 password: data.password === "" ? "this field is required" : null,
-  //                 email: data.email === "" ? "this field is required" : null,
-  //                 confirmpass: data.confirmpass === "" ? "this field is required" : null,
-  //             });
-  //             return 0;
-  //         }
-  //     }
-  // };
+const Signup = ({ setStep, setEmail }) => {
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  const direction = localStorage.getItem("direction");
+  const [passwordShow, setPasswordShow] = useState(false);
+  const [passwordShowConfirm, setPasswordShowConfirm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { user, error, signIn } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (error) navigate("/register");
+
+    if (user) navigate("/home");
+
+    // dispatch(deleteSign());
+  }, [navigate, signIn, user]);
+
+  const dispatch = useDispatch();
+  const handleSubmit = async (e) => {
+    setLoading(true);
+    console.log(e);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const res = await axios.post(`${URL}/api/register`, e, config);
+      console.log(res);
+      //  navigate("/login");
+      setStep(2);
+      setEmail(e.email);
+      setLoading(false);
+      // return res.data;
+    } catch (error) {
+      // return custom error message from backend if present
+      setLoading(false);
+      console.log(error, "error");
+    }
+
+    // dispatch(signUpUser({ user, setLoading }));
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone: "",
+      password: "",
+      password_confirmation: "",
+      user_name: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("عنوان البريد الإلكتروني غير صالح")
+        .matches(
+          /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/,
+          "يجب ادخال ايميل صالح"
+        )
+        .required("مطلوب"),
+      // باقي قواعد التحقق من الصحة
+
+      password: Yup.string()
+        .required("مطلوب")
+        .matches(
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{12,}$/,
+          "يجب أن تحتوي كلمة المرور على حرف كبير وحرف صغير ورقم ورمز خاص ويجب أن تكون على الأقل 12 أحرف."
+        ),
+      password_confirmation: Yup.string()
+        .oneOf([Yup.ref("password"), null], "يجب أن تتطابق كلمات المرور")
+        .required("مطلوب"),
+      user_name: Yup.string().required("مطلوب"),
+      last_name: Yup.string().required("مطلوب"),
+      first_name: Yup.string().required("مطلوب"),
+      phone: Yup.string()
+        .matches(/^\d{11}$/, "يجب أن يحتوي رقم الهاتف على 11 رقمًا")
+        .required("مطلوب"),
+    }),
+    onSubmit: (values) => {
+      // Handle form submission here
+      console.log("Form submitted with values:", values);
+      handleSubmit(values);
+    },
+  });
+
   return (
-    <div className="container ">
-      <div className="row m-md-5 my-5 no-gutters">
+    <div className={`container ${direction}`}>
+      <div className="row m-md-5 d-flex align-items-center no-gutters">
         <div className="col-xl-6 col-12 d-none d-xl-block">
           <Logimage />
         </div>
-        <div className="col-xl-6 col-12 bg-white p-5 logform">
-          <div className="p-md-5 p-2">
+        <div className="col-xl-6 col-12 bg-white px-md-5 logform">
+          <div className=" p-2">
             <h1 className="title" style={{ marginBottom: "5px" }}>
               أهلا بعودتك
             </h1>
@@ -200,30 +132,65 @@ const Signup = () => {
               أو{" "}
             </h3>
 
-            <div className="form-style" style={{ textAlign: "end" }}>
-              <form
-              // onSubmit={submitForm}
-              >
+            <div className="form-style">
+              <form onSubmit={formik.handleSubmit}>
                 <label
                   htmlFor="email"
                   className="input-label"
                   style={{ marginBottom: "5px", fontWeight: "500" }}
                 >
-                  الاسم بالكامل{" "}
+                  الاسم الاول{" "}
                 </label>
 
-                <div className="input-block">
+                <div className="input-block mb-3">
                   <input
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.first_name}
+                    style={
+                      formik.touched.first_name &&
+                      formik.errors.first_name && { border: "1px solid red" }
+                    }
                     type="text"
-                    name="name"
+                    name="first_name"
                     className="form-control"
                     id="exampleInputEmail1"
                     aria-describedby="name"
                     placeholder="ادخل اسمك "
                     required
-                    value={data.login}
-                    onChange={(e) => handleChange(e)}
                   />
+                  {formik.touched.first_name && formik.errors.first_name ? (
+                    <div className="text-red">{formik.errors.first_name}</div>
+                  ) : null}
+                </div>
+                <label
+                  htmlFor="email"
+                  className="input-label"
+                  style={{ marginBottom: "5px", fontWeight: "500" }}
+                >
+                  الاسم الاخير{" "}
+                </label>
+
+                <div className="input-block mb-3">
+                  <input
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.last_name}
+                    style={
+                      formik.touched.last_name &&
+                      formik.errors.last_name && { border: "1px solid red" }
+                    }
+                    type="text"
+                    name="last_name"
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="last_name"
+                    placeholder="ادخل اسمك "
+                    required
+                  />
+                  {formik.touched.last_name && formik.errors.last_name ? (
+                    <div className="text-red">{formik.errors.last_name}</div>
+                  ) : null}
                 </div>
                 <label
                   htmlFor="email"
@@ -233,8 +200,15 @@ const Signup = () => {
                   البريد الإلكتروني
                 </label>
 
-                <div className="input-block">
+                <div className="input-block mb-3">
                   <input
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
+                    style={
+                      formik.touched.email &&
+                      formik.errors.email && { border: "1px solid red" }
+                    }
                     type="email"
                     name="email"
                     className="form-control"
@@ -242,9 +216,69 @@ const Signup = () => {
                     aria-describedby="emailHelp"
                     placeholder="ادخل بريدك الالكتروني"
                     required
-                    value={data.email}
-                    onChange={(e) => handleChange(e)}
                   />
+                  {formik.touched.email && formik.errors.email ? (
+                    <div className="text-red">{formik.errors.email}</div>
+                  ) : null}
+                </div>
+                <label
+                  htmlFor="email"
+                  className="input-label"
+                  style={{ marginBottom: "5px", fontWeight: "500" }}
+                >
+                  اسم المستخدم{" "}
+                </label>
+
+                <div className="input-block mb-3">
+                  <input
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.user_name}
+                    style={
+                      formik.touched.user_name &&
+                      formik.errors.user_name && { border: "1px solid red" }
+                    }
+                    type="text"
+                    name="user_name"
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="name"
+                    placeholder="ادخل اسم المستخدم "
+                    required
+                  />
+                  {formik.touched.user_name && formik.errors.user_name ? (
+                    <div className="text-red">{formik.errors.user_name}</div>
+                  ) : null}
+                </div>
+                <label
+                  htmlFor="email"
+                  className="input-label"
+                  style={{ marginBottom: "5px", fontWeight: "500" }}
+                >
+                  رقم التليفون
+                </label>
+
+                <div className="input-block mb-3">
+                  <input
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.phone}
+                    style={
+                      formik.touched.phone &&
+                      formik.errors.phone && { border: "1px solid red" }
+                    }
+                    type="text"
+                    name="phone"
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="name"
+                    placeholder=" رقم التليفون "
+                    required
+                  />
+
+                  {formik.touched.phone && formik.errors.phone ? (
+                    <div className="text-red">{formik.errors.phone}</div>
+                  ) : null}
                 </div>
 
                 <label
@@ -256,17 +290,45 @@ const Signup = () => {
                   كلمة السر
                 </label>
 
-                <div className="form-group pb-3">
+                <div
+                  className="form-group pb-3 p-relative"
+                  style={{ position: "relative" }}
+                >
                   <input
-                    type="password"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.password}
+                    style={
+                      formik.touched.password &&
+                      formik.errors.password && { border: "1px solid red" }
+                    }
+                    type={passwordShow ? "text" : "password"}
                     name="password"
                     placeholder=" ادخل كلمة السر"
                     className="form-control"
                     id="exampleInputPassword1"
                     required
-                    value={data.password}
-                    onChange={(e) => handleChange(e)}
                   />
+                  <button
+                    className=" position-absolute  top-0  text-decoration-none text-muted"
+                    style={
+                      direction == "rtl"
+                        ? { left: "10px" }
+                        : { right: "20px", left: "auto" }
+                    }
+                    type="button"
+                    id="password-addon"
+                    onClick={() => setPasswordShow(!passwordShow)}
+                  >
+                    {passwordShow ? (
+                      <i className="ri-eye-fill uil uil-eye-slash align-middle"></i>
+                    ) : (
+                      <i className="ri-eye-fill uil uil-eye align-middle"></i>
+                    )}
+                  </button>
+                  {formik.touched.password && formik.errors.password ? (
+                    <div className="text-red">{formik.errors.password}</div>
+                  ) : null}
                 </div>
 
                 <label
@@ -277,17 +339,50 @@ const Signup = () => {
                   تأكيد كلمة السر
                 </label>
 
-                <div className="form-group pb-3">
+                <div
+                  className="form-group pb-3"
+                  style={{ position: "relative" }}
+                >
                   <input
-                    type="password"
-                    name="confirmpass"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.password_confirmation}
+                    style={
+                      formik.touched.password_confirmation &&
+                      formik.errors.password_confirmation && {
+                        border: "1px solid red",
+                      }
+                    }
+                    type={passwordShowConfirm ? "text" : "password"}
+                    name="password_confirmation"
                     placeholder=" تأكيد كلمة السر"
                     className="form-control"
                     id="exampleInputPassword1"
                     required
-                    value={data.confirmpass}
-                    onChange={(e) => handleChange(e)}
                   />
+                  <button
+                    className=" position-absolute  top-0  text-decoration-none text-muted"
+                    type="button"
+                    id="password-addon"
+                    onClick={() => setPasswordShowConfirm(!passwordShowConfirm)}
+                    style={
+                      direction === "rtl"
+                        ? { left: "10px" }
+                        : { right: "20px", left: "auto" }
+                    }
+                  >
+                    {passwordShowConfirm ? (
+                      <i className="ri-eye-fill uil uil-eye-slash align-middle"></i>
+                    ) : (
+                      <i className="ri-eye-fill uil uil-eye align-middle"></i>
+                    )}
+                  </button>
+                  {formik.touched.password_confirmation &&
+                  formik.errors.password_confirmation ? (
+                    <div className="text-red">
+                      {formik.errors.password_confirmation}
+                    </div>
+                  ) : null}
                 </div>
 
                 <div className="pb-2">
@@ -303,7 +398,8 @@ const Signup = () => {
                       marginTop: "0.5rem",
                       border: "none",
                     }}
-                    onClick={() => navigate("/check-code")}
+                    disabled={loading}
+                    // onClick={() => navigate("/check-code")}
                   >
                     التالى
                   </button>

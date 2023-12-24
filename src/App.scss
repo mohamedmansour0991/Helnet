@@ -24,12 +24,11 @@ body {
 }
 
 .form-style input {
-  text-align: end;
   border: 1px solid #ced4da;
   height: 50px;
   border-radius: 12px;
   color: #96a0ad;
-  margin-bottom: 16px;
+  // margin-bottom: 16px;
 
   /* border-bottom: 1px solid #ebebeb; */
 }
@@ -115,7 +114,7 @@ button {
 }
 
 .logform {
-  padding-left: 80px !important;
+  // padding-left: 80px !important;
   @media screen and (max-width: 1120px) {
     & {
       padding-left: 3rem !important;
@@ -152,10 +151,14 @@ button {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   height: 120px;
-  width: 120px;
-  margin: 48px 25px;
+  // width: 120px;
+  margin: 10px;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  &.active {
+    border: 3px solid #007bff;
+  }
   img {
     width: 100px;
   }
@@ -572,4 +575,48 @@ button {
 
 .theme-color-red {
   color: red;
+  fill: red;
+}
+
+@font-face {
+  font-family: Unicons;
+  src: url(../src/assets/images/icons/unicons/Unicons.woff2) format("woff2"),
+    url(../src/assets/images/icons/unicons/Unicons.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+[class*=" uil-"],
+[class^="uil-"] {
+  font-family: Unicons !important;
+}
+[class*=" icn-"],
+[class*=" uil-"],
+[class^="icn-"],
+[class^="uil-"] {
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-spacing: normal;
+}
+[class*=" uil-"],
+[class^="uil-"] {
+  font-family: Unicons !important;
+}
+[class*=" icn-"],
+[class^="icn-"] {
+  font-family: Custom !important;
+}
+
+.uil-eye:before {
+  content: "\eae1";
+}
+
+.uil-eye-slash:before {
+  content: "\eae0";
 }

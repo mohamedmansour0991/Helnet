@@ -8,7 +8,7 @@ import {
   friend,
 } from "/src/assets/images/icons";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Reels from "../reels/reels";
 import Settings from "../settings/Settings";
 import Notifcations from "../notifcations/Notifcations";
@@ -17,8 +17,12 @@ import { data } from "/public/fakeData";
 import { CreatePost } from "../../components/ui";
 import Friends from "../Friends/Friends";
 import "./MainPage.scss";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function MainPage() {
+  const { user, error, msg } = useSelector((state) => state.auth);
+
   const { t } = useTranslation();
   const direction = localStorage.getItem("direction");
   const name = useParams().allroute;

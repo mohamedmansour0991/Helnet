@@ -47,7 +47,7 @@ const ButtonsForm = ({ next, prev }) => {
             letterSpacing: "1px",
             border: "none",
           }}
-          onClick={() => navigate(next)}
+          // onClick={() => navigate(next)}
         >
           التالي
         </button>

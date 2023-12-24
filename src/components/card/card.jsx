@@ -1,9 +1,13 @@
 // import React from 'react';
 
 // eslint-disable-next-line react/prop-types
-const Card = ({ imageSrc, title }) => {
+const Card = ({ imageSrc, title, name, setType, type }) => {
   return (
-    <div className="card">
+    <div
+      className={type == name ? "card active" : "card"}
+      onClick={() => setType(name)}
+      
+    >
       <img
         src={imageSrc}
         alt="Avatar"

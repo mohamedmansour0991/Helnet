@@ -1,135 +1,50 @@
 // import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Logimage from "../../components/logImage/logImage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../rtk/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 const Login = () => {
-  const validEmail = new RegExp(
-    "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
-  );
+  const direction = localStorage.getItem("direction");
+  const [passwordShow, setPasswordShow] = useState(false);
 
-  const [errors, seterrors] = useState({
-    login: null,
-    password: null,
-  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [remember, setRemember] = useState(false);
+  const { user, error, msg } = useSelector((state) => state.auth);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  /////////////// login
+  useEffect(() => {
+    // redirect user to login page if registration was successful
+    if (error) navigate("/login");
+    // redirect authenticated user to profile screen
+    if (user) navigate("/home");
+  }, [navigate, user, error]);
 
-  const [data, setData] = useState({
-    login: "",
-    password: "",
-  });
+  const handleSubmit = async (e) => {
+    setLoading(true);
+    e.preventDefault();
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setData({
-      ...data,
-      [e.target.name]: value,
-    });
+    let user = {
+      email,
+      password,
+    };
 
-    if (e.target.name === "email") {
-      setData({
-        ...data,
-        login: e.target.value,
-      });
-      seterrors({
-        ...errors,
-        login:
-          validEmail.test(e.target.value) === false
-            ? "please write a vaild email !"
-            : null,
-      });
-    } else if (e.target.name === "password") {
-      setData({
-        ...data,
-        password: e.target.value,
-      });
-      seterrors({
-        ...errors,
-        password:
-          e.target.value.length < 3
-            ? "password should have more than 3 charctricts"
-            : null,
-      });
-    }
+    dispatch(loginUser({ user, setLoading }));
+    // Cookies.set("remember", JSON.stringify({ email, password }), {
+    //   expires: 7,
+    // });
   };
 
-  // const userData = {
-  //     login: data.login,
-  //     password: data.password
-  // };
-
-  // // console.log(JSON.stringify(userData))
-
-  // const customConfig = {
-  //     headers: {
-  //         'Content-Type': 'application/json'
-  //     }
-  // };
-
-  // const submitForm = (e) => {
-  //     e.preventDefault();
-
-  //     axios
-  //         .post(url + "login", userData, customConfig)
-  //         .then((response) => {
-
-  //             // console.log(response.data);
-
-  //             localStorage.setItem('accessToken', response.data.token);
-
-  //             toast.success('Welcome back! You have successfully logged in.', {
-  //                 position: toast.POSITION.BOTTOM_RIGHT,
-  //                 autoClose: 2000
-  //             });
-
-  //             // Wait for the toast message to disappear before navigating to the next page
-  //             setTimeout(() => {
-  //                 // window.location.href = '/home';
-  //             }, 2000); // Wait for 2 seconds
-
-  //         })
-  //         .catch((error) => {
-  //             if (error.response) {
-  //                 // console.log(error.response.data.message);
-  //                 // alert(error.response.data.message)
-  //                 toast.error(error.response.data.message, {
-  //                     position: toast.POSITION.BOTTOM_RIGHT,
-  //                     autoClose: 2000
-  //                 });
-
-  //             } else if (error.request) {
-  //                 toast.error("server error", {
-  //                     position: toast.POSITION.BOTTOM_RIGHT,
-  //                     autoClose: 2000
-  //                 });
-
-  //             } else {
-  //                 console.log(error);
-  //                 toast.error("server error", {
-  //                     position: toast.POSITION.BOTTOM_RIGHT,
-  //                     autoClose: 2000
-  //                 });
-  //             }
-  //         });
-
-  //     for (var item in data) {
-  //         // console.log(item);
-
-  //         if (data[item] === "") {
-  //             seterrors({
-  //                 ...errors,
-  //                 login: data.login === "" ? "this field is required" : null,
-  //                 password: data.password === "" ? "this field is required" : null,
-  //             });
-  //             return 0;
-  //         }
-  //     }
-  // };
-
+  const [t] = useTranslation();
+  const lang = localStorage.getItem("lang");
   return (
-    <div className="container ">
+    <div className={`container ${direction}`}>
       <div className="row m-md-5 my-5  no-gutters flex-wrap">
         <div className="col-xl-6 col-12 d-none d-xl-block">
           <Logimage style={{ minHeight: "100%" }} />
@@ -155,10 +70,8 @@ const Login = () => {
             أو{" "}
           </h3>
 
-          <div className="form-style" style={{ textAlign: "end" }}>
-            <form
-            // onSubmit={(e) => submitForm(e)}
-            >
+          <div className="form-style">
+            <form onSubmit={(e) => handleSubmit(e)}>
               <label
                 htmlFor="email"
                 className="input-label"
@@ -176,11 +89,10 @@ const Login = () => {
                   aria-describedby="emailHelp"
                   placeholder="ادخل بريدك الالكتروني"
                   required
-                  value={data.login}
-                  onChange={(e) => handleChange(e)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="text-danger text-left ">{errors.login}</div>
+              {/* <div className="text-danger text-left ">{errors.login}</div> */}
 
               <label
                 htmlFor="password"
@@ -191,19 +103,37 @@ const Login = () => {
                 كلمة السر
               </label>
 
-              <div className="form-group pb-3">
+              <div className="form-group pb-3" style={{ position: "relative" }}>
                 <input
-                  type="password"
-                  name="password"
+                  type={passwordShow ? "text" : "password"}
                   placeholder=" ادخل كلمة السر"
                   className="form-control"
                   id="exampleInputPassword1"
                   required
-                  value={data.password}
-                  onChange={handleChange}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
+                <button
+                  className=" position-absolute  top-0  text-decoration-none text-muted"
+                  style={
+                    direction === "rtl"
+                      ? { left: "10px" }
+                      : { right: "20px", left: "auto" }
+                  }
+                  type="button"
+                  id="password-addon"
+                  onClick={() => setPasswordShow(!passwordShow)}
+                >
+                  {passwordShow ? (
+                    <i className="ri-eye-fill uil uil-eye-slash align-middle"></i>
+                  ) : (
+                    <i className="ri-eye-fill uil uil-eye align-middle"></i>
+                  )}
+                </button>
               </div>
-              <div className="text-danger">{errors.password}</div>
+              <p style={{ color: "red" }}>
+                {msg && t("The password or email does not match")}
+              </p>
+              {/* <div className="text-danger">{errors.password}</div> */}
 
               <div className="d-flex align-items-center justify-content-between">
                 <div style={{ color: "#A74ED1" }}>
@@ -238,6 +168,7 @@ const Login = () => {
                     marginTop: "3.5rem",
                     border: "none",
                   }}
+                  disabled={loading}
                 >
                   تسجيل دخول
                 </button>

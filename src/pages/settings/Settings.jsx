@@ -38,7 +38,7 @@ function Settings() {
     { name: t("Language"), icon: language, link: "settings/language" },
     { name: t("Color"), icon: art, link: "settings/art" },
     { name: t("Support"), icon: support, link: "settings/support" },
-    { name: t("Logout"), icon: logout, link: "login" },
+    { name: t("Logout"), icon: logout, link: "login", event: "logout" },
   ];
   return (
     <div className="bg-body">

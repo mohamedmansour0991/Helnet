@@ -28,16 +28,16 @@
   --color: #a74ed1;
   --bg-color: #fff;
   --main-bg: #f6f6f6;
-  
 }
 
 html,
 body {
   height: 100%;
+  direction: rtl;
   // background-color: var(--main-bg);
 
-  .rtl {
-    direction: rtl;
+  .ltr {
+    direction: ltr;
   }
 }
 

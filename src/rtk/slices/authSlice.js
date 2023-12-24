@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-const backendURL = "https://3lm.wearher-from-mimi.com/api";
+const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+
 //  "http://api.wearher-from-mimi.com/api";
 //  "https://wearher-from-mimi.com/api";
 
@@ -15,7 +16,7 @@ export const signUpUser = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const res = await axios.post(`${backendURL}/register`, user, config);
+      const res = await axios.post(`${URL}/api/register`, user, config);
       console.log(res);
       //  navigate("/login");
       setLoading(false);
@@ -32,20 +33,26 @@ export const loginUser = createAsyncThunk(
   "loginUser",
   async ({ user, setLoading }, thunkAPI) => {
     setLoading(true);
+    console.log(user);
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
         },
       };
-      const res = await axios.post(`${backendURL}/login`, user, config);
+      const res = await axios.post(`${URL}/api/login`, user, config);
       console.log(res);
       // navigator("/home");
       setLoading(false);
       return res.data;
     } catch (error) {
-      // return custom error message from backend if present
       console.log(error);
+      setLoading(false);
+
+      if (error.response.status == 401) {
+        // navigate("/register");
+      }
+      // return custom error message from backend if present
       setLoading(false);
     }
   }
@@ -60,7 +67,7 @@ export const logoutUser = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const res = await axios.post(`${backendURL}/logout`, user, config);
+      const res = await axios.post(`${URL}/api/logout`, user, config);
       console.log(res);
       // navigator("/home");
 

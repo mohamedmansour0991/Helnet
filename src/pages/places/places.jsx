@@ -1,45 +1,200 @@
+import analysis from "../../assets/images/analysis 1.png";
+import restaurant from "../../assets/images/restaurant.png";
+import hospital from "../../assets/images/hospital.png";
+import clinic from "../../assets/images/clinic 1.png";
+import pharmacy from "../../assets/images/pharmacy.png";
+import office from "../../assets/images/office.png";
+import gym from "../../assets/images/gym.png";
+import Card from "../../components/card/card";
+import ButtonsForm from "../../components/buttonsForm/buttonsForm";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-toastify";
+const Places = ({ email, setStep, setprev, settypeProvider }) => {
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
-import analysis from "../../assets/images/analysis 1.png"
-import restaurant from "../../assets/images/restaurant.png"
-import hospital from "../../assets/images/hospital.png"
-import clinic from "../../assets/images/clinic 1.png"
-import pharmacy from "../../assets/images/pharmacy.png"
-import office from "../../assets/images/office.png"
-import gym from "../../assets/images/gym.png"
-import Card from "../../components/card/card"
-import ButtonsForm from "../../components/buttonsForm/buttonsForm"
+  const [type, setType] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const handleSubmit = async () => {
+    setLoading(true);
+    let data = {
+      email,
+      job: type,
+    };
+    console.log(data);
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const res = await axios.post(`${URL}/api/add_job`, data, config);
+      console.log(res);
+      navigate("/");
 
-const Places = () => {
+      setLoading(false);
+      // return res.data;
+    } catch (error) {
+      // return custom error message from backend if present
+      setLoading(false);
+      console.log(error, "error");
+      toast.error(error?.response?.data?.msg);
+    }
+  };
+  return (
+    <div className="container">
+      <div className="row  no-gutters">
+        <div
+          className="bg-white p-5"
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <h1 className="title" style={{ marginBottom: "20px" }}>
+            {" "}
+            أماكن{" "}
+          </h1>
+          <div className="form-style w-100" style={{ textAlign: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexFlow: "wrap",
+              }}
+            >
+              <Card
+                name={"Games Hall"}
+                type={type}
+                setType={setType}
+                imageSrc={gym}
+                title="صالة ألعاب"
+              />
+              <Card
+                name={"company"}
+                type={type}
+                setType={setType}
+                imageSrc={office}
+                title="شركة"
+              />
+              <Card
+                name={"pharmacy"}
+                type={type}
+                setType={setType}
+                imageSrc={pharmacy}
+                title="صيدلية"
+              />
+              <Card
+                name={"clinic"}
+                type={type}
+                setType={setType}
+                imageSrc={clinic}
+                title="عيادة "
+              />
+              <Card
+                name={"hospital"}
+                type={type}
+                setType={setType}
+                imageSrc={hospital}
+                title="مستشفى "
+              />
+              <Card
+                name={"Training academy"}
+                type={type}
+                setType={setType}
+                imageSrc={analysis}
+                title="أكاديمية تدريب "
+              />
+              <Card
+                name={"restaurant"}
+                type={type}
+                setType={setType}
+                imageSrc={restaurant}
+                title=" مطعم "
+              />
 
-
-    return (
-
-        <div className="container">
-            <div className="row m-5 no-gutters">
-                <div className="bg-white p-5" >
-                    <h1 className="title" style={{ marginBottom: "66px" }}> أماكن </h1>
-                    <div className="form-style" style={{ textAlign: "center" }}>
-                        <div style={{
-                            display: "flex", justifyContent: "center",
-                            flexFlow: "wrap", height: "256px", overflow: "auto", marginBottom: "40px"
-                        }}>
-                            <Card imageSrc={gym} title="صالة ألعاب" />
-                            <Card imageSrc={office} title="شركة" />
-                            <Card imageSrc={pharmacy} title="صيدلية" />
-                            <Card imageSrc={clinic} title="عيادة " />
-                            <Card imageSrc={hospital} title="مستشفى " />
-                            <Card imageSrc={analysis} title="أكاديمية تدريب " />
-                            <Card imageSrc={restaurant} title=" مطعم " />
-
-
-                            {/* Add more CardComponent instances with different text */}
-                        </div>
-                        <ButtonsForm />
-                    </div>
-                </div>
+              {/* Add more CardComponent instances with different text */}
             </div>
-            <style>
+            <form
+              className="btnform w-100"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "1rem",
+                marginTop: "3.5rem",
+              }}
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <div className="pb-2">
+                <button
+                  // type="submit"
+                  className="btn btn-dark font-weight-bold logbtn"
+                  style={{
+                    background: "linear-gradient(#00ACFF75, #BD00FF58)",
+                    borderRadius: "16px",
+                    width: "250px",
+                    maxWidth: "100%",
+                    fontSize: "24px",
+                    fontWeight: "600",
+                    letterSpacing: "1px",
+                    border: "none",
+                  }}
+                  onClick={() => {
+                    settypeProvider(1);
+                    setprev("");
+                  }}
+                >
+                  السابق
+                </button>
+              </div>
+              <div className="pb-2">
+                <button
+                  type="submit"
+                  className="btn btn-dark font-weight-bold logbtn"
+                  style={{
+                    background: "linear-gradient(#00ACFF75, #BD00FF58)",
+                    borderRadius: "16px",
+                    width: "250px",
+                    maxWidth: "100%",
+                    fontSize: "24px",
+                    fontWeight: "600",
+                    letterSpacing: "1px",
+                    border: "none",
+                  }}
+                  disabled={loading}
+                  onClick={() => handleSubmit()}
+                  // onClick={() => navigate(next)}
+                >
+                  التالي
+                </button>
+              </div>
+              <style>
                 {`
+          @media (max-width: 768px) {
+            .logbtn {
+              width: 289px;
+            }
+          }
+          @media (max-width: 1018px) {
+            .btnform {
+                justify-content: center!important;
+
+            }
+          }
+        `}
+              </style>
+            </form>
+          </div>
+        </div>
+      </div>
+      <style>
+        {`
           @media (max-width: 538px) {
             .title {
                 font-size: 32px;
@@ -56,9 +211,9 @@ const Places = () => {
             }
           }
         `}
-            </style>
-        </div>
-    );
+      </style>
+    </div>
+  );
 };
 
 export default Places;

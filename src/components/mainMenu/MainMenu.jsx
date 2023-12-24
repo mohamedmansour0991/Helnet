@@ -1,6 +1,8 @@
 import { search, store, events, video, reel } from "/src/assets/images/icons";
 import "./MainMenu.scss";
 import { NavLink } from "react-router-dom";
+import { logout } from "../../rtk/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 export default function MainMenu({ mainMenuLabels, header }) {
   // const mainMenuLabels = [
@@ -10,6 +12,7 @@ export default function MainMenu({ mainMenuLabels, header }) {
   //   { name: "video", icon: video },
   //   { name: "reel", icon: reel },
   // ];
+  const dispatch = useDispatch();
   return (
     <aside className="mainMenu">
       <div className="mainMenu__All">
@@ -17,7 +20,15 @@ export default function MainMenu({ mainMenuLabels, header }) {
         <ul className="mainMenu__List">
           {mainMenuLabels.map((tap, index) => (
             <li key={index} role="button">
-              <NavLink className={""} to={`/${tap.link}`}>
+              <NavLink
+                onClick={() => {
+                  if (tap.event == "logout") {
+                    dispatch(logout());
+                  }
+                }}
+                className={""}
+                to={`/${tap.link}`}
+              >
                 <img src={tap.icon} alt="" />
                 <p>{tap.name}</p>
               </NavLink>
