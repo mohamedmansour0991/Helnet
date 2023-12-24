@@ -12,15 +12,15 @@ function AllRegister() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
-  useEffect(() => {
-    // redirect user to login page if registration was successful
-    if (error) navigate("/register");
-    // redirect authenticated user to profile screen
-    if (signIn) navigate("/login");
-    if (user) navigate("/home");
+  // useEffect(() => {
+  //   // redirect user to login page if registration was successful
+  //   if (error) navigate("/register");
+  //   // redirect authenticated user to profile screen
+  //   if (signIn) navigate("/login");
+  //   if (user) navigate("/home");
 
-    // dispatch(deleteSign());
-  }, [navigate, signIn, user, error]);
+  //   // dispatch(deleteSign());
+  // }, [navigate, signIn, user, error]);
 
   const dispatch = useDispatch();
   return (

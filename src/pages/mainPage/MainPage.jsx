@@ -34,6 +34,9 @@ export default function MainPage() {
     { name: t("Reel"), icon: reel, link: "reel" },
     { name: t("Friends"), icon: friend, link: "friends" },
   ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="bg-body">

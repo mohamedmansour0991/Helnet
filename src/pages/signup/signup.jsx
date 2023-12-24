@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Signup = ({ setStep, setEmail }) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
@@ -48,6 +49,19 @@ const Signup = ({ setStep, setEmail }) => {
       // return custom error message from backend if present
       setLoading(false);
       console.log(error, "error");
+      if (
+        error.response.data.data.email &&
+        error.response.data.data.email.length > 0
+      ) {
+        toast.error(error.response.data.data.email[0]);
+      }
+
+      if (
+        error.response.data.data.phone &&
+        error.response.data.data.phone.length > 0
+      ) {
+        toast.error(error.response.data.data.phone[0]);
+      }
     }
 
     // dispatch(signUpUser({ user, setLoading }));

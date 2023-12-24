@@ -12,10 +12,14 @@ import Nutrition from "../nutrition/nutrition";
 import Places from "../places/places";
 import Doctor from "../doctor/doctor";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Provider = ({ email, setStep }) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const [type, setType] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const [typeProvider, settypeProvider] = useState(1);
   const navigate = useNavigate();
   const handleSubmit = async () => {
@@ -146,8 +150,9 @@ const Provider = ({ email, setStep }) => {
                         border: "none",
                       }}
                       disabled={!type}
-                      onClick={() => {
+                      onClick={(e) => {
                         if (type == "1") {
+                          e.preventDefault();
                           handleSubmit();
                         } else {
                           settypeProvider("2");

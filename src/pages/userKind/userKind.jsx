@@ -6,6 +6,8 @@ import Card from "../../components/card/card";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../rtk/slices/authSlice";
 
 const UserKind = ({ email, setStep }) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
@@ -13,6 +15,7 @@ const UserKind = ({ email, setStep }) => {
   const [type, setType] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSubmit = async () => {
     setLoading(true);
     let data = {
@@ -32,6 +35,7 @@ const UserKind = ({ email, setStep }) => {
       if (res.data.data == 1) {
         setStep(4);
       } else {
+        dispatch(loginSuccess(res.data));
         navigate("/language");
       }
       setLoading(false);
