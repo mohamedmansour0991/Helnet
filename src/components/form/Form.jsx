@@ -4,6 +4,7 @@ import { Button, Input, Modal } from "../ui";
 import { t } from "i18next";
 import Waveform from "./Waveform";
 import delet from "../../assets/images/delete.png"
+import recordbutton from "../../assets/images/recordbutton.png"
 
 export default function Form({ isOpen, closeModal, title }) {
   const [formType, setFormType] = useState("");
@@ -77,7 +78,7 @@ export default function Form({ isOpen, closeModal, title }) {
 
 
 
-
+  const [url, setUrl] = useState();
   const [recording, setRecording] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [timer, setTimer] = useState(0);
@@ -144,14 +145,11 @@ export default function Form({ isOpen, closeModal, title }) {
   const addAudioElement = (audioBlob) => {
     const audioUrl = URL.createObjectURL(audioBlob);
     audioRef.current.src = audioUrl;
+    console.log(audioRef);
+    console.log(audioUrl);
+    setUrl(audioUrl)
   };
 
-
-
-
-
-
-  const [selectedTrack, setSelectedTrack] = useState("https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3");
 
 
   return (
@@ -185,8 +183,6 @@ export default function Form({ isOpen, closeModal, title }) {
               <Input type="text" label={t("Attach a picture of the product")} />
             </>
           ) : null}
-
-
 
           {formType === "images" ? (
             <>
@@ -261,68 +257,83 @@ export default function Form({ isOpen, closeModal, title }) {
           {formType === "record" ? (
             <>
 
-              {/* شكل الريكورد عند التسجيل */}
+              {url ? (
+                //  شكل الريكورد بعد التسجيل  
 
-              {/* 
+
                 <div
-                  className="rounded-circle d-flex bg-white btn-tertiary js-labelFile p-4"
-                  style={{ justifyContent: "center", alignItems: "center", width: "200px", height: "200px", margin: "0 auto", fontSize: "48px", cursor: "pointer" }}
-                  onClick={handleRecordClick}>
+                  className="rounded-3 text-center p-5 w-100 border-dashed"
+                  style={{ marginBottom: "20px" }} >
+                  <h4 style={{ fontWeight: "500", fontSize: "large" }}>Your record</h4>
 
-                   <img src={recordbutton} /> 
+                  <div className="wavebody">
+                    <Waveform url={url} />
+                    <button style={{ margin: "auto", display: "block" }}> <img src={delet} alt="" /></button>
+                  </div>
                 </div>
 
+              ) : (
+                //   شكل الريكورد عند التسجيل 
 
-                {recording && (
-                  <p style={{ textAlign: "center", marginTop: "10px", fontSize: "24px" }}>Recording...</p>
-                )}
 
-                {recording && (
-                  <p style={{ textAlign: "center", marginTop: "10px", fontSize: "24px" }}>{formatTime(timer)}</p>
-                )}
+                <div
+                  className="rounded-3 text-center d-flex bg-white w-100 btn-tertiary js-labelFile p-4 border-dashed"
+                  style={{
+                    justifyContent: "center", flexDirection: "column", alignItems: "center", width: "200px",
+                    margin: "0 auto", fontSize: "48px", cursor: "pointer", marginBottom: "20px"
+                  }}
+                  onClick={handleRecordClick}>
+                  <h4 style={{ fontWeight: "500", fontSize: "large" }}>Tap here to start a record</h4>
+                  <img src={recordbutton} />
 
-                <audio ref={audioRef} controls className="audio1" />
+                  {recording && (
+                    <p style={{ textAlign: "center", marginTop: "10px", fontSize: "24px" }}>Recording...</p>
+                  )}
 
-               */}
+                  {recording && (
+                    <p style={{ textAlign: "center", marginTop: "10px", fontSize: "24px" }}>{formatTime(timer)}</p>
+                  )}
 
-              {/* شكل الريكورد بعد التسجيل  */}
+                  <audio ref={audioRef} controls className="audio1" />
 
-              {/* 
-              <div className="wavebody">
-                <Waveform url={selectedTrack} />
-                <button style={{ margin: "auto", display: "block" }}> <img src={delet} alt="" /></button>
-              </div> */}
+                </div>
+
+              )}
             </>
           ) : null}
 
 
 
 
-          {formType === "service" ? (
-            <>
-              <Input type="tel" label={t("service name")} />
-
-              <label htmlFor="formTextarea">{t("Details")}</label>
-              <textarea
-                id="formTextarea"
-                className="w-full rounded-lg bg-red-50 resize-none px-2 h-28 text-xl w-100"
-              />
-
-              <Input type="number" label={t("Suggested price")} />
-            </>
-          ) : null}
-
-
-          {formType === "usedProduct" ||
-            formType === "newProduct" ||
+          {
             formType === "service" ? (
-            <>
-              <Input type="tel" label={t("Contact method")} />
-            </>
-          ) : null}
+              <>
+                <Input type="tel" label={t("service name")} />
+
+                <label htmlFor="formTextarea">{t("Details")}</label>
+                <textarea
+                  id="formTextarea"
+                  className="w-full rounded-lg bg-red-50 resize-none px-2 h-28 text-xl w-100"
+                />
+
+                <Input type="number" label={t("Suggested price")} />
+              </>
+            ) : null
+          }
+
+
+          {
+            formType === "usedProduct" ||
+              formType === "newProduct" ||
+              formType === "service" ? (
+              <>
+                <Input type="tel" label={t("Contact method")} />
+              </>
+            ) : null
+          }
 
           <Button children={t("Post")} />
-        </form>
+        </form >
       }
     />
   );
