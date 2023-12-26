@@ -8,9 +8,11 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../rtk/slices/authSlice";
+import { useTranslation } from "react-i18next";
 
 const UserKind = ({ email, setStep }) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  const [t] = useTranslation();
 
   const [type, setType] = useState("");
   const [loading, setLoading] = useState(false);
@@ -53,7 +55,7 @@ const UserKind = ({ email, setStep }) => {
     <div className={`container ${direction}`}>
       <div className="">
         <div className="bg-white p-5 d-flex align-items-center justify-content-center flex-column h-100vh">
-          <h1 className="title"> من هو المستخدم؟</h1>
+          <h1 className="title">  {t("Who is the user?")}</h1>
 
           <div className="form-style w-100" style={{ textAlign: "center" }}>
             <div
@@ -68,7 +70,7 @@ const UserKind = ({ email, setStep }) => {
                 name={"0"}
                 setType={setType}
                 imageSrc={student}
-                title=" مستخدم عادي "
+                title={t("Regular user")}
                 type={type}
               />
               <Card
@@ -76,7 +78,7 @@ const UserKind = ({ email, setStep }) => {
                 setType={setType}
                 type={type}
                 imageSrc={manager}
-                title=" مقدم خدمة "
+                title={t("Service provider")}
               />
             </div>
             <form
@@ -106,7 +108,7 @@ const UserKind = ({ email, setStep }) => {
                   }}
                   onClick={() => navigate(prev)}
                 >
-                  السابق
+                  {t("Back")}
                 </button>
               </div>
               <div className="pb-2">
@@ -125,9 +127,9 @@ const UserKind = ({ email, setStep }) => {
                   }}
                   disabled={!type || loading}
                   onClick={() => handleSubmit()}
-                  // onClick={() => navigate(next)}
+                // onClick={() => navigate(next)}
                 >
-                  التالي
+                  {t("Next")}
                 </button>
               </div>
               <style>

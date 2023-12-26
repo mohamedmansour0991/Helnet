@@ -9,8 +9,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+
 const Nutrition = ({ email, setStep, setprev, settypeProvider }) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  const [t] = useTranslation();
 
   const [type, setType] = useState("");
   const [loading, setLoading] = useState(false);
@@ -56,7 +59,7 @@ const Nutrition = ({ email, setStep, setprev, settypeProvider }) => {
         >
           <h1 className="title" style={{ marginBottom: "20px" }}>
             {" "}
-            تغذية{" "}
+            {t("nourishment")} {" "}
           </h1>
           <div className="form-style w-100" style={{ textAlign: "center" }}>
             <div
@@ -72,35 +75,35 @@ const Nutrition = ({ email, setStep, setprev, settypeProvider }) => {
                 type={type}
                 setType={setType}
                 imageSrc={chef}
-                title="طباخ "
+                title={t("cook")}
               />
               <Card
                 name={"Health coach"}
                 type={type}
                 setType={setType}
                 imageSrc={healthcare}
-                title="مدرب صحة "
+                title={t("Health coach")}
               />
               <Card
                 name={"Psychologist"}
                 type={type}
                 setType={setType}
                 imageSrc={therapy}
-                title="أخصائي نفسي"
+                title={t("Psychologist")}
               />
               <Card
                 name={"Fitness Trainer  "}
                 type={type}
                 setType={setType}
                 imageSrc={treadmill}
-                title="مدرب رياضي  "
+                title={t("Fitness Trainer")}
               />
               <Card
                 name={"nutrition specialist"}
                 type={type}
                 setType={setType}
                 imageSrc={nutrition}
-                title="أخصائي تغذية "
+                title={t("nutrition specialist")}
               />
 
               {/* Add more CardComponent instances with different text */}
@@ -135,7 +138,7 @@ const Nutrition = ({ email, setStep, setprev, settypeProvider }) => {
                     setprev("");
                   }}
                 >
-                  السابق
+                  {t("Back")}
                 </button>
               </div>
               <div className="pb-2">
@@ -154,9 +157,9 @@ const Nutrition = ({ email, setStep, setprev, settypeProvider }) => {
                   }}
                   disabled={loading}
                   onClick={() => handleSubmit()}
-                  // onClick={() => navigate(next)}
+                // onClick={() => navigate(next)}
                 >
-                  التالي
+                  {t("Next")}
                 </button>
               </div>
               <style>

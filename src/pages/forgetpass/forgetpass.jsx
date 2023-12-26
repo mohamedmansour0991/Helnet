@@ -4,9 +4,11 @@ import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import Logimage from "../../components/logImage/logImage";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Forgetpass = () => {
   const [email, setEmail] = useState("");
+  const [t] = useTranslation();
 
   // const handleSubmit = (event) => {
   //     event.preventDefault();
@@ -59,7 +61,7 @@ const Forgetpass = () => {
         <div className="col-lg-6 bg-white p-5 logform">
           <h1 className="title" style={{ marginBottom: "5px" }}>
             {" "}
-            نسيت كلمة السر؟{" "}
+            {t("Forgot your password?")}{" "}
           </h1>
           <h3
             className="pb-3 "
@@ -71,7 +73,7 @@ const Forgetpass = () => {
             }}
           >
             {" "}
-            لتعيين كلمة سرجديدة ادخل بريدك الالكتروني{" "}
+            {t("To set a new password, enter your email")}{" "}
           </h3>
 
           <div className="form-style" style={{ textAlign: "end" }}>
@@ -84,7 +86,7 @@ const Forgetpass = () => {
                 className="input-label"
                 style={{ marginBottom: "5px", fontWeight: "500" }}
               >
-                البريد الإلكتروني
+                {t("Email")}
               </label>
 
               <div className="input-block">
@@ -94,7 +96,7 @@ const Forgetpass = () => {
                   className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
-                  placeholder="ادخل بريدك الالكتروني"
+                  placeholder={t("enter your email")}
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -117,7 +119,7 @@ const Forgetpass = () => {
                   }}
                   onClick={() => navigate("/reset-pass")}
                 >
-                  أرسل الكود
+                  {t("Send the code")}
                 </button>
               </div>
             </form>

@@ -9,8 +9,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+
 const Doctor = ({ email, setStep, setprev, settypeProvider }) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  const [t] = useTranslation();
 
   const [type, setType] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,7 +50,7 @@ const Doctor = ({ email, setStep, setprev, settypeProvider }) => {
         <div className="bg-white p-5 d-flex align-items-center justify-content-center flex-column h-100vh">
           <h1 className="title" style={{ marginBottom: "66px" }}>
             {" "}
-            طبيب{" "}
+            {t("Doctor")}{" "}
           </h1>
           <div className="form-style w-100" style={{ textAlign: "center" }}>
             <div
@@ -64,35 +67,35 @@ const Doctor = ({ email, setStep, setprev, settypeProvider }) => {
                 type={type}
                 setType={setType}
                 imageSrc={painful}
-                title="علاج طبيعي"
+                title={t("Physiotherapy")}
               />
               <Card
                 name={"veterinarian"}
                 type={type}
                 setType={setType}
                 imageSrc={veterinary}
-                title="طبيب بيطري"
+                title={t("veterinarian")}
               />
               <Card
                 name={"pharmaceutical"}
                 type={type}
                 setType={setType}
                 imageSrc={pharmacy}
-                title="صيدلي"
+                title={t("pharmaceutical")}
               />
               <Card
                 name={"dentist"}
                 type={type}
                 setType={setType}
                 imageSrc={floss}
-                title="طبيب أسنان "
+                title={t("dentist")}
               />
               <Card
                 name={"human doctor"}
                 type={type}
                 setType={setType}
                 imageSrc={stethoscope}
-                title="طبيب بشري"
+                title={t("human doctor")}
               />
 
               {/* Add more CardComponent instances with different text */}
@@ -127,7 +130,7 @@ const Doctor = ({ email, setStep, setprev, settypeProvider }) => {
                     setprev("");
                   }}
                 >
-                  السابق
+                  {t("Back")}
                 </button>
               </div>
               <div className="pb-2">
@@ -146,9 +149,9 @@ const Doctor = ({ email, setStep, setprev, settypeProvider }) => {
                   }}
                   disabled={loading}
                   onClick={() => handleSubmit()}
-                  // onClick={() => navigate(next)}
+                // onClick={() => navigate(next)}
                 >
-                  التالي
+                  {t("Next")}
                 </button>
               </div>
               <style>
