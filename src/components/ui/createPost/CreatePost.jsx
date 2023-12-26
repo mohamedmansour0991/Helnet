@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { t } from "i18next";
 import {
   Video3,
@@ -144,9 +145,8 @@ export default function CreatePost({
 
         {/* this well be a reusable component */}
         <textarea
-          className={`w-full outline-none resize-none px-2 h-28 text-xl w-100 ${
-            isArabic ? "text-right" : "text-left"
-          }`}
+          className={`w-full outline-none resize-none px-2 h-28 text-xl w-100 ${isArabic ? "text-right" : "text-left"
+            }`}
           placeholder={
             placeholder
               ? t(placeholder)

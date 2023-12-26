@@ -2966,6 +2966,11 @@
   dependencies:
     "loose-envify" "^1.0.0"
 
+"wavesurfer.js@^7.5.5":
+  "integrity" "sha512-c6mXvuJEv2MuSQFC5qlFf7urL8sSueQ/z+c0a3MPyVTEJ74dGAAjI87RqmeA80jy62XqpBI2ueuQ+a/oajL+Bg=="
+  "resolved" "https://registry.npmjs.org/wavesurfer.js/-/wavesurfer.js-7.5.5.tgz"
+  "version" "7.5.5"
+
 "webidl-conversions@^3.0.0":
   "integrity" "sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ=="
   "resolved" "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
