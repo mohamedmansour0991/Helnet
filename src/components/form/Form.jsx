@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Button, Input, Modal } from "../ui";
 import { t } from "i18next";
 import Waveform from "./Waveform";
-import delet from "../../assets/images/delete.png"
-import recordbutton from "../../assets/images/recordbutton.png"
+import delet from "../../assets/images/delete.png";
+import recordbutton from "../../assets/images/recordbutton.png";
 
 export default function Form({ isOpen, closeModal, title }) {
   const [formType, setFormType] = useState("");
@@ -74,8 +74,6 @@ export default function Form({ isOpen, closeModal, title }) {
       });
     }, 500);
   };
-
-
 
   const [url, setUrl] = useState();
   const [recording, setRecording] = useState(false);
@@ -148,9 +146,8 @@ export default function Form({ isOpen, closeModal, title }) {
     audioRef.current.src = audioUrl;
     console.log(audioRef);
     console.log(audioUrl);
-    setUrl(audioUrl)
+    setUrl(audioUrl);
   };
-
 
   return (
     <Modal
@@ -277,84 +274,101 @@ export default function Form({ isOpen, closeModal, title }) {
 
           {formType === "record" ? (
             <>
-
               {url ? (
-                //  شكل الريكورد بعد التسجيل  
-
+                //  شكل الريكورد بعد التسجيل
 
                 <div
                   className="rounded-3 text-center p-5 w-100 border-dashed"
-                  style={{ marginBottom: "20px" }} >
-                  <h4 style={{ fontWeight: "500", fontSize: "large" }}>Your record</h4>
+                  style={{ marginBottom: "20px" }}
+                >
+                  <h4 style={{ fontWeight: "500", fontSize: "large" }}>
+                    Your record
+                  </h4>
 
                   <div className="wavebody">
                     <Waveform url={url} />
-                    <button style={{ margin: "auto", display: "block" }}> <img src={delet} alt="" /></button>
+                    <div style={{ margin: "auto", display: "block" }}>
+                      {" "}
+                      <img src={delet} alt="" />
+                    </div>
                   </div>
                 </div>
-
               ) : (
-                //   شكل الريكورد عند التسجيل 
-
+                //   شكل الريكورد عند التسجيل
 
                 <div
                   className="rounded-3 text-center d-flex bg-white w-100 btn-tertiary js-labelFile p-4 border-dashed"
                   style={{
-                    justifyContent: "center", flexDirection: "column", alignItems: "center", width: "200px",
-                    margin: "0 auto", fontSize: "48px", cursor: "pointer", marginBottom: "20px"
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "200px",
+                    margin: "0 auto",
+                    fontSize: "48px",
+                    cursor: "pointer",
+                    marginBottom: "20px",
                   }}
-                  onClick={handleRecordClick}>
-                  <h4 style={{ fontWeight: "500", fontSize: "large" }}>Tap here to start a record</h4>
+                  onClick={handleRecordClick}
+                >
+                  <h4 style={{ fontWeight: "500", fontSize: "large" }}>
+                    Tap here to start a record
+                  </h4>
                   <img src={recordbutton} />
 
                   {recording && (
-                    <p style={{ textAlign: "center", marginTop: "10px", fontSize: "24px" }}>Recording...</p>
+                    <p
+                      style={{
+                        textAlign: "center",
+                        marginTop: "10px",
+                        fontSize: "24px",
+                      }}
+                    >
+                      Recording...
+                    </p>
                   )}
 
                   {recording && (
-                    <p style={{ textAlign: "center", marginTop: "10px", fontSize: "24px" }}>{formatTime(timer)}</p>
+                    <p
+                      style={{
+                        textAlign: "center",
+                        marginTop: "10px",
+                        fontSize: "24px",
+                      }}
+                    >
+                      {formatTime(timer)}
+                    </p>
                   )}
 
                   <audio ref={audioRef} controls className="audio1" />
-
                 </div>
-
               )}
             </>
           ) : null}
 
+          {formType === "service" ? (
+            <>
+              <Input type="tel" label={t("service name")} />
 
+              <label htmlFor="formTextarea">{t("Details")}</label>
+              <textarea
+                id="formTextarea"
+                className="w-full rounded-lg bg-red-50 resize-none px-2 h-28 text-xl w-100"
+              />
 
+              <Input type="number" label={t("Suggested price")} />
+            </>
+          ) : null}
 
-          {
-            formType === "service" ? (
-              <>
-                <Input type="tel" label={t("service name")} />
-
-                <label htmlFor="formTextarea">{t("Details")}</label>
-                <textarea
-                  id="formTextarea"
-                  className="w-full rounded-lg bg-red-50 resize-none px-2 h-28 text-xl w-100"
-                />
-
-                <Input type="number" label={t("Suggested price")} />
-              </>
-            ) : null
-          }
-
-
-          {
-            formType === "usedProduct" ||
-              formType === "newProduct" ||
-              formType === "service" ? (
-              <>
-                <Input type="tel" label={t("Contact method")} />
-              </>
-            ) : null
-          }
+          {formType === "usedProduct" ||
+          formType === "newProduct" ||
+          formType === "service" ? (
+            <>
+              <Input type="tel" label={t("Contact method")} />
+            </>
+          ) : null}
 
           <Button children={t("Post")} />
-        </form >
+        </form>
       }
     />
   );
