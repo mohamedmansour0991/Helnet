@@ -14,6 +14,9 @@ import Modal from "../modal/Modal";
 import { useEffect, useState } from "react";
 import Select from "../select/Select";
 import Form from "../../form/Form";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addUpload } from "../../../rtk/slices/progressSlice";
 
 export default function CreatePost({
   placeholder,
@@ -57,13 +60,24 @@ export default function CreatePost({
 
   /////////////// main module ///////////////////
 
-  //   ${isArabic ? "text-right" : "text-left"}
   const [isArabic, setIsArabic] = useState(false);
 
   useEffect(() => {
     setIsArabic(localStorage.getItem("i18nextLng") === "ar");
   }, []);
 
+  const [openSelect, setOpenSelect] = useState(false);
+
+  const [text, setText] = useState("");
+  const [privacy, setprivacy] = useState("public");
+  const [typePost, setTypePost] = useState("scientific");
+
+  const data = {
+    text: text,
+    privacy,
+    category: typePost,
+    classification_id: 1,
+  };
   return (
     <>
       <div className="createPost rounded-xl bg-white">
@@ -131,6 +145,7 @@ export default function CreatePost({
                 selectLabels={selectLabels}
                 withImage={true}
                 hasIndictor={true}
+                setprivacy={setprivacy}
               />
             </div>
             <img className="w-10 h-10" src={profile1} alt="" />
@@ -143,17 +158,17 @@ export default function CreatePost({
           </button>
         </div>
 
-        {/* this well be a reusable component */}
         <textarea
-          className={`w-full outline-none resize-none px-2 h-28 text-xl w-100 ${isArabic ? "text-right" : "text-left"
-            }`}
+          onChange={(e) => setText(e.target.value)}
+          className={`w-full outline-none resize-none px-2 h-28 text-xl w-100 ${
+            isArabic ? "text-right" : "text-left"
+          }`}
           placeholder={
             placeholder
               ? t(placeholder)
               : `${t("write something")} ${t(",")} ${username}`
           }
         />
-        {/* this well be a reusable component */}
 
         <div
           className="sm:flex items-center justify-between gap-3 px-4 mb-3 border rounded-2xl"
@@ -188,7 +203,7 @@ export default function CreatePost({
 
         <Form isOpen={isFormOpen} closeModal={closeForm} title={formTitle} />
 
-        <Button children={t("Post")} />
+        <Button children={t("Post")} data={data} />
       </Modal>
     </>
   );

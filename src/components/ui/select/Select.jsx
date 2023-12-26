@@ -6,6 +6,7 @@ import { publicIcon } from "../../../assets/images/icons";
 
 export default function Select({
   className = "",
+  setprivacy,
   selectLabels,
   hasIndictor,
   withImage = false,
@@ -46,6 +47,7 @@ export default function Select({
                     }`
                   }
                   value={label}
+                  onClick={() => setprivacy(label)}
                 >
                   {({ selected }) => (
                     <>

@@ -42,7 +42,6 @@ export default function Form({ isOpen, closeModal, title }) {
     }
   }, [title]);
 
-
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -107,7 +106,9 @@ export default function Form({ isOpen, closeModal, title }) {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   const startRecording = async () => {
@@ -116,14 +117,14 @@ export default function Form({ isOpen, closeModal, title }) {
       const recorder = new MediaRecorder(stream);
 
       const chunks = [];
-      recorder.addEventListener('dataavailable', (e) => {
+      recorder.addEventListener("dataavailable", (e) => {
         if (e.data.size > 0) {
           chunks.push(e.data);
         }
       });
 
-      recorder.addEventListener('stop', () => {
-        const audioBlob = new Blob(chunks, { type: 'audio/webm' });
+      recorder.addEventListener("stop", () => {
+        const audioBlob = new Blob(chunks, { type: "audio/webm" });
         addAudioElement(audioBlob);
       });
 
@@ -131,12 +132,12 @@ export default function Form({ isOpen, closeModal, title }) {
       setRecording(true);
       setMediaRecorder(recorder);
     } catch (error) {
-      console.error('Error starting audio recording:', error);
+      console.error("Error starting audio recording:", error);
     }
   };
 
   const stopRecording = () => {
-    if (mediaRecorder && mediaRecorder.state === 'recording') {
+    if (mediaRecorder && mediaRecorder.state === "recording") {
       mediaRecorder.stop();
       setRecording(false);
     }
@@ -149,7 +150,6 @@ export default function Form({ isOpen, closeModal, title }) {
     console.log(audioUrl);
     setUrl(audioUrl)
   };
-
 
 
   return (
@@ -186,11 +186,22 @@ export default function Form({ isOpen, closeModal, title }) {
 
           {formType === "images" ? (
             <>
-
-              <label htmlFor="file" className="rounded-3 text-center d-flex bg-white p-4 w-100 border-dashed"
-                style={{ justifyContent: "center", alignItems: "center", flexDirection: "column", marginBottom: "30px" }}>
-                <h4 style={{ fontWeight: "500" }}>Choose a file or drag & drop it here</h4>
-                <h3 style={{ fontWeight: "500", color: "#A9ACB4" }}>JPEG, PNG, PDF, and MP4 formats, up to 50MB</h3>
+              <label
+                htmlFor="file"
+                className="rounded-3 text-center d-flex bg-white p-4 w-100 border-dashed"
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  marginBottom: "30px",
+                }}
+              >
+                <h4 style={{ fontWeight: "500" }}>
+                  Choose a file or drag & drop it here
+                </h4>
+                <h3 style={{ fontWeight: "500", color: "#A9ACB4" }}>
+                  JPEG, PNG, PDF, and MP4 formats, up to 50MB
+                </h3>
                 <br />
                 <input
                   type="file"
@@ -202,7 +213,7 @@ export default function Form({ isOpen, closeModal, title }) {
                   accept=".jpeg, .jpg, .png, .pdf, .mp4"
                 />
                 <label htmlFor="file" className="browse-button">
-                  {uploading ? 'Uploading...' : 'Browse File'}
+                  {uploading ? "Uploading..." : "Browse File"}
                 </label>
                 {uploading && (
                   <div>
@@ -216,16 +227,26 @@ export default function Form({ isOpen, closeModal, title }) {
                   </div>
                 )}
               </label>
-
-
             </>
           ) : null}
           {formType === "video" ? (
             <>
-              <label htmlFor="file" className="rounded-3 text-center d-flex bg-white p-4 w-100 border-dashed"
-                style={{ justifyContent: "center", alignItems: "center", flexDirection: "column", marginBottom: "30px" }}>
-                <h4 style={{ fontWeight: "500" }}>Choose a file or drag & drop it here</h4>
-                <h3 style={{ fontWeight: "500", color: "#A9ACB4" }}>JPEG, PNG, PDF, and MP4 formats, up to 50MB</h3>
+              <label
+                htmlFor="file"
+                className="rounded-3 text-center d-flex bg-white p-4 w-100 border-dashed"
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  marginBottom: "30px",
+                }}
+              >
+                <h4 style={{ fontWeight: "500" }}>
+                  Choose a file or drag & drop it here
+                </h4>
+                <h3 style={{ fontWeight: "500", color: "#A9ACB4" }}>
+                  JPEG, PNG, PDF, and MP4 formats, up to 50MB
+                </h3>
                 <br />
                 <input
                   type="file"
@@ -237,7 +258,7 @@ export default function Form({ isOpen, closeModal, title }) {
                   accept=".jpeg, .jpg, .png, .pdf, .mp4"
                 />
                 <label htmlFor="file" className="browse-button">
-                  {uploading ? 'Uploading...' : 'Browse File'}
+                  {uploading ? "Uploading..." : "Browse File"}
                 </label>
                 {uploading && (
                   <div>
@@ -251,9 +272,9 @@ export default function Form({ isOpen, closeModal, title }) {
                   </div>
                 )}
               </label>
-
             </>
           ) : null}
+
           {formType === "record" ? (
             <>
 

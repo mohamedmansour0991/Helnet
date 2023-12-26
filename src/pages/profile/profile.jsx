@@ -1,7 +1,3 @@
-import cover from "../../assets/images/cover.png";
-import character from "../../assets/images/character.png";
-import vector from "../../assets/images/Vector.png";
-import camera2 from "../../assets/images/camera2.png";
 import home from "../../assets/images/home.png";
 import graduation from "../../assets/images/graduation.png";
 import freelance from "../../assets/images/freelance.png";
@@ -36,6 +32,7 @@ import NotActive from "../../components/profileComponents/notActive/NotActive";
 import BoxFirendsProfile from "../../components/profileComponents/boxFirendsProfile/BoxFirendsProfile";
 import BoxAcceptFirendsProfile from "../../components/profileComponents/boxFirendsProfile/BoxAcceptFirendsProfile";
 import { data } from "/public/fakeData";
+import ProfileHeader from "../../components/profileHeader/ProfileHeader";
 
 const Profile = () => {
   const mainMenuLabels = [
@@ -72,52 +69,7 @@ const Profile = () => {
       {/* mycover */}
       <div className="bg-body">
         <Navbar />
-        <div className="profile-card  text-start" style={{ marginTop: "6rem" }}>
-          <img className="img-responsive " src={cover} alt="" />
-          <div className="profile-info">
-            <img className="profile-pic3" src={camera2} alt="" />
-            <img className="profile-pic" src={character} alt="" />
-            <h2 className="hvr-underline-from-center" onClick={openModal}>
-              {" "}
-              طلب صداقة 20 .
-            </h2>
-            <h2 className="hvr-underline-from-center" onClick={openModal}>
-              {" "}
-              صديق 320{" "}
-            </h2>
-
-            <h1 className="profile-title">
-              كريم سيف <img className="profile-pic2" src={vector} alt="" />
-            </h1>
-            <h1
-              className="profile-title"
-              style={{ opacity: "0.7", fontSize: "25px", marginRight: "43px" }}
-            >
-              {" "}
-              مبرمج فى ألمانيا
-            </h1>
-          </div>
-          <div className="pb-2">
-            <button
-              type="submit"
-              className="btn btn-dark font-weight-bold logbtn"
-              style={{
-                background: " linear-gradient(#00ACFF75, #BD00FF58)",
-                borderRadius: "11px",
-                fontSize: "18px ",
-                fontWeight: "600",
-                letterSpacing: "1px",
-                marginBottom: "0.5rem",
-                marginLeft: "1rem",
-                border: "none",
-                width: "135px ",
-                height: "38px ",
-              }}
-            >
-              تعديل بياناتي
-            </button>
-          </div>
-        </div>
+        <ProfileHeader openModal={openModal} />
         <main className={`main mt-4 ${direction}`}>
           <MainMenu mainMenuLabels={mainMenuLabels} />
           <div className="container">

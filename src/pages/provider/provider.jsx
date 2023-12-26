@@ -134,7 +134,7 @@ const Provider = ({ email, setStep }) => {
                       }}
                       onClick={() => navigate(prev)}
                     >
-                      {t("Back")}
+                      السابق
                     </button>
                   </div>
                   <div className="pb-2">
