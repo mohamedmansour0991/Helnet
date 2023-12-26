@@ -7,16 +7,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../rtk/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 const Login = () => {
   const direction = localStorage.getItem("direction");
   const [passwordShow, setPasswordShow] = useState(false);
-
+  const [remember, setRemember] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [remember, setRemember] = useState(false);
   const { user, error, msg } = useSelector((state) => state.auth);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(
+    Cookies.get("remember") ? Cookies.get("remember").email : ""
+  );
+  const [password, setPassword] = useState(
+    Cookies.get("remember") ? Cookies.get("remember").password : ""
+  );
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -36,9 +40,9 @@ const Login = () => {
     };
 
     dispatch(loginUser({ user, setLoading }));
-    // Cookies.set("remember", JSON.stringify({ email, password }), {
-    //   expires: 7,
-    // });
+    Cookies.set("remember", JSON.stringify({ email, password }), {
+      expires: 7,
+    });
   };
 
   const [t] = useTranslation();
@@ -86,6 +90,7 @@ const Login = () => {
                   name="email"
                   className="form-control"
                   id="exampleInputEmail1"
+                  defaultValue={email}
                   aria-describedby="emailHelp"
                   placeholder="ادخل بريدك الالكتروني"
                   required
@@ -110,6 +115,7 @@ const Login = () => {
                   className="form-control"
                   id="exampleInputPassword1"
                   required
+                  defaultValue={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
@@ -143,6 +149,7 @@ const Login = () => {
                   <span
                     className="pl-2 font-weight-bold"
                     style={{ fontWeight: "500" }}
+                    onClick={() => setRemember(!remember)}
                   >
                     {" "}
                     تذكرني

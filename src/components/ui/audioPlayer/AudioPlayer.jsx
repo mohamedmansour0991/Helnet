@@ -13,7 +13,7 @@ import { useRef, useState } from "react";
 import { t } from "i18next";
 import "./AudioPlayer.scss";
 
-export default function AudioPlayer({ data,user }) {
+export default function AudioPlayer({ data, user }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const audioRef = useRef(null);
@@ -83,7 +83,11 @@ export default function AudioPlayer({ data,user }) {
 
             <img
               className="absolute"
-              src={user?.user_img ? storageLink + e.user.profile.user_img : profile1}
+              src={
+                user?.user_img
+                  ? storageLink + e.user.profile.user_img
+                  : profile1
+              }
               alt=""
             />
 
