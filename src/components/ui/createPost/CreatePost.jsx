@@ -87,9 +87,13 @@ export default function CreatePost({
       data.append("image[]", photo[i]);
     }
   }
-  if (video.length > 0) {
+  if (video) {
     data.append("classification_id", 2);
     data.append("video", video);
+  }
+  if (record) {
+    data.append("audio", record);
+    data.append("classification_id", 4);
   }
   if (text) {
     data.append("text", text);
@@ -214,10 +218,10 @@ export default function CreatePost({
             </video>
           </div>
         )}
-        {/* {record && (
-          <audio src={URL.createObjectURL(record)}></audio>
-          // <AudioPlayer data={URL.createObjectURL(record)} />
-        )} */}
+        {record && (
+          // <audio src={URL.createObjectURL(record)}></audio>
+          <AudioPlayer data={URL.createObjectURL(record)} />
+        )}
 
         <div
           className="sm:flex items-center justify-between gap-3 px-4 mb-3 border rounded-2xl"

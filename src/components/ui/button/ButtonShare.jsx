@@ -30,7 +30,7 @@ export default function ButtonShare({
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
 
-  //upload text
+  //upload text and photo and audio
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const handleClick = async (e) => {
     console.log(data);
@@ -70,8 +70,10 @@ export default function ButtonShare({
     }
   };
 
+
+
   //video
-  const CHUNK_SIZE = 5 * 1024 * 1024; // 5MB
+  const CHUNK_SIZE = 1 * 1024 * 1024; // 5MB
   let uploadedChunks = 1;
   const [progress, setProgress] = useState(0);
   const [uploadComplete, setUploadComplete] = useState(false);
@@ -104,7 +106,8 @@ export default function ButtonShare({
     const end = Math.min(start + CHUNK_SIZE, video.size);
     console.log(start);
     console.log(end);
-    const blob = video.slice(start, end);
+    // const blob = video.slice(start, end);
+    const blob = video.slice(start, end, "video/mp4");
     console.log(video.slice(start, end));
     if (video) {
       const formData = new FormData();
@@ -180,20 +183,22 @@ export default function ButtonShare({
   };
 
   return (
-    <button
-      type={type}
-      onClick={state ? handleClickVideo : handleClick}
-      style={{
-        backgroundColor: backgroundColor,
-        color: color,
-        borderWidth: border,
-      }}
-      className={`normalButton ${className} ${
-        backgroundColor === null && "gradient"
-      }`}
-      {...rest}
-    >
-      <div className={`children ${className}`}>{children}</div>
-    </button>
+    <>
+      <button
+        type={type}
+        onClick={state ? handleClickVideo : handleClick}
+        style={{
+          backgroundColor: backgroundColor,
+          color: color,
+          borderWidth: border,
+        }}
+        className={`normalButton ${className} ${
+          backgroundColor === null && "gradient"
+        }`}
+        {...rest}
+      >
+        <div className={`children ${className}`}>{children}</div>
+      </button>
+    </>
   );
 }

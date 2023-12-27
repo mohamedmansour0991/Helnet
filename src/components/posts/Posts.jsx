@@ -8,7 +8,7 @@ import getDataPost from "./getDataPost";
 export default function Posts({ data }) {
   const { user, token, refrech } = useSelector((state) => state.auth);
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
-  const { items, hasMore, loadMore } = getDataPost(1, token, refrech);
+  const { items, hasMore, loadMore } = getDataPost(1, token, refrech, "post");
   const dispatch = useDispatch();
 
   // console.log(items);

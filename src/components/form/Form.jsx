@@ -66,7 +66,7 @@ export default function Form({
     } else if (type == "record") {
       setVideo("");
       setPhoto([]);
-      setRecord(e.target.value);
+      setRecord(e.target.files[0]);
     }
     const file = e.target.files[0];
     setSelectedFile(...e.target.files);
@@ -353,16 +353,16 @@ export default function Form({
                         Your record
                       </h4>
 
-                        <div className="wavebody">
-                          <Waveform url={url} />
-                          <div style={{ margin: "auto", display: "block" }}>
-                            {" "}
-                            <img src={delet} alt="" />
-                          </div>
+                      <div className="wavebody">
+                        <Waveform url={url} />
+                        <div style={{ margin: "auto", display: "block" }}>
+                          {" "}
+                          <img src={delet} alt="" />
                         </div>
                       </div>
-                    ) : (
-                      //   شكل الريكورد عند التسجيل
+                    </div>
+                  ) : (
+                    //   شكل الريكورد عند التسجيل
 
                     <div
                       className="rounded-3 text-center d-flex bg-white w-100 btn-tertiary js-labelFile p-4 border-dashed"

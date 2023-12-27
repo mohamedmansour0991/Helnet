@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const getDataPost = (initialPage, token, refresh) => {
+const getDataPost = (initialPage, token, refresh, api) => {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -12,7 +12,7 @@ const getDataPost = (initialPage, token, refresh) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${URL}/api/post/post?page=${page}`, {
+      const response = await fetch(`${URL}/api/post/${api}?page=${page}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ const getDataPost = (initialPage, token, refresh) => {
   }, [page, hasMore, token]);
 
   useEffect(() => {
-    console.log(1)
+    console.log(1);
     const fetchData = async () => {
       const response = await fetch(`${URL}/api/post/post?page=${initialPage}`, {
         method: "GET",

@@ -63,7 +63,7 @@ function App() {
         <Route path="/doctor" element={<Doctor />} />
         <Route path="/user-kind" element={<UserKind />} />
         <Route path="/job" element={<Jobs />} />
-        <Route path="/profile1" element={user ? <Profile /> : <Login />} />
+        <Route path="/profile/:id" element={user ? <Profile /> : <Login />} />
         <Route path="/reels-page" element={user ? <ReelsPage /> : <Login />} />
         <Route path="/:allroute" element={user ? <MainPage /> : <Login />} />
         <Route path="/" element={user ? <MainPage /> : <Login />} />

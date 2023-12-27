@@ -24,8 +24,20 @@ import BoxFirendsProfile from "../../components/profileComponents/boxFirendsProf
 import BoxAcceptFirendsProfile from "../../components/profileComponents/boxFirendsProfile/BoxAcceptFirendsProfile";
 import { data } from "/public/fakeData";
 import ProfileHeader from "../../components/profileHeader/ProfileHeader";
+import getDataPost from "../../components/posts/getDataPost";
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const { user, token, refrech } = useSelector((state) => state.auth);
+  const params = useParams().id;
+
+  const { items, hasMore, loadMore } = getDataPost(
+    1,
+    token,
+    refrech,
+    `/get_post_user/${params}`
+  );
   const mainMenuLabels = [
     { name: "من المنصورة", icon: home },
     { name: "درس في جامعة المنصورة ", icon: graduation },
@@ -33,6 +45,7 @@ const Profile = () => {
     { name: "ولد 12 سبتمبر 2002 ", icon: cake },
     { name: " انضم في مارس 2020 ", icon: link },
   ];
+
   const { t } = useTranslation();
   const direction = localStorage.getItem("direction");
   let [isOpen, setIsOpen] = useState(false);
@@ -60,7 +73,7 @@ const Profile = () => {
       {/* mycover */}
       <div className="bg-body">
         <Navbar />
-        <ProfileHeader openModal={openModal} />
+        {/* <ProfileHeader openModal={openModal} /> */}
         <main className={`main mt-4 ${direction}`}>
           <MainMenu mainMenuLabels={mainMenuLabels} />
           <div className="container">
@@ -93,7 +106,7 @@ const Profile = () => {
                   </p>
                 </div>
               </div>
-              <Posts data={data} />
+              <Posts data={items} />
             </div>
           </div>
           <Aside />

@@ -30,9 +30,10 @@ import { useEffect, useRef, useState } from "react";
 import { t } from "i18next";
 import "./Navbar.scss";
 import { logout } from "../../rtk/slices/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Navbar() {
+  const { user } = useSelector((state) => state.auth);
   const name = window.location.pathname.split("/")[1];
   const mainNavbarList = [
     { name: t("Home"), icon: home, coloredIcon: homeColored, link: "home" },
@@ -73,7 +74,7 @@ export default function Navbar() {
     { name: t("Settings"), icon: settings, link: "settings/update-user" },
   ];
   const userOptionsListComputer = [
-    { name: t("Ebrahim mohamed"), icon: profile1, link: "profile1" },
+    { name: t("Ebrahim mohamed"), icon: profile1, link: `profile/${user?.id}` },
     { name: t("Globe"), icon: globe, link: "globe" },
     // { name: "settings/", icon: settings, link: "settings/update-user" },
     { name: t("Settings"), icon: settings, link: "settings/update-user" },
