@@ -17,6 +17,7 @@ import Form from "../../form/Form";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUpload } from "../../../rtk/slices/progressSlice";
+import ButtonShare from "../button/ButtonShare";
 
 export default function CreatePost({
   placeholder,
@@ -75,7 +76,7 @@ export default function CreatePost({
   const data = {
     text: text,
     privacy,
-    category: typePost,
+    category_id: 1,
     classification_id: 1,
   };
   return (
@@ -203,7 +204,7 @@ export default function CreatePost({
 
         <Form isOpen={isFormOpen} closeModal={closeForm} title={formTitle} />
 
-        <Button children={t("Post")} data={data} />
+        <ButtonShare children={t("Post")} data={data} />
       </Modal>
     </>
   );

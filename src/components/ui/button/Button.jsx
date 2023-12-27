@@ -24,54 +24,10 @@ export default function Button({
   onClick = () => {},
   ...rest
 }) {
-  const [t] = useTranslation();
-  const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
-
-  //upload text
-  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
-  const handleClick = async (e) => {
-
-
-    const fileId = Date.now();
-    dispatch(addUpload({ fileId }));
-    try {
-      const res = await axios.post(
-        `${URL}/api/post/create_post`,
-        data,
-
-        {
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          onUploadProgress: (progressEvent) => {
-            const progress = Math.round(
-              (progressEvent.loaded / progressEvent.total) * 100
-            );
-            dispatch(setPercentage({ fileId, progress }));
-          },
-        }
-      );
-      console.log(res);
-
-      if (res.data) {
-        dispatch(refrechPosts());
-        dispatch(finishUpload({ fileId }));
-        toast.success("تم نشر المنشور");
-      }
-    } catch (err) {
-      dispatch(finishUpload({ fileId }));
-      toast.error(t("A network error occurred"));
-
-      console.log(err);
-    }
-  };
-
+ 
   return (
     <button
       type={type}
-      onClick={handleClick}
       style={{
         backgroundColor: backgroundColor,
         color: color,
