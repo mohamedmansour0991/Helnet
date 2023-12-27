@@ -29,8 +29,10 @@ function FormSelect({ inputs, header, name, formValues, setFormValues }) {
             />
           ) : (
             <input
+              defaultValue={tap?.value}
               type={tap.type}
               onChange={(e) => handleInputChange(tap.state, e.target.value)}
+              
             />
           )}
         </div>
