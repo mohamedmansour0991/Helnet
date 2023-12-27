@@ -281,7 +281,7 @@ button {
   z-index: 1;
   max-width: 150px;
   transition: all 0.4s;
-  background-color: orange;
+  // background-color: orange;
 }
 
 .profile-pic2 {
@@ -305,7 +305,16 @@ button {
   max-width: 45px;
   transition: all 0.4s;
 }
-
+.profile-pic4 {
+  border-radius: 50%;
+  position: absolute;
+  /* top: 0px; */
+  right: 148px;
+  margin: auto;
+  z-index: 1;
+  max-width: 40px;
+  transition: all 0.4s;
+}
 .profile-info {
   color: #000;
   padding-left: 45px;
@@ -721,7 +730,21 @@ button {
  .controls {
   text-align: left;
   padding: 2em;
+
  }
 
 }
 
+.photodropdown {
+  top: -40px;
+  min-width: 16rem;
+  border-radius: 20px;
+  padding: 1.5rem 0.5rem;
+
+}
+.photodropdownitem{
+  padding: 1rem;
+    font-weight: 600;
+  justify-content: space-between;
+display: flex;
+}

@@ -1,18 +1,193 @@
-import React from "react";
 import cover from "../../assets/images/cover.png";
-import character from "../../assets/images/character.png";
+import mg from "../../assets/images/mg.jpg";
 import vector from "../../assets/images/Vector.png";
 import camera2 from "../../assets/images/camera2.png";
+import gallery from "../../assets/images/gallery.png";
+import edit from "../../assets/images/edit.png";
+import edit2 from "../../assets/images/ccc.png";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
+import React, { useState } from "react";
 function ProfileHeader({ openModal }) {
   const { user, error, msg } = useSelector((state) => state.auth);
 
+
+  const [showDropdown, setShowDropdown] = useState(false);
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const [showDropdown1, setShowDropdown1] = useState(false);
+  const toggleDropdown1 = () => {
+    setShowDropdown1(!showDropdown1);
+  };
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "auto",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    // height: "90%",
+    p: 0,
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [lightboxOpen1, setLightboxOpen1] = useState(false);
+  const openLightbox1 = () => setLightboxOpen1(true);
+  const closeLightbox1 = () => setLightboxOpen1(false);
+
+  const [selectedcover, setSelectedcover] = useState(cover);
+  const [selectedphoto, setSelectedphoto] = useState(mg);
+
+  const handlecoverChange = (e) => {
+    const coverfile = e.target.files[0];
+    // setSelectedcover(coverfile)
+    if (coverfile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedcover(reader.result);
+      };
+      reader.readAsDataURL(coverfile);
+    }
+  };
+
+  const handlephotoChange = (e) => {
+    const photofile = e.target.files[0];
+    // setSelectedphoto(photofile)
+    if (photofile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedphoto(reader.result);
+      };
+      reader.readAsDataURL(photofile);
+    }
+  };
+
+
+
+
   return (
     <div className="profile-card  text-start" style={{ marginTop: "6rem" }}>
-      <img className="img-responsive " src={cover} alt="" />
+      <img className="img-responsive " src={selectedcover} alt="" />
       <div className="profile-info">
-        <img className="profile-pic3" src={camera2} alt="" />
-        <img className="profile-pic" src={character} alt="" />
+        <img
+          className="profile-pic3"
+          src={camera2}
+          alt=""
+          onClick={toggleDropdown}
+        />
+        {/* Dropdown */}
+        <div
+          className={`dropdown-menu photodropdown ${showDropdown ? "show" : ""}`}
+        >
+          <div
+            className="dropdown-item photodropdownitem"
+            onClick={openLightbox1}
+          >
+            <img src={edit} /> رؤية صورة الخلفية
+          </div>
+          <div
+            className="dropdown-item photodropdownitem" >
+            <input
+              type="file"
+              name="file[]"
+              required
+              onChange={handlecoverChange}
+              id="coverFileInput"
+              style={{ display: "none" }}
+              accept=".jpeg, .jpg, .png"
+            />
+
+            <img src={gallery} style={{
+              backgroundColor: "#E9E9E9",
+              width: "26px",
+              padding: "6px",
+              borderRadius: "5px"
+            }} /> <label htmlFor="coverFileInput" >
+              اختر صورة الخلفية
+            </label>
+          </div>
+        </div>
+        {/* showcover */}
+        <Modal
+          open={lightboxOpen1}
+          onClose={closeLightbox1}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <img
+              className="w-100 rounded "
+              src={selectedcover}
+            />
+          </Box>
+        </Modal>
+
+
+        <img className="profile-pic" src={selectedphoto} alt="" />
+        <img
+          className="profile-pic4"
+          src={camera2}
+          alt=""
+          onClick={toggleDropdown1}
+        />
+        {/* Dropdown */}
+        <div
+          className={`dropdown-menu photodropdown ${showDropdown1 ? "show" : ""}`}
+          style={{ right: "174px", top: "28px" }}
+        >
+          <div
+            className="dropdown-item photodropdownitem"
+            onClick={handleOpen}
+          >
+            <img src={edit} /> رؤية صورة الشخصية
+          </div>
+          <div
+            className="dropdown-item photodropdownitem" >
+            <input
+              type="file"
+              name="file[]"
+              required
+              onChange={handlephotoChange}
+              id="photoFileInput"
+              style={{ display: "none" }}
+              accept=".jpeg, .jpg, .png"
+            />
+
+            <img src={gallery} style={{
+              backgroundColor: "#E9E9E9",
+              width: "26px",
+              padding: "6px",
+              borderRadius: "5px"
+            }} />  <label htmlFor="photoFileInput" >
+              اختر صورة شخصية
+            </label>
+          </div>
+        </div>
+        {/* showphoto */}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <img style={{ width: "auto" }}
+              className="w-100 rounded "
+              src={selectedphoto}
+            />
+          </Box>
+        </Modal>
+
+
 
         <div
           className="d-flex align-items-center justify-content-between flex-wrap w-100  gap-2"
