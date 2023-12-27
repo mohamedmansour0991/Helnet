@@ -13,20 +13,18 @@ import "./singlePost.scss";
 
 export default function SinglePost({ data }) {
   return (
-    <div className="singlePost" key={data.post_id}>
+    <div className="singlePost mb-3" key={data.post_id}>
       <PostHeader user={user} />
 
       <div className="singlePost__body">
         {/* handel the text post  */}
-        {data?.post_data?.post_text && (
-          <p className="singlePost__body--text">
-            {t(data.post_data?.post_text)}
-          </p>
+        {data?.text && (
+          <p className="singlePost__body--text">{t(data?.text)}</p>
         )}
 
         {/* handel the images post  */}
-        {data.post_data?.post_images.length > 0 && (
-          <Gallery data={data.post_data?.post_images} target={data.post_id} />
+        {data.post_classification?.name == "image" && (
+          <Gallery data={data.image} target={data} />
         )}
 
         {/* handel the audio post  */}

@@ -6,9 +6,16 @@ import Waveform from "./Waveform";
 import delet from "../../assets/images/delete.png";
 import recordbutton from "../../assets/images/recordbutton.png";
 
-export default function Form({ isOpen, closeModal, title }) {
+export default function Form({
+  isOpen,
+  closeModal,
+  title,
+  setPhoto,
+  setVideo,
+  setRecord,
+}) {
   const [formType, setFormType] = useState("");
-  const [file, setFile] = useState("");
+  // const [file, setPhoto] = useState("");
   const [showFile, setShowFile] = useState();
   useEffect(() => {
     switch (title) {
@@ -47,9 +54,23 @@ export default function Form({ isOpen, closeModal, title }) {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadComplete, setUploadComplete] = useState(false);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e, type) => {
+    if (type == "img") {
+      setPhoto((prev) => [...prev, ...e.target.files]);
+      setVideo("");
+      setRecord("");
+    } else if (type == "video") {
+      setVideo(e.target.files[0]);
+      setPhoto([]);
+      setRecord("");
+    } else if (type == "record") {
+      setVideo("");
+      setPhoto([]);
+      setRecord(e.target.value);
+    }
     const file = e.target.files[0];
-    setSelectedFile(file);
+    setSelectedFile(...e.target.files);
+
     setUploadComplete(false);
 
     if (file) {
@@ -69,6 +90,7 @@ export default function Form({ isOpen, closeModal, title }) {
           clearInterval(interval);
           setUploadComplete(true);
           setUploading(false);
+          closeModal();
           return prevProgress;
         }
       });
@@ -211,7 +233,8 @@ export default function Form({ isOpen, closeModal, title }) {
                   type="file"
                   name="file[]"
                   required
-                  onChange={handleFileChange}
+                  onChange={(e) => handleFileChange(e, "img")}
+                  multiple
                   id="file"
                   style={{ display: "none" }} // Hide the input element
                   accept=".jpeg, .jpg, .png, .pdf, .mp4"
@@ -236,7 +259,7 @@ export default function Form({ isOpen, closeModal, title }) {
           {formType === "video" ? (
             <>
               <label
-                htmlFor="file"
+                htmlFor="video"
                 className="rounded-3 text-center d-flex bg-white p-4 w-100 border-dashed"
                 style={{
                   justifyContent: "center",
@@ -249,19 +272,19 @@ export default function Form({ isOpen, closeModal, title }) {
                   Choose a file or drag & drop it here
                 </h4>
                 <h3 style={{ fontWeight: "500", color: "#A9ACB4" }}>
-                  JPEG, PNG, PDF, and MP4 formats, up to 50MB
+                  MP4 formats
                 </h3>
                 <br />
                 <input
                   type="file"
                   name="file[]"
                   required
-                  onChange={handleFileChange}
-                  id="file"
+                  onChange={(e) => handleFileChange(e, "video")}
+                  id="video"
                   style={{ display: "none" }} // Hide the input element
-                  accept=".jpeg, .jpg, .png, .pdf, .mp4"
+                  accept=".mp4"
                 />
-                <label htmlFor="file" className="browse-button">
+                <label htmlFor="video" className="browse-button">
                   {uploading ? "Uploading..." : "Browse File"}
                 </label>
                 {uploading && (
@@ -297,89 +320,98 @@ export default function Form({ isOpen, closeModal, title }) {
                       How would you like to add audio?
                     </h3>
                     <br />
-                    <button className="browse-button" onClick={() => handleUserChoice("record")}>Record Audio</button>
-                    <button className="browse-button" onClick={() => handleUserChoice("upload")}>Upload Audio</button>
+                    <button
+                      className="browse-button"
+                      onClick={() => handleUserChoice("record")}
+                    >
+                      Record Audio
+                    </button>
+                    <button
+                      className="browse-button"
+                      onClick={() => handleUserChoice("upload")}
+                    >
+                      Upload Audio
+                    </button>
                   </label>
                 </div>
               )}
 
               {userChoice === "record" && (
                 <>
-                  {
-                    url ? (
-                      //  شكل الريكورد بعد التسجيل
+                  {url ? (
+                    //  شكل الريكورد بعد التسجيل
 
-                      <div
-                        className="rounded-3 text-center p-5 w-100 border-dashed"
-                        style={{ marginBottom: "20px" }}
-                      >
-                        <h4 style={{ fontWeight: "500", fontSize: "large" }}>
-                          Your record
-                        </h4>
+                    <div
+                      className="rounded-3 text-center p-5 w-100 border-dashed"
+                      style={{ marginBottom: "20px" }}
+                    >
+                      <h4 style={{ fontWeight: "500", fontSize: "large" }}>
+                        Your record
+                      </h4>
 
-                        <div className="wavebody">
-                          <Waveform url={url} />
-                          <div style={{ margin: "auto", display: "block" }}>
-                            {" "}
-                            <img src={delet} alt="" />
-                          </div>
+                      <div className="wavebody">
+                        <Waveform url={url} />
+                        <div style={{ margin: "auto", display: "block" }}>
+                          {" "}
+                          <img src={delet} alt="" />
                         </div>
                       </div>
-                    ) : (
-                      //   شكل الريكورد عند التسجيل
+                    </div>
+                  ) : (
+                    //   شكل الريكورد عند التسجيل
 
-                      <div
-                        className="rounded-3 text-center d-flex bg-white w-100 btn-tertiary js-labelFile p-4 border-dashed"
-                        style={{
-                          justifyContent: "center",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          width: "200px",
-                          margin: "0 auto",
-                          fontSize: "48px",
-                          cursor: "pointer",
-                          marginBottom: "20px",
-                        }}
-                        onClick={handleRecordClick}
-                      >
-                        <h4 style={{ fontWeight: "500", fontSize: "large" }}>
-                          Tap here to start a record
-                        </h4>
-                        <img src={recordbutton} />
+                    <div
+                      className="rounded-3 text-center d-flex bg-white w-100 btn-tertiary js-labelFile p-4 border-dashed"
+                      style={{
+                        justifyContent: "center",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        width: "200px",
+                        margin: "0 auto",
+                        fontSize: "48px",
+                        cursor: "pointer",
+                        marginBottom: "20px",
+                      }}
+                      onClick={handleRecordClick}
+                    >
+                      <h4 style={{ fontWeight: "500", fontSize: "large" }}>
+                        Tap here to start a record
+                      </h4>
+                      <img src={recordbutton} />
 
-                        {recording && (
-                          <p
-                            style={{
-                              textAlign: "center",
-                              marginTop: "10px",
-                              fontSize: "24px",
-                            }}
-                          >
-                            Recording...
-                          </p>
-                        )}
+                      {recording && (
+                        <p
+                          style={{
+                            textAlign: "center",
+                            marginTop: "10px",
+                            fontSize: "24px",
+                          }}
+                        >
+                          Recording...
+                        </p>
+                      )}
 
-                        {recording && (
-                          <p
-                            style={{
-                              textAlign: "center",
-                              marginTop: "10px",
-                              fontSize: "24px",
-                            }}
-                          >
-                            {formatTime(timer)}
-                          </p>
-                        )}
+                      {recording && (
+                        <p
+                          style={{
+                            textAlign: "center",
+                            marginTop: "10px",
+                            fontSize: "24px",
+                          }}
+                        >
+                          {formatTime(timer)}
+                        </p>
+                      )}
 
-                        <audio ref={audioRef} controls className="audio1" />
-                      </div>
-                    )}
+                      <audio ref={audioRef} controls className="audio1" />
+                    </div>
+                  )}
                 </>
               )}
 
               {userChoice === "upload" && (
                 <label
-                  htmlFor="file"
+                  htmlFor="record"
                   className="rounded-3 text-center d-flex bg-white p-4 w-100 border-dashed"
                   style={{
                     justifyContent: "center",
@@ -397,14 +429,14 @@ export default function Form({ isOpen, closeModal, title }) {
                   <br />
                   <input
                     type="file"
-                    name="file[]"
+                    name="record"
                     required
-                    onChange={handleFileChange}
-                    id="file"
+                    onChange={(e) => handleFileChange(e, "record")}
+                    id="record"
                     style={{ display: "none" }} // Hide the input element
-                    accept=".jpeg, .jpg, .png, .pdf, .mp4"
+                    accept=""
                   />
-                  <label htmlFor="file" className="browse-button">
+                  <label htmlFor="record" className="browse-button">
                     {uploading ? "Uploading..." : "Browse File"}
                   </label>
                   {uploading && (
@@ -420,42 +452,33 @@ export default function Form({ isOpen, closeModal, title }) {
                   )}
                 </label>
               )}
-
-
-
-
-
             </>
           ) : null}
 
-          {
-            formType === "service" ? (
-              <>
-                <Input type="tel" label={t("service name")} />
+          {formType === "service" ? (
+            <>
+              <Input type="tel" label={t("service name")} />
 
-                <label htmlFor="formTextarea">{t("Details")}</label>
-                <textarea
-                  id="formTextarea"
-                  className="w-full rounded-lg bg-red-50 resize-none px-2 h-28 text-xl w-100"
-                />
+              <label htmlFor="formTextarea">{t("Details")}</label>
+              <textarea
+                id="formTextarea"
+                className="w-full rounded-lg bg-red-50 resize-none px-2 h-28 text-xl w-100"
+              />
 
-                <Input type="number" label={t("Suggested price")} />
-              </>
-            ) : null
-          }
+              <Input type="number" label={t("Suggested price")} />
+            </>
+          ) : null}
 
-          {
-            formType === "usedProduct" ||
-              formType === "newProduct" ||
-              formType === "service" ? (
-              <>
-                <Input type="tel" label={t("Contact method")} />
-              </>
-            ) : null
-          }
+          {formType === "usedProduct" ||
+          formType === "newProduct" ||
+          formType === "service" ? (
+            <>
+              <Input type="tel" label={t("Contact method")} />
+            </>
+          ) : null}
 
           <Button children={t("Post")} />
-        </form >
+        </form>
       }
     />
   );

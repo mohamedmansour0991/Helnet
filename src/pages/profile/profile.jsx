@@ -16,15 +16,6 @@ import close2 from "../../assets/images/close2.png";
 // import MainMenu from "../../components/MainMenu/MainMenu"
 // import { MainMenu } from "/src/components";
 import { Navbar, Aside, MainMenu } from "/src/components";
-import {
-  testImage1,
-  testImage2,
-  testImage3,
-  testImage4,
-  testImage5,
-  testImage6,
-} from "../../assets/images";
-import { testVideo } from "../../assets/videos";
 import Card from "../../components/card/card";
 import { useTranslation } from "react-i18next";
 import Posts from "../../components/posts/Posts";

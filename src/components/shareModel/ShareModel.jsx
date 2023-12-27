@@ -28,6 +28,7 @@ export default function ShareModel({ isShareOpen, closeShareModal }) {
         title={t("Share this post")}
         closeIcon={true}
         isFullScreen={false}
+        
       >
         <p className="text-stone-900 text-lg">
           {t("if you like this post share it with your friends!")}

@@ -18,6 +18,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUpload } from "../../../rtk/slices/progressSlice";
 import ButtonShare from "../button/ButtonShare";
+import { CloseButton, Col } from "react-bootstrap";
+import AudioPlayer from "../audioPlayer/AudioPlayer";
 
 export default function CreatePost({
   placeholder,
@@ -72,13 +74,29 @@ export default function CreatePost({
   const [text, setText] = useState("");
   const [privacy, setprivacy] = useState("public");
   const [typePost, setTypePost] = useState("scientific");
+  const [photo, setPhoto] = useState("");
+  const [video, setVideo] = useState("");
+  const [record, setRecord] = useState("");
 
-  const data = {
-    text: text,
-    privacy,
-    category_id: 1,
-    classification_id: 1,
-  };
+  const data = new FormData();
+  data.append("privacy", privacy);
+  data.append("classification_id", 1);
+  if (photo.length > 0) {
+    data.append("classification_id", 3);
+    for (let i = 0; i < photo.length; i++) {
+      data.append("image[]", photo[i]);
+    }
+  }
+  if (video.length > 0) {
+    data.append("classification_id", 2);
+    data.append("video", video);
+  }
+  if (text) {
+    data.append("text", text);
+  }
+
+  console.log(data);
+
   return (
     <>
       <div className="createPost rounded-xl bg-white">
@@ -171,6 +189,36 @@ export default function CreatePost({
           }
         />
 
+        {photo && (
+          <div className="d-flex flex-wrap gap-3">
+            {photo?.map((f, index) => (
+              <div style={{ position: "relative" }}>
+                <CloseButton
+                  style={{ position: "absolute", cursor: "pointer" }}
+                  // onClick={() => removeFile(index)}
+                />
+                <img
+                  src={URL.createObjectURL(f)}
+                  alt=""
+                  style={{ width: "150px", height: "100px" }}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {video && (
+          <div className="d-flex flex-wrap gap-3">
+            <video width="400" controls>
+              <source src={URL.createObjectURL(video)} />
+            </video>
+          </div>
+        )}
+        {/* {record && (
+          <audio src={URL.createObjectURL(record)}></audio>
+          // <AudioPlayer data={URL.createObjectURL(record)} />
+        )} */}
+
         <div
           className="sm:flex items-center justify-between gap-3 px-4 mb-3 border rounded-2xl"
           dir={direction}
@@ -202,9 +250,22 @@ export default function CreatePost({
           </div>
         </div>
 
-        <Form isOpen={isFormOpen} closeModal={closeForm} title={formTitle} />
+        <Form
+          isOpen={isFormOpen}
+          closeModal={closeForm}
+          title={formTitle}
+          photo={photo}
+          setPhoto={setPhoto}
+          setVideo={setVideo}
+          setRecord={setRecord}
+        />
 
-        <ButtonShare children={t("Post")} data={data} />
+        <ButtonShare
+          children={t("Post")}
+          data={data}
+          state={video && true}
+          video={video}
+        />
       </Modal>
     </>
   );

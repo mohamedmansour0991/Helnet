@@ -645,21 +645,17 @@ button {
   border: 2px #ddd dashed !important;
 }
 
-.browse-button  {
-  border: 1px solid #CBD0DC;
+.browse-button {
+  border: 1px solid #cbd0dc;
   padding: 6px 21px;
   border-radius: 12px;
   margin-bottom: 20px;
-
 }
 
-.audio1{
+.audio1 {
   // margin: auto;
   display: none;
 }
-
-
-
 
 // .audio1::-webkit-media-controls-panel {
 //   background-color: #fff;
@@ -687,41 +683,55 @@ button {
 //   display: none;
 // }
 
-
-
 .wavebody {
   background: #fff;
-  color: #C4C4C4;
-.mywave{
+  color: #c4c4c4;
+  .mywave {
+    width: 100%;
+    /* height: 100px; */
+    // margin-left: 160px;
+  }
+
+  .playlist {
+    text-align: left;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  .playlist-item {
+    color: #444;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    padding: 1em;
+  }
+
+  .playlist-item.selected {
+    font-weight: bold;
+  }
+
+  .playlist-item:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .controls {
+    text-align: left;
+    padding: 1em;
+  }
+}
+
+@media (max-width: 550px) {
+  .min-h-full .w-full.transform {
+    height: 100vh;
+    border-radius: 0 !important;
+  }
+}
+
+.min-h-full {
+  padding: 0 !important;
+}
+
+.main > .container {
+  display: block;
+}
+.infinite-scroll-component__outerdiv {
   width: 100%;
-  /* height: 100px; */
-  // margin-left: 160px;
 }
-
- .playlist {
-  text-align: left;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
- }
-
- .playlist-item {
-  color: #444;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-   padding: 1em;
- }
-
- .playlist-item.selected {
-  font-weight: bold;
- }
-
- .playlist-item:hover {
-  background: rgba(0, 0, 0, 0.1);
- }
-
- .controls {
-  text-align: left;
-  padding: 1em;
- }
-
-}
-
