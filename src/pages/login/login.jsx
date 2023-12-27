@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../rtk/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Cookies from "js-cookie";
 // import Cookies from "js-cookie";
 const Login = () => {
   const direction = localStorage.getItem("direction");

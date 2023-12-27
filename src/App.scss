@@ -281,7 +281,7 @@ button {
   z-index: 1;
   max-width: 150px;
   transition: all 0.4s;
-  background-color: orange;
+  // background-color: orange;
 }
 
 .profile-pic2 {
@@ -305,7 +305,16 @@ button {
   max-width: 45px;
   transition: all 0.4s;
 }
-
+.profile-pic4 {
+  border-radius: 50%;
+  position: absolute;
+  /* top: 0px; */
+  right: 148px;
+  margin: auto;
+  z-index: 1;
+  max-width: 40px;
+  transition: all 0.4s;
+}
 .profile-info {
   color: #000;
   padding-left: 45px;
@@ -717,20 +726,8 @@ button {
     padding: 1em;
   }
 }
-
-@media (max-width: 550px) {
-  .min-h-full .w-full.transform {
-    height: 100vh;
-    border-radius: 0 !important;
-  }
-}
-
-.min-h-full {
-  padding: 0 !important;
-}
-
-.main > .container {
-  display: block;
+.container {
+  display: block !important;
 }
 .infinite-scroll-component__outerdiv {
   width: 100%;

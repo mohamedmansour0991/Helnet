@@ -178,6 +178,10 @@ export default function Form({
     setUserChoice(choice);
   };
 
+  const handleDelete = () => {
+    setUrl(""); // Clear the URL
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -349,16 +353,16 @@ export default function Form({
                         Your record
                       </h4>
 
-                      <div className="wavebody">
-                        <Waveform url={url} />
-                        <div style={{ margin: "auto", display: "block" }}>
-                          {" "}
-                          <img src={delet} alt="" />
+                        <div className="wavebody">
+                          <Waveform url={url} />
+                          <div style={{ margin: "auto", display: "block" }}>
+                            {" "}
+                            <img src={delet} alt="" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ) : (
-                    //   شكل الريكورد عند التسجيل
+                    ) : (
+                      //   شكل الريكورد عند التسجيل
 
                     <div
                       className="rounded-3 text-center d-flex bg-white w-100 btn-tertiary js-labelFile p-4 border-dashed"
