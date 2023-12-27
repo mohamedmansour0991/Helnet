@@ -156,6 +156,10 @@ export default function Form({ isOpen, closeModal, title }) {
     setUserChoice(choice);
   };
 
+  const handleDelete = () => {
+    setUrl(""); // Clear the URL
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -321,7 +325,7 @@ export default function Form({ isOpen, closeModal, title }) {
                           <Waveform url={url} />
                           <div style={{ margin: "auto", display: "block" }}>
                             {" "}
-                            <img src={delet} alt="" />
+                            <img style={{ margin: "auto" }} src={delet} alt="" onClick={handleDelete} />
                           </div>
                         </div>
                       </div>

@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../rtk/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 const Login = () => {
   const direction = localStorage.getItem("direction");
   const [passwordShow, setPasswordShow] = useState(false);
@@ -15,12 +15,12 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, error, msg } = useSelector((state) => state.auth);
-  // const [email, setEmail] = useState(
-  //   Cookies.get("remember") ? Cookies.get("remember").email : ""
-  // );
-  // const [password, setPassword] = useState(
-  //   Cookies.get("remember") ? Cookies.get("remember").password : ""
-  // );
+  const [email, setEmail] = useState(
+    Cookies.get("remember") ? Cookies.get("remember").email : ""
+  );
+  const [password, setPassword] = useState(
+    Cookies.get("remember") ? Cookies.get("remember").password : ""
+  );
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
