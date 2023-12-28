@@ -117,7 +117,7 @@ export default function VideoPlayer({ data }) {
       <video
         className="video"
         style={{ maxHeight: "400px" }}
-        src={`${URL}/storage/${data}`}
+        src={`${URL}/api/storage/videos/${data}`}
         ref={videoRef}
         onClick={togglePlay}
       />

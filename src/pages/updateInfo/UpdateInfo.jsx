@@ -35,6 +35,12 @@ function UpdateInfo() {
       value: user?.email,
     },
     { name: t("About You"), type: "textarea", class: "", state: "aaboutMe" },
+    {
+      name: t("Account Privacy"),
+      type: "select",
+      select: ["Public", "Private"],
+      state: "accountPrivacy",
+    },
   ];
   const typeUser = [{ name: t("User Type"), type: "select" }];
 

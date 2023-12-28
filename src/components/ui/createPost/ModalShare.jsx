@@ -75,13 +75,11 @@ export default function ModalShare({
     setIsArabic(localStorage.getItem("i18nextLng") === "ar");
   }, []);
 
-  const [openSelect, setOpenSelect] = useState(false);
-
   const [text, setText] = useState(post?.text);
   const [privacy, setprivacy] = useState("public");
   console.log(post?.image);
   const [photo, setPhoto] = useState([]);
-  const [video, setVideo] = useState(post?.video);
+  const [video, setVideo] = useState("");
   const [videoEdit, setVideoEdit] = useState(post?.video);
   const [imageEdit, setImageEdit] = useState(post?.image);
   const [record, setRecord] = useState("");
@@ -113,9 +111,9 @@ export default function ModalShare({
 
   if (video) {
     data.append("classification_id", 2);
-    // data.append("video", video);
+  } else if (videoEdit) {
+    data.append("classification_id", 2);
   }
-
   if (record) {
     data.append("audio", record);
     data.append("classification_id", 4);
@@ -218,16 +216,26 @@ export default function ModalShare({
           </>
         )}
 
-        {/* {video && (
+        {video ? (
           <div className="d-flex flex-wrap justify-content-center gap-3 mb-2">
             <video width="400" controls style={{ maxHeight: "350px" }}>
-              <source src={URL.createObjectURL(video)} />
+              <source src={URL?.createObjectURL(video)} />
             </video>
           </div>
-        )} */}
+        ) : (
+          <>
+            {videoEdit && (
+              <div className="d-flex flex-wrap justify-content-center gap-3 mb-2">
+                <video width="400" controls style={{ maxHeight: "350px" }}>
+                  <source src={`${URL2}/api/storage/videos/${videoEdit}`} />
+                </video>
+              </div>
+            )}
+          </>
+        )}
         {record && (
           // <audio src={URL.createObjectURL(record)}></audio>
-          <AudioPlayer data={URL.createObjectURL(record)} />
+          <AudioPlayer data={URL?.createObjectURL(record)} />
         )}
 
         <div

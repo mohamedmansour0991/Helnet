@@ -31,12 +31,6 @@ export default function CreatePost({
     { value: "Record", title: "Post Record", image: voice },
   ],
 }) {
-  const selectLabels = ["public", "private"];
-  const direction = localStorage.getItem("direction");
-
-  const username = "كريم";
-  const userFullName = "كريم سيف";
-
   /////////////// main module ///////////////////
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("Text Post");
@@ -49,65 +43,6 @@ export default function CreatePost({
     setIsOpen(true);
   }
 
-  /////////////// main module ///////////////////
-
-  /////////////// store module ///////////////////
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [formTitle, setFormTitle] = useState("Text Post");
-
-  function closeForm() {
-    setIsFormOpen(false);
-  }
-
-  function openForm() {
-    setIsFormOpen(true);
-  }
-
-  /////////////// main module ///////////////////
-
-  const [isArabic, setIsArabic] = useState(false);
-
-  useEffect(() => {
-    setIsArabic(localStorage.getItem("i18nextLng") === "ar");
-  }, []);
-
-  const [openSelect, setOpenSelect] = useState(false);
-
-  const [text, setText] = useState("");
-  const [privacy, setprivacy] = useState("public");
-  const [typePost, setTypePost] = useState("scientific");
-  const [photo, setPhoto] = useState("");
-  const [video, setVideo] = useState("");
-  const [record, setRecord] = useState("");
-
-  const data = new FormData();
-  data.append("privacy", privacy);
-  console.log(privacy);
-  data.append("classification_id", 1);
-  if (photo.length > 0) {
-    data.append("classification_id", 3);
-    for (let i = 0; i < photo.length; i++) {
-      data.append("image[]", photo[i]);
-    }
-  }
-  if (video) {
-    data.append("classification_id", 2);
-    // data.append("video", video);
-  }
-  if (record) {
-    data.append("audio", record);
-    data.append("classification_id", 4);
-  }
-  if (text) {
-    data.append("text", text);
-  }
-
-  console.log(data);
-  const removeFile = (index) => {
-    const updatedFiles = [...photo];
-    updatedFiles.splice(index, 1);
-    setPhoto(updatedFiles);
-  };
   return (
     <>
       <div className="createPost rounded-xl bg-white">
@@ -164,7 +99,11 @@ export default function CreatePost({
           </Button>
         </div>
       </div>
-      <ModalShare isOpen={isOpen} closeModal={closeModal} setIsOpen={setIsOpen} />
+      <ModalShare
+        isOpen={isOpen}
+        closeModal={closeModal}
+        setIsOpen={setIsOpen}
+      />
     </>
   );
 }

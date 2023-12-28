@@ -31,6 +31,7 @@ import { t } from "i18next";
 import "./Navbar.scss";
 import { logout } from "../../rtk/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Sidebar } from "./NavbarMobile";
 
 export default function Navbar() {
   const { user } = useSelector((state) => state.auth);
@@ -105,7 +106,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleClick = (e) => {
-      if (menuRef.current.contains(e.target)) {
+      if (menuRef?.current?.contains(e.target)) {
         // inside click
         return;
       } else {
@@ -191,6 +192,7 @@ export default function Navbar() {
           onClick={() => setIsOpened(!isOpened)}
         />
       </div>
+      {/* <Sidebar isOpened={isOpened} menuRef={menuRef} /> */}
       <ul
         ref={menuRef}
         className={`navbar__list mobileMenu p-0 py-4  d-grid  ${isOpened} ${direction} `}
