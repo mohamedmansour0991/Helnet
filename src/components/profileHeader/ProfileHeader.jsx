@@ -5,8 +5,8 @@ import camera2 from "../../assets/images/camera2.png";
 import gallery from "../../assets/images/gallery.png";
 import edit from "../../assets/images/edit.png";
 import edit2 from "../../assets/images/ccc.png";
-// import Box from "@mui/material/Box";
-// import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
 import React, { useState } from "react";
 function ProfileHeader({ openModal }) {

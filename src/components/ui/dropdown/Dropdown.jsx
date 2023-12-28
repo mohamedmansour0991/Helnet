@@ -1,16 +1,28 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { t } from "i18next";
+import { deletPost } from "../../../rtk/Api/Api";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Dropdown({ buttonData = "open", labels = [] }) {
+export default function Dropdown({
+  buttonData = "open",
+  labels = [],
+  post_id,
+}) {
   const [isArabic, setIsArabic] = useState(false);
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsArabic(localStorage.getItem("i18nextLng") === "ar");
     // console.log(localStorage.getItem("i18nextLng") === "ar");
     // console.log(isArabic);
   }, [localStorage.getItem("i18nextLng")]);
-
+  const handleButtonClick = (label) => {
+    if (label === "Delete") {
+      deletPost(token, post_id, dispatch);
+    }
+  };
   return (
     <div className=" ">
       <Menu as="div" className="relative inline-block text-left">
@@ -38,6 +50,7 @@ export default function Dropdown({ buttonData = "open", labels = [] }) {
                   <Menu.Item key={index}>
                     {({ active }) => (
                       <button
+                        onClick={() => handleButtonClick(label)}
                         className={`${
                           active ? "bg-violet-500 text-white" : "text-gray-900"
                         } group flex w-full items-center text-center rounded-md px-3 py-2`}

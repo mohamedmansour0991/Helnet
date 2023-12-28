@@ -11,6 +11,8 @@ import {
 import "./VideoPlayer.scss";
 
 export default function VideoPlayer({ data }) {
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
@@ -115,7 +117,7 @@ export default function VideoPlayer({ data }) {
       <video
         className="video"
         style={{ maxHeight: "400px" }}
-        src={data}
+        src={`${URL}/storage/${data}`}
         ref={videoRef}
         onClick={togglePlay}
       />

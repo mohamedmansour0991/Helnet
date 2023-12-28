@@ -33,8 +33,8 @@ export default function SinglePost({ data }) {
         )}
 
         {/* handel the video post  */}
-        {data.post_data?.post_video && (
-          <VideoPlayer data={data.post_data.post_video} user={user} />
+        {data?.video && (
+          <VideoPlayer data={data.video} user={user} />
         )}
 
         {/* handel the link post  */}

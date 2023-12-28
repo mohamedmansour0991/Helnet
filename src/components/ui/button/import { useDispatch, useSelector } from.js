@@ -21,7 +21,6 @@ export default function ButtonShare({
   border = "",
   className = "",
   color = "#fff",
-  setIsOpen,
   onclick,
   backgroundColor = null,
   onClick = () => {},
@@ -31,10 +30,9 @@ export default function ButtonShare({
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
 
-  //upload text and photo and audio
+  //upload text
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const handleClick = async (e) => {
-    setIsOpen(false);
     console.log(data);
 
     const fileId = Date.now();
@@ -74,10 +72,11 @@ export default function ButtonShare({
 
   //video
   const CHUNK_SIZE = 5 * 1024 * 1024; // 5MB
-  let uploadedChunks = 0;
+  let uploadedChunks = 1;
   const [progress, setProgress] = useState(0);
   const [uploadComplete, setUploadComplete] = useState(false);
-
+  const [videoPath, setVideoPath] = useState("");
+  const [path, setPath] = useState("");
   // const handleProgress =
   const totalChunks = Math.ceil(video.size / CHUNK_SIZE);
   const generateRandomFileName = (length) => {
@@ -99,16 +98,13 @@ export default function ButtonShare({
     setRandomFileName(newRandomFileName);
   };
   const handleClickVideo = async () => {
-        setIsOpen(false);
-
     console.log(video);
     await handleGenerateRandomFileName();
     const start = uploadedChunks * CHUNK_SIZE;
     const end = Math.min(start + CHUNK_SIZE, video.size);
     console.log(start);
     console.log(end);
-    // const blob = video.slice(start, end);
-    const blob = video.slice(start, end, "video/mp4");
+    const blob = video.slice(start, end);
     console.log(video.slice(start, end));
     if (video) {
       const formData = new FormData();
@@ -143,11 +139,14 @@ export default function ButtonShare({
           if (response?.data?.original?.data.path) {
             dispatch(finishUpload({ fileId }));
             if (uploadedChunks < totalChunks) {
-              handleClickVideo();
+              handleUpload();
             } else {
+              setVideoPath(response?.original?.data.path);
               setUploadComplete(true);
               console.log("Upload complete");
-              data.append("video", response?.data?.original?.data?.path);
+              setPath(response?.original?.data.path);
+
+              data.append("video", response?.original?.data.path);
               // formData2.append("privacy", privacy);
               data.append("classification_id", 2);
               // if (text) {
@@ -181,22 +180,20 @@ export default function ButtonShare({
   };
 
   return (
-    <>
-      <button
-        type={type}
-        onClick={state ? handleClickVideo : handleClick}
-        style={{
-          backgroundColor: backgroundColor,
-          color: color,
-          borderWidth: border,
-        }}
-        className={`normalButton ${className} ${
-          backgroundColor === null && "gradient"
-        }`}
-        {...rest}
-      >
-        <div className={`children ${className}`}>{children}</div>
-      </button>
-    </>
+    <button
+      type={type}
+      onClick={state ? handleClickVideo : handleClick}
+      style={{
+        backgroundColor: backgroundColor,
+        color: color,
+        borderWidth: border,
+      }}
+      className={`normalButton ${className} ${
+        backgroundColor === null && "gradient"
+      }`}
+      {...rest}
+    >
+      <div className={`children ${className}`}>{children}</div>
+    </button>
   );
 }

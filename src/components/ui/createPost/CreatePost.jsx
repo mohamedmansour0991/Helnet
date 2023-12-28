@@ -8,6 +8,7 @@ import {
   voice,
   write,
   close1,
+  close,
 } from "../../../assets/images/icons";
 import Button from "../button/Button";
 import Modal from "../modal/Modal";
@@ -29,7 +30,7 @@ export default function CreatePost({
     { value: "Record", title: "Post Record", image: voice },
   ],
 }) {
-  const selectLabels = ["public", "privet"];
+  const selectLabels = ["public", "private"];
   const direction = localStorage.getItem("direction");
 
   const username = "كريم";
@@ -80,6 +81,7 @@ export default function CreatePost({
 
   const data = new FormData();
   data.append("privacy", privacy);
+  console.log(privacy);
   data.append("classification_id", 1);
   if (photo.length > 0) {
     data.append("classification_id", 3);
@@ -89,7 +91,7 @@ export default function CreatePost({
   }
   if (video) {
     data.append("classification_id", 2);
-    data.append("video", video);
+    // data.append("video", video);
   }
   if (record) {
     data.append("audio", record);
@@ -100,7 +102,11 @@ export default function CreatePost({
   }
 
   console.log(data);
-
+  const removeFile = (index) => {
+    const updatedFiles = [...photo];
+    updatedFiles.splice(index, 1);
+    setPhoto(updatedFiles);
+  };
   return (
     <>
       <div className="createPost rounded-xl bg-white">
@@ -194,17 +200,18 @@ export default function CreatePost({
         />
 
         {photo && (
-          <div className="d-flex flex-wrap gap-3">
+          <div className="d-flex flex-wrap gap-3 mb-3">
             {photo?.map((f, index) => (
               <div style={{ position: "relative" }}>
-                <CloseButton
+                <img
+                  src={close}
                   style={{ position: "absolute", cursor: "pointer" }}
-                  // onClick={() => removeFile(index)}
+                  onClick={() => removeFile(index)}
                 />
                 <img
                   src={URL.createObjectURL(f)}
                   alt=""
-                  style={{ width: "150px", height: "100px" }}
+                  style={{ width: "150px", height: "150px" }}
                 />
               </div>
             ))}
@@ -212,8 +219,8 @@ export default function CreatePost({
         )}
 
         {video && (
-          <div className="d-flex flex-wrap gap-3">
-            <video width="400" controls>
+          <div className="d-flex flex-wrap justify-content-center gap-3 mb-2">
+            <video width="400" controls style={{ maxHeight: "350px" }}>
               <source src={URL.createObjectURL(video)} />
             </video>
           </div>
@@ -269,6 +276,7 @@ export default function CreatePost({
           data={data}
           state={video && true}
           video={video}
+          setIsOpen={setIsOpen}
         />
       </Modal>
     </>

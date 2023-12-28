@@ -12,7 +12,7 @@ const getDataPost = (initialPage, token, refresh, api) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${URL}/api/post/${api}?page=${page}`, {
+      const response = await fetch(`${URL}/api/${api}?page=${page}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -45,13 +45,16 @@ const getDataPost = (initialPage, token, refresh, api) => {
   useEffect(() => {
     console.log(1);
     const fetchData = async () => {
-      const response = await fetch(`${URL}/api/post/post?page=${initialPage}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${URL}/api/${api}?page=${initialPage}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const data = await response.json();
 

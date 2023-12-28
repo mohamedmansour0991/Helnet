@@ -1,20 +1,45 @@
 import React from "react";
 import FriendBox from "../../components/friendBox/friendBox";
 import "./Friends.scss";
-function Friends() {
+import { useSelector } from "react-redux";
+import getDataPost from "../../components/posts/getDataPost";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { FiltersBar } from "../../components/ui";
+import { useTranslation } from "react-i18next";
+function Friends({ type }) {
+  const { user, token, refrech } = useSelector((state) => state.auth);
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  
+  const { items, hasMore, loadMore } = getDataPost(
+    1,
+    token,
+    refrech,
+    type
+  );
+  const { t } = useTranslation();
+  console.log(items)
   return (
-    <div className="friends__page">
-      <FriendBox />
-      <FriendBox />
-      <FriendBox />
-      <FriendBox />
-      <FriendBox />
-      <FriendBox />
-      <FriendBox />
-      <FriendBox />
-      <FriendBox />
-      <FriendBox />
-    </div>
+    <InfiniteScroll
+      dataLength={items.length}
+      next={loadMore}
+      hasMore={hasMore}
+      loader={<div className="lds-default  m-auto d-flex"></div>}
+    >
+      <div className="friends">
+        <FiltersBar
+          data={[
+            { name: t("Friends"), link: "friends" },
+            { name: t("Suggests"), link: "suggests" },
+            { name: t("Request"), link: "request" },
+          ]}
+        />
+        <div className="friends__page">
+          {items
+            ? items.map((post) => <FriendBox key={post.post_id} data={post} />)
+            : ""}
+        </div>
+      </div>
+    </InfiniteScroll>
   );
 }
 

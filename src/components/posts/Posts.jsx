@@ -8,10 +8,16 @@ import getDataPost from "./getDataPost";
 export default function Posts({ data }) {
   const { user, token, refrech } = useSelector((state) => state.auth);
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
-  const { items, hasMore, loadMore } = getDataPost(1, token, refrech, "post");
+  const { items, hasMore, loadMore } = getDataPost(
+    1,
+    token,
+    refrech,
+    "post/post"
+  );
   const dispatch = useDispatch();
 
-  // console.log(items);
+  
+
   return (
     <div className="grid gap-3 w-100 d-flex align-items-center flex-column">
       <InfiniteScroll

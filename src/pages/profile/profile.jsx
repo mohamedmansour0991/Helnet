@@ -36,7 +36,7 @@ const Profile = () => {
     1,
     token,
     refrech,
-    `/get_post_user/${params}`
+    `post/get_post_user/${params}`
   );
   const mainMenuLabels = [
     { name: "من المنصورة", icon: home },
@@ -73,7 +73,7 @@ const Profile = () => {
       {/* mycover */}
       <div className="bg-body">
         <Navbar />
-        {/* <ProfileHeader openModal={openModal} /> */}
+        <ProfileHeader openModal={openModal} />
         <main className={`main mt-4 ${direction}`}>
           <MainMenu mainMenuLabels={mainMenuLabels} />
           <div className="container">

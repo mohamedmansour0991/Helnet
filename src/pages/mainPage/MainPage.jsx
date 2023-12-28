@@ -19,9 +19,11 @@ import Friends from "../Friends/Friends";
 import "./MainPage.scss";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 export default function MainPage() {
   const { user, error, msg } = useSelector((state) => state.auth);
+  const uploads = useSelector((state) => state.progress.uploads);
 
   const { t } = useTranslation();
   const direction = localStorage.getItem("direction");
@@ -47,6 +49,30 @@ export default function MainPage() {
           {name === "home" || name === undefined ? (
             <div className="grid gap-3">
               <CreatePost />
+              {uploads.map((upload) => (
+                <div
+                  key={upload.fileId}
+                  className="d-flex justify-content-between align-items-center shadow-xss p-3 mx-3"
+                >
+                  {upload.isLoading && (
+                    <>
+                      <div className="">{t("uploading")}</div>
+                      <div style={{ width: "50px" }}>
+                        <CircularProgressbar
+                          value={upload.percentage}
+                          text={`${upload.percentage}%`}
+                          styles={buildStyles({
+                            textColor: "#333",
+                            pathColor: "#007bff",
+                            trailColor: "#f0f0f0",
+                            textSize: "16px",
+                          })}
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+              ))}
               <Posts data={data} />
             </div>
           ) : name === "reel" ? (
@@ -54,7 +80,13 @@ export default function MainPage() {
           ) : name === "video" ? (
             <Videos />
           ) : name === "friends" ? (
-            <Friends />
+            <Friends type="current-follower" />
+          ) : name === "suggests" ? (
+            <Friends type="may-know" />
+          ) : name === "request" ? (
+            <Friends type="current-requests" />
+          ) : name === "following" ? (
+            <Friends type="current-following" />
           ) : name === "globe" ? (
             <Notifcations />
           ) : (

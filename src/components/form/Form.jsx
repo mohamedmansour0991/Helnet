@@ -55,30 +55,17 @@ export default function Form({
   const [uploadComplete, setUploadComplete] = useState(false);
 
   const handleFileChange = (e, type) => {
-    if (type == "img") {
-      setPhoto((prev) => [...prev, ...e.target.files]);
-      setVideo("");
-      setRecord("");
-    } else if (type == "video") {
-      setVideo(e.target.files[0]);
-      setPhoto([]);
-      setRecord("");
-    } else if (type == "record") {
-      setVideo("");
-      setPhoto([]);
-      setRecord(e.target.files[0]);
-    }
     const file = e.target.files[0];
     setSelectedFile(...e.target.files);
 
     setUploadComplete(false);
 
     if (file) {
-      handleUpload(file);
+      handleUpload(e, type);
     }
   };
 
-  const handleUpload = (file) => {
+  const handleUpload = (e, type) => {
     setUploading(true);
 
     // Simulating upload progress
@@ -91,6 +78,22 @@ export default function Form({
           setUploadComplete(true);
           setUploading(false);
           closeModal();
+          setTimeout(() => {
+            if (type == "img") {
+              setPhoto((prev) => [...prev, ...e.target.files]);
+              setVideo("");
+              setRecord("");
+            } else if (type == "video") {
+              setVideo(e.target.files[0]);
+              setPhoto([]);
+              setRecord("");
+            } else if (type == "record") {
+              setVideo("");
+              setPhoto([]);
+              setRecord(e.target.files[0]);
+              handleUserChoice("");
+            }
+          }, 500);
           return prevProgress;
         }
       });
@@ -185,7 +188,10 @@ export default function Form({
   return (
     <Modal
       isOpen={isOpen}
-      closeModal={closeModal}
+      closeModal={() => {
+        closeModal();
+        handleUserChoice("");
+      }}
       title={t(title)}
       closeIcon={true}
       children={
@@ -230,7 +236,7 @@ export default function Form({
                   Choose a file or drag & drop it here
                 </h4>
                 <h3 style={{ fontWeight: "500", color: "#A9ACB4" }}>
-                  JPEG, PNG, PDF, and MP4 formats, up to 50MB
+                  JPEG, PNG formats, up to 50MB
                 </h3>
                 <br />
                 <input
@@ -241,7 +247,7 @@ export default function Form({
                   multiple
                   id="file"
                   style={{ display: "none" }} // Hide the input element
-                  accept=".jpeg, .jpg, .png, .pdf, .mp4"
+                  accept=".jpeg, .jpg, .png"
                 />
                 <label htmlFor="file" className="browse-button">
                   {uploading ? "Uploading..." : "Browse File"}
@@ -481,7 +487,7 @@ export default function Form({
             </>
           ) : null}
 
-          <Button children={t("Post")} />
+          {/* <Button children={t("Post")} /> */}
         </form>
       }
     />

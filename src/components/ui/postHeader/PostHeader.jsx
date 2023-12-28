@@ -3,8 +3,10 @@ import { PFP } from "../../../assets/images";
 import { vertical3dots } from "../../../assets/images/icons";
 import Dropdown from "../dropdown/Dropdown";
 import "./PostHeader.scss";
+import { useSelector } from "react-redux";
 
 export default function PostHeader({ user }) {
+  const myUser = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const openProfile = () => {
     navigate("/");
@@ -29,13 +31,15 @@ export default function PostHeader({ user }) {
           {/* <p className="postingTime">{moment(e?.created_at).fromNow(true)}</p> */}
         </div>
       </div>
-
-      <div className="postHeader__aside">
-        <Dropdown
-          buttonData={<img src={vertical3dots} alt="" role="button" />}
-          labels={["Edit","Delete"]}
-        />
-      </div>
+      {myUser.id == user.user_id && (
+        <div className="postHeader__aside">
+          <Dropdown
+            buttonData={<img src={vertical3dots} alt="" role="button" />}
+            labels={["Edit", "Delete"]}
+            post_id={user.id}
+          />
+        </div>
+      )}
     </div>
   );
 }
