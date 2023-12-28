@@ -125,11 +125,13 @@ export default function ModalShare({
   }, [post]);
 
   console.log(data);
+  // remove image
   const removeFile = (index) => {
     const updatedFiles = [...photo];
     updatedFiles.splice(index, 1);
     setPhoto(updatedFiles);
   };
+  // remove image edit
   const removeFileEdit = (index) => {
     const updatedFiles = [...imageEdit];
     updatedFiles.splice(index, 1);

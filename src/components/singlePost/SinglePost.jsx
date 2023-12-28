@@ -12,6 +12,8 @@ import { t } from "i18next";
 import "./singlePost.scss";
 
 export default function SinglePost({ data }) {
+    const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+
   return (
     <div className="singlePost mb-3" key={data.post_id}>
       <PostHeader user={data} />
@@ -28,14 +30,10 @@ export default function SinglePost({ data }) {
         )}
 
         {/* handel the audio post  */}
-        {data?.post_data?.post_audio?.length > 0 && (
-          <AudioPlayer data={data.post_data?.post_audio} />
-        )}
+        {data?.audio && <AudioPlayer data={`${URL}/api/audio/${data.audio}`} />}
 
         {/* handel the video post  */}
-        {data?.video && (
-          <VideoPlayer data={data.video} user={user} />
-        )}
+        {data?.video && <VideoPlayer data={data.video} user={user} />}
 
         {/* handel the link post  */}
         {data?.post_data?.post_link && <p>{data.post_data?.post_link}</p>}
