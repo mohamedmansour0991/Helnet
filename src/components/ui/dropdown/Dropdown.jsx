@@ -3,15 +3,18 @@ import { Fragment, useEffect, useState } from "react";
 import { t } from "i18next";
 import { deletPost } from "../../../rtk/Api/Api";
 import { useDispatch, useSelector } from "react-redux";
+import ModalShare from "../createPost/ModalShare";
 
 export default function Dropdown({
   buttonData = "open",
+  post,
   labels = [],
   post_id,
 }) {
   const [isArabic, setIsArabic] = useState(false);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  console.log(post, "s");
 
   useEffect(() => {
     setIsArabic(localStorage.getItem("i18nextLng") === "ar");
@@ -19,10 +22,18 @@ export default function Dropdown({
     // console.log(isArabic);
   }, [localStorage.getItem("i18nextLng")]);
   const handleButtonClick = (label) => {
-    if (label === "Delete") {
-      deletPost(token, post_id, dispatch);
+    if (label == "Delete") {
+      deletPost(token, post.id, dispatch);
+    } else if (label == "Edit") {
+      setIsOpen(true);
+      console.log(post);
     }
   };
+  const [isOpen, setIsOpen] = useState(false);
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   return (
     <div className=" ">
       <Menu as="div" className="relative inline-block text-left">
@@ -64,6 +75,12 @@ export default function Dropdown({
           </Menu.Items>
         </Transition>
       </Menu>
+      <ModalShare
+        isOpen={isOpen}
+        closeModal={closeModal}
+        setIsOpen={setIsOpen}
+        post={post}
+      />
     </div>
   );
 }

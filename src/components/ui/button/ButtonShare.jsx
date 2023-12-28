@@ -22,6 +22,7 @@ export default function ButtonShare({
   className = "",
   color = "#fff",
   setIsOpen,
+  api,
   onclick,
   backgroundColor = null,
   onClick = () => {},
@@ -41,7 +42,7 @@ export default function ButtonShare({
     dispatch(addUpload({ fileId }));
     try {
       const res = await axios.post(
-        `${URL}/api/post/create_post`,
+        `${URL}/api/post/${api}`,
         data,
 
         {
@@ -65,10 +66,9 @@ export default function ButtonShare({
         toast.success("تم نشر المنشور");
       }
     } catch (err) {
+      console.log(err);
       dispatch(finishUpload({ fileId }));
       toast.error(t("A network error occurred"));
-
-      console.log(err);
     }
   };
 
@@ -79,7 +79,7 @@ export default function ButtonShare({
   const [uploadComplete, setUploadComplete] = useState(false);
 
   // const handleProgress =
-  const totalChunks = Math.ceil(video.size / CHUNK_SIZE);
+  const totalChunks = Math.ceil(video?.size / CHUNK_SIZE);
   const generateRandomFileName = (length) => {
     const charset =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -99,7 +99,7 @@ export default function ButtonShare({
     setRandomFileName(newRandomFileName);
   };
   const handleClickVideo = async () => {
-        setIsOpen(false);
+    setIsOpen(false);
 
     console.log(video);
     await handleGenerateRandomFileName();
@@ -154,7 +154,7 @@ export default function ButtonShare({
               //   formData2.append("text", text);
               // }
               axios
-                .post(`${URL}/api/post/create_post`, data, {
+                .post(`${URL}/api/post/${api}`, data, {
                   headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`,

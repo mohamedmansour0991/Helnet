@@ -14,7 +14,7 @@ import "./singlePost.scss";
 export default function SinglePost({ data }) {
   return (
     <div className="singlePost mb-3" key={data.post_id}>
-      <PostHeader user={user} />
+      <PostHeader user={data} />
 
       <div className="singlePost__body">
         {/* handel the text post  */}
