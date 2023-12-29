@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FriendBox from "../../components/friendBox/friendBox";
 import "./Friends.scss";
 import { useSelector } from "react-redux";
@@ -6,18 +6,17 @@ import getDataPost from "../../components/posts/getDataPost";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FiltersBar } from "../../components/ui";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 function Friends({ type }) {
   const { user, token, refrech } = useSelector((state) => state.auth);
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
-  
-  const { items, hasMore, loadMore } = getDataPost(
-    1,
-    token,
-    refrech,
-    type
-  );
+  // const { items, hasMore, loadMore } = getDataPost(1, token, refrech, type);
+  const name = useParams().name;
+  const { items, hasMore, loadMore } = getDataPost(1, token, refrech, type);
+  // useEffect(() => {}, [name]);
+  console.log(type);
   const { t } = useTranslation();
-  console.log(items)
+  console.log(items);
   return (
     <InfiniteScroll
       dataLength={items.length}

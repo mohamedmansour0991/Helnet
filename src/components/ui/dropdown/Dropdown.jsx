@@ -14,7 +14,6 @@ export default function Dropdown({
   const [isArabic, setIsArabic] = useState(false);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  console.log(post, "s");
 
   useEffect(() => {
     setIsArabic(localStorage.getItem("i18nextLng") === "ar");
@@ -26,7 +25,6 @@ export default function Dropdown({
       deletPost(token, post.id, dispatch);
     } else if (label == "Edit") {
       setIsOpen(true);
-      console.log(post);
     }
   };
   const [isOpen, setIsOpen] = useState(false);

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { loginSuccess, refrechPosts } from "../slices/authSlice";
+import { deletePosts, loginSuccess, refrechPosts } from "../slices/authSlice";
 import { toast } from "react-toastify";
 const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
@@ -36,8 +36,8 @@ export const deletPost = async (token, post_id, dispatch) => {
       }
     );
     console.log(res);
-      toast.success("تم حذف المنشور");
-    dispatch(refrechPosts());
+    toast.success("تم حذف المنشور");
+    dispatch(deletePosts({post_id}));
   } catch (err) {
     console.log(err);
   }

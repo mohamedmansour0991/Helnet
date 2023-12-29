@@ -84,6 +84,8 @@ const authSlice = createSlice({
     msg: false,
     signIn: false,
     refrech: 0,
+    update: {},
+    deletePost_id: {},
     user: JSON.parse(localStorage.getItem("user"))
       ? JSON.parse(localStorage.getItem("user"))
       : "",
@@ -139,6 +141,12 @@ const authSlice = createSlice({
     },
     refrechPosts: (state, action) => {
       state.refrech += 1;
+      state.update = action.payload;
+    },
+    deletePosts: (state, action) => {
+      state.refrech += 1;
+      console.log(action.payload);
+      state.deletePost_id = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -201,5 +209,6 @@ export const {
   deleteSign,
   CurrentStudy,
   refrechPosts,
+  deletePosts,
 } = authSlice.actions;
 export default authSlice.reducer;

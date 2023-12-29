@@ -61,7 +61,7 @@ export default function ButtonShare({
       console.log(res);
 
       if (res.data) {
-        dispatch(refrechPosts());
+        dispatch(refrechPosts(res.data.original.post));
         dispatch(finishUpload({ fileId }));
         toast.success("تم نشر المنشور");
       }
@@ -161,7 +161,7 @@ export default function ButtonShare({
                   },
                 })
                 .then(function (response) {
-                  dispatch(refrechPosts());
+                  dispatch(refrechPosts(response.data.original.post));
 
                   console.log(response);
                 })

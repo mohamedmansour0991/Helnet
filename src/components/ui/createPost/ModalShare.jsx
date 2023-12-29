@@ -34,7 +34,6 @@ export default function ModalShare({
     { value: "Record", title: "Post Record", image: voice },
   ],
 }) {
-  console.log("first", post);
   const selectLabels = ["public", "private"];
   const direction = localStorage.getItem("direction");
   const URL2 = import.meta.env.VITE_REACT_APP_API_KEY;
@@ -48,10 +47,6 @@ export default function ModalShare({
   //   function closeModal() {
   //     setIsOpen(false);
   //   }
-
-  function openModal() {
-    setIsOpen(true);
-  }
 
   /////////////// main module ///////////////////
 
@@ -77,7 +72,6 @@ export default function ModalShare({
 
   const [text, setText] = useState(post?.text);
   const [privacy, setprivacy] = useState("public");
-  console.log(post?.image);
   const [photo, setPhoto] = useState([]);
   const [video, setVideo] = useState("");
   const [videoEdit, setVideoEdit] = useState(post?.video);
@@ -86,7 +80,6 @@ export default function ModalShare({
 
   const data = new FormData();
   data.append("privacy", privacy);
-  console.log(privacy);
 
   if (text) {
     data.append("classification_id", 1);
@@ -124,7 +117,6 @@ export default function ModalShare({
     setImageEdit(post?.image);
   }, [post]);
 
-  console.log(data);
   // remove image
   const removeFile = (index) => {
     const updatedFiles = [...photo];
@@ -179,7 +171,7 @@ export default function ModalShare({
         {photo.length > 0 ? (
           <div className="d-flex flex-wrap gap-3 mb-3">
             {photo?.map((f, index) => (
-              <div style={{ position: "relative" }}>
+              <div style={{ position: "relative" }} key={index}>
                 <img
                   src={close}
                   style={{ position: "absolute", cursor: "pointer" }}
@@ -199,7 +191,7 @@ export default function ModalShare({
               {imageEdit && (
                 <div className="d-flex flex-wrap gap-3 mb-3">
                   {imageEdit?.map((f, index) => (
-                    <div style={{ position: "relative" }}>
+                    <div style={{ position: "relative" }} key={index}>
                       <img
                         src={close}
                         style={{ position: "absolute", cursor: "pointer" }}

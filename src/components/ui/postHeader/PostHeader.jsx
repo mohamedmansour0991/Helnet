@@ -25,8 +25,7 @@ export default function PostHeader({ user }) {
         <div className="postHeader__user--data">
           <div className="userData">
             <p className="name" role="button" onClick={openProfile}>
-              {user?.user.first_name}{" "}
-              {user?.user.last_name}
+              {user?.user?.first_name} {user?.user?.last_name}
             </p>
           </div>
           {/* <p className="postingTime">{moment(e?.created_at).fromNow(true)}</p> */}
