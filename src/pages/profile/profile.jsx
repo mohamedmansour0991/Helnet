@@ -29,13 +29,14 @@ import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const { user, token, refrech } = useSelector((state) => state.auth);
+  const { token, deletePost_id, update } = useSelector((state) => state.auth);
   const params = useParams().id;
 
   const { items, hasMore, loadMore } = getDataPost(
     1,
     token,
-    refrech,
+    deletePost_id,
+    update,
     `post/get_post_user/${params}`
   );
   const mainMenuLabels = [
