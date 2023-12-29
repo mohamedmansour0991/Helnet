@@ -45,7 +45,7 @@ export default function CreatePost({
 
   return (
     <>
-      <div className="createPost rounded-xl bg-white">
+      <div className="max-w-4xl w-full rounded-xl bg-white">
         <div
           className="flex gap-3 items-center pt-4 ps-3 pb-10"
           onClick={() => {

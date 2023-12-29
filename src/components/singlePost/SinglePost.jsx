@@ -15,7 +15,7 @@ export default function SinglePost({ data }) {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
   return (
-    <div className="singlePost mb-3" key={data.id}>
+    <div className="singlePost max-w-4xl w-full mb-3" key={data.id}>
       <PostHeader user={data} />
 
       <div className="singlePost__body">

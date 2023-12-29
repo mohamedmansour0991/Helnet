@@ -22,17 +22,17 @@ export default function Posts() {
     // console.log(deletePost_id);
   }, [deletePost_id]);
   return (
-    <div className="grid gap-3 w-100 d-flex align-items-center flex-column">
-      <InfiniteScroll
-        dataLength={items.length}
-        next={loadMore}
-        hasMore={hasMore}
-        loader={<div className="lds-default  m-auto d-flex"></div>}
-      >
+    <InfiniteScroll
+      dataLength={items.length}
+      next={loadMore}
+      hasMore={hasMore}
+      loader={<div className="lds-default  m-auto d-flex"></div>}
+    >
+      <div className="flex items-center flex-col gap-3 w-full">
         {items
           ? items.map((post) => <SinglePost key={post.id} data={post} />)
           : ""}
-      </InfiniteScroll>
-    </div>
+      </div>
+    </InfiniteScroll>
   );
 }

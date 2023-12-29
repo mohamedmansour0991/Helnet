@@ -48,7 +48,9 @@ export default function MainPage() {
         <div className="container no-scrollbar">
           {name === "home" || name === undefined ? (
             <div className="grid gap-3">
-              <CreatePost />
+              <div className="flex items-center flex-col gap-3 w-full">
+                <CreatePost />
+              </div>
               {uploads.map((upload) => (
                 <div
                   key={upload.fileId}
