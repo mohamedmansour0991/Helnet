@@ -7,7 +7,6 @@ export default function Gallery({ data, target }) {
     navigate(target);
   };
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
-  console.log(data[0].image.path);
   return (
     <div className={`gallery with${data.length}`}>
       {data.slice(0, 5).map((image, index) => (

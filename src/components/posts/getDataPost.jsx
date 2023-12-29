@@ -28,7 +28,7 @@ const getDataPost = (initialPage, token, deletePost_id, update, api) => {
         fetchData(); // Retry the request
         return;
       }
-      console.log(data);
+      // console.log(data);
       if (page > 0) {
         // Append the new data to the existing items
 
@@ -74,13 +74,13 @@ const getDataPost = (initialPage, token, deletePost_id, update, api) => {
   }, [update]);
 
   useEffect(() => {
-    console.log(deletePost_id, "ASd");
+    // console.log(deletePost_id, "ASd");
     const deletePost_idHandle = (deletePost_id) => {
       setItems((prevItems) =>
         prevItems.filter((post) => post.id !== deletePost_id.post_id)
       );
     };
-    console.log(items);
+    // console.log(items);
     deletePost_idHandle(deletePost_id);
   }, [deletePost_id]);
   return { items, hasMore, loadMore };

@@ -38,7 +38,7 @@ function App() {
   }, [user]);
 
   useEffect(() => {
-    console.log(i18n.language);
+    // console.log(i18n.language);
     if (i18n.language === "ar") {
       localStorage.setItem("direction", "rtl");
       document.body.classList.remove("en");
