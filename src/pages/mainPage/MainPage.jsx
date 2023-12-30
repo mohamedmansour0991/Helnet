@@ -20,6 +20,8 @@ import "./MainPage.scss";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import Suggest from "../Friends/Suggest";
+import Requests from "../Friends/Requests";
 
 export default function MainPage() {
   const { user, error, msg } = useSelector((state) => state.auth);
@@ -84,9 +86,9 @@ export default function MainPage() {
           ) : name === "friends" ? (
             <Friends type="current-follower" />
           ) : name === "suggests" ? (
-            <Friends type="may-know" />
+            <Suggest type="may-know" />
           ) : name === "request" ? (
-            <Friends type="current-requests" />
+            <Requests type="current-requests" />
           ) : name === "following" ? (
             <Friends type="current-following" />
           ) : name === "globe" ? (

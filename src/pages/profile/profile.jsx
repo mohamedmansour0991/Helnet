@@ -24,9 +24,9 @@ import BoxFirendsProfile from "../../components/profileComponents/boxFirendsProf
 import BoxAcceptFirendsProfile from "../../components/profileComponents/boxFirendsProfile/BoxAcceptFirendsProfile";
 import { data } from "/public/fakeData";
 import ProfileHeader from "../../components/profileHeader/ProfileHeader";
-import getDataPost from "../../components/posts/getDataPost";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
+import { getDataPost } from "../../components/posts/getDataPost";
 
 const Profile = () => {
   const { token, deletePost_id, update } = useSelector((state) => state.auth);

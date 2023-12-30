@@ -3,7 +3,8 @@ import SinglePost from "../singlePost/SinglePost";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import getDataPost from "./getDataPost";
+import { getDataPost } from "./getDataPost";
+// import getDataPost from "./getDataPost";
 
 export default function Posts() {
   const { user, token, deletePost_id, update } = useSelector(

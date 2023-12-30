@@ -131,7 +131,7 @@ export default function ModalShare({
   };
   return (
     <>
-      <Modal isOpen={isOpen} closeModal={closeModal} width="max-w-2xl">
+      <Modal isOpen={isOpen} closeModal={closeModal} width="max-w-xl w-full">
         <div className="flex flex-row-reverse justify-between pb-4">
           <div className="flex items-center gap-2">
             <div className="w-100">

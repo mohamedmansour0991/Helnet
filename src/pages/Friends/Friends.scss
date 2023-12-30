@@ -6,16 +6,15 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
     padding: 20px;
-  }
-
-  @media (max-width: 550px) {
-    // padding: 0px;
-    width: 100%;
-  }
-  @media (max-width: 1200px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 450px) {
-    grid-template-columns: repeat(1, 1fr);
+    @media (max-width: 550px) {
+      // padding: 0px;
+      width: 100%;
+    }
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 450px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 }
