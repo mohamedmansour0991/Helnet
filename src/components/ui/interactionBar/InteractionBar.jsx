@@ -47,6 +47,13 @@ export default function InteractionBar({ data }) {
   };
 
   const likeThePost = async () => {
+    console.log("first");
+    if (isLiked) {
+      setLikes((prev) => prev - 1);
+    } else {
+      setLikes((prev) => prev + 1);
+    }
+    setIsLiked(!isLiked);
     try {
       const results = await axios.post(
         `${URL}/api/postLike`,
@@ -57,9 +64,11 @@ export default function InteractionBar({ data }) {
           },
         }
       );
+      console.log(results);
 
-      if (results.data.original.data.data !== undefined) {
-        setLikes(results.data.original.data.data.length);
+      if (results.data.original.data.like !== undefined) {
+        console.log(results.data.original.data.like.Likes.length);
+        setLikes(JSON.parse(results.data.original.data.like.Likes).length);
       } else {
         setLikes(0);
       }
@@ -73,7 +82,7 @@ export default function InteractionBar({ data }) {
   useEffect(() => {
     getAllLikes();
     // likeThePost();
-  }, [isLiked]);
+  }, []);
 
   const comments = "12";
 
@@ -87,7 +96,13 @@ export default function InteractionBar({ data }) {
             likeThePost();
           }}
         >
-          <img src={isLiked ? like : like} role="button" alt="" />
+          <img
+            style={isLiked ? { background: "red" } : { background: "#fff" }}
+            src={isLiked ? like : like}
+            role="button"
+            alt=""
+          />
+
           <span
             className={`absolute top-2 text-xs left-0 translate-x-3 border-4 border-white rounded-full bg-violet-700 text-white ${
               likes > 9 ? "px-2" : "px-1"
