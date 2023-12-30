@@ -10,7 +10,17 @@ import axios from "axios";
 export default function InteractionBar({ data }) {
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [commentsNumber, setCommentsNumber] = useState(0);
+  const [isCommentModelOpen, setIsCommentModelOpen] = useState(false);
   const [isShareModelOpen, setIsShareModelOpen] = useState(false);
+
+  function closeCommentModal() {
+    setIsCommentModelOpen(false);
+  }
+
+  function openCommentModal() {
+    setIsCommentModelOpen(true);
+  }
 
   function closeShareModal() {
     setIsShareModelOpen(false);
@@ -66,16 +76,13 @@ export default function InteractionBar({ data }) {
 
       setIsLiked(!isLiked);
     } catch (error) {
-      console.log(error);
+      console.log("like error :" + error);
     }
   };
 
   useEffect(() => {
     getAllLikes();
-    // likeThePost();
   }, [isLiked]);
-
-  const comments = "12";
 
   return (
     <>
@@ -83,7 +90,6 @@ export default function InteractionBar({ data }) {
         <button
           className="relative"
           onClick={() => {
-            // console.log(data.id);
             likeThePost();
           }}
         >
@@ -96,22 +102,30 @@ export default function InteractionBar({ data }) {
             {likes > 0 && (likes > 99 ? "+99" : likes)}
           </span>
         </button>
-        <button className="relative" onClick={() => {}}>
+
+        <button className="relative" onClick={openCommentModal}>
           <span
             className={`absolute top-2 text-xs left-0 translate-x-3 border-4 border-white rounded-full bg-violet-700 text-white ${
-              comments > 9 ? "px-2" : "px-1"
+              commentsNumber > 9 ? "px-2" : "px-1"
             }`}
           >
-            {comments > 0 && (comments > 99 ? "+99" : comments)}
+            {commentsNumber > 0 &&
+              (commentsNumber > 99 ? "+99" : commentsNumber)}
           </span>
           <img src={comment} role="button" alt="" />
         </button>
+
         <button onClick={openShareModal}>
           <img src={share} role="button" alt="" />
         </button>
       </div>
 
-      <CommentSection />
+      <CommentSection
+        post={data}
+        isCommentModelOpen={isCommentModelOpen}
+        closeCommentModal={closeCommentModal}
+        setCommentsNumber={setCommentsNumber}
+      />
 
       <ShareModel
         isShareOpen={isShareModelOpen}
