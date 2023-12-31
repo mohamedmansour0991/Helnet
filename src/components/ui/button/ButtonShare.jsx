@@ -17,6 +17,10 @@ export default function ButtonShare({
   data,
   video,
   state,
+  setRecord,
+  setPhoto,
+  setVideo,
+  setText,
   type = "",
   border = "",
   className = "",
@@ -64,6 +68,10 @@ export default function ButtonShare({
         dispatch(refrechPosts(res.data.original.post));
         dispatch(finishUpload({ fileId }));
         toast.success("تم نشر المنشور");
+        setPhoto("");
+        setVideo("");
+        setRecord("");
+        setText("");
       }
     } catch (err) {
       console.log(err);

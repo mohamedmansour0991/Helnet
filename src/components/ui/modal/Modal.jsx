@@ -24,7 +24,7 @@ export default function Modal({
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div" className="relative z-10 p-3" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -38,7 +38,7 @@ export default function Modal({
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center sm:p-4 text-center">
+          <div className="flex min-h-full items-center justify-center sm:p-4 text-center p-2">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -49,7 +49,7 @@ export default function Modal({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                className={`${width} ${height} transform overflow-hidden sm:rounded-3xl bg-white text-start align-middle shadow-xl transition-all ${
+                className={`${width} ${height} p-3 transform overflow-hidden sm:rounded-3xl bg-white text-start align-middle shadow-xl transition-all ${
                   isFullScreen ? "max-w-4xl" : "max-w-md"
                 }`}
               >

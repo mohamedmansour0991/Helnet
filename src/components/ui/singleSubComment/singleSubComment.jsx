@@ -8,12 +8,12 @@ import { PFP } from "../../../assets/images";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-export default function SingleComment({ data, user, parent_comment_id, post }) {
-  const [isWriting, setIsWriting] = useState(false);
+export default function singleSubComment({ data, user, parent_comment_id, post }) {
+  const [isWriting, setIsWriting] = useState();
   const dateObject = new Date(data.updated_at);
   const normalTime = dateObject.toLocaleTimeString();
   const [subComments, setSubComments] = useState([]);
-  const [likes, setLikes] = useState(data.likes);
+  const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   // console.log(data);
 
@@ -83,36 +83,29 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
   //   }
   // };
 
-  const likeTheComment = async () => {
-    if (isLiked) {
-      setLikes(likes + 1);
-    } else {
-      setLikes(likes - 1);
-    }
-    setIsLiked(!isLiked);
-    try {
-      const results = await axios.post(
-        `${URL}/api/post/comment_like`,
-        { post_comment_id: data.id },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(results.data.original.data.like.likes);
+  // const likeTheComment = async () => {
+  //   try {
+  //     const results = await axios.post(
+  //       `${URL}/api/post/comment_like`,
+  //       { post_comment_id: data.id },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
 
-      if (results.data.original.data !== undefined) {
-        setLikes(JSON.parse(results.data.original.data.like.likes).length);
-      } else {
-        setLikes(0);
-      }
+  //     if (results.data.original.data !== undefined) {
+  //       setLikes(results.data.original.data.length);
+  //     } else {
+  //       setLikes(0);
+  //     }
 
-      setIsLiked(!isLiked);
-    } catch (error) {
-      console.log("like error :" + error);
-    }
-  };
+  //     setIsLiked(!isLiked);
+  //   } catch (error) {
+  //     console.log("like error :" + error);
+  //   }
+  // };
 
   useEffect(() => {
     // getAllSubComments();
@@ -143,11 +136,14 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
           <div className="flex gap-1 text-stone-400 py-2">
             <button
               className={`h-fit ${isLiked && "text-blue-600"}`}
-              onClick={likeTheComment}
+              // onClick={likeTheComment}
             >
               {t("Like") + " ."}
             </button>
-            <button className="h-fit" onClick={() => setIsWriting(!isWriting)}>
+            <button
+              className="h-fit"
+              // onClick={() => setIsWriting(!isWriting)}
+            >
               {t("Comment") + " ."}
             </button>
             <p>{normalTime + " ."}</p>
@@ -156,27 +152,8 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
         </div>
       </div>
 
-      {subComments &&
-        subComments.map((subComment) => (
-          <>
-            <SingleComment
-              key={subComment.id}
-              id={subComment.id}
-              user={user}
-              data={subComment}
-            />
-            {isWriting && (
-              <CreateComment
-                post={data}
-                // parent_comment_id={data.id}
-                getAllComments={getAllSubComments}
-                isReplying={isWriting}
-                parent_comment_id={parent_comment_id}
-              />
-            )}
-          </>
-        ))}
-      {isWriting && <CreateComment post={data} isReplying={isWriting} />}
+      
+      {/* {isWriting && <CreateComment post={data} isReplying={isWriting} />} */}
     </div>
   );
 }

@@ -1,14 +1,15 @@
 import { t } from "i18next";
 import { image, send, voice } from "../../../assets/images/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { PFP } from "../../../assets/images";
 import { useEffect, useState } from "react";
+import { refrechcomment } from "../../../rtk/slices/authSlice";
 
 export default function CreateComment({
   isReplying,
   post,
-  getAllComments = () => {},
+  // getAllComments = () => {},
   parent_comment_id,
 }) {
   const [comment, setComment] = useState("");
@@ -17,7 +18,7 @@ export default function CreateComment({
 
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const { user, token } = useSelector((state) => state.auth);
-
+  const dispatch = useDispatch();
   const typeComment = async () => {
     const data = {
       post_id: post.id,
@@ -32,6 +33,7 @@ export default function CreateComment({
         },
       });
       setComment("");
+      dispatch(refrechcomment(results.data.original.comment));
       console.log(results);
     } catch (error) {
       console.log("Create comments error :" + error);
@@ -65,8 +67,8 @@ export default function CreateComment({
   };
 
   useEffect(() => {
-    getAllComments();
-  }, [comment]);
+    // getAllComments();
+  }, []);
 
   return (
     <div className="flex justify-center items-center gap-3 bg-slate-200 py-2 px-3 mb-10 rounded-full">

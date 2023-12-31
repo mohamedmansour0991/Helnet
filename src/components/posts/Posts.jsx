@@ -7,7 +7,7 @@ import { getDataPost } from "./getDataPost";
 // import getDataPost from "./getDataPost";
 
 export default function Posts() {
-  const { user, token, deletePost_id, update } = useSelector(
+  const {  token, deletePost_id, update } = useSelector(
     (state) => state.auth
   );
 
@@ -19,9 +19,7 @@ export default function Posts() {
     "post/post"
   );
 
-  useEffect(() => {
-    // console.log(deletePost_id);
-  }, [deletePost_id]);
+
   return (
     <InfiniteScroll
       dataLength={items.length}

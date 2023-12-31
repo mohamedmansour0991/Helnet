@@ -351,7 +351,8 @@ export default function Form({
                   {url ? (
                     //  شكل الريكورد بعد التسجيل
 
-                    <div
+                    {
+                      /* <div
                       className="rounded-3 text-center p-5 w-100 border-dashed"
                       style={{ marginBottom: "20px" }}
                     >
@@ -363,10 +364,18 @@ export default function Form({
                         <Waveform url={url} />
                         <div style={{ margin: "auto", display: "block" }}>
                           {" "}
-                          <img src={delet} alt="" />
+                          <img
+                            src={delet}
+                            alt=""
+                            onClick={() => {
+                              setUrl("");
+                              setUserChoice("");
+                            }}
+                          />
                         </div>
                       </div>
-                    </div>
+                    </div> */
+                    }
                   ) : (
                     //   شكل الريكورد عند التسجيل
 

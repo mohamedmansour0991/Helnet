@@ -15,7 +15,7 @@ export default function CommentSection({
   const [comments, setComments] = useState([]);
 
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
-  const { user, token } = useSelector((state) => state.auth);
+  const { user, token, updateComment } = useSelector((state) => state.auth);
 
   const getAllComments = async () => {
     try {
@@ -36,6 +36,31 @@ export default function CommentSection({
       console.log("get the comments error :" + error);
     }
   };
+  const updatePost = (postId, updatedData) => {
+    setComments((prevItems) =>
+      prevItems.map((post) =>
+        post.id === postId ? { ...post, ...updatedData } : post
+      )
+    );
+  };
+
+  const addOrUpdatePost = (update) => {
+    const existingPostIndex = comments.findIndex(
+      (post) => post.id === updateComment.id
+    );
+
+    if (existingPostIndex !== -1) {
+      // Post found, update it
+      updatePost(updateComment.id, updateComment);
+    } else {
+      // Post not found, add it to the beginning of the array
+      setComments((prevItems) => [updateComment, ...prevItems]);
+    }
+  };
+
+  useEffect(() => {
+    addOrUpdatePost(updateComment);
+  }, [updateComment]);
 
   useEffect(() => {
     getAllComments();
@@ -46,7 +71,7 @@ export default function CommentSection({
       <Modal isOpen={isCommentModelOpen} closeModal={closeCommentModal}>
         <SinglePost data={post} />
 
-        <CreateComment post={post} getAllComments={getAllComments} />
+        <CreateComment post={post} />
 
         {comments &&
           comments.map((comment) => (

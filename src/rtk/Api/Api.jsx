@@ -37,7 +37,7 @@ export const deletPost = async (token, post_id, dispatch) => {
     );
     console.log(res);
     toast.success("تم حذف المنشور");
-    dispatch(deletePosts({post_id}));
+    dispatch(deletePosts({ post_id }));
   } catch (err) {
     console.log(err);
   }

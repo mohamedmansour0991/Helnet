@@ -6,7 +6,7 @@ import CommentSection from "../../commentSection/CommentSection";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-export default function InteractionBar({ data }) {
+export default function InteractionBarComment({ data }) {
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [commentsNumber, setCommentsNumber] = useState(0);
@@ -144,14 +144,12 @@ export default function InteractionBar({ data }) {
         </button>
       </div>
 
-      {isCommentModelOpen && (
-        <CommentSection
-          post={data}
-          isCommentModelOpen={isCommentModelOpen}
-          closeCommentModal={closeCommentModal}
-          setCommentsNumber={setCommentsNumber}
-        />
-      )}
+      <CommentSection
+        post={data}
+        isCommentModelOpen={isCommentModelOpen}
+        closeCommentModal={closeCommentModal}
+        setCommentsNumber={setCommentsNumber}
+      />
 
       <ShareModel
         isShareOpen={isShareModelOpen}

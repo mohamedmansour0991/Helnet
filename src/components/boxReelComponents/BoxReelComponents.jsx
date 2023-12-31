@@ -6,6 +6,8 @@ import Shape from "../../assets/images/Shape.png";
 import { useNavigate } from "react-router-dom";
 
 function BoxReelComponents({ video, index }) {
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+
   const navigate = useNavigate();
   console.log(video);
   return (
@@ -16,17 +18,16 @@ function BoxReelComponents({ video, index }) {
           key={index}
           role="button"
           onClick={() => {
-            navigate("/reels-page");
+            navigate(`/reels-page/${video.id}`);
             handleVideoClick(video);
             openModal2();
           }}
         >
           <div
-            className="singlePost__body--video"
+            className="singlePost__body--video d-flex flex-wrap"
             style={{ maxWidth: "100%", height: "auto" }}
           >
             <a href="#">
-              {/* الشكل بيتكرر ف نفس المكان !!! */}
               <img
                 preload="true"
                 className="profile-pic3"
@@ -35,7 +36,12 @@ function BoxReelComponents({ video, index }) {
                 alt=""
               />
             </a>
-            <video className="" preload="true" src={video?.src} />
+            <video
+              style={{ maxHeight: "200px", minWidth: "200px" }}
+              className=""
+              preload="true"
+              src={`${URL}/storage/videos/${video?.video}`}
+            />
           </div>
         </div>
       </div>

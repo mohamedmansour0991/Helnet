@@ -6,16 +6,10 @@ import { useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FiltersBar } from "../../components/ui";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
 import { getDataFriends } from "../../components/posts/getDataPost";
 function Friends({ type }) {
-  const { user, token, refrech } = useSelector((state) => state.auth);
-  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
-  // const { items, hasMore, loadMore } = getDataPost(1, token, refrech, type);
-  const name = useParams().name;
+  const { token } = useSelector((state) => state.auth);
   const { items, hasMore, loadMore } = getDataFriends(1, token, type);
-  // useEffect(() => {}, [name]);
-  console.log(type);
   const { t } = useTranslation();
   console.log(items);
   return (

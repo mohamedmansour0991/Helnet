@@ -101,6 +101,7 @@ export default function CreatePost({
       </div>
       <ModalShare
         isOpen={isOpen}
+        
         closeModal={closeModal}
         setIsOpen={setIsOpen}
       />

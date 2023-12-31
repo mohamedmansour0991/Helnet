@@ -26,8 +26,8 @@ export default function ModalShare({
   post,
   isOpen,
   closeModal,
-  placeholder,
   setIsOpen,
+  placeholder,
   buttons = [
     { value: "Images", title: "Post Images", image: image },
     { value: "Video", title: "Post Video", image: Video3 },
@@ -76,6 +76,7 @@ export default function ModalShare({
   const [video, setVideo] = useState("");
   const [videoEdit, setVideoEdit] = useState(post?.video);
   const [imageEdit, setImageEdit] = useState(post?.image);
+  const [recordEdit, setrecordEdit] = useState(post?.audio);
   const [record, setRecord] = useState("");
 
   const data = new FormData();
@@ -110,6 +111,9 @@ export default function ModalShare({
   if (record) {
     data.append("audio", record);
     data.append("classification_id", 4);
+  } else if (recordEdit) {
+    data.append("audio", record);
+    data.append("classification_id", 4);
   }
 
   useEffect(() => {
@@ -131,7 +135,17 @@ export default function ModalShare({
   };
   return (
     <>
-      <Modal isOpen={isOpen} closeModal={closeModal} width="max-w-xl w-full">
+      <Modal
+        isOpen={isOpen}
+        closeModal={() => {
+          setVideo("");
+          setIsOpen(false);
+          setPhoto("");
+          setText("");
+          setRecord("");
+        }}
+        width="max-w-xl w-full"
+      >
         <div className="flex flex-row-reverse justify-between pb-4">
           <div className="flex items-center gap-2">
             <div className="w-100">
@@ -227,9 +241,20 @@ export default function ModalShare({
             )}
           </>
         )}
-        {record && (
+        {record ? (
           // <audio src={URL.createObjectURL(record)}></audio>
-          <AudioPlayer data={URL?.createObjectURL(record)} />
+          <>
+            <AudioPlayer data={URL?.createObjectURL(record)} />
+          </>
+        ) : (
+          <>
+            {recordEdit && (
+              <>
+                <img src={close1} alt="" onClick={() => setrecordEdit("")} />
+                <AudioPlayer data={`${URL}/storage/${recordEdit}`} />
+              </>
+            )}
+          </>
         )}
 
         <div
@@ -278,7 +303,11 @@ export default function ModalShare({
           data={data}
           state={video && true}
           video={video}
+          setText={setText}
           setIsOpen={setIsOpen}
+          setPhoto={setPhoto}
+          setRecord={setRecord}
+          setVideo={setVideo}
           api={post ? `update_post/${post.id}` : `create_post`}
         />
       </Modal>

@@ -1,5 +1,5 @@
 // App.js
-import React, {  useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 // import "./App.css";
 import Video from "./Video";
 // import { BiArrowBack } from "react-icons/bi";
@@ -11,6 +11,8 @@ import "./ReelsPage.scss";
 import { x } from "/src/assets/images/icons";
 
 function ReelsPage() {
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+
   const items = [
     { src: sea },
     { src: sea },
@@ -38,70 +40,70 @@ function ReelsPage() {
 
   const params = useParams().id;
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://3lm.wearher-from-mimi.com/api/post/get_post_reel?page=${page}`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //         }
-  //       );
-  //       const data = await response.json();
-  //       console.log(data);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://3lm.wearher-from-mimi.com/api/post/get_post_reel?page=${page}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        console.log(data);
 
-  //       if (data.posts_type_reels.data.length === 0) {
-  //         setHasMore(false);
-  //       } else {
-  //         if (params) {
-  //           const filteredData = data.posts_type_reels.data.filter(
-  //             (e) => e.id != params
-  //           );
-  //           setItems((prevItems) => [...prevItems, ...filteredData]);
-  //         } else {
-  //           setItems((prevItems) => [
-  //             ...prevItems,
-  //             ...data.posts_type_reels.data,
-  //           ]);
-  //         }
-  //         setPage(page + 1);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
+        if (data.posts_type_reels.data.length === 0) {
+          setHasMore(false);
+        } else {
+          if (params) {
+            const filteredData = data.posts_type_reels.data.filter(
+              (e) => e.id != params
+            );
+            setItems((prevItems) => [...prevItems, ...filteredData]);
+          } else {
+            setItems((prevItems) => [
+              ...prevItems,
+              ...data.posts_type_reels.data,
+            ]);
+          }
+          setPage(page + 1);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  //   if (hasMore && isLastVideoVisible) {
-  //     fetchData();
-  //   }
-  // }, [page, hasMore, isLastVideoVisible]);
-  // const fetchData = async () => {
-  //   if (params) {
-  //     try {
-  //       const response = await fetch(
-  //         `https://3lm.wearher-from-mimi.com/api/post/get_post_reel/${params}`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-  //       const data = await response.json();
-  //       console.log(data);
-  //       setItems((prevItems) => [...prevItems, data.data.post]);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchData();
-  // }, [params]);
+    if (hasMore && isLastVideoVisible) {
+      fetchData();
+    }
+  }, [page, hasMore, isLastVideoVisible]);
+  const fetchData = async () => {
+    if (params) {
+      try {
+        const response = await fetch(
+          `https://3lm.wearher-from-mimi.com/api/post/get_post_reel/${params}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+        setItems((prevItems) => [...prevItems, data.data.post]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, [params]);
   return (
     <div className="reelsPage">
       <div
