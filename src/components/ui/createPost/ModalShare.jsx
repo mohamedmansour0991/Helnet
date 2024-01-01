@@ -133,6 +133,11 @@ export default function ModalShare({
     updatedFiles.splice(index, 1);
     setImageEdit(updatedFiles);
   };
+
+  const removeAllImages = () => {
+    setPhoto([]);
+  };
+
   return (
     <>
       <Modal
@@ -183,21 +188,29 @@ export default function ModalShare({
         />
 
         {photo.length > 0 ? (
-          <div className="d-flex flex-wrap gap-3 mb-3">
-            {photo?.map((f, index) => (
-              <div style={{ position: "relative" }} key={index}>
-                <img
-                  src={close}
-                  style={{ position: "absolute", cursor: "pointer" }}
-                  onClick={() => removeFile(index)}
-                />
-                <img
-                  src={URL.createObjectURL(f)}
-                  alt=""
-                  style={{ width: "150px", height: "150px" }}
-                />
-              </div>
-            ))}
+          <div>
+            <button
+              className="w-full flex justify-center"
+              onClick={removeAllImages}
+            >
+              <img src={close} alt="" />
+            </button>
+            <div className="d-flex flex-wrap gap-3 mb-3 relative">
+              {photo?.map((f, index) => (
+                <div style={{ position: "relative" }} key={index}>
+                  <img
+                    src={close}
+                    style={{ position: "absolute", cursor: "pointer" }}
+                    onClick={() => removeFile(index)}
+                  />
+                  <img
+                    src={URL.createObjectURL(f)}
+                    alt=""
+                    style={{ width: "150px", height: "150px" }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
           <>

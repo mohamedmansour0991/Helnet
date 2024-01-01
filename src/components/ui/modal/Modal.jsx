@@ -15,6 +15,7 @@ export default function Modal({
   height = "h-[100dvh] sm:h-auto",
   isFullScreen = true,
   hasCloseButton = false,
+  closeButtonLeft = false,
 }) {
   const [isArabic, setIsArabic] = useState(false);
 
@@ -65,7 +66,9 @@ export default function Modal({
 
                   {hasCloseButton && (
                     <button
-                      className="absolute z-20 right-1 top-1"
+                      className={`absolute z-20 top-1 ${
+                        closeButtonLeft ? "left-5" : "right-5"
+                      }`}
                       onClick={closeModal}
                     >
                       <img src={close1} alt="" />

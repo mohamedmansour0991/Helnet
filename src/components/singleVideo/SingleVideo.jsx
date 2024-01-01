@@ -5,6 +5,7 @@ import { youtubeCardData } from "/public/fakeData";
 import { verified1 } from "../../assets/images/icons";
 import { t } from "i18next";
 import { useState } from "react";
+import { videosData } from "../../../public/fakeData";
 
 export default function SingleVideo() {
   const cardData = youtubeCardData;
@@ -15,7 +16,7 @@ export default function SingleVideo() {
   return (
     <div dir={direction}>
       <Navbar />
-      <div className="container flex flex-col-reverse lg:grid gap-6 grid-cols-12 pt-28 ">
+      <div className="mx-auto flex flex-col-reverse lg:grid gap-6 grid-cols-12 pt-28 ">
         <ul className="bg-white rounded-xl p-3 col-span-12 lg:col-span-5 xl:col-span-4">
           {cardData &&
             cardData.map((card) => (
@@ -64,11 +65,8 @@ export default function SingleVideo() {
             ))}
         </ul>
 
-        <div
-          className="col-span-12 lg:col-span-7 xl:col-span-8"
-         
-        >
-          <SinglePost data={youtubeCardData[postIndex]} />
+        <div className="col-span-12 lg:col-span-7 xl:col-span-8">
+          <SinglePost data={videosData[0]} />
         </div>
       </div>
     </div>

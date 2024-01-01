@@ -10,7 +10,7 @@ import { close } from "../../assets/images/icons";
 // import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
-import { Button, Modal } from "../ui";
+import { Button, Dropdown, Modal } from "../ui";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -167,52 +167,24 @@ function ProfileHeader({ openModal }) {
           onClick={toggleDropdown}
         />
         <div className="profile-info">
-          <img
-            className="profile-pic3"
-            src={camera2}
-            alt=""
-            onClick={toggleDropdown}
-          />
-          {/* Dropdown */}
-          <div
-            className={`dropdown-menu cover photodropdown ${
-              showDropdown ? "show" : ""
-            }`}
-          >
-            <div
-              className="dropdown-item photodropdownitem"
-              onClick={openLightbox1}
-            >
-              <img src={edit} /> رؤية صورة الخلفية
-            </div>
-            <div
-              className="dropdown-item photodropdownitem"
-              onClick={() => {
+          <Dropdown
+            buttonData={<img className="profile-pic3" src={camera2} alt="" />}
+            labels={["See the background image", "Choose a background image"]}
+            post_id={user.id}
+            post={user}
+            top="-top-8"
+            handleButtons={(label) => {
+              if (label === "See the background image") {
+                openLightbox1;
+              } else if (label === "Choose a background image") {
                 setIsShareOpen(true);
                 setTypeImage("cover");
-              }}
-            >
-              {/* <input
-                type="file"
-                name="file[]"
-                required
-                onChange={handlecoverChange}
-                id="coverFileInput"
-                style={{ display: "none" }}
-                accept=".jpeg, .jpg, .png"
-              /> */}
-              <img
-                src={gallery}
-                style={{
-                  backgroundColor: "#E9E9E9",
-                  width: "26px",
-                  padding: "6px",
-                  borderRadius: "5px",
-                }}
-              />{" "}
-              <label htmlFor="">اختر صورة الخلفية</label>
-            </div>
-          </div>
+              }
+            }}
+          />
+
+          {/* Dropdown */}
+
           {/* showcover */}
           {/* <Modal
           open={lightboxOpen1}
@@ -231,53 +203,34 @@ function ProfileHeader({ openModal }) {
             alt=""
             onClick={toggleDropdown1}
           />
-          <img
+
+          {/* <img
             className="profile-pic4"
             src={camera2}
             alt=""
             onClick={toggleDropdown1}
-          />
-          {/* Dropdown */}
-          <div
-            className={`dropdown-menu photodropdown ${
-              showDropdown1 ? "show" : ""
-            }`}
-            style={{ right: "174px", top: "28px" }}
-          >
-            <div
-              className="dropdown-item photodropdownitem"
-              onClick={handleOpen}
-            >
-              <img src={edit} /> رؤية صورة الشخصية
-            </div>
-            <div
-              className="dropdown-item photodropdownitem"
-              onClick={() => {
-                setIsShareOpen(true);
-                setTypeImage("img");
+          /> */}
+
+          <div className="profile-pic4">
+            <Dropdown
+              buttonData={<img src={camera2} alt="" />}
+              labels={["See profile picture", "Choose a personal photo"]}
+              post_id={user.id}
+              post={user}
+              top="-top-8"
+              position="right-10"
+              handleButtons={(label) => {
+                if (label === "See profile picture") {
+                  handleOpen;
+                } else if (label === "Choose a personal photo") {
+                  setIsShareOpen(true);
+                  setTypeImage("img");
+                }
               }}
-            >
-              <input
-                type="file"
-                name="file[]"
-                required
-                onChange={handlephotoChange}
-                id="photoFileInput"
-                style={{ display: "none" }}
-                accept=".jpeg, .jpg, .png"
-              />
-              <img
-                src={gallery}
-                style={{
-                  backgroundColor: "#E9E9E9",
-                  width: "26px",
-                  padding: "6px",
-                  borderRadius: "5px",
-                }}
-              />{" "}
-              <label htmlFor="photoFileInput">اختر صورة شخصية</label>
-            </div>
+            />
           </div>
+          {/* Dropdown */}
+
           {/* showphoto */}
           {/* <Modal
           open={open}
@@ -351,6 +304,8 @@ function ProfileHeader({ openModal }) {
         </div>
       </div>
       <Modal
+        hasCloseButton
+        closeButtonLeft
         isOpen={isShareOpen}
         closeModal={() => setIsShareOpen(false)}
         title={t("update image Profile")}

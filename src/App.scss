@@ -308,8 +308,8 @@ button {
 .profile-pic4 {
   border-radius: 50%;
   position: absolute;
-  /* top: 0px; */
-  right: 148px;
+  top: 0px;
+  right: 140px;
   margin: auto;
   z-index: 1;
   max-width: 40px;
@@ -731,4 +731,42 @@ button {
 }
 .infinite-scroll-component__outerdiv {
   width: 100%;
+}
+
+.playAnimation {
+  -webkit-animation: pulsate-animation 0.5s ease-in-out infinite;
+  animation: pulsate-animation 0.5s ease-in-out infinite;
+}
+
+@-webkit-keyframes pulsate-animation {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes pulsate-animation {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }

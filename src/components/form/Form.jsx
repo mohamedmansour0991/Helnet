@@ -5,6 +5,7 @@ import { t } from "i18next";
 import Waveform from "./Waveform";
 import delet from "../../assets/images/delete.png";
 import recordbutton from "../../assets/images/recordbutton.png";
+import { recordingButton } from "../../assets/images/icons";
 
 export default function Form({
   isOpen,
@@ -187,6 +188,8 @@ export default function Form({
 
   return (
     <Modal
+      hasCloseButton
+      closeButtonLeft={true}
       isOpen={isOpen}
       closeModal={() => {
         closeModal();
@@ -396,7 +399,11 @@ export default function Form({
                       <h4 style={{ fontWeight: "500", fontSize: "large" }}>
                         Tap here to start a record
                       </h4>
-                      <img src={recordbutton} />
+                      <img
+                        className={recording && "playAnimation"}
+                        src={recording ? recordingButton : recordbutton}
+                        alt=""
+                      />
 
                       {recording && (
                         <p

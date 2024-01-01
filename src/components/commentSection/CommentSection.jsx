@@ -68,10 +68,14 @@ export default function CommentSection({
 
   return (
     <>
-      <Modal isOpen={isCommentModelOpen} closeModal={closeCommentModal}>
+      <Modal
+        isOpen={isCommentModelOpen}
+        closeModal={closeCommentModal}
+        hasCloseButton
+        closeButtonLeft
+        childrenPadding="px-6 py-0 sm:py-3"
+      >
         <SinglePost data={post} />
-
-        <CreateComment post={post} />
 
         {comments &&
           comments.map((comment) => (
@@ -83,6 +87,10 @@ export default function CommentSection({
               data={comment}
             />
           ))}
+
+        <div className="sticky bottom-0">
+          <CreateComment post={post} />
+        </div>
       </Modal>
     </>
   );

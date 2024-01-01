@@ -10,6 +10,11 @@ export default function Dropdown({
   post,
   labels = [],
   post_id,
+  top,
+  position,
+  handleButtons = (label) => {
+    console.log(label);
+  },
 }) {
   const [isArabic, setIsArabic] = useState(false);
   const { token } = useSelector((state) => state.auth);
@@ -20,6 +25,7 @@ export default function Dropdown({
     // console.log(localStorage.getItem("i18nextLng") === "ar");
     // console.log(isArabic);
   }, [localStorage.getItem("i18nextLng")]);
+
   const handleButtonClick = (label) => {
     if (label == "Delete") {
       deletPost(token, post.id, dispatch);
@@ -49,9 +55,8 @@ export default function Dropdown({
         >
           <Menu.Items
             className={`absolute z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none ${
-              // isArabic ? "right-0" : "left-0"
               isArabic ? "left-0" : "right-0"
-            }`}
+            } ${top} ${position}`}
           >
             <div className="px-1 py-1 ">
               {labels &&
@@ -59,7 +64,10 @@ export default function Dropdown({
                   <Menu.Item key={index}>
                     {({ active }) => (
                       <button
-                        onClick={() => handleButtonClick(label)}
+                        onClick={() => {
+                          handleButtonClick(label);
+                          handleButtons(label);
+                        }}
                         className={`${
                           active ? "bg-violet-500 text-white" : "text-gray-900"
                         } group flex w-full items-center text-center rounded-md px-3 py-2`}
