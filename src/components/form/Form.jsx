@@ -1,6 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import { useEffect, useRef, useState } from "react";
-import { Button, Input, Modal } from "../ui";
+import { AudioPlayer, Button, Input, Modal } from "../ui";
 import { t } from "i18next";
 import Waveform from "./Waveform";
 import delet from "../../assets/images/delete.png";
@@ -354,17 +354,19 @@ export default function Form({
                   {url ? (
                     //  شكل الريكورد بعد التسجيل
 
-                    {
-                      /* <div
+                    <div
                       className="rounded-3 text-center p-5 w-100 border-dashed"
-                      style={{ marginBottom: "20px" }}
+                      // style={{ marginBottom: "20px" }}
                     >
                       <h4 style={{ fontWeight: "500", fontSize: "large" }}>
                         Your record
                       </h4>
 
                       <div className="wavebody">
-                        <Waveform url={url} />
+                        {/* <Waveform url={url} /> */}
+
+                        <AudioPlayer data={url} />
+
                         <div style={{ margin: "auto", display: "block" }}>
                           {" "}
                           <img
@@ -377,8 +379,7 @@ export default function Form({
                           />
                         </div>
                       </div>
-                    </div> */
-                    }
+                    </div>
                   ) : (
                     //   شكل الريكورد عند التسجيل
 
@@ -400,7 +401,7 @@ export default function Form({
                         Tap here to start a record
                       </h4>
                       <img
-                        className={recording && "playAnimation"}
+                        className={recording ? "playAnimation" : ""}
                         src={recording ? recordingButton : recordbutton}
                         alt=""
                       />

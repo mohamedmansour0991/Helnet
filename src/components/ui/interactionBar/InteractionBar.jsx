@@ -127,7 +127,15 @@ export default function InteractionBar({ data }) {
           </span>
         </button>
 
-        <button className="relative" onClick={openCommentModal}>
+        <button
+          className="relative"
+          disabled={isCommentModelOpen}
+          onClick={() => {
+            if (isCommentModelOpen === false) {
+              openCommentModal();
+            } else return;
+          }}
+        >
           <span
             className={`absolute top-2 text-xs left-0 translate-x-3 border-4 border-white rounded-full bg-violet-700 text-white ${
               commentsNumber > 9 ? "px-2" : "px-1"

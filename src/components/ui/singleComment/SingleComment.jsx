@@ -121,7 +121,7 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
   }, []);
 
   return (
-    <div key={data.id} className={data.id ? "ms-20" : ""}>
+    <div key={data.id} className={data.parent === null ? "" : "ms-20"}>
       <div className="flex gap-2 mt-6">
         <Link to={"path" + user.id}>
           <img

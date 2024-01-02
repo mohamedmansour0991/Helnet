@@ -28,7 +28,7 @@ export default function CommentSection({
           },
         }
       );
-      console.log(results);
+
       // get all the comments
       setComments(results.data.original.comment.data);
       setCommentsNumber(results.data.original.comment.data.length);
