@@ -3,157 +3,137 @@ import { Link } from "react-router-dom";
 
 import { t } from "i18next";
 import { useEffect, useState } from "react";
-import CreateComment from "../createComment/CreateComment";
 import { PFP } from "../../../assets/images";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import DropdownComment from "../dropdown/DropdownComment";
+import { vertical3dots } from "../../../assets/images/icons";
+import UpdateComment from "../../UpdateComment/UpdateComment";
 
-export default function singleSubComment({ data, user, parent_comment_id, post }) {
-  const [isWriting, setIsWriting] = useState();
-  const dateObject = new Date(data.updated_at);
+export default function SingleSubComment({ subComments }) {
+  const dateObject = new Date(subComments?.updated_at);
   const normalTime = dateObject.toLocaleTimeString();
-  const [subComments, setSubComments] = useState([]);
-  const [likes, setLikes] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
-  // console.log(data);
+  // const [subComments, setSubComments] = useState([]);
+  const [likes, setLikes] = useState(subComments?.likes);
+  const [isLiked, setIsLiked] = useState(subComments.liked);
+  console.log(subComments, subComments.id, subComments.liked);
+  const [edit, setEdit] = useState();
 
-  // console.log(parent_comment_id);
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const { token } = useSelector((state) => state.auth);
 
-  // const getAllSubComments = async () => {
-  //   try {
-  //     const results = await axios.post(
-  //       `${URL}/api/post/show_sub_comment`,
-  //       { post_id: post.id, parent_comment_id: parent_comment_id },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     if (results.status === 429) {
-  //       // Implement backoff logic here
-  //       console.log("Too Many Requests. Retrying after some time...");
-  //       await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait for 5 seconds
-  //       getAllSubComments();
-  //       return;
-  //     }
+  const likeTheSubComment = async () => {
+    console.log(likes);
+    setTimeout(() => {
+      if (isLiked) {
+        setLikes((prev) => prev - 1);
+      } else {
+        setLikes((prev) => prev + 1);
+      }
+      setIsLiked(!isLiked);
+    }, 200);
+    try {
+      const results = await axios.post(
+        `${URL}/api/post/comment_like`,
+        { post_comment_id: subComments.id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(results);
 
-  //     // get all the comments
-  //     results.data.original.comment &&
-  //       setSubComments(results.data.original.comment.data);
-  //   } catch (error) {
-  //     console.log("get the comments error :" + error);
-  //   }
-  // };
-
-  // const getCommentLikes = async () => {
-  //   try {
-  //     const results = await axios.get(
-  //       `${URL}/api/post/getwhoLikedComment/${data.id}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     if (results.status === 429) {
-  //       // Implement backoff logic here
-  //       console.log("Too Many Requests. Retrying after some time...");
-  //       await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait for 5 seconds
-  //       getCommentLikes();
-  //       return;
-  //     }
-  //     results.data.original.data &&
-  //       console.log(results.data.original.data.length);
-
-  //     if (results.data.original.data !== null) {
-  //       // get all the likes
-  //       setLikes(results.data.original.data.length);
-
-  //       // check if the current user liking the post
-  //       const isLikedByCurrentUser = results.data.original.data.some(
-  //         (i) => i.id === user.id
-  //       );
-  //       setIsLiked(isLikedByCurrentUser);
-  //     }
-  //   } catch (error) {
-  //     console.log("get the likes error :" + error);
-  //   }
-  // };
-
-  // const likeTheComment = async () => {
-  //   try {
-  //     const results = await axios.post(
-  //       `${URL}/api/post/comment_like`,
-  //       { post_comment_id: data.id },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-
-  //     if (results.data.original.data !== undefined) {
-  //       setLikes(results.data.original.data.length);
-  //     } else {
-  //       setLikes(0);
-  //     }
-
-  //     setIsLiked(!isLiked);
-  //   } catch (error) {
-  //     console.log("like error :" + error);
-  //   }
-  // };
-
-  useEffect(() => {
-    // getAllSubComments();
-    // getCommentLikes();
-    // likeTheComment();
-  }, []);
+      if (results.data.original.data !== undefined) {
+        // setLikes(JSON.parse(results.data.original.data.like.likes).length);
+      } else {
+        // setLikes(0);
+      }
+    } catch (error) {
+      console.log("like error :" + error);
+    }
+  };
 
   return (
-    <div key={data.id} className={data.id ? "ms-20" : ""}>
-      <div className="flex gap-2 mt-6">
-        <Link to={"path" + user.id}>
-          <img
-            className="rounded-full"
-            src={user.image ? user.image : PFP}
-            alt="PFP"
-          />
-        </Link>
-        <div>
-          <Link className="flex" to={"path" + user.id}>
-            <p className="text-lg capitalize">
-              {user.first_name + " " + user.last_name}
-            </p>
-            {user.type && (
-              <img className="w-4 h-4 m-2" src={user.type} alt="" />
-            )}
+    <div className="d-flex" style={{ position: "relative" }}>
+      <div key={subComments.id} className={subComments.id ? "ms-20" : ""}>
+        <div className="flex gap-2 mt-6">
+          <Link to={"/profile/" + subComments.user_id}>
+            <img
+              className="rounded-full"
+              style={{ width: "40px", height: "40px" }}
+              src={
+                subComments.user_image
+                  ? `${URL}/storage/${subComments.user_image}`
+                  : PFP
+              }
+              alt="PFP"
+            />
           </Link>
-          <p>{data.text + " " + data.id}</p>
-          <div className="flex gap-1 text-stone-400 py-2">
-            <button
-              className={`h-fit ${isLiked && "text-blue-600"}`}
-              // onClick={likeTheComment}
-            >
-              {t("Like") + " ."}
-            </button>
-            <button
+          <div>
+            <Link className="flex" to={"path" + subComments.user_id}>
+              <p className="text-lg capitalize">
+                {subComments.first_name + " " + subComments.last_name}
+              </p>
+              {subComments.type && (
+                <img className="w-4 h-4 m-2" src={subComments.type} alt="" />
+              )}
+            </Link>
+            <div>
+              {edit ? (
+                <UpdateComment
+                  value={subComments.text}
+                  data={subComments}
+                  setEdit={setEdit}
+                  subComment={true}
+                />
+              ) : (
+                <>
+                  <p>{subComments.text}</p>
+                  {subComments.image && (
+                    <img
+                      src={`${URL}/storage/${subComments.image}`}
+                      alt=""
+                      style={{ width: "150px", height: "150px" }}
+                    />
+                  )}
+                </>
+              )}
+            </div>
+            <div className="flex gap-1 text-stone-400 py-2">
+              <button
+                className={`h-fit ${isLiked && "text-blue-600"}`}
+                // onClick={likeTheComment}
+                onClick={() => likeTheSubComment()}
+              >
+                {t("Like") + " ."}
+              </button>
+              {/* <button
               className="h-fit"
               // onClick={() => setIsWriting(!isWriting)}
             >
               {t("Comment") + " ."}
-            </button>
-            <p>{normalTime + " ."}</p>
-            <p className="text-violet-700">{likes + " " + t("Likes")}</p>
+            </button> */}
+              <p>{normalTime + " ."}</p>
+              <p className="text-violet-700">{likes + " " + t("Likes")}</p>
+            </div>
           </div>
         </div>
+        {/* {isWriting && <CreateComment post={subComments} isReplying={isWriting} />} */}
       </div>
-
-      
-      {/* {isWriting && <CreateComment post={data} isReplying={isWriting} />} */}
+      <div
+        className="p-absolute"
+        style={{ left: "0px", position: "absolute", marginTop: "10px" }}
+      >
+        <DropdownComment
+          buttonData={<img src={vertical3dots} alt="" role="button" />}
+          labels={["Edit", "Delete"]}
+          post_id={subComments.id}
+          post={subComments}
+          subComment={true}
+          setEdit={setEdit}
+        />
+      </div>
     </div>
   );
 }

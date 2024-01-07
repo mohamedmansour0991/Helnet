@@ -5,13 +5,14 @@ import ShareModel from "../../shareModel/ShareModel";
 import CommentSection from "../../commentSection/CommentSection";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import _ from "lodash";
 export default function InteractionBar({ data }) {
-  const [likes, setLikes] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
-  const [commentsNumber, setCommentsNumber] = useState(0);
+  const [likes, setLikes] = useState(data.likes);
+  const [isLiked, setIsLiked] = useState(data?.liked);
+  const [commentsNumber, setCommentsNumber] = useState(data?.comments);
   const [isCommentModelOpen, setIsCommentModelOpen] = useState(false);
   const [isShareModelOpen, setIsShareModelOpen] = useState(false);
+  const [comments, setComments] = useState([]);
 
   function closeCommentModal() {
     setIsCommentModelOpen(false);
@@ -32,44 +33,37 @@ export default function InteractionBar({ data }) {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const { user, token } = useSelector((state) => state.auth);
 
-  const getAllLikes = async () => {
-    try {
-      const results = await axios.get(`${URL}/api/getwhoLikedPost/${data.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (results.status === 429) {
-        // Implement backoff logic here
-        console.log("Too Many Requests. Retrying after some time...");
-        await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait for 5 seconds
-        getAllLikes();
-        return;
-      }
+  // const getAllLikes = async () => {
+  //   try {
+  //     const results = await axios.get(`${URL}/api/getwhoLikedPost/${data.id}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     if (results.status === 429) {
+  //       // Implement backoff logic here
+  //       console.log("Too Many Requests. Retrying after some time...");
+  //       await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait for 5 seconds
+  //       getAllLikes();
+  //       return;
+  //     }
 
-      if (results.data.original.data !== null) {
-        // get all the likes
-        setLikes(results.data.original.data.data.length);
+  //     if (results.data.original.data !== null) {
+  //       // get all the likes
+  //       setLikes(results.data.original.data.data.length);
 
-        // check if the current user liking the post
-        const isLikedByCurrentUser = results.data.original.data.data.some(
-          (i) => i.id === user.id
-        );
-        setIsLiked(isLikedByCurrentUser);
-      }
-    } catch (error) {
-      console.log("get the likes error :" + error);
-    }
-  };
+  //       // check if the current user liking the post
+  //       const isLikedByCurrentUser = results.data.original.data.data.some(
+  //         (i) => i.id === user.id
+  //       );
+  //       setIsLiked(isLikedByCurrentUser);
+  //     }
+  //   } catch (error) {
+  //     console.log("get the likes error :" + error);
+  //   }
+  // };
 
   const likeThePost = async () => {
-    console.log("first");
-    if (isLiked) {
-      setLikes((prev) => prev - 1);
-    } else {
-      setLikes((prev) => prev + 1);
-    }
-    setIsLiked(!isLiked);
     try {
       const results = await axios.post(
         `${URL}/api/postLike`,
@@ -83,34 +77,40 @@ export default function InteractionBar({ data }) {
       console.log(results);
 
       if (results.data.original.data.like !== undefined) {
-        console.log(results.data.original.data.like.Likes.length);
+        // console.log(results.data.original.data.like.Likes.length);
         setLikes(JSON.parse(results.data.original.data.like.Likes).length);
       } else {
         setLikes(0);
       }
 
-      setIsLiked(!isLiked);
+      // setIsLiked(!isLiked);
     } catch (error) {
       console.log("like error :" + error);
     }
   };
 
-  useEffect(() => {
-    getAllLikes();
-    // likeThePost();
-  }, [isLiked]);
+  const debouncedLikeThePost = _.debounce(likeThePost, 1000); // Adjust the delay as needed
 
-  const comments = "12";
+  // useEffect(() => {
+  //   getAllLikes();
+  //   // likeThePost();
+  // }, [isLiked]);
 
+  const handleLikeButtonClick = () => {
+    setTimeout(() => {
+      if (isLiked) {
+        setLikes((prev) => prev - 1);
+      } else {
+        setLikes((prev) => prev + 1);
+      }
+      setIsLiked(!isLiked);
+    }, 200);
+    debouncedLikeThePost();
+  };
   return (
     <>
       <div className="flex gap-4 mt-8 ps-6">
-        <button
-          className="relative"
-          onClick={() => {
-            likeThePost();
-          }}
-        >
+        <button className="relative" onClick={handleLikeButtonClick}>
           <img
             style={isLiked ? { background: "red" } : { background: "#fff" }}
             src={isLiked ? like : like}
@@ -131,6 +131,7 @@ export default function InteractionBar({ data }) {
           className="relative"
           disabled={isCommentModelOpen}
           onClick={() => {
+            setComments([]);
             if (isCommentModelOpen === false) {
               openCommentModal();
             } else return;
@@ -158,6 +159,8 @@ export default function InteractionBar({ data }) {
           isCommentModelOpen={isCommentModelOpen}
           closeCommentModal={closeCommentModal}
           setCommentsNumber={setCommentsNumber}
+          setComments={setComments}
+          comments={comments}
         />
       )}
 

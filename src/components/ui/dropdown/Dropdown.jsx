@@ -4,6 +4,9 @@ import { t } from "i18next";
 import { deletPost } from "../../../rtk/Api/Api";
 import { useDispatch, useSelector } from "react-redux";
 import ModalShare from "../createPost/ModalShare";
+import { Video3, image, voice } from "../../../assets/images/icons";
+import Modal from "../modal/Modal";
+import EditPostsServices from "../../posts/EditPostsServices";
 
 export default function Dropdown({
   buttonData = "open",
@@ -22,18 +25,24 @@ export default function Dropdown({
 
   useEffect(() => {
     setIsArabic(localStorage.getItem("i18nextLng") === "ar");
-    // console.log(localStorage.getItem("i18nextLng") === "ar");
-    // console.log(isArabic);
   }, [localStorage.getItem("i18nextLng")]);
 
   const handleButtonClick = (label) => {
     if (label == "Delete") {
-      deletPost(token, post.id, dispatch);
+      deletPost(token, post.id, dispatch, post);
     } else if (label == "Edit") {
-      setIsOpen(true);
+      if (post?.price) {
+        setIsOpenservicw(true);
+      } else {
+        setIsOpen(true);
+        setIsFormOpen(true);
+      }
     }
   };
+  const [isOpenservicw, setIsOpenservicw] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [formType, setformType] = useState("service");
   function closeModal() {
     setIsOpen(false);
   }
@@ -85,8 +94,30 @@ export default function Dropdown({
         isOpen={isOpen}
         closeModal={closeModal}
         setIsOpen={setIsOpen}
+        setIsFormOpen={setIsFormOpen}
+        isFormOpen={isFormOpen}
         post={post}
+        buttons={[
+          { value: "Images", title: "Post Images", image: image },
+          { value: "Video", title: "Post Video", image: Video3 },
+          { value: "Record", title: "Post Record", image: voice },
+        ]}
       />
+      <Modal
+        isOpen={isOpenservicw}
+        closeModal={() => {
+          setIsOpenservicw(false);
+        }}
+        width="max-w-xl w-full"
+      >
+        <EditPostsServices
+          formType={formType}
+          setIsOpenservicw={setIsOpenservicw}
+          // setIsOpen={setIsOpen}
+          setIsFormOpen={setIsFormOpen}
+          post={post}
+        />
+      </Modal>
     </div>
   );
 }

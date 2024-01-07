@@ -32,21 +32,23 @@ const Reels = () => {
 
   return (
     <>
-      <div className="bg-white rounded-xl">
-        <FiltersBar />
-        <InfiniteScroll
-          dataLength={items.length}
-          next={loadMore}
-          hasMore={hasMore}
-          loader={<div className="lds-default  m-auto d-flex"></div>}
-        >
-          <div className="reelsComponents ">
-            {/* sidebar */}
-            {items.map((video, index) => (
-              <BoxReelComponents video={video} index={index} />
-            ))}
-          </div>
-        </InfiniteScroll>
+      <div className="grid gap-3">
+        <div className="bg-white rounded-xl">
+          <FiltersBar />
+          <InfiniteScroll
+            dataLength={items.length}
+            next={loadMore}
+            hasMore={hasMore}
+            loader={<div className="lds-default  m-auto d-flex"></div>}
+          >
+            <div className="reelsComponents ">
+              {/* sidebar */}
+              {items.map((video, index) => (
+                <BoxReelComponents video={video} index={index} />
+              ))}
+            </div>
+          </InfiniteScroll>
+        </div>
       </div>
     </>
   );

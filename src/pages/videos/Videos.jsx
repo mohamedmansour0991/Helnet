@@ -105,7 +105,7 @@ function Videos() {
         loader={<div className="lds-default  m-auto d-flex"></div>}
       >
         <div className="videos__page">
-          <VideoCard videos={videos} />
+          <VideoCard videos={items} />
         </div>
       </InfiniteScroll>
     </div>

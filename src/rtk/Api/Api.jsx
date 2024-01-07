@@ -1,7 +1,15 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { deletePosts, loginSuccess, refrechPosts } from "../slices/authSlice";
+import {
+  deletePosts,
+  deleteSubcomment,
+  deletecomment,
+  loginSuccess,
+  refrechPosts,
+  refrechcomment,
+} from "../slices/authSlice";
 import { toast } from "react-toastify";
+import { deleteServicese } from "../slices/productSlice";
 const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
 export const getUser = async (token, dispatch) => {
@@ -19,7 +27,7 @@ export const getUser = async (token, dispatch) => {
   }
 };
 
-export const deletPost = async (token, post_id, dispatch) => {
+export const deletPost = async (token, post_id, dispatch, post) => {
   const data = {
     post_id,
   };
@@ -37,7 +45,35 @@ export const deletPost = async (token, post_id, dispatch) => {
     );
     console.log(res);
     toast.success("تم حذف المنشور");
-    dispatch(deletePosts({ post_id }));
+    if (post?.price) {
+      dispatch(deleteServicese({ post_id }));
+    } else {
+      dispatch(deletePosts({ post_id }));
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteComment = async (token, post_id, dispatch, subComment) => {
+  try {
+    const res = await axios.post(
+      `${URL}/api/post/delete_comment`,
+      { post_comment_id: post_id },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(res);
+    toast.success("تم حذف المنشور");
+    if (subComment) {
+      dispatch(deleteSubcomment({ post_id }));
+    } else {
+      dispatch(deletecomment({ post_id }));
+    }
   } catch (err) {
     console.log(err);
   }

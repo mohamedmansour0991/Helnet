@@ -10,14 +10,53 @@ import { Aside, MainMenu, Navbar, SinglePost } from "/src/components";
 import { useTranslation } from "react-i18next";
 import { search, store, events, video, reel } from "/src/assets/images/icons";
 import BoxNotification from "../../components/boxNotification/BoxNotification";
+import { useSelector } from "react-redux";
+import { getDataNotification } from "../../components/posts/getDataPost";
+import InfiniteScroll from "react-infinite-scroll-component";
+import axios from "axios";
 
 const Notifcations = () => {
   const [t] = useTranslation();
+  const { token } = useSelector((state) => state.auth);
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
+  const { items, hasMore, loadMore, setPage } = getDataNotification(
+    1,
+    token,
+    "get_notification"
+  );
+
+  const handleButtonClick = async () => {
+    try {
+      const res = await axios.get(
+        `${URL}/api/mark_all_notification_as_read`,
+
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res);
+      setPage(0);
+    } catch (err) {
+      // toast.error(t("A network error occurred"));
+
+      console.log(err);
+    }
+  };
   return (
     <>
+      <div
+        className="w-100 bg-white mb-2 text-center cursor-pointer py-2"
+        style={{ borderRadius: "10px" }}
+        onClick={() => handleButtonClick()}
+      >
+        Read All
+      </div>
       <div className="notification">
-        <div>
+        {/* <div>
           <h1
             className="mb-0 pb-0"
             style={{
@@ -29,10 +68,26 @@ const Notifcations = () => {
             اليوم :{" "}
           </h1>
           <img className="pic2" src={Rectangle} alt="" />
-        </div>
-        <BoxNotification />
-        <BoxNotification />
-        <div>
+        </div> */}
+        <InfiniteScroll
+          dataLength={items.length}
+          next={loadMore}
+          hasMore={hasMore}
+          loader={<div className="lds-default  m-auto d-flex"></div>}
+        >
+          {items[0]?.id
+            ? items.map((notification) => (
+                <BoxNotification
+                  key={notification.id}
+                  notification={notification}
+                />
+              ))
+            : ""}
+          {/* <BoxNotification />
+          <BoxNotification /> */}
+        </InfiniteScroll>
+
+        {/* <div>
           <h1
             className="mb-0 pb-0"
             style={{
@@ -61,7 +116,7 @@ const Notifcations = () => {
           <img className="pic2" src={Rectangle} alt="" />
         </div>
         <BoxNotification />
-        <BoxNotification />
+        <BoxNotification /> */}
       </div>
       {/* sidebar */}
 

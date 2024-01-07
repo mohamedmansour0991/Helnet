@@ -3,12 +3,15 @@ import {
   search,
   store,
   events,
+  Video3,
   video,
   reel,
+  image,
+  voice,
   friend,
 } from "/src/assets/images/icons";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Reels from "../reels/reels";
 import Settings from "../settings/Settings";
 import Notifcations from "../notifcations/Notifcations";
@@ -17,16 +20,23 @@ import { data } from "/public/fakeData";
 import { CreatePost } from "../../components/ui";
 import Friends from "../Friends/Friends";
 import "./MainPage.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import Suggest from "../Friends/Suggest";
 import Requests from "../Friends/Requests";
+import Search from "../Search/Search";
+import { refrechPosts } from "../../rtk/slices/authSlice";
+import { refrechPostsProductNews } from "../../rtk/slices/productSlice";
 
 export default function MainPage() {
-  const { user, error, msg } = useSelector((state) => state.auth);
+  const { user, error, msg, update } = useSelector((state) => state.auth);
+  const { updateNews } = useSelector((state) => state.store);
   const uploads = useSelector((state) => state.progress.uploads);
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { t } = useTranslation();
   const direction = localStorage.getItem("direction");
   const name = useParams().allroute;
@@ -38,10 +48,19 @@ export default function MainPage() {
     { name: t("Reel"), icon: reel, link: "reel" },
     { name: t("Friends"), icon: friend, link: "friends" },
   ];
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (update.id) {
+      dispatch(refrechPosts({}));
+    }
+    if (updateNews.id) {
+      dispatch(refrechPostsProductNews({}));
+    }
+  }, [name]);
   return (
     <div className="bg-body">
       <Navbar />
@@ -51,7 +70,13 @@ export default function MainPage() {
           {name === "home" || name === undefined ? (
             <div className="grid gap-3">
               <div className="flex items-center flex-col gap-3 w-full">
-                <CreatePost />
+                <CreatePost
+                  buttons={[
+                    { value: "Images", title: "Post Images", image: image },
+                    { value: "Video", title: "Post Video", image: Video3 },
+                    { value: "Record", title: "Post Record", image: voice },
+                  ]}
+                />
               </div>
               {uploads.map((upload) => (
                 <div
@@ -93,6 +118,8 @@ export default function MainPage() {
             <Friends type="current-following" />
           ) : name === "globe" ? (
             <Notifcations />
+          ) : name === "search" ? (
+            <Search />
           ) : (
             name === "settings" && <Settings />
           )}

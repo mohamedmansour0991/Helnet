@@ -38,8 +38,8 @@ function UpdateInfo() {
     {
       name: t("Account Privacy"),
       type: "select",
-      select: ["Public", "Private"],
-      state: "accountPrivacy",
+      select: ["public", "private"],
+      state: "privacy",
     },
   ];
   const typeUser = [{ name: t("User Type"), type: "select" }];

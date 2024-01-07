@@ -275,7 +275,7 @@ button {
 .profile-pic {
   border-radius: 50%;
   position: absolute;
-  top: -109px;
+  top: -46px;
   right: 50px;
   margin: auto;
   z-index: 1;
@@ -308,7 +308,7 @@ button {
 .profile-pic4 {
   border-radius: 50%;
   position: absolute;
-  top: 0px;
+  bottom: 90px;
   right: 140px;
   margin: auto;
   z-index: 1;
@@ -413,6 +413,7 @@ button {
 .img-responsive {
   width: 100%;
   min-height: 150px !important;
+  max-height: 350px !important;
 }
 
 .profile-title {

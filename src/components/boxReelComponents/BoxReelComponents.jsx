@@ -9,7 +9,7 @@ function BoxReelComponents({ video, index }) {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
   const navigate = useNavigate();
-  console.log(video);
+  // console.log(video);
   return (
     <>
       <div className="box__reel__components">
@@ -19,8 +19,8 @@ function BoxReelComponents({ video, index }) {
           role="button"
           onClick={() => {
             navigate(`/reels-page/${video.id}`);
-            handleVideoClick(video);
-            openModal2();
+            // handleVideoClick(video);
+            // openModal2();
           }}
         >
           <div

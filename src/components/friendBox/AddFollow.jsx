@@ -2,17 +2,18 @@ import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
 
-function AddFollow({ user }) {
+function AddFollow({ user, setType }) {
+  console.log(user);
   const { token } = useSelector((state) => state.auth);
-
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const data = {
-    following_id: user.id,
+    following_id: user.id || user.user_id,
   };
   console.log(data);
   const handleFollow = async () => {
+    setType(false);
     try {
-      const res = await axios.post(`${URL}/follow-create`, data, {
+      const res = await axios.post(`${URL}/api/follow-create`, data, {
         headers: {
           Accept: "multipart/form-data",
           Authorization: `Bearer ${token}`,

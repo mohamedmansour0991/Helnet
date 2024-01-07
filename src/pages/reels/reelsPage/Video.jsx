@@ -15,6 +15,8 @@ const Video = ({
   videos,
   shares,
 }) => {
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef(null);
   const options = {
@@ -55,7 +57,7 @@ const Video = ({
         ref={videoRef}
         onClick={onVideoClick}
         onDoubleClick={() => setLiked(true)}
-        src={url}
+        src={`${URL}/storage/videos/${videos.video}`}
       ></video>
       {/* <VideoFooter
         channel={channel}
