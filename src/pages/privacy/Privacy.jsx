@@ -17,6 +17,7 @@ function Privacy() {
     {
       name: t("Who can see Your Posts"),
       type: "select",
+      select: ["Public", "Private"],
       state: "accountPosts",
     },
     {

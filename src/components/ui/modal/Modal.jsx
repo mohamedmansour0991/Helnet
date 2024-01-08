@@ -1,26 +1,31 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
-import { close } from "../../../assets/images/icons";
+import { close, close1 } from "../../../assets/images/icons";
 
 export default function Modal({
-  isOpen,
-  closeModal,
-  title,
-  children,
-  closeIcon,
+  isOpen = () => {},
+  closeModal = () => {},
+  backFunc = () => {
+    closeModal();
+  },
+  title = "",
+  children = "placeholder",
+  childrenPadding = "p-6",
+  width = "w-full",
+  height = "h-[100dvh] sm:h-auto",
   isFullScreen = true,
+  hasCloseButton = false,
+  closeButtonLeft = false,
 }) {
-  const [isXIcon, setIsXIcon] = useState(false);
   const [isArabic, setIsArabic] = useState(false);
 
   useEffect(() => {
-    setIsXIcon(closeIcon);
     setIsArabic(localStorage.getItem("i18nextLng") === "ar");
   }, []);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div" className="relative z-10 p-3" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -34,7 +39,7 @@ export default function Modal({
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <div className="flex min-h-full items-center justify-center sm:p-4 text-center p-2">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -45,22 +50,11 @@ export default function Modal({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                className={`w-full  transform overflow-hidden rounded-2xl bg-white p-6 text-start align-middle shadow-xl transition-all ${
-                  isFullScreen ? "max-w-2xl" : "max-w-md"
+                className={`${width} ${height} p-3 transform overflow-hidden sm:rounded-3xl bg-white text-start align-middle shadow-xl transition-all ${
+                  isFullScreen ? "max-w-4xl" : "max-w-md"
                 }`}
               >
                 <div className={`${isArabic ? "text-right" : "text-left"}`}>
-                  {isXIcon && (
-                    <button
-                      className={`absolute z-50 right-0 top-0 h-1 ${
-                        isArabic ? "left-0" : "right-0"
-                      }`}
-                      onClick={closeModal}
-                    >
-                      <img src={close} alt="" role="button" />
-                    </button>
-                  )}
-
                   {title && (
                     <Dialog.Title
                       as="h3"
@@ -70,7 +64,22 @@ export default function Modal({
                     </Dialog.Title>
                   )}
 
-                  <div className="mt-4">{children}</div>
+                  {hasCloseButton && (
+                    <button
+                      className={`absolute z-20 top-1 ${
+                        closeButtonLeft ? "left-5" : "right-5"
+                      }`}
+                      onClick={closeModal}
+                    >
+                      <img src={close1} alt="" />
+                    </button>
+                  )}
+
+                  <div
+                    className={`overflow-y-scroll sm:max-h-[70dvh] max-h-[100dvh] no-scrollbar ${childrenPadding}`}
+                  >
+                    {children}
+                  </div>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

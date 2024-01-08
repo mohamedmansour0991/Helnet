@@ -17,14 +17,14 @@ export const signUpUser = createAsyncThunk(
         },
       };
       const res = await axios.post(`${URL}/api/register`, user, config);
-      console.log(res);
+      // console.log(res);
       //  navigate("/login");
       setLoading(false);
       return res.data;
     } catch (error) {
       // return custom error message from backend if present
       setLoading(false);
-      console.log(error, "error");
+      // console.log(error, "error");
     }
   }
 );
@@ -33,7 +33,7 @@ export const loginUser = createAsyncThunk(
   "loginUser",
   async ({ user, setLoading }, thunkAPI) => {
     setLoading(true);
-    console.log(user);
+    // console.log(user);
     try {
       const config = {
         headers: {
@@ -41,12 +41,12 @@ export const loginUser = createAsyncThunk(
         },
       };
       const res = await axios.post(`${URL}/api/login`, user, config);
-      console.log(res);
+      // console.log(res);
       // navigator("/home");
       setLoading(false);
       return res.data;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setLoading(false);
 
       if (error.response.status == 401) {
@@ -68,13 +68,13 @@ export const logoutUser = createAsyncThunk(
         },
       };
       const res = await axios.post(`${URL}/api/logout`, user, config);
-      console.log(res);
+      // console.log(res);
       // navigator("/home");
 
       localStorage.removeItem("access_token");
     } catch (error) {
       // return custom error message from backend if present
-      console.log(error);
+      // console.log(error);
     }
   }
 );
@@ -84,6 +84,12 @@ const authSlice = createSlice({
     msg: false,
     signIn: false,
     refrech: 0,
+    update: {},
+    updateComment: {},
+    deleteComment_id: {},
+    updateSubComment: {},
+    deleteSubComment_id: {},
+    deletePost_id: {},
     user: JSON.parse(localStorage.getItem("user"))
       ? JSON.parse(localStorage.getItem("user"))
       : "",
@@ -99,25 +105,25 @@ const authSlice = createSlice({
   },
   reducers: {
     loginGoogle: (state, actions) => {
-      console.log(actions.payload);
+      // console.log(actions.payload);
       localStorage.setItem("user", JSON.stringify(actions.payload));
       state.user = actions.payload;
     },
     loginStart: (state, actios) => {
       state.loading = true;
-      console.log(actios);
+      // console.log(actios);
     },
     loginSuccess: (state, action) => {
-      console.log("sdf");
-      console.log("action");
-      console.log(action);
-      console.log("state");
-      console.log(state);
+      // console.log("sdf");
+      // console.log("action");
+      // console.log(action);
+      // console.log("state");
+      // console.log(state);
 
       state.loading = false;
       state.user = action.payload;
-      console.log("state user   ");
-      console.log(state.user);
+      // console.log("state user   ");
+      // console.log(state.user);
       localStorage.setItem("user", JSON.stringify(action.payload));
     },
     loginFailure: (state, actions) => {
@@ -139,6 +145,24 @@ const authSlice = createSlice({
     },
     refrechPosts: (state, action) => {
       state.refrech += 1;
+      state.update = action.payload;
+    },
+    deletePosts: (state, action) => {
+      state.refrech += 1;
+      // console.log(action.payload);
+      state.deletePost_id = action.payload;
+    },
+    refrechcomment: (state, action) => {
+      state.updateComment = action.payload;
+    },
+    deletecomment: (state, action) => {
+      state.deleteComment_id = action.payload;
+    },
+    refrechSubcomment: (state, action) => {
+      state.updateSubComment = action.payload;
+    },
+    deleteSubcomment: (state, action) => {
+      state.deleteSubComment_id = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -149,7 +173,7 @@ const authSlice = createSlice({
       })
       .addCase(signUpUser.fulfilled, (state, { payload }) => {
         state.loading = false;
-        console.log(payload, "payload");
+        // console.log(payload, "payload");
         if (payload) {
           state.msg = false;
 
@@ -171,7 +195,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
+        // console.log(payload);
         if (payload) {
           state.msg = false;
           localStorage.setItem("user", JSON.stringify(payload.user));
@@ -201,5 +225,10 @@ export const {
   deleteSign,
   CurrentStudy,
   refrechPosts,
+  deletePosts,
+  refrechcomment,
+  deletecomment,
+  deleteSubcomment,
+  refrechSubcomment,
 } = authSlice.actions;
 export default authSlice.reducer;

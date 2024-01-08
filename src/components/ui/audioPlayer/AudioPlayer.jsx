@@ -9,13 +9,14 @@ import {
   profile1,
 } from "../../../assets/images/icons";
 import { Button } from "../";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { t } from "i18next";
 import "./AudioPlayer.scss";
 
 export default function AudioPlayer({ data, user }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
+  const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef(null);
 
   const playAudio = () => {
@@ -61,6 +62,32 @@ export default function AudioPlayer({ data, user }) {
     }
   };
 
+  useEffect(() => {
+    // Define event listener functions
+    const handleAudioEnd = () => {
+      setIsPlaying(false);
+    };
+
+    const handleTimeUpdate = () => {
+      setCurrentTime(audioRef.current.currentTime);
+    };
+
+    // Add event listeners if audioRef is available
+    if (audioRef.current) {
+      audioRef.current.addEventListener("ended", handleAudioEnd);
+      audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+    }
+
+    // Clean up the event listeners when the component unmounts
+    return () => {
+      // Check if audioRef is still available
+      if (audioRef.current) {
+        audioRef.current.removeEventListener("ended", handleAudioEnd);
+        audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+      }
+    };
+  }, [audioRef]);
+
   const maxTime = isNaN(audioRef.current?.duration)
     ? 0
     : audioRef.current.duration;
@@ -71,6 +98,10 @@ export default function AudioPlayer({ data, user }) {
       <Button
         dir="rtl"
         className="h-60 rounded-3xl relative cursor-auto"
+        onClick={(e) => {
+          e.preventDefault();
+          togglePlay;
+        }}
         children={
           <>
             <div
@@ -121,7 +152,7 @@ export default function AudioPlayer({ data, user }) {
                   onChange={handleVolumeChange}
                 />
 
-                <span>{formatTime(maxTime)}</span>
+                <span>{formatTime(maxTime - currentTime)}</span>
               </div>
             </div>
           </>

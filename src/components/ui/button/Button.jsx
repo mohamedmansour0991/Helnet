@@ -24,10 +24,10 @@ export default function Button({
   onClick = () => {},
   ...rest
 }) {
- 
   return (
     <button
       type={type}
+      onClick={onClick}
       style={{
         backgroundColor: backgroundColor,
         color: color,

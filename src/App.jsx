@@ -24,11 +24,15 @@ import { store } from "./rtk/store";
 import AllRegister from "./pages/AllRegister/AllRegister";
 import { ToastContainer } from "react-toastify";
 import Language from "./pages/languag/languag";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "./rtk/Api/Api";
+import ShowPost from "./pages/ShowPost/ShowPost";
+import ShowComment from "./pages/ShowComment/ShowComment";
 
 function App() {
   const [t, i18n] = useTranslation();
-  const { user, error, msg } = useSelector((state) => state.auth);
+  const { user, error, msg, token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!user) {
       document.body.classList.add("bg-white");
@@ -38,7 +42,8 @@ function App() {
   }, [user]);
 
   useEffect(() => {
-    console.log(i18n.language);
+    getUser(token, dispatch);
+    // console.log(i18n.language);
     if (i18n.language === "ar") {
       localStorage.setItem("direction", "rtl");
       document.body.classList.remove("en");
@@ -63,8 +68,11 @@ function App() {
         <Route path="/doctor" element={<Doctor />} />
         <Route path="/user-kind" element={<UserKind />} />
         <Route path="/job" element={<Jobs />} />
-        <Route path="/profile1" element={user ? <Profile /> : <Login />} />
-        <Route path="/reels-page" element={user ? <ReelsPage /> : <Login />} />
+        <Route path="/profile/:id" element={user ? <Profile /> : <Login />} />
+        <Route
+          path="/reels-page/:id"
+          element={user ? <ReelsPage /> : <Login />}
+        />
         <Route path="/:allroute" element={user ? <MainPage /> : <Login />} />
         <Route path="/" element={user ? <MainPage /> : <Login />} />
         <Route
@@ -75,11 +83,19 @@ function App() {
         <Route path="/store" element={user ? <Store /> : <Login />} />
 
         <Route
-          path="/singleVideo"
+          path="/singleVideo/:id"
           element={user ? <SingleVideo /> : <Login />}
         />
         <Route
-          path="/singleProduct"
+          path="/singlePost/:id"
+          element={user ? <ShowPost /> : <Login />}
+        />
+        <Route
+          path="/singleComment/:post_id/:comment_id"
+          element={user ? <ShowComment /> : <Login />}
+        />
+        <Route
+          path="/singleProduct/:id"
           element={user ? <SingleProduct /> : <Login />}
         />
       </Routes>

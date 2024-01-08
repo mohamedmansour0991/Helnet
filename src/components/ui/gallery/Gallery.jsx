@@ -6,7 +6,7 @@ export default function Gallery({ data, target }) {
   const handelClick = () => {
     navigate(target);
   };
-
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   return (
     <div className={`gallery with${data.length}`}>
       {data.slice(0, 5).map((image, index) => (
@@ -15,7 +15,7 @@ export default function Gallery({ data, target }) {
           className={`imageNo${index + 1}`}
           onClick={handelClick}
         >
-          <img src={image} alt="" />
+          <img src={`${URL}/storage/${image.image.path}`} alt="" />
 
           {data.length > 5 && (
             <>

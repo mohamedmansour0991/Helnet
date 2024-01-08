@@ -501,7 +501,7 @@ export const storeData = [
     category: "used",
     post_data: {
       post_time: "",
-      post_images: [testImage1,testImage2,testImage3,testImage4,testImage5],
+      post_images: [testImage1, testImage2, testImage3, testImage4, testImage5],
       post_text: "",
 
       description:
@@ -512,6 +512,23 @@ export const storeData = [
       quantity: 1,
       isNew: false,
       contactInfo: "0114789563",
+    },
+    post_user: {
+      user_id: "1",
+    },
+    post_likes: [],
+  },
+];
+
+export const videosData = [
+  {
+    post_id: "1",
+    post_data: {
+      post_time: "",
+      post_text: "(⓿_⓿)",
+      post_images: [],
+      post_video: testVideo,
+      post_audio: "",
     },
     post_user: {
       user_id: "1",

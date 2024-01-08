@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+}
+
+body.en .sidebar {
+  direction: ltr !important;
+}
+
+.sidebar {
+  
+  position: fixed;
+  top: 0;
+  /* left: 0; */
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+  width: 260px;
+  height: 100%;
+   max-width: 250px;
+  padding: 0 16px;
+  background: #fff;
+  border-right: 1px solid #2e303e;
+  transition: 0.4s;
+  direction: rtl !important;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  height: 72px;
+  padding: 0 1.25rem 0 0;
+  border-bottom: 1px solid #2e303e;
+  color: #000;
+}
+
+.sidebar .sidebar-header button {
+  width: 54px;
+}
+
+.sidebar-logo {
+  height: 20px;
+}
+
+.sidebar button {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+ 
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 0 16px;
+  color: #000;
+  transition: background 0.3s;
+}
+
+.sidebar button span:nth-child(2) {
+}
+
+.sidebar button:is(.active, :hover) {
+  background: #004fee;
+  color: #e1ecff;
+}
+
+.sidebar button span {
+  transition: 0.3s;
+}
+
+.sidebar button.active > span:nth-child(3) {
+  rotate: -180deg;
+}
+
+.sidebar button:not(.active):hover {
+  background: #2e303e;
+}
+
+.sub-nav button.active::before {
+  background: #e1ecff;
+}
+
+.sub-nav {
+  overflow: hidden;
+  /* height: 0; */
+  transition: 0.5s;
+}
+
+/* .sub-nav.open {
+  height: 200px;
+} */
+
+.sub-nav button {
+  padding-left: 54px;
+}
+
+.sub-nav button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  translate: 0 -50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #e1ecff;
+}
+
+.material-symbols-outlined {
+  font-size: 22px;
+}
+
+.sidebar {
+  left: auto !important;
+  right: -400px !important;
+  &.true {
+    right: 0px !important;
+    left: auto !important;
+  }
+
+  @media (min-width: 1050px) {
+    & {
+      display: none !important;
+    }
+  }
+}
+
+.en {
+  .sidebar {
+    left: -400px !important;
+    right: auto !important;
+
+    &.true {
+      right: auto !important;
+
+      left: 0px !important;
+    }
+    @media (min-width: 1100px) {
+      & {
+        display: none !important;
+      }
+    }
+  }
+}
+
+.sub-nav-inner{
+  margin: 0px 20px;
+}

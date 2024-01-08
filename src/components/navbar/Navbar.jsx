@@ -30,10 +30,14 @@ import { useEffect, useRef, useState } from "react";
 import { t } from "i18next";
 import "./Navbar.scss";
 import { logout } from "../../rtk/slices/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Sidebar } from "./NavbarMobile";
 
 export default function Navbar() {
+  const { user } = useSelector((state) => state.auth);
   const name = window.location.pathname.split("/")[1];
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+
   const mainNavbarList = [
     { name: t("Home"), icon: home, coloredIcon: homeColored, link: "home" },
     { name: t("video"), icon: video, coloredIcon: videoColored, link: "video" },
@@ -73,7 +77,13 @@ export default function Navbar() {
     { name: t("Settings"), icon: settings, link: "settings/update-user" },
   ];
   const userOptionsListComputer = [
-    { name: t("Ebrahim mohamed"), icon: profile1, link: "profile1" },
+    // {
+    //   name: t("Ebrahim mohamed"),
+    //   icon: user.profile.image
+    //     ? `${URL}/storage/${user.profile.image}`
+    //     : profile1,
+    //   link: `profile/${user?.id}`,
+    // },
     { name: t("Globe"), icon: globe, link: "globe" },
     // { name: "settings/", icon: settings, link: "settings/update-user" },
     { name: t("Settings"), icon: settings, link: "settings/update-user" },
@@ -104,7 +114,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleClick = (e) => {
-      if (menuRef.current.contains(e.target)) {
+      if (menuRef?.current?.contains(e.target)) {
         // inside click
         return;
       } else {
@@ -150,6 +160,22 @@ export default function Navbar() {
             onClick={() => setIsOpened(!isOpened)}
           />
         </li>
+        <li
+          className="cursor-pointer"
+          onClick={() => {
+            navigate(`/profile/${user.id}`);
+          }}
+        >
+          <img
+            src={
+              user.profile.image
+                ? `${URL}/storage/${user.profile.image}`
+                : profile1
+            }
+            alt=""
+            style={{ borderRadius: "50%", height: "50px", width: "50px" }}
+          />
+        </li>
         {userOptionsListComputer.map((tap, index) => (
           <li
             key={index}
@@ -159,7 +185,7 @@ export default function Navbar() {
               navigate(`/${tap.link}`);
             }}
           >
-            <img src={tap.icon} alt="" />
+            <img src={tap.icon} alt="" style={{ borderRadius: "50%" }} />
 
             {tap.name === "globe" && notifications.length > 0 && (
               <div className="notifications">
@@ -190,6 +216,7 @@ export default function Navbar() {
           onClick={() => setIsOpened(!isOpened)}
         />
       </div>
+      {/* <Sidebar isOpened={isOpened} menuRef={menuRef} /> */}
       <ul
         ref={menuRef}
         className={`navbar__list mobileMenu p-0 py-4  d-grid  ${isOpened} ${direction} `}

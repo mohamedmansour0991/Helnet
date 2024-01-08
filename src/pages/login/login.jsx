@@ -40,9 +40,9 @@ const Login = () => {
     };
 
     dispatch(loginUser({ user, setLoading }));
-    // Cookies.set("remember", JSON.stringify({ email, password }), {
-    //   expires: 7,
-    // });
+    Cookies.set("remember", JSON.stringify({ email, password }), {
+      expires: 7,
+    });
   };
 
   const [t] = useTranslation();

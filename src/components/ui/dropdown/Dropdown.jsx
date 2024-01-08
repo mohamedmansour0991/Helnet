@@ -1,15 +1,51 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { t } from "i18next";
+import { deletPost } from "../../../rtk/Api/Api";
+import { useDispatch, useSelector } from "react-redux";
+import ModalShare from "../createPost/ModalShare";
+import { Video3, image, voice } from "../../../assets/images/icons";
+import Modal from "../modal/Modal";
+import EditPostsServices from "../../posts/EditPostsServices";
 
-export default function Dropdown({ buttonData = "open", labels = [] }) {
+export default function Dropdown({
+  buttonData = "open",
+  post,
+  labels = [],
+  post_id,
+  top,
+  position,
+  handleButtons = (label) => {
+    console.log(label);
+  },
+}) {
   const [isArabic, setIsArabic] = useState(false);
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsArabic(localStorage.getItem("i18nextLng") === "ar");
-    // console.log(localStorage.getItem("i18nextLng") === "ar");
-    // console.log(isArabic);
   }, [localStorage.getItem("i18nextLng")]);
+
+  const handleButtonClick = (label) => {
+    if (label == "Delete") {
+      deletPost(token, post.id, dispatch, post);
+    } else if (label == "Edit") {
+      if (post?.price) {
+        setIsOpenservicw(true);
+      } else {
+        setIsOpen(true);
+        setIsFormOpen(true);
+      }
+    }
+  };
+  const [isOpenservicw, setIsOpenservicw] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [formType, setformType] = useState("service");
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   return (
     <div className=" ">
@@ -28,9 +64,8 @@ export default function Dropdown({ buttonData = "open", labels = [] }) {
         >
           <Menu.Items
             className={`absolute z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none ${
-              // isArabic ? "right-0" : "left-0"
               isArabic ? "left-0" : "right-0"
-            }`}
+            } ${top} ${position}`}
           >
             <div className="px-1 py-1 ">
               {labels &&
@@ -38,6 +73,10 @@ export default function Dropdown({ buttonData = "open", labels = [] }) {
                   <Menu.Item key={index}>
                     {({ active }) => (
                       <button
+                        onClick={() => {
+                          handleButtonClick(label);
+                          handleButtons(label);
+                        }}
                         className={`${
                           active ? "bg-violet-500 text-white" : "text-gray-900"
                         } group flex w-full items-center text-center rounded-md px-3 py-2`}
@@ -51,6 +90,34 @@ export default function Dropdown({ buttonData = "open", labels = [] }) {
           </Menu.Items>
         </Transition>
       </Menu>
+      <ModalShare
+        isOpen={isOpen}
+        closeModal={closeModal}
+        setIsOpen={setIsOpen}
+        setIsFormOpen={setIsFormOpen}
+        isFormOpen={isFormOpen}
+        post={post}
+        buttons={[
+          { value: "Images", title: "Post Images", image: image },
+          { value: "Video", title: "Post Video", image: Video3 },
+          { value: "Record", title: "Post Record", image: voice },
+        ]}
+      />
+      <Modal
+        isOpen={isOpenservicw}
+        closeModal={() => {
+          setIsOpenservicw(false);
+        }}
+        width="max-w-xl w-full"
+      >
+        <EditPostsServices
+          formType={formType}
+          setIsOpenservicw={setIsOpenservicw}
+          // setIsOpen={setIsOpen}
+          setIsFormOpen={setIsFormOpen}
+          post={post}
+        />
+      </Modal>
     </div>
   );
 }

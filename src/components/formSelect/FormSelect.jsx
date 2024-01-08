@@ -23,8 +23,17 @@ function FormSelect({ inputs, header, name, formValues, setFormValues }) {
                 <option key={i}>{o}</option>
               ))}
             </select>
+          ) : tap.type == "file" ? (
+            <input
+              type="file"
+              multiple
+              onChange={(e) =>
+                handleInputChange(tap.state, [...e.target.files])
+              }
+            />
           ) : tap.type === "textarea" ? (
             <textarea
+              defaultValue={tap?.value}
               onChange={(e) => handleInputChange(tap.state, e.target.value)}
             />
           ) : (
@@ -32,7 +41,6 @@ function FormSelect({ inputs, header, name, formValues, setFormValues }) {
               defaultValue={tap?.value}
               type={tap.type}
               onChange={(e) => handleInputChange(tap.state, e.target.value)}
-              
             />
           )}
         </div>

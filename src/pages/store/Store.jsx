@@ -15,11 +15,17 @@ import Buy from "./buy/Buy";
 import "./Store.scss";
 import { useEffect, useState } from "react";
 import StoreForm from "../../components/form/Form";
+import Used from "./Used/Used";
+import { useDispatch, useSelector } from "react-redux";
+import { refrechPostsProductNews } from "../../rtk/slices/productSlice";
+import PostsServices from "../../components/posts/PostsServices";
 
 function Store() {
   const direction = localStorage.getItem("direction");
+  const { updateNews } = useSelector((state) => state.store);
 
   const name = useParams().name;
+  const dispatch = useDispatch();
 
   const mainMenuLabels = [
     { name: t("new"), icon: buy, link: "store/new" },
@@ -45,6 +51,13 @@ function Store() {
     );
     setServicesList(filteredServicesList);
   }, []);
+
+  useEffect(() => {
+    console.log("first");
+    // if (updateNews.id) {
+    dispatch(refrechPostsProductNews({}));
+    // }
+  }, [name]);
 
   return (
     <div className="bg-body">
@@ -76,13 +89,13 @@ function Store() {
 
             {name === "services" ? (
               <>
-                <FiltersBar />
-                <Posts data={servicesList} />
+                {/* <FiltersBar /> */}
+                <PostsServices data={servicesList} />
               </>
             ) : name == "used" ? (
               <>
                 <FiltersBar />
-                <Posts data={usedList} />
+                <Used />
               </>
             ) : (
               <div

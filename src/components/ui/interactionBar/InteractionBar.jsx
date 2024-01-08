@@ -1,11 +1,26 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { like, comment, share } from "../../../assets/images/icons";
 import ShareModel from "../../shareModel/ShareModel";
-import CreateComment from "../createComment/CreateComment";
 import CommentSection from "../../commentSection/CommentSection";
-
-export default function InteractionBar() {
+import { useSelector } from "react-redux";
+import axios from "axios";
+import _ from "lodash";
+export default function InteractionBar({ data }) {
+  const [likes, setLikes] = useState(data.likes);
+  const [isLiked, setIsLiked] = useState(data?.liked);
+  const [commentsNumber, setCommentsNumber] = useState(data?.comments);
+  const [isCommentModelOpen, setIsCommentModelOpen] = useState(false);
   const [isShareModelOpen, setIsShareModelOpen] = useState(false);
+  const [comments, setComments] = useState([]);
+
+  function closeCommentModal() {
+    setIsCommentModelOpen(false);
+  }
+
+  function openCommentModal() {
+    setIsCommentModelOpen(true);
+  }
 
   function closeShareModal() {
     setIsShareModelOpen(false);
@@ -15,45 +30,139 @@ export default function InteractionBar() {
     setIsShareModelOpen(true);
   }
 
-  const likes = "99+";
-  const comments = "8";
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  const { user, token } = useSelector((state) => state.auth);
 
+  // const getAllLikes = async () => {
+  //   try {
+  //     const results = await axios.get(`${URL}/api/getwhoLikedPost/${data.id}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     if (results.status === 429) {
+  //       // Implement backoff logic here
+  //       console.log("Too Many Requests. Retrying after some time...");
+  //       await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait for 5 seconds
+  //       getAllLikes();
+  //       return;
+  //     }
+
+  //     if (results.data.original.data !== null) {
+  //       // get all the likes
+  //       setLikes(results.data.original.data.data.length);
+
+  //       // check if the current user liking the post
+  //       const isLikedByCurrentUser = results.data.original.data.data.some(
+  //         (i) => i.id === user.id
+  //       );
+  //       setIsLiked(isLikedByCurrentUser);
+  //     }
+  //   } catch (error) {
+  //     console.log("get the likes error :" + error);
+  //   }
+  // };
+
+  const likeThePost = async () => {
+    try {
+      const results = await axios.post(
+        `${URL}/api/postLike`,
+        { post_id: data.id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(results);
+
+      if (results.data.original.data.like !== undefined) {
+        // console.log(results.data.original.data.like.Likes.length);
+        setLikes(JSON.parse(results.data.original.data.like.Likes).length);
+      } else {
+        setLikes(0);
+      }
+
+      // setIsLiked(!isLiked);
+    } catch (error) {
+      console.log("like error :" + error);
+    }
+  };
+
+  const debouncedLikeThePost = _.debounce(likeThePost, 1000); // Adjust the delay as needed
+
+  // useEffect(() => {
+  //   getAllLikes();
+  //   // likeThePost();
+  // }, [isLiked]);
+
+  const handleLikeButtonClick = () => {
+    setTimeout(() => {
+      if (isLiked) {
+        setLikes((prev) => prev - 1);
+      } else {
+        setLikes((prev) => prev + 1);
+      }
+      setIsLiked(!isLiked);
+    }, 200);
+    debouncedLikeThePost();
+  };
   return (
     <>
       <div className="flex gap-4 mt-8 ps-6">
+        <button className="relative" onClick={handleLikeButtonClick}>
+          <img
+            style={isLiked ? { background: "red" } : { background: "#fff" }}
+            src={isLiked ? like : like}
+            role="button"
+            alt=""
+          />
+
+          <span
+            className={`absolute top-2 text-xs left-0 translate-x-3 border-4 border-white rounded-full bg-violet-700 text-white ${
+              likes > 9 ? "px-2" : "px-1"
+            }`}
+          >
+            {likes > 0 && (likes > 99 ? "+99" : likes)}
+          </span>
+        </button>
+
         <button
           className="relative"
-          children={
-            <>
-              <img src={like} role="button" alt="" />
-              <span
-                className="absolute top-0 text-xs left-0 translate-x-2 rounded-full bg-violet-700 px-2 text-white"
-                children={likes}
-              />
-            </>
-          }
-          onClick={() => {}}
-        />
-        <button
-          className="relative"
-          children={
-            <>
-              <span
-                className="absolute top-0 text-xs left-0 translate-x-2 rounded-full bg-violet-700 px-2 text-white"
-                children={comments}
-              />
-              <img src={comment} role="button" alt="" />
-            </>
-          }
-          onClick={() => {}}
-        />
-        <button
-          children={<img src={share} role="button" alt="" />}
-          onClick={openShareModal}
-        />
+          disabled={isCommentModelOpen}
+          onClick={() => {
+            setComments([]);
+            if (isCommentModelOpen === false) {
+              openCommentModal();
+            } else return;
+          }}
+        >
+          <span
+            className={`absolute top-2 text-xs left-0 translate-x-3 border-4 border-white rounded-full bg-violet-700 text-white ${
+              commentsNumber > 9 ? "px-2" : "px-1"
+            }`}
+          >
+            {commentsNumber > 0 &&
+              (commentsNumber > 99 ? "+99" : commentsNumber)}
+          </span>
+          <img src={comment} role="button" alt="" />
+        </button>
+
+        <button onClick={openShareModal}>
+          <img src={share} role="button" alt="" />
+        </button>
       </div>
 
-      <CommentSection />
+      {isCommentModelOpen && (
+        <CommentSection
+          post={data}
+          isCommentModelOpen={isCommentModelOpen}
+          closeCommentModal={closeCommentModal}
+          setCommentsNumber={setCommentsNumber}
+          setComments={setComments}
+          comments={comments}
+        />
+      )}
 
       <ShareModel
         isShareOpen={isShareModelOpen}

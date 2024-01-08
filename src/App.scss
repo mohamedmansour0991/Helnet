@@ -275,7 +275,7 @@ button {
 .profile-pic {
   border-radius: 50%;
   position: absolute;
-  top: -109px;
+  top: -46px;
   right: 50px;
   margin: auto;
   z-index: 1;
@@ -308,8 +308,8 @@ button {
 .profile-pic4 {
   border-radius: 50%;
   position: absolute;
-  /* top: 0px; */
-  right: 148px;
+  bottom: 90px;
+  right: 140px;
   margin: auto;
   z-index: 1;
   max-width: 40px;
@@ -658,21 +658,17 @@ button {
   border: 2px #ddd dashed !important;
 }
 
-.browse-button  {
-  border: 1px solid #CBD0DC;
+.browse-button {
+  border: 1px solid #cbd0dc;
   padding: 6px 21px;
   border-radius: 12px;
   margin-bottom: 20px;
-
 }
 
-.audio1{
+.audio1 {
   // margin: auto;
   display: none;
 }
-
-
-
 
 // .audio1::-webkit-media-controls-panel {
 //   background-color: #fff;
@@ -700,55 +696,81 @@ button {
 //   display: none;
 // }
 
-
-
 .wavebody {
   background: #fff;
-  color: #C4C4C4;
-.mywave{
+  color: #c4c4c4;
+  .mywave {
+    width: 100%;
+    /* height: 100px; */
+    // margin-left: 160px;
+  }
+
+  .playlist {
+    text-align: left;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  .playlist-item {
+    color: #444;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    padding: 1em;
+  }
+
+  .playlist-item.selected {
+    font-weight: bold;
+  }
+
+  .playlist-item:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .controls {
+    text-align: left;
+    padding: 1em;
+  }
+}
+.container {
+  display: block !important;
+}
+.infinite-scroll-component__outerdiv {
   width: 100%;
-  /* height: 100px; */
-  // margin-left: 160px;
 }
 
- .playlist {
-  text-align: left;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
- }
-
- .playlist-item {
-  color: #444;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-   padding: 1em;
- }
-
- .playlist-item.selected {
-  font-weight: bold;
- }
-
- .playlist-item:hover {
-  background: rgba(0, 0, 0, 0.1);
- }
-
- .controls {
-  text-align: left;
-  padding: 2em;
-
- }
-
+.playAnimation {
+  -webkit-animation: pulsate-animation 0.5s ease-in-out infinite;
+  animation: pulsate-animation 0.5s ease-in-out infinite;
 }
 
-.photodropdown {
-  top: -40px;
-  min-width: 16rem;
-  border-radius: 20px;
-  padding: 1.5rem 0.5rem;
+@-webkit-keyframes pulsate-animation {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }
-.photodropdownitem{
-  padding: 1rem;
-    font-weight: 600;
-  justify-content: space-between;
-display: flex;
+@keyframes pulsate-animation {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }

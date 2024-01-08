@@ -10,44 +10,55 @@ import { user } from "/public/fakeData";
 import Category from "../category/Category";
 import { t } from "i18next";
 import "./singlePost.scss";
+import { useSelector } from "react-redux";
 
-export default function SinglePost({ data }) {
+export default function SinglePost({ data, notPar }) {
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  const { user } = useSelector((state) => state.auth);
   return (
-    <div className="singlePost" key={data.post_id}>
-      <PostHeader user={user} />
+    <div className="singlePost max-w-4xl w-full mb-3" key={data.id}>
+      <PostHeader user={data} notPar={notPar} />
 
       <div className="singlePost__body">
         {/* handel the text post  */}
-        {data?.post_data?.post_text && (
+        {data?.text && (
+          <p className="singlePost__body--text">{t(data?.text)}</p>
+        )}
+        {data?.details && (
           <p className="singlePost__body--text">
-            {t(data.post_data?.post_text)}
+            {" "}
+            التفاصيل : {t(data?.details)}
+          </p>
+        )}
+        {data?.price && (
+          <p className="singlePost__body--text">
+            {" "}
+            السعر : {t(data?.price)}
+          </p>
+        )}
+        {data?.contact && (
+          <p className="singlePost__body--text">
+            {" "}
+            التواصل : {t(data?.contact)}
           </p>
         )}
 
         {/* handel the images post  */}
-        {data.post_data?.post_images.length > 0 && (
-          <Gallery data={data.post_data?.post_images} target={data.post_id} />
-        )}
+        {data.image?.length > 0 && <Gallery data={data.image} target={data} />}
 
         {/* handel the audio post  */}
-        {data?.post_data?.post_audio?.length > 0 && (
-          <AudioPlayer data={data.post_data?.post_audio} />
-        )}
+        {data?.audio && <AudioPlayer data={`${URL}/storage/${data.audio}`} />}
 
         {/* handel the video post  */}
-        {data.post_data?.post_video && (
-          <VideoPlayer data={data.post_data.post_video} user={user} />
-        )}
+        {data?.video && <VideoPlayer data={data.video} user={user} />}
 
         {/* handel the link post  */}
-        {data?.post_data?.post_link && <p>{data.post_data?.post_link}</p>}
+        {/* {data?.post_data?.post_link && <p>{data.post_data?.post_link}</p>} */}
 
         {/* handel the store post  */}
         {data?.category && <Category data={data} />}
-
-        <PostTime />
-
-        <InteractionBar />
+        {data?.created_at && <PostTime createdAt={data.created_at} />}
+        {!notPar && <InteractionBar data={data} />}
       </div>
     </div>
   );
