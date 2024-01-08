@@ -17,7 +17,7 @@ export default function PostHeader({ user, notPar }) {
     <div className="postHeader">
       <div className="postHeader__user">
         <img
-        onClick={()=>navigate(`/profile/${user.user.id}`)}
+          onClick={() => navigate(`/profile/${user.user.user_name}`)}
           className="postHeader__user--image"
           role="button"
           src={

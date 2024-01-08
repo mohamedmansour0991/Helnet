@@ -35,6 +35,8 @@ import { Sidebar } from "./NavbarMobile";
 
 export default function Navbar() {
   const { user } = useSelector((state) => state.auth);
+
+  console.log(user);
   const name = window.location.pathname.split("/")[1];
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
@@ -163,7 +165,7 @@ export default function Navbar() {
         <li
           className="cursor-pointer"
           onClick={() => {
-            navigate(`/profile/${user.id}`);
+            navigate(`/profile/${user.user_name}`);
           }}
         >
           <img

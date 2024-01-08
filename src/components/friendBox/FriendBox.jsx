@@ -13,7 +13,7 @@ function FriendBox({ user, type, data }) {
     <div className="friend__box">
       <div
         className="friend__box__images"
-        onClick={() => navigate(`/profile/${user.id}`)}
+        onClick={() => navigate(`/profile/${user.user_name}`)}
       >
         {" "}
         <img className="friend__box__images__img" src={Header} alt="" />
@@ -21,7 +21,7 @@ function FriendBox({ user, type, data }) {
       </div>
       <div
         className="friend__box__content"
-        onClick={() => navigate(`/profile/${user.id}`)}
+        onClick={() => navigate(`/profile/${user.user_name}`)}
       >
         <h3>
           {user.first_name} {user.last_name}
@@ -50,7 +50,7 @@ function FriendBox({ user, type, data }) {
               justifyContent: "center",
               padding: "8px 15px",
             }}
-            onClick={() => navigate(`/profile/${user.id}`)}
+            onClick={() => navigate(`/profile/${user.user_name}`)}
           >
             {" "}
             عرض الصفحة

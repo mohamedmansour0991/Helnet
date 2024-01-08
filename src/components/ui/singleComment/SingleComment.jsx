@@ -16,6 +16,7 @@ import Input from "../input/Input";
 import UpdateComment from "../../UpdateComment/UpdateComment";
 
 export default function SingleComment({ data, user, parent_comment_id, post }) {
+
   const [isWriting, setIsWriting] = useState(false);
   const dateObject = new Date(data.updated_at);
   const normalTime = dateObject.toLocaleTimeString();
@@ -133,7 +134,7 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
                 src={`${URL}/storage/${data?.user_image}`}
                 alt=""
                 style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-                // onClick={toggleDropdown}
+              // onClick={toggleDropdown}
               />
             ) : (
               <img
