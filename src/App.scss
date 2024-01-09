@@ -413,10 +413,7 @@ button {
 .img-responsive {
   width: 100%;
   min-height: 150px !important;
-  max-height: 250px;
-  object-fit: cover;
-  border-start-start-radius: 16px;
-  border-start-end-radius: 16px;
+  max-height: 350px !important;
 }
 
 .profile-title {

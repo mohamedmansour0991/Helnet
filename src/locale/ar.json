@@ -702,5 +702,7 @@
   "Rewrite password": "أعد كتابة كلمة السر",
   "Who is the user?": "من هو المستخدم؟",
   "Regular user": " مستخدم عادي ",
-  "Service provider": "مقدم خدمة "
+  "Service provider": "مقدم خدمة ",
+  "There is a post already loading":"هناك بوست يتم تحميله بالفعل",
+  "Show the product":"عرض المنتج"
 }

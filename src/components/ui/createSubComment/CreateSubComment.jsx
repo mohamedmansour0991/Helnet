@@ -94,9 +94,9 @@ export default function CreateSubComment({
   };
 
   return (
-    <div className="d-flex flex-column mx-5 mb-4">
+    <>
       {imageComment && (
-        <div>
+        <>
           <button
             onClick={() => setImageComment("")}
             style={{
@@ -112,15 +112,19 @@ export default function CreateSubComment({
             src={URL.createObjectURL(imageComment)}
             style={{ width: "80px", height: "80px", marginBottom: "50px" }}
           />
-        </div>
+        </>
       )}
-      <div
+      <form
         className="flex justify-center items-center gap-3 bg-slate-200 py-2 px-3 rounded-full"
-        // style={{
-        //   position: "absolute",
-        //   bottom: "0px",
-        //   width: "100%",
-        // }}
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          if (value) {
+            typeCommentUpdate();
+          } else {
+            typeSubComment();
+          }
+        }}
       >
         <img className="w-7" src={user.image ? user.image : PFP} alt="" />
         <div className="w-full flex">
@@ -130,16 +134,7 @@ export default function CreateSubComment({
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
-          <button
-            className="h-fit"
-            onClick={() => {
-              if (value) {
-                typeCommentUpdate();
-              } else {
-                typeSubComment();
-              }
-            }}
-          >
+          <button className="h-fit">
             <img src={send} alt="" role="button" />
           </button>
         </div>
@@ -157,7 +152,7 @@ export default function CreateSubComment({
         {/* <button className="h-fit">
           <img src={voice} alt="" role="button" />
         </button> */}
-      </div>
-    </div>
+      </form>
+    </>
   );
 }

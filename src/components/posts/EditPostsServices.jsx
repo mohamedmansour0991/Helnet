@@ -5,7 +5,10 @@ import FormSelect from "../formSelect/FormSelect";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { refrechPostsProductNews, refrechServicese } from "../../rtk/slices/productSlice";
+import {
+  refrechPostsProductNews,
+  refrechServicese,
+} from "../../rtk/slices/productSlice";
 function EditPostsServices({
   formType,
   setIsFormOpen,

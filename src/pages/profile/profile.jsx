@@ -33,14 +33,13 @@ const Profile = () => {
   const { token, deletePost_id, update, user } = useSelector(
     (state) => state.auth
   );
-  const params = useParams().user_name;
+  const params = useParams().id;
 
   const { items, hasMore, loadMore } = getDataPostProfile(
     1,
     token,
 
     `post/get_post_user/${params}`
-
   );
 
   const [mainMenu, setMainMenu] = useState();
@@ -96,7 +95,7 @@ const Profile = () => {
               ) : (
                 <>
                   {mainMenu?.privacy == "private" &&
-                    mainMenu?.follow == "unfriend" ? (
+                  mainMenu?.follow == "unfriend" ? (
                     <>
                       <div
                         className="card__center w-100 mb-3"
@@ -166,7 +165,7 @@ const Profile = () => {
           <div className="fixed inset-0 overflow-y-auto">
             <div
               className="flex items-center justify-start p-4 text-center"
-            //   style={{ minHeight: "72rem", paddingLeft: "6rem!important" }}
+              //   style={{ minHeight: "72rem", paddingLeft: "6rem!important" }}
             >
               <Transition.Child
                 as={Fragment}

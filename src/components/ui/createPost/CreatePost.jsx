@@ -22,20 +22,32 @@ import ButtonShare from "../button/ButtonShare";
 import { CloseButton, Col } from "react-bootstrap";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 import ModalShare from "./ModalShare";
+import { toast } from "react-toastify";
 
-export default function CreatePost({ placeholder, buttons }) {
+export default function CreatePost({ placeholder, buttons, isNormalPost }) {
   /////////////// main module ///////////////////
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("Text Post");
   const { user, error, msg, token } = useSelector((state) => state.auth);
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
+  const uploads = useSelector((state) => state.progress.uploads);
+
   function closeModal() {
     setIsOpen(false);
   }
 
   function openModal() {
-    setIsOpen(true);
+    // Check if there is any ongoing upload
+    const isUploading = uploads.some((upload) => upload.isLoading);
+
+    // Prevent opening the modal if there is an upload in progress
+    if (!isUploading) {
+      setIsOpen(true);
+      setTitle("Post Text");
+    } else {
+      toast.error(t("There is a post already loading"));
+    }
   }
 
   return (
@@ -105,6 +117,7 @@ export default function CreatePost({ placeholder, buttons }) {
         </div>
       </div>
       <ModalShare
+        isNormalPost={isNormalPost}
         isOpen={isOpen}
         buttons={buttons}
         closeModal={closeModal}

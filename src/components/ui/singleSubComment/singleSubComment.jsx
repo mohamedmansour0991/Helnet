@@ -71,7 +71,7 @@ export default function SingleSubComment({ subComments }) {
             />
           </Link>
           <div>
-            <Link className="flex" to={"path" + subComments.user_id}>
+            <Link className="flex" to={"/profile/" + subComments.user_id}>
               <p className="text-lg capitalize">
                 {subComments.first_name + " " + subComments.last_name}
               </p>

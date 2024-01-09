@@ -64,9 +64,10 @@ function Store() {
       <Navbar />
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
-        <div className="  container no-scrollbar">
-          <div className="2xl:w-4/5  rounded-xl w-full">
+        <div className="container no-scrollbar">
+          <div className="m-auto rounded-xl w-fit">
             <CreatePost
+              isNormalPost={false}
               placeholder={"Request a service or offer your product now"}
               buttons={[
                 {
@@ -94,15 +95,11 @@ function Store() {
               </>
             ) : name == "used" ? (
               <>
-                <FiltersBar />
+                {/* <FiltersBar /> */}
                 <Used />
               </>
             ) : (
-              <div
-                className="bg-white p-2 mt-4"
-                style={{ borderRadius: "1rem" }}
-              >
-                <FiltersBar />
+              <div className="bg-white m-auto w-fit p-4 mt-4 rounded-2xl">
                 <Buy />
               </div>
             )}

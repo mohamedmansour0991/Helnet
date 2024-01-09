@@ -34,14 +34,14 @@ const Reels = () => {
     <>
       <div className="grid gap-3">
         <div className="bg-white rounded-xl">
-          <FiltersBar />
+          {/* <FiltersBar /> */}
           <InfiniteScroll
             dataLength={items.length}
             next={loadMore}
             hasMore={hasMore}
             loader={<div className="lds-default  m-auto d-flex"></div>}
           >
-            <div className="reelsComponents ">
+            <div className="reelsComponents gap-4">
               {/* sidebar */}
               {items.map((video, index) => (
                 <BoxReelComponents video={video} index={index} />

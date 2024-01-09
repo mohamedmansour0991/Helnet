@@ -73,7 +73,7 @@ export default function Form({
   };
 
   const handleUpload = (e, type) => {
-    setUploading(true);
+    // setUploading(true);
 
     // Simulating upload progress
     const interval = setInterval(() => {
@@ -100,11 +100,11 @@ export default function Form({
               setRecord(e.target.files[0]);
               handleUserChoice("");
             }
-          }, 500);
+          }, 0);
           return prevProgress;
         }
       });
-    }, 500);
+    }, 0);
   };
 
   const [recording, setRecording] = useState(false);

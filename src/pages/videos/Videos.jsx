@@ -97,7 +97,7 @@ function Videos() {
   ];
   return (
     <div className="videosPage__wrapper">
-      <FiltersBar />
+      {/* <FiltersBar /> */}
       <InfiniteScroll
         dataLength={items.length}
         next={loadMore}

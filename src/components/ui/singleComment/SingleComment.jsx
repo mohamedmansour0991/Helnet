@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 
 import { t } from "i18next";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CreateComment from "../createComment/CreateComment";
 import { PFP } from "../../../assets/images";
 import axios from "axios";
@@ -16,13 +16,12 @@ import Input from "../input/Input";
 import UpdateComment from "../../UpdateComment/UpdateComment";
 
 export default function SingleComment({ data, user, parent_comment_id, post }) {
-
   const [isWriting, setIsWriting] = useState(false);
   const dateObject = new Date(data.updated_at);
   const normalTime = dateObject.toLocaleTimeString();
   const [likes, setLikes] = useState(data?.likes);
   const [isLiked, setIsLiked] = useState(data?.liked);
-  const [edit, setEdit] = useState();
+  const [edit, setEdit] = useState(false);
   // console.log(parent_comment_id);
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   const { token } = useSelector((state) => state.auth);
@@ -89,6 +88,22 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
   //   }
   // };
 
+  const commentRef = useRef();
+
+  const handleClickOutside = (event) => {
+    if (edit && !commentRef.current.contains(event.target)) {
+      setEdit(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [edit]);
+
   const likeTheComment = async () => {
     setTimeout(() => {
       if (isLiked) {
@@ -124,7 +139,7 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
 
   return (
     // <div key={data.id} className={data.parent === null ? "" : "ms-20"}>
-    <div className="d-flex" style={{ position: "relative" }}>
+    <div className="d-flex w-full relative">
       <div key={data.id}>
         <div className="flex gap-2 mt-6">
           <Link to={"/profile/" + data.user_id}>
@@ -134,7 +149,7 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
                 src={`${URL}/storage/${data?.user_image}`}
                 alt=""
                 style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-              // onClick={toggleDropdown}
+                // onClick={toggleDropdown}
               />
             ) : (
               <img
@@ -145,7 +160,7 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
             )}
           </Link>
           <div>
-            <Link className="flex" to={"path" + user.id}>
+            <Link className="flex" to={"/profile/" + user.id}>
               <p className="text-lg capitalize">
                 {data.first_name + " " + data.last_name}
               </p>
@@ -153,7 +168,7 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
                 <img className="w-4 h-4 m-2" src={data.type} alt="" />
               )}
             </Link>
-            <div>
+            <div ref={commentRef}>
               {edit ? (
                 <UpdateComment
                   value={data.text}
@@ -182,14 +197,17 @@ export default function SingleComment({ data, user, parent_comment_id, post }) {
                 {t("Like") + " ."}
               </button>
               <button
-                className="h-fit"
+                className={`h-fit ${
+                  isWriting ? "text-blue-600 underline" : ""
+                }`}
                 onClick={() => {
                   setIsWriting(!isWriting);
                   setShowAllReplay(true);
                 }}
               >
-                {t("Comment") + " ."}
+                {t("Comment")}
               </button>
+              {" ."}
               <p>{normalTime + " ."}</p>
               <p className="text-violet-700">{likes + " " + t("Likes")}</p>
             </div>

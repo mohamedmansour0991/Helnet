@@ -25,8 +25,7 @@ import RejectedFollow from "../friendBox/RejectFollow";
 function ProfileHeader({ openModal, setMainMenu, mainMenu }) {
   const { user, error, token } = useSelector((state) => state.auth);
   const URL_API = import.meta.env.VITE_REACT_APP_API_KEY;
-
-  const params = useParams().user_name;
+  const params = useParams().id;
   const [change, setChange] = useState(false);
   const { items } = getDataProfile(
     token,
@@ -167,28 +166,12 @@ function ProfileHeader({ openModal, setMainMenu, mainMenu }) {
     }
   };
 
-  // const [type, setType] = useState(items.follow == "unfriend" ? true : false);
-
-  // useEffect(() => {
-  //   console.log(type);
-  //   setMainMenu(items);
-  //   setType(items.follow == "unfriend" ? true : false);
-  // }, [items]);
-
-
-  const [type, setType] = useState(false);
-
+  const [type, setType] = useState(items.follow == "unfriend" ? true : false);
   useEffect(() => {
-    if (items && items.follow) {
-      console.log(items.follow);
-      setType(items.follow === "unfriend");
-      setMainMenu(items);
-    }
+    console.log(type);
+    setMainMenu(items);
+    setType(items.follow == "unfriend" ? true : false);
   }, [items]);
-
-
-
-
   return (
     <>
       <div className="profile-card  text-start" style={{ marginTop: "6rem" }}>
@@ -208,7 +191,7 @@ function ProfileHeader({ openModal, setMainMenu, mainMenu }) {
               onClick={toggleDropdown}
             />
           )}
-          {items && items.user_id && items.user_id !== user.id && (
+          {items.user_id != user.id && (
             <div className="p-2">
               {type ? (
                 <AddFollow user={items} setType={setType} />

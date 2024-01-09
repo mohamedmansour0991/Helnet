@@ -20,17 +20,22 @@ function FormProducts({ formType, setIsOpen, setIsFormOpen }) {
     { name: t("Product Type"), type: "text", state: "type" },
     { name: t("Price"), type: "number", state: "price" },
     { name: t("quanti"), type: "number", state: "quantity" },
-    // { name: t("product image"), type: "file", state: "image" },
     {
       name: t("Attach a picture of the product"),
       type: "file",
       state: "image",
     },
     { name: t("Contact method"), type: "tel", state: "contact" },
+    {
+      name: t("Product status"),
+      type: "select",
+      state: "status",
+      select: [t("new"), t("used")],
+    },
   ];
-  const inputsSelectUsed = [
-    { name: t("Product status"), type: "text", state: "status" },
-  ];
+  // const inputsSelectUsed = [
+  //   { name: t("Product status"), type: "select", state: "status", select: [t("new"), t("used")], },
+  // ];
   const inputsSelectService = [
     { name: t("service name"), type: "tel", state: "text" },
     { name: t("Details"), type: "textarea", state: "details" },
@@ -118,14 +123,14 @@ function FormProducts({ formType, setIsOpen, setIsFormOpen }) {
           />
         </>
       ) : null}
-      {formType === "usedProduct" ? (
+      {/* {formType === "usedProduct" ? (
         <>
           <FormSelect
             inputs={inputsSelectUsed}
             setFormValues={setFormValuesUsed}
           />
         </>
-      ) : null}
+      ) : null} */}
       {formType === "service" ? (
         <>
           <FormSelect

@@ -165,7 +165,7 @@ export default function Navbar() {
         <li
           className="cursor-pointer"
           onClick={() => {
-            navigate(`/profile/${user.user_name}`);
+            navigate(`/profile/${user.id}`);
           }}
         >
           <img

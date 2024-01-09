@@ -17,7 +17,7 @@ import Settings from "../settings/Settings";
 import Notifcations from "../notifcations/Notifcations";
 import Videos from "../videos/Videos";
 import { data } from "/public/fakeData";
-import { CreatePost } from "../../components/ui";
+import { CreatePost, FiltersBar } from "../../components/ui";
 import Friends from "../Friends/Friends";
 import "./MainPage.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,14 +79,11 @@ export default function MainPage() {
                 />
               </div>
               {uploads.map((upload) => (
-                <div
-                  key={upload.fileId}
-                  className="d-flex justify-content-between align-items-center shadow-xss p-3 mx-3"
-                >
+                <div key={upload.fileId}>
                   {upload.isLoading && (
-                    <>
+                    <div className="w-full flex justify-between bg-white rounded-2xl items-center max-w-4xl shadow-xss p-3 m-auto">
                       <div className="">{t("uploading")}</div>
-                      <div style={{ width: "50px" }}>
+                      <div className="w-16">
                         <CircularProgressbar
                           value={upload.percentage}
                           text={`${upload.percentage}%`}
@@ -94,11 +91,11 @@ export default function MainPage() {
                             textColor: "#333",
                             pathColor: "#007bff",
                             trailColor: "#f0f0f0",
-                            textSize: "16px",
+                            textSize: "1.25rem",
                           })}
                         />
                       </div>
-                    </>
+                    </div>
                   )}
                 </div>
               ))}

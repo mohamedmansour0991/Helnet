@@ -23,6 +23,7 @@ import { CloseButton, Col } from "react-bootstrap";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 
 export default function ModalShare({
+  isNormalPost = true,
   post,
   isOpen,
   closeModal,
@@ -184,14 +185,15 @@ export default function ModalShare({
           <div className="flex items-center gap-2">
             <div className="w-100">
               <p className="px-2">{user.first_name}</p>
-
-              <Select
-                className="flex gap-3 justify-between items-center px-2 py-0 bg-blue-50 rounded-xl max-w-28 w-fit max-h-8"
-                selectLabels={selectLabels}
-                withImage={true}
-                hasIndictor={true}
-                setprivacy={setprivacy}
-              />
+              {isNormalPost && (
+                <Select
+                  className="flex gap-3 justify-between items-center px-2 py-0 bg-blue-50 rounded-xl max-w-28 w-fit max-h-8"
+                  selectLabels={selectLabels}
+                  withImage={true}
+                  hasIndictor={true}
+                  setprivacy={setprivacy}
+                />
+              )}
             </div>
             <img
               className="w-10 h-10"
@@ -319,10 +321,14 @@ export default function ModalShare({
           className="sm:flex items-center justify-between gap-3 px-4 mb-3 border rounded-2xl"
           dir={direction}
         >
-          {!placeholder && (
-            <p className="d-none d-sm-block whitespace-nowrap">
-              {t("add to your post")}
-            </p>
+          {isNormalPost && (
+            <>
+              {!placeholder && (
+                <p className="d-none d-sm-block whitespace-nowrap">
+                  {t("add to your post")}
+                </p>
+              )}
+            </>
           )}
           <div className="sm:flex flex flex-column justify-between flex-sm-row w-full flex-wrap">
             {buttons &&
