@@ -5,20 +5,26 @@ import Dropdown from "../dropdown/Dropdown";
 import "./PostHeader.scss";
 import { useSelector } from "react-redux";
 
-export default function PostHeader({ user }) {
+export default function PostHeader({ user, notPar }) {
   const myUser = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const openProfile = () => {
     navigate("/");
   };
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
   return (
     <div className="postHeader">
       <div className="postHeader__user">
         <img
+        onClick={()=>navigate(`/profile/${user.user.id}`)}
           className="postHeader__user--image"
           role="button"
-          src={user?.user_img ? storageLink + e.user.profile.user_img : PFP}
+          src={
+            user?.user?.profile?.image
+              ? `${URL}/storage/${user?.user?.profile?.image}`
+              : PFP
+          }
           alt="PFP"
         />
 
@@ -31,15 +37,19 @@ export default function PostHeader({ user }) {
           {/* <p className="postingTime">{moment(e?.created_at).fromNow(true)}</p> */}
         </div>
       </div>
-      {myUser.id == user.user_id && (
-        <div className="postHeader__aside">
-          <Dropdown
-            buttonData={<img src={vertical3dots} alt="" role="button" />}
-            labels={["Edit", "Delete"]}
-            post_id={user.id}
-            post={user}
-          />
-        </div>
+      {!notPar && (
+        <>
+          {myUser.id == user.user_id && (
+            <div className="postHeader__aside">
+              <Dropdown
+                buttonData={<img src={vertical3dots} alt="" role="button" />}
+                labels={["Edit", "Delete"]}
+                post_id={user.id}
+                post={user}
+              />
+            </div>
+          )}
+        </>
       )}
     </div>
   );

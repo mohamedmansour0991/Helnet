@@ -10,17 +10,22 @@ export default function CommentSection({
   post,
   isCommentModelOpen,
   closeCommentModal,
+  comments,
+  setComments,
   setCommentsNumber,
 }) {
-  const [comments, setComments] = useState([]);
-
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
-  const { user, token, updateComment } = useSelector((state) => state.auth);
+  const { user, token, updateComment, deleteComment_id } = useSelector(
+    (state) => state.auth
+  );
+  console.log(post);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   const getAllComments = async () => {
     try {
       const results = await axios.post(
-        `${URL}/api/post/comment`,
+        `${URL}/api/post/comment?page=${page}`,
         { post_id: post.id },
         {
           headers: {
@@ -28,10 +33,22 @@ export default function CommentSection({
           },
         }
       );
+      if (page > 1) {
+        setComments((prevItems) => [
+          ...prevItems,
+          ...results.data.original.data.data,
+        ]);
+      } else {
+        setComments([...results.data.original.data.data]);
+      }
 
+      if (results.data.original.data.data.length === 0) {
+        setHasMore(false);
+      }
       // get all the comments
-      setComments(results.data.original.comment.data);
-      setCommentsNumber(results.data.original.comment.data.length);
+
+      // setComments(results.data.original.data.data);
+      setCommentsNumber(results.data.original.data.data.length);
     } catch (error) {
       console.log("get the comments error :" + error);
     }
@@ -64,7 +81,17 @@ export default function CommentSection({
 
   useEffect(() => {
     getAllComments();
-  }, []);
+  }, [page]);
+  useEffect(() => {
+    // console.log(deleteComment_id, "ASd");
+    const deleteComment_idHandle = (deleteComment_id) => {
+      setComments((prevItems) =>
+        prevItems.filter((post) => post.id !== deleteComment_id.post_id)
+      );
+    };
+
+    deleteComment_idHandle(deleteComment_id);
+  }, [deleteComment_id]);
 
   return (
     <>
@@ -73,11 +100,11 @@ export default function CommentSection({
         closeModal={closeCommentModal}
         hasCloseButton
         closeButtonLeft
-        childrenPadding="px-6 py-0 sm:py-3"
+        childrenPadding="px- py-0 sm:py-3"
       >
-        <SinglePost data={post} />
+        <SinglePost data={post} notPar={true} />
 
-        {comments &&
+        {comments[0]?.id &&
           comments.map((comment) => (
             <SingleComment
               post={post}
@@ -88,7 +115,23 @@ export default function CommentSection({
             />
           ))}
 
-        <div className="sticky bottom-0">
+        {comments.length > 0 && (
+          <>
+            {hasMore && (
+              <button onClick={() => setPage((pre) => pre + 1)}>
+                عرض المزيد
+              </button>
+            )}
+          </>
+        )}
+        <div
+          className="sticky bottom-0"
+          style={{
+            background: "#fff",
+            minHeight: "60px",
+            borderTop: "1px solid",
+          }}
+        >
           <CreateComment post={post} />
         </div>
       </Modal>

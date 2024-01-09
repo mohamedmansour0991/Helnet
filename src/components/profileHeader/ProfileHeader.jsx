@@ -5,20 +5,34 @@ import camera2 from "../../assets/images/camera2.png";
 import gallery from "../../assets/images/gallery.png";
 import edit from "../../assets/images/edit.png";
 import "./ProfileHeader.scss";
-import { close } from "../../assets/images/icons";
+import { close, home } from "../../assets/images/icons";
 // import Box from "@mui/material/Box";
 // import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Dropdown, Modal } from "../ui";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getUser } from "../../rtk/Api/Api";
-function ProfileHeader({ openModal }) {
+import { getDataProfile } from "../posts/getDataPost";
+import { useParams } from "react-router-dom";
+import graduation from "../../assets/images/graduation.png";
+import cake from "../../assets/images/cake.png";
+import Actions from "../friendBox/Actions";
+import AddFollow from "../friendBox/AddFollow";
+import RejectedFollow from "../friendBox/RejectFollow";
+function ProfileHeader({ openModal, setMainMenu, mainMenu }) {
   const { user, error, token } = useSelector((state) => state.auth);
   const URL_API = import.meta.env.VITE_REACT_APP_API_KEY;
+  const params = useParams().id;
+  const [change, setChange] = useState(false);
+  const { items } = getDataProfile(
+    token,
 
+    `profile/${params}`,
+    change
+  );
   const [showDropdown, setShowDropdown] = useState(false);
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -52,30 +66,6 @@ function ProfileHeader({ openModal }) {
 
   const [selectedcover, setSelectedcover] = useState(cover);
   const [selectedphoto, setSelectedphoto] = useState(mg);
-
-  // const handlecoverChange = (e) => {
-  //   const coverfile = e.target.files[0];
-  //   // setSelectedcover(coverfile)
-  //   if (coverfile) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       setSelectedcover(reader.result);
-  //     };
-  //     reader.readAsDataURL(coverfile);
-  //   }
-  // };
-
-  const handlephotoChange = (e) => {
-    const photofile = e.target.files[0];
-    // setSelectedphoto(photofile)
-    if (photofile) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedphoto(reader.result);
-      };
-      reader.readAsDataURL(photofile);
-    }
-  };
 
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [photo, setPhoto] = useState("");
@@ -111,22 +101,7 @@ function ProfileHeader({ openModal }) {
           clearInterval(interval);
           setUploadComplete(true);
           setUploading(false);
-          // closeModal();
-          // setTimeout(() => {
-          //   if (type == "img") {
-          //     setVideo("");
-          //     setRecord("");
-          //   } else if (type == "video") {
-          //     setVideo(e.target.files[0]);
-          //     setPhoto([]);
-          //     setRecord("");
-          //   } else if (type == "record") {
-          //     setVideo("");
-          //     setPhoto([]);
-          //     setRecord(e.target.files[0]);
-          //     handleUserChoice("");
-          //   }
-          // }, 500);
+
           return prevProgress;
         }
       });
@@ -135,15 +110,49 @@ function ProfileHeader({ openModal }) {
   const dispatch = useDispatch();
   const handleUpdate = async (e) => {
     console.log(e);
-    console.log("j");
+
     try {
-      const res = await axios.post(`${URL_API}/api/${e}`, photo, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await axios.post(
+        `${URL_API}/api/${e}`,
+        { image: photo },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       if (res.status == 200) {
+        setChange(!change);
+        toast.success("Profile img updated successfully");
+        setIsShareOpen(false);
+        setPhoto("");
+        getUser(token, dispatch);
+      }
+      console.log(res);
+    } catch (err) {
+      setIsShareOpen(false);
+      setPhoto("");
+      console.log(err);
+    }
+  };
+  const handleUpdateCover = async (e) => {
+    console.log(e);
+    console.log("j");
+    console.log(photo);
+    try {
+      const res = await axios.post(
+        `${URL_API}/api/${e}`,
+        { cover: photo },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (res.status == 200) {
+        setChange(!change);
         toast.success("Profile userCoverImage updated successfully");
         setIsShareOpen(false);
         setPhoto("");
@@ -157,15 +166,42 @@ function ProfileHeader({ openModal }) {
     }
   };
 
+  const [type, setType] = useState(items.follow == "unfriend" ? true : false);
+  useEffect(() => {
+    console.log(type);
+    setMainMenu(items);
+    setType(items.follow == "unfriend" ? true : false);
+  }, [items]);
   return (
     <>
       <div className="profile-card  text-start" style={{ marginTop: "6rem" }}>
-        <img
-          className="img-responsive "
-          src={selectedcover}
-          alt=""
-          onClick={toggleDropdown}
-        />
+        <div className="">
+          {items?.cover_Img ? (
+            <img
+              className="img-responsive "
+              src={`${URL_API}/storage/${items?.cover_Img}`}
+              alt=""
+              onClick={toggleDropdown}
+            />
+          ) : (
+            <img
+              className="img-responsive "
+              src={selectedcover}
+              alt=""
+              onClick={toggleDropdown}
+            />
+          )}
+          {items.user_id != user.id && (
+            <div className="p-2">
+              {type ? (
+                <AddFollow user={items} setType={setType} />
+              ) : (
+                <RejectedFollow user={items} setType={setType} />
+              )}
+            </div>
+          )}
+        </div>
+
         <div className="profile-info">
           <Dropdown
             buttonData={<img className="profile-pic3" src={camera2} alt="" />}
@@ -183,26 +219,22 @@ function ProfileHeader({ openModal }) {
             }}
           />
 
-          {/* Dropdown */}
-
-          {/* showcover */}
-          {/* <Modal
-          open={lightboxOpen1}
-          onClose={closeLightbox1}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <img className="w-100 rounded " src={selectedcover} />
-          </Box>
-        </Modal> */}
-
-          <img
-            className="profile-pic"
-            src={selectedphoto}
-            alt=""
-            onClick={toggleDropdown1}
-          />
+          {items?.user_img ? (
+            <img
+              className="profile-pic"
+              src={`${URL_API}/storage/${items?.user_img}`}
+              alt=""
+              onClick={toggleDropdown}
+              style={{ width: "130px", height: "130px" }}
+            />
+          ) : (
+            <img
+              className="profile-pic"
+              src={selectedphoto}
+              alt=""
+              onClick={toggleDropdown1}
+            />
+          )}
 
           {/* <img
             className="profile-pic4"
@@ -255,7 +287,7 @@ function ProfileHeader({ openModal }) {
               <div className="d-flex align-items-center">
                 <h2 className="mb-0 pb-0 ">
                   {" "}
-                  {user?.first_name} {user?.last_name}
+                  {items?.first_name} {items?.last_name}
                 </h2>
                 <img
                   style={{ width: "30px" }}
@@ -270,7 +302,7 @@ function ProfileHeader({ openModal }) {
               </h3>
             </div>
 
-            <div className="d-flex">
+            {/* <div className="d-flex">
               <div className="hvr-underline-from-center" onClick={openModal}>
                 {" "}
                 طلب صداقة 20 .
@@ -279,9 +311,10 @@ function ProfileHeader({ openModal }) {
                 {" "}
                 صديق 320{" "}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
+
         <div className="pb-2">
           <button
             type="submit"
@@ -331,7 +364,7 @@ function ProfileHeader({ openModal }) {
                 children="Update"
                 onClick={() => {
                   if (typeImage == "cover") {
-                    handleUpdate("profile/uploadUserCoverImage");
+                    handleUpdateCover("profile/uploadUserCoverImage");
                   } else {
                     handleUpdate("profile/uploadUserImage");
                   }

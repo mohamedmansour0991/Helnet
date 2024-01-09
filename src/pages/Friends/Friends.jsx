@@ -9,7 +9,11 @@ import { useTranslation } from "react-i18next";
 import { getDataFriends } from "../../components/posts/getDataPost";
 function Friends({ type }) {
   const { token } = useSelector((state) => state.auth);
-  const { items, hasMore, loadMore } = getDataFriends(1, token, type);
+  const { items, hasMore, loadMore } = getDataFriends(
+    1,
+    token,
+    "current-following"
+  );
   const { t } = useTranslation();
   console.log(items);
   return (
@@ -29,10 +33,8 @@ function Friends({ type }) {
             ]}
           />
           <div className="friends__page">
-            {items
-              ? items.map((post) => (
-                  <FriendBox key={post.post_id} data={post} />
-                ))
+            {items.length > 0
+              ? items.map((post, i) => <FriendBox key={i} user={post} />)
               : ""}
           </div>
         </div>

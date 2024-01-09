@@ -16,30 +16,34 @@ import { useEffect, useState } from "react";
 import Select from "../select/Select";
 import Form from "../../form/Form";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUpload } from "../../../rtk/slices/progressSlice";
 import ButtonShare from "../button/ButtonShare";
 import { CloseButton, Col } from "react-bootstrap";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 
 export default function ModalShare({
+  isNormalPost = true,
   post,
   isOpen,
   closeModal,
   setIsOpen,
   placeholder,
-  buttons = [
-    { value: "Images", title: "Post Images", image: image },
-    { value: "Video", title: "Post Video", image: Video3 },
-    { value: "Record", title: "Post Record", image: voice },
-  ],
+
+  buttons,
 }) {
   const selectLabels = ["public", "private"];
   const direction = localStorage.getItem("direction");
   const URL2 = import.meta.env.VITE_REACT_APP_API_KEY;
+  // const history = useHistory();
+  const { user } = useSelector((state) => state.auth);
 
+  // Access the current path
+  const currentPath = window.location.pathname.split("/")[1];
+  console.log(currentPath);
   const username = "كريم";
   const userFullName = "كريم سيف";
+  // const URL_API = import.meta.env.VITE_REACT_APP_API_KEY;
 
   /////////////// main module ///////////////////
   const [title, setTitle] = useState("Text Post");
@@ -78,7 +82,7 @@ export default function ModalShare({
   const [imageEdit, setImageEdit] = useState(post?.image);
   const [recordEdit, setrecordEdit] = useState(post?.audio);
   const [record, setRecord] = useState("");
-
+  const [url, setUrl] = useState();
   const data = new FormData();
   data.append("privacy", privacy);
 
@@ -115,6 +119,31 @@ export default function ModalShare({
     data.append("audio", record);
     data.append("classification_id", 4);
   }
+  // if (url) {
+  //   console.log(url);
+
+  //   // data.append(
+  //   //   "audio",
+  //   //   fetch(url).then((response) => response.blob())
+  //   // );
+  //   // console.log(fetch(url).then((response) => response.blob()));
+
+  //   // data.append("audio", URL.createObjectURL(url), "audio.wav");
+  //   data.append("audio", url);
+  //   data.append("classification_id", 4);
+  // }
+
+  if (url) {
+    fetch(url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        data.append("audio", blob, "audio.wav");
+      })
+      .catch((error) => {
+        console.error("Error fetching audio file:", error);
+      });
+    data.append("classification_id", 4);
+  }
 
   useEffect(() => {
     setText(post?.text);
@@ -137,7 +166,8 @@ export default function ModalShare({
   const removeAllImages = () => {
     setPhoto([]);
   };
-
+  const [formType, setFormType] = useState("");
+  // console.log(post);
   return (
     <>
       <Modal
@@ -154,17 +184,27 @@ export default function ModalShare({
         <div className="flex flex-row-reverse justify-between pb-4">
           <div className="flex items-center gap-2">
             <div className="w-100">
-              <p className="px-2">{userFullName}</p>
-
-              <Select
-                className="flex gap-3 justify-between items-center px-2 py-0 bg-blue-50 rounded-xl max-w-28 w-fit max-h-8"
-                selectLabels={selectLabels}
-                withImage={true}
-                hasIndictor={true}
-                setprivacy={setprivacy}
-              />
+              <p className="px-2">{user.first_name}</p>
+              {isNormalPost && (
+                <Select
+                  className="flex gap-3 justify-between items-center px-2 py-0 bg-blue-50 rounded-xl max-w-28 w-fit max-h-8"
+                  selectLabels={selectLabels}
+                  withImage={true}
+                  hasIndictor={true}
+                  setprivacy={setprivacy}
+                />
+              )}
             </div>
-            <img className="w-10 h-10" src={profile1} alt="" />
+            <img
+              className="w-10 h-10"
+              style={{ borderRadius: "50%" }}
+              src={
+                user.profile.image
+                  ? `${URL2}/storage/${user.profile.image}`
+                  : profile1
+              }
+              alt=""
+            />
           </div>
           <button
             className="rounded-full bg-blue-50 h-fit p-1D"
@@ -173,19 +213,22 @@ export default function ModalShare({
             <img src={close1} alt="" />
           </button>
         </div>
-
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className={`w-full outline-none resize-none px-2 h-28 text-xl w-100 ${
-            isArabic ? "text-right" : "text-left"
-          }`}
-          placeholder={
-            placeholder
-              ? t(placeholder)
-              : `${t("write something")} ${t(",")} ${username}`
-          }
-        />
+        {currentPath != "store" ? (
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            className={`w-full outline-none resize-none px-2 h-28 text-xl w-100 ${
+              isArabic ? "text-right" : "text-left"
+            }`}
+            placeholder={
+              placeholder
+                ? t(placeholder)
+                : `${t("write something")} ${t(",")} ${user.first_name}`
+            }
+          />
+        ) : (
+          ""
+        )}
 
         {photo.length > 0 ? (
           <div>
@@ -246,11 +289,14 @@ export default function ModalShare({
         ) : (
           <>
             {videoEdit && (
-              <div className="d-flex flex-wrap justify-content-center gap-3 mb-2">
-                <video width="400" controls style={{ maxHeight: "350px" }}>
-                  <source src={`${URL2}/api/storage/videos/${videoEdit}`} />
-                </video>
-              </div>
+              <>
+                <img src={close1} alt="" onClick={() => setVideoEdit("")} />
+                <div className="d-flex flex-wrap justify-content-center gap-3 mb-2">
+                  <video width="400" controls style={{ maxHeight: "350px" }}>
+                    <source src={`${URL2}/storage/videos/${videoEdit}`} />
+                  </video>
+                </div>
+              </>
             )}
           </>
         )}
@@ -270,14 +316,19 @@ export default function ModalShare({
           </>
         )}
 
+        {url && <AudioPlayer data={url} />}
         <div
           className="sm:flex items-center justify-between gap-3 px-4 mb-3 border rounded-2xl"
           dir={direction}
         >
-          {!placeholder && (
-            <p className="d-none d-sm-block whitespace-nowrap">
-              {t("add to your post")}
-            </p>
+          {isNormalPost && (
+            <>
+              {!placeholder && (
+                <p className="d-none d-sm-block whitespace-nowrap">
+                  {t("add to your post")}
+                </p>
+              )}
+            </>
           )}
           <div className="sm:flex flex flex-column justify-between flex-sm-row w-full flex-wrap">
             {buttons &&
@@ -302,13 +353,19 @@ export default function ModalShare({
         </div>
 
         <Form
+          setUrl={setUrl}
+          url={url}
+          setIsOpen={setIsOpen}
           isOpen={isFormOpen}
           closeModal={closeForm}
           title={formTitle}
           photo={photo}
+          setIsFormOpen={setIsFormOpen}
           setPhoto={setPhoto}
           setVideo={setVideo}
           setRecord={setRecord}
+          setFormType={setFormType}
+          formType={formType}
         />
 
         <ButtonShare

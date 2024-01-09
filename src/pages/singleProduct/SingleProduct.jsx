@@ -10,14 +10,19 @@ import {
   testImage5,
   testImage6,
 } from "../../assets/images";
-import {
-  Star,
-  arrowDown,
-  grayStar,
-  whatsapp,
-} from "../../assets/images/icons";
+import { Star, arrowDown, grayStar, whatsapp } from "../../assets/images/icons";
+import { useSelector } from "react-redux";
+import { getDataProduct } from "../../rtk/Api/PoroductsApi";
+import { useParams } from "react-router-dom";
 
 export default function SingleProduct({ product }) {
+  const { token, deletePost_id, update } = useSelector((state) => state.auth);
+  const params = useParams().id;
+  const { items, hasMore, loadMore } = getDataProduct(
+    token,
+
+    `product/get-product/${params}`
+  );
   product = {
     product_id: "1",
     name: "لاب توب ماركة أبل يحتوي على   (13-inch, 8GB RAM, 256GB SSD Storage) ",
@@ -41,6 +46,7 @@ export default function SingleProduct({ product }) {
       testImage6,
     ],
   };
+  console.log(items);
 
   const direction = localStorage.getItem("direction");
   const [currentColor, setCurrentColor] = useState(0);

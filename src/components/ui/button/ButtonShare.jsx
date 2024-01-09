@@ -65,7 +65,7 @@ export default function ButtonShare({
       console.log(res);
 
       if (res.data) {
-        dispatch(refrechPosts(res.data.original.post));
+        dispatch(refrechPosts(res.data.original.post[0]));
         dispatch(finishUpload({ fileId }));
         toast.success("تم نشر المنشور");
         setPhoto("");
@@ -169,7 +169,7 @@ export default function ButtonShare({
                   },
                 })
                 .then(function (response) {
-                  dispatch(refrechPosts(response.data.original.post));
+                  dispatch(refrechPosts(response.data.original.post[0]));
 
                   console.log(response);
                 })

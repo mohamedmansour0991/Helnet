@@ -3,16 +3,26 @@ import { Avatar, Header } from "/src/assets/images/icons";
 import "./friendBox.scss";
 import delet from "../../assets/images/delete.png";
 import AddFollow from "./AddFollow";
+import Actions from "./Actions";
+import { useNavigate } from "react-router-dom";
 
-function FriendBox({ user, type }) {
+function FriendBox({ user, type, data }) {
+  const navigate = useNavigate();
+  // console.log(user, "user");
   return (
     <div className="friend__box">
-      <div className="friend__box__images">
+      <div
+        className="friend__box__images"
+        onClick={() => navigate(`/profile/${user.id}`)}
+      >
         {" "}
         <img className="friend__box__images__img" src={Header} alt="" />
         <img className="friend__box__images__avatar" src={Avatar} alt="" />
       </div>
-      <div className="friend__box__content">
+      <div
+        className="friend__box__content"
+        onClick={() => navigate(`/profile/${user.id}`)}
+      >
         <h3>
           {user.first_name} {user.last_name}
         </h3>
@@ -20,7 +30,7 @@ function FriendBox({ user, type }) {
       </div>
       <div className="friend__box__buttons">
         {type == "suggest" ? (
-          <AddFollow user={user} />
+          <Actions user={user} />
         ) : (
           <button
             type="submit"
@@ -40,6 +50,7 @@ function FriendBox({ user, type }) {
               justifyContent: "center",
               padding: "8px 15px",
             }}
+            onClick={() => navigate(`/profile/${user.id}`)}
           >
             {" "}
             عرض الصفحة

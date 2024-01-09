@@ -13,7 +13,6 @@ import {
 } from "../../components/posts/getDataPost";
 function Suggest({ type }) {
   const { user, token, refrech } = useSelector((state) => state.auth);
-  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   // const { items, hasMore, loadMore } = getDataPost(1, token, refrech, type);
   const name = useParams().name;
   const { items, hasMore, loadMore } = getDataSuggest(1, token, type);

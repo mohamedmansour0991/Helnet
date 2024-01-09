@@ -92,6 +92,8 @@ export default function AudioPlayer({ data, user }) {
     ? 0
     : audioRef.current.duration;
 
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+
   return (
     <>
       <audio src={data} ref={audioRef} />
@@ -113,11 +115,13 @@ export default function AudioPlayer({ data, user }) {
             </div>
 
             <img
-              className="absolute"
+              className={`absolute w-16 h-16 rounded-full ${
+                isPlaying ? "playAnimation" : ""
+              }`}
               src={
-                user?.user_img
-                  ? storageLink + e.user.profile.user_img
-                  : profile1
+                user?.user?.profile?.image
+                  ? `${URL}/storage/${user?.user?.profile?.image}`
+                  : ""
               }
               alt=""
             />

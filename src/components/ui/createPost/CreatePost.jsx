@@ -16,24 +16,19 @@ import { useEffect, useState } from "react";
 import Select from "../select/Select";
 import Form from "../../form/Form";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUpload } from "../../../rtk/slices/progressSlice";
 import ButtonShare from "../button/ButtonShare";
 import { CloseButton, Col } from "react-bootstrap";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 import ModalShare from "./ModalShare";
 
-export default function CreatePost({
-  placeholder,
-  buttons = [
-    { value: "Images", title: "Post Images", image: image },
-    { value: "Video", title: "Post Video", image: Video3 },
-    { value: "Record", title: "Post Record", image: voice },
-  ],
-}) {
+export default function CreatePost({ placeholder, buttons, isNormalPost }) {
   /////////////// main module ///////////////////
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("Text Post");
+  const { user, error, msg, token } = useSelector((state) => state.auth);
+  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
   function closeModal() {
     setIsOpen(false);
@@ -45,7 +40,7 @@ export default function CreatePost({
 
   return (
     <>
-      <div className="max-w-4xl w-full rounded-xl bg-white">
+      <div className="max-w-4xl w-full rounded-xl bg-white mb-4">
         <div
           className="flex gap-3 items-center pt-4 ps-3 pb-10"
           onClick={() => {
@@ -54,7 +49,17 @@ export default function CreatePost({
           }}
           role="button"
         >
-          <img src={profile1} alt="" />
+          {/* <img src={profile1} alt="" /> */}
+          <img
+            className="w-10 h-10"
+            style={{ borderRadius: "50%" }}
+            src={
+              user.profile.image
+                ? `${URL}/storage/${user.profile.image}`
+                : profile1
+            }
+            alt=""
+          />
           <p className="flex gap-2 items-center">
             {placeholder ? (
               t(placeholder)
@@ -100,8 +105,9 @@ export default function CreatePost({
         </div>
       </div>
       <ModalShare
+        isNormalPost={isNormalPost}
         isOpen={isOpen}
-        
+        buttons={buttons}
         closeModal={closeModal}
         setIsOpen={setIsOpen}
       />

@@ -1,5 +1,5 @@
 import { t } from "i18next";
-import { image, send, voice } from "../../../assets/images/icons";
+import { image, send, voice, close } from "../../../assets/images/icons";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { PFP } from "../../../assets/images";
@@ -16,7 +16,7 @@ export default function CreateComment({
   const [imageComment, setImageComment] = useState("");
   const [audioComment, setAudioComment] = useState("");
 
-  const URL = import.meta.env.VITE_REACT_APP_API_KEY;
+  const URL_API = import.meta.env.VITE_REACT_APP_API_KEY;
   const { user, token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const typeComment = async () => {
@@ -24,16 +24,26 @@ export default function CreateComment({
       post_id: post.id,
       comment: comment,
       comment_image: imageComment,
-      comment_audio: audioComment,
+      // comment_audio: audioComment,
     };
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key]);
+    });
     try {
-      const results = await axios.post(`${URL}/api/post/create_comment`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const results = await axios.post(
+        `${URL_API}/api/post/create_comment`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "multipart/form-data",
+          },
+        }
+      );
       setComment("");
-      dispatch(refrechcomment(results.data.original.comment));
+      setImageComment("");
+      dispatch(refrechcomment(results.data.original.comment[0]));
       console.log(results);
     } catch (error) {
       console.log("Create comments error :" + error);
@@ -52,7 +62,7 @@ export default function CreateComment({
 
     try {
       const results = await axios.post(
-        `${URL}/api/post/show_sub_comment`,
+        `${URL_API}/api/post/show_sub_comment`,
         data,
         {
           headers: {
@@ -71,30 +81,60 @@ export default function CreateComment({
   }, []);
 
   return (
-    <div className="flex justify-center items-center gap-3 bg-slate-200 py-2 px-3 rounded-full">
-      <img className="w-7" src={user.image ? user.image : PFP} alt="" />
-      <div className="w-full flex">
-        <input
-          placeholder={t("write a comment")}
-          className="w-full outline-none bg-slate-200 placeholder-gray-400"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-        <button
-          className="h-fit"
-          onClick={() => {
-            !isReplying ? typeComment() : typeSubComment();
-          }}
-        >
-          <img src={send} alt="" role="button" />
-        </button>
-      </div>
-      <button className="h-fit">
-        <img src={image} alt="" role="button" />
-      </button>
-      <button className="h-fit">
-        <img src={voice} alt="" role="button" />
-      </button>
+    <div className="d-flex">
+      {imageComment && (
+        <div>
+          <button
+            onClick={() => setImageComment("")}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              position: "absolute",
+            }}
+          >
+            <img src={close} alt="" />
+          </button>
+          <img
+            className="p-1"
+            src={URL.createObjectURL(imageComment)}
+            style={{ width: "80px", height: "80px", marginBottom: "50px" }}
+          />
+        </div>
+      )}
+      <form
+        className="flex w-full absolute bottom-0 justify-center items-center gap-3 bg-slate-200 py-2 px-3 rounded-full"
+        onSubmit={(e) => {
+          e.preventDefault();
+          !isReplying ? typeComment() : typeSubComment();
+        }}
+      >
+        <img className="w-7" src={user.image ? user.image : PFP} alt="" />
+        <div className="w-full flex">
+          <input
+            placeholder={t("write a comment")}
+            className="w-full outline-none bg-slate-200 placeholder-gray-400"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button className="h-fit">
+            <img src={send} alt="" role="button" />
+          </button>
+        </div>
+        <label className="h-fit" htmlFor="image">
+          <img src={image} alt="" role="button" />
+          <input
+            accept=".png,.jpg"
+            type="file"
+            name=""
+            id="image"
+            hidden
+            onChange={(e) => setImageComment(e.target.files[0])}
+          />
+        </label>
+        {/* <button className="h-fit">
+          <img src={voice} alt="" role="button" />
+        </button> */}
+      </form>
     </div>
   );
 }

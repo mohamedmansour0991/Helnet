@@ -26,25 +26,34 @@ import { data } from "/public/fakeData";
 import ProfileHeader from "../../components/profileHeader/ProfileHeader";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { getDataPost } from "../../components/posts/getDataPost";
+import { getDataPostProfile } from "../../components/posts/getDataPost";
+import PostsProfile from "../../components/posts/PostsProfile";
 
 const Profile = () => {
-  const { token, deletePost_id, update } = useSelector((state) => state.auth);
+  const { token, deletePost_id, update, user } = useSelector(
+    (state) => state.auth
+  );
   const params = useParams().id;
 
-  const { items, hasMore, loadMore } = getDataPost(
+  const { items, hasMore, loadMore } = getDataPostProfile(
     1,
     token,
-    deletePost_id,
-    update,
+
     `post/get_post_user/${params}`
   );
+
+  const [mainMenu, setMainMenu] = useState();
+
   const mainMenuLabels = [
-    { name: "من المنصورة", icon: home },
-    { name: "درس في جامعة المنصورة ", icon: graduation },
-    { name: "يعمل في شركة مصر ", icon: freelance },
-    { name: "ولد 12 سبتمبر 2002 ", icon: cake },
-    { name: " انضم في مارس 2020 ", icon: link },
+    {
+      name: mainMenu?.country_name ? mainMenu?.country_name : "لايوجد",
+      icon: home,
+    },
+    { name: mainMenu?.city, icon: home },
+    { name: mainMenu?.study_at, icon: graduation },
+    // { name: "يعمل في شركة مصر ", icon: freelance },
+    { name: mainMenu?.borned_in, icon: cake },
+    // { name: " انضم في مارس 2020 ", icon: link },
   ];
 
   const { t } = useTranslation();
@@ -74,40 +83,52 @@ const Profile = () => {
       {/* mycover */}
       <div className="bg-body">
         <Navbar />
-        <ProfileHeader openModal={openModal} />
+        <ProfileHeader openModal={openModal} setMainMenu={setMainMenu} />
         <main className={`main mt-4 ${direction}`}>
           <MainMenu mainMenuLabels={mainMenuLabels} />
           <div className="container">
             <div className="d-flex flex-column">
               {" "}
-              <NotActive openModal2={openModal2} />
-              <div
-                className="card__center w-100 mb-3"
-                style={{ backgroundColor: "#fff" }}
-              >
-                <div className="w-100 p-4">
-                  <div
-                    className="gap-2 mb-3"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      className=""
-                      src={padlock}
-                      alt=""
-                      style={{ width: "30px" }}
-                    />
-                    <h1>حساب خاص</h1>
-                  </div>
-                  <p className="card-text">
-                    هذا حساب خاص لا يمكنك مشاهدة منشورات كريم، يرجى ضغط زر
-                    “إضافة صديق” لإرسال طلب صداقة.
-                  </p>
-                </div>
-              </div>
-              <Posts data={items} />
+              {mainMenu?.status == 0 && <NotActive openModal2={openModal2} />}
+              {user.id == mainMenu?.user_id ? (
+                <PostsProfile data={items} />
+              ) : (
+                <>
+                  {mainMenu?.privacy == "private" &&
+                  mainMenu?.follow == "unfriend" ? (
+                    <>
+                      <div
+                        className="card__center w-100 mb-3"
+                        style={{ backgroundColor: "#fff" }}
+                      >
+                        <div className="w-100 p-4">
+                          <div
+                            className="gap-2 mb-3"
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            <img
+                              className=""
+                              src={padlock}
+                              alt=""
+                              style={{ width: "30px" }}
+                            />
+                            <h1>حساب خاص</h1>
+                          </div>
+                          <p className="card-text">
+                            هذا حساب خاص لا يمكنك مشاهدة منشورات كريم، يرجى ضغط
+                            زر “إضافة صديق” لإرسال طلب صداقة.
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <PostsProfile data={items} />
+                  )}
+                </>
+              )}
             </div>
           </div>
           <Aside />
@@ -394,7 +415,6 @@ const Profile = () => {
         {`
                  @media (max-width: 600px) {
                   .profile-pic{
-                    max-width: 90px;
                     top: -46px;
                     right: 18px;
 

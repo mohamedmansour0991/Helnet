@@ -10,27 +10,48 @@ import { user } from "/public/fakeData";
 import Category from "../category/Category";
 import { t } from "i18next";
 import "./singlePost.scss";
+import { useSelector } from "react-redux";
 
-export default function SinglePost({ data }) {
+export default function SinglePost({ data, notPar, isFullScreen = false }) {
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
-
+  const { user } = useSelector((state) => state.auth);
   return (
-    <div className="singlePost max-w-4xl w-full mb-3" key={data.id}>
-      <PostHeader user={data} />
+    <div
+      className={`singlePost w-full mb-3 ${
+        isFullScreen ? "max-w-none" : "max-w-4xl"
+      }`}
+      key={data.id}
+    >
+      <PostHeader user={data} notPar={notPar} />
 
       <div className="singlePost__body">
         {/* handel the text post  */}
         {data?.text && (
           <p className="singlePost__body--text">{t(data?.text)}</p>
         )}
-
-        {/* handel the images post  */}
-        {data.post_classification?.name == "image" && (
-          <Gallery data={data.image} target={data} />
+        {data?.details && (
+          <p className="singlePost__body--text">
+            {" "}
+            التفاصيل : {t(data?.details)}
+          </p>
+        )}
+        {data?.price && (
+          <p className="singlePost__body--text"> السعر : {t(data?.price)}</p>
+        )}
+        {data?.contact && (
+          <p className="singlePost__body--text">
+            {" "}
+            التواصل : {t(data?.contact)}
+          </p>
         )}
 
+        {/* handel the images post  */}
+        {data.image?.length > 0 && <Gallery data={data.image} target={data} />}
+
         {/* handel the audio post  */}
-        {data?.audio && <AudioPlayer data={`${URL}/storage/${data.audio}`} />}
+        {data?.audio && (
+          <AudioPlayer data={`${URL}/storage/${data.audio}`} user={data} />
+        )}
 
         {/* handel the video post  */}
         {data?.video && <VideoPlayer data={data.video} user={user} />}
@@ -40,10 +61,8 @@ export default function SinglePost({ data }) {
 
         {/* handel the store post  */}
         {data?.category && <Category data={data} />}
-
-        <PostTime />
-
-        <InteractionBar data={data} />
+        {data?.created_at && <PostTime createdAt={data.created_at} />}
+        {!notPar && <InteractionBar data={data} />}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import "./Gallery.scss";
 export default function Gallery({ data, target }) {
   const navigate = useNavigate();
   const handelClick = () => {
-    navigate(target);
+    navigate(`/singlePost/${target.id}`);
   };
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
   return (

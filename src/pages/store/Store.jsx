@@ -15,11 +15,17 @@ import Buy from "./buy/Buy";
 import "./Store.scss";
 import { useEffect, useState } from "react";
 import StoreForm from "../../components/form/Form";
+import Used from "./Used/Used";
+import { useDispatch, useSelector } from "react-redux";
+import { refrechPostsProductNews } from "../../rtk/slices/productSlice";
+import PostsServices from "../../components/posts/PostsServices";
 
 function Store() {
   const direction = localStorage.getItem("direction");
+  const { updateNews } = useSelector((state) => state.store);
 
   const name = useParams().name;
+  const dispatch = useDispatch();
 
   const mainMenuLabels = [
     { name: t("new"), icon: buy, link: "store/new" },
@@ -46,14 +52,22 @@ function Store() {
     setServicesList(filteredServicesList);
   }, []);
 
+  useEffect(() => {
+    console.log("first");
+    // if (updateNews.id) {
+    dispatch(refrechPostsProductNews({}));
+    // }
+  }, [name]);
+
   return (
     <div className="bg-body">
       <Navbar />
       <main className={`main ${direction}`}>
         <MainMenu mainMenuLabels={mainMenuLabels} />
-        <div className="  container no-scrollbar">
-          <div className="2xl:w-4/5  rounded-xl w-full">
+        <div className="container no-scrollbar">
+          <div className="m-auto rounded-xl w-fit">
             <CreatePost
+              isNormalPost={false}
               placeholder={"Request a service or offer your product now"}
               buttons={[
                 {
@@ -76,20 +90,16 @@ function Store() {
 
             {name === "services" ? (
               <>
-                <FiltersBar />
-                <Posts data={servicesList} />
+                {/* <FiltersBar /> */}
+                <PostsServices data={servicesList} />
               </>
             ) : name == "used" ? (
               <>
-                <FiltersBar />
-                <Posts data={usedList} />
+                {/* <FiltersBar /> */}
+                <Used />
               </>
             ) : (
-              <div
-                className="bg-white p-2 mt-4"
-                style={{ borderRadius: "1rem" }}
-              >
-                <FiltersBar />
+              <div className="bg-white m-auto w-fit p-4 mt-4 rounded-2xl">
                 <Buy />
               </div>
             )}
