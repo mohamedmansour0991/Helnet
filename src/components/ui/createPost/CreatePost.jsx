@@ -22,6 +22,7 @@ import ButtonShare from "../button/ButtonShare";
 import { CloseButton, Col } from "react-bootstrap";
 import AudioPlayer from "../audioPlayer/AudioPlayer";
 import ModalShare from "./ModalShare";
+import { toast } from "react-toastify";
 
 export default function CreatePost({ placeholder, buttons, isNormalPost }) {
   /////////////// main module ///////////////////
@@ -44,6 +45,8 @@ export default function CreatePost({ placeholder, buttons, isNormalPost }) {
     if (!isUploading) {
       setIsOpen(true);
       setTitle("Post Text");
+    } else {
+      toast.error(t("There is a post already loading"));
     }
   }
 

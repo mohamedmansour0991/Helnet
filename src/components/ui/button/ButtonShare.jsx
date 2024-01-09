@@ -29,7 +29,7 @@ export default function ButtonShare({
   api,
   onclick,
   backgroundColor = null,
-  onClick = () => {},
+  onClick = () => { },
   ...rest
 }) {
   const [t] = useTranslation();
@@ -77,6 +77,10 @@ export default function ButtonShare({
       console.log(err);
       dispatch(finishUpload({ fileId }));
       toast.error(t("A network error occurred"));
+      setPhoto("");
+      setVideo("");
+      setRecord("");
+      setText("");
     }
   };
 
@@ -198,9 +202,8 @@ export default function ButtonShare({
           color: color,
           borderWidth: border,
         }}
-        className={`normalButton ${className} ${
-          backgroundColor === null && "gradient"
-        }`}
+        className={`normalButton ${className} ${backgroundColor === null && "gradient"
+          }`}
         {...rest}
       >
         <div className={`children ${className}`}>{children}</div>

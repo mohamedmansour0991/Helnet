@@ -100,11 +100,11 @@ export default function Form({
               setRecord(e.target.files[0]);
               handleUserChoice("");
             }
-          }, 500);
+          }, 0);
           return prevProgress;
         }
       });
-    }, 500);
+    }, 0);
   };
 
   const [recording, setRecording] = useState(false);
@@ -205,8 +205,8 @@ export default function Form({
       children={
         <>
           {formType === "usedProduct" ||
-          formType === "newProduct" ||
-          formType === "service" ? (
+            formType === "newProduct" ||
+            formType === "service" ? (
             <>
               <FormProducts
                 formType={formType}
@@ -354,7 +354,7 @@ export default function Form({
 
                         <div
                           className="rounded-3 text-center p-5 w-100 border-dashed"
-                          // style={{ marginBottom: "20px" }}
+                        // style={{ marginBottom: "20px" }}
                         >
                           <h4 style={{ fontWeight: "500", fontSize: "large" }}>
                             Your record
