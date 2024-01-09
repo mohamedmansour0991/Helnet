@@ -205,8 +205,8 @@ export default function Form({
       children={
         <>
           {formType === "usedProduct" ||
-          formType === "newProduct" ||
-          formType === "service" ? (
+            formType === "newProduct" ||
+            formType === "service" ? (
             <>
               <FormProducts
                 formType={formType}
@@ -253,12 +253,12 @@ export default function Form({
                     <label htmlFor="file" className="browse-button">
                       {uploading ? "Uploading..." : "Browse File"}
                     </label>
-                    {uploading && (
+                    {/* {uploading && (
                       <div>
                         <p>Uploading: {uploadProgress}%</p>
                         <progress value={uploadProgress} max="100" />
                       </div>
-                    )}
+                    )} */}
                     {uploadComplete && (
                       <div>
                         <p>Upload Complete!</p>
@@ -298,12 +298,12 @@ export default function Form({
                     <label htmlFor="video" className="browse-button">
                       {uploading ? "Uploading..." : "Browse File"}
                     </label>
-                    {uploading && (
+                    {/* {uploading && (
                       <div>
                         <p>Uploading: {uploadProgress}%</p>
                         <progress value={uploadProgress} max="100" />
                       </div>
-                    )}
+                    )} */}
                     {uploadComplete && (
                       <div>
                         <p>Upload Complete!</p>
@@ -353,7 +353,7 @@ export default function Form({
 
                         <div
                           className="rounded-3 text-center p-5 w-100 border-dashed"
-                          // style={{ marginBottom: "20px" }}
+                        // style={{ marginBottom: "20px" }}
                         >
                           <h4 style={{ fontWeight: "500", fontSize: "large" }}>
                             Your record
