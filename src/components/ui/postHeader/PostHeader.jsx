@@ -13,6 +13,25 @@ export default function PostHeader({ user, notPar }) {
   };
   const URL = import.meta.env.VITE_REACT_APP_API_KEY;
 
+  const calculateTimeAgo = (commentDate) => {
+    const currentDate = new Date();
+    const commentDateTime = new Date(commentDate);
+    const timeDifference = currentDate - commentDateTime;
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+      return days + ' Day';
+    } else if (hours > 0) {
+      return hours + ' Hour';
+    } else if (minutes > 0) {
+      return minutes + ' Minute';
+    } else {
+      return seconds + ' Second';
+    }
+  };
   return (
     <div className="postHeader">
       <div className="postHeader__user">
@@ -35,6 +54,7 @@ export default function PostHeader({ user, notPar }) {
             </p>
           </div>
           {/* <p className="postingTime">{moment(e?.created_at).fromNow(true)}</p> */}
+          {calculateTimeAgo(user.created_at)}
         </div>
       </div>
       {!notPar && (
