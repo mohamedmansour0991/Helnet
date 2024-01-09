@@ -18,16 +18,15 @@ export default function SinglePost({ data, notPar, isFullScreen = false }) {
   const { user } = useSelector((state) => state.auth);
   return (
     <div
-      className={`singlePost w-full mb-3 ${isFullScreen ? "max-w-none" : "max-w-4xl"
-        }`}
+      className={`singlePost w-full mb-3 ${
+        isFullScreen ? "max-w-none" : "max-w-4xl"
+      }`}
       key={data.id}
     >
       <PostHeader user={data} notPar={notPar} />
 
-
       <div className="flex items-center justify-between">
-
-        <div className="singlePost__body">
+        <div className="singlePost__body w-full">
           {/* handel the text post  */}
           {data?.text && (
             <p className="singlePost__body--text">{t(data?.text)}</p>
@@ -49,7 +48,9 @@ export default function SinglePost({ data, notPar, isFullScreen = false }) {
           )}
 
           {/* handel the images post  */}
-          {data.image?.length > 0 && <Gallery data={data.image} target={data} />}
+          {data.image?.length > 0 && (
+            <Gallery data={data.image} target={data} />
+          )}
 
           {/* handel the audio post  */}
           {data?.audio && (
@@ -67,9 +68,6 @@ export default function SinglePost({ data, notPar, isFullScreen = false }) {
           {data?.created_at && <PostTime createdAt={data.created_at} />}
           {!notPar && <InteractionBar data={data} />}
         </div>
-        <button className=" w-fit h-fit py-2 px-2">
-          <img className="w-7" src={whatsapp} alt="" />
-        </button>
       </div>
     </div>
   );
