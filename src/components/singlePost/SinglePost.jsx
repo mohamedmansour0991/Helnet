@@ -7,6 +7,7 @@ import {
 } from "../ui";
 import PostTime from "../postTime/PostTime";
 import { user } from "/public/fakeData";
+import { Star, whatsapp } from "../../assets/images/icons";
 import Category from "../category/Category";
 import { t } from "i18next";
 import "./singlePost.scss";
@@ -17,52 +18,58 @@ export default function SinglePost({ data, notPar, isFullScreen = false }) {
   const { user } = useSelector((state) => state.auth);
   return (
     <div
-      className={`singlePost w-full mb-3 ${
-        isFullScreen ? "max-w-none" : "max-w-4xl"
-      }`}
+      className={`singlePost w-full mb-3 ${isFullScreen ? "max-w-none" : "max-w-4xl"
+        }`}
       key={data.id}
     >
       <PostHeader user={data} notPar={notPar} />
 
-      <div className="singlePost__body">
-        {/* handel the text post  */}
-        {data?.text && (
-          <p className="singlePost__body--text">{t(data?.text)}</p>
-        )}
-        {data?.details && (
-          <p className="singlePost__body--text">
-            {" "}
-            التفاصيل : {t(data?.details)}
-          </p>
-        )}
-        {data?.price && (
-          <p className="singlePost__body--text"> السعر : {t(data?.price)}</p>
-        )}
-        {data?.contact && (
-          <p className="singlePost__body--text">
-            {" "}
-            التواصل : {t(data?.contact)}
-          </p>
-        )}
 
-        {/* handel the images post  */}
-        {data.image?.length > 0 && <Gallery data={data.image} target={data} />}
+      <div className="flex items-center justify-between">
 
-        {/* handel the audio post  */}
-        {data?.audio && (
-          <AudioPlayer data={`${URL}/storage/${data.audio}`} user={data} />
-        )}
+        <div className="singlePost__body">
+          {/* handel the text post  */}
+          {data?.text && (
+            <p className="singlePost__body--text">{t(data?.text)}</p>
+          )}
+          {data?.details && (
+            <p className="singlePost__body--text">
+              {" "}
+              التفاصيل : {t(data?.details)}
+            </p>
+          )}
+          {data?.price && (
+            <p className="singlePost__body--text"> السعر : {t(data?.price)}</p>
+          )}
+          {data?.contact && (
+            <p className="singlePost__body--text">
+              {" "}
+              التواصل : {t(data?.contact)}
+            </p>
+          )}
 
-        {/* handel the video post  */}
-        {data?.video && <VideoPlayer data={data.video} user={user} />}
+          {/* handel the images post  */}
+          {data.image?.length > 0 && <Gallery data={data.image} target={data} />}
 
-        {/* handel the link post  */}
-        {data?.post_data?.post_link && <p>{data.post_data?.post_link}</p>}
+          {/* handel the audio post  */}
+          {data?.audio && (
+            <AudioPlayer data={`${URL}/storage/${data.audio}`} user={data} />
+          )}
 
-        {/* handel the store post  */}
-        {data?.category && <Category data={data} />}
-        {data?.created_at && <PostTime createdAt={data.created_at} />}
-        {!notPar && <InteractionBar data={data} />}
+          {/* handel the video post  */}
+          {data?.video && <VideoPlayer data={data.video} user={user} />}
+
+          {/* handel the link post  */}
+          {data?.post_data?.post_link && <p>{data.post_data?.post_link}</p>}
+
+          {/* handel the store post  */}
+          {data?.category && <Category data={data} />}
+          {data?.created_at && <PostTime createdAt={data.created_at} />}
+          {!notPar && <InteractionBar data={data} />}
+        </div>
+        <button className=" w-fit h-fit py-2 px-2">
+          <img className="w-7" src={whatsapp} alt="" />
+        </button>
       </div>
     </div>
   );
