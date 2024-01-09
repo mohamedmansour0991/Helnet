@@ -18,9 +18,8 @@ export default function SinglePost({ data, notPar, isFullScreen = false }) {
   const { user } = useSelector((state) => state.auth);
   return (
     <div
-      className={`singlePost w-full mb-3 ${
-        isFullScreen ? "max-w-none" : "max-w-4xl"
-      }`}
+      className={`singlePost w-full mb-3 ${isFullScreen ? "max-w-none" : "max-w-4xl"
+        }`}
       key={data.id}
     >
       <PostHeader user={data} notPar={notPar} />
